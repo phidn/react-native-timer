@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/yarn.lock": true,
+    "**/ios": true,
+  },
+  "prettier.endOfLine": "crlf",
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.environmentChangesRelaunch": false
+}
