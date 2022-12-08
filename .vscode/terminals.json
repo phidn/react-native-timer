@@ -14,15 +14,14 @@
       "name": "Android",
       "icon": "code",
       "color": "terminal.ansiBlue",
-      "execute": true,
-      "focus": true,
+      "execute": false,
       "command": "yarn android"
     },
     {
       "name": "Emulator",
       "icon": "device-mobile",
       "color": "terminal.ansiBlue",
-      "execute": false,
+      "execute": true,
       "commands": [
         "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
         "emulator.exe -avd Pixel_4_API_29"
