@@ -1,10 +1,16 @@
 {
   "compilerOptions": {
+    "target": "es2021",
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@navigation/*": ["./src/navigation/*"],
       "@screens/*": ["./src/screens/*"],
-      "@store/*": ["./src/store/*"]
+      "@store/*": ["./src/store/*"],
+      "@translations/*": ["./src/translations/*"],
+      "@utilities/*": ["./src/utilities/*"]
     }
   }
 }
