@@ -64,19 +64,19 @@ const PresetScreen = ({ navigation }) => {
     setIsShowCountdown(!isShowCountdown)
   }
 
-  const onBellChange = async (value) => {
+  const onBellChange = (value) => {
     setBellId(value)
     play(getAsset(value + '_short'), bellVolume)
   }
 
-  const onBellVolumeChangeComplete = async (value) => {
+  const onBellVolumeChangeComplete = (value) => {
     setBellVolume(value)
     play(getAsset(bellId + '_short'), value)
   }
 
-  const startSession = async () => {
+  const startSession = () => {
     release()
-    navigation.navigate('MeditationScreen', {
+    navigation.navigate('MeditationTimerScreen', {
       duration,
       interval,
       bellId,

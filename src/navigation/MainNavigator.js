@@ -9,6 +9,7 @@ import SettingsScreen from '@screens/SettingsScreen'
 import PrepareScreen from '@screens/PrepareScreen'
 import LanguageSettingScreen from '@screens/LanguageSettingScreen'
 import AdminScreen from '@screens/AdminScreen'
+import MeditationTimerScreen from '@screens/MeditationTimerScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,7 +40,20 @@ const MainNavigator = () => {
           headerTransparent: true,
           headerShadowVisible: false,
           headerTitleStyle: { color: onPrimary },
-          headerTintColor: onPrimary
+          headerTintColor: onPrimary,
+        }}
+      />
+      <Stack.Screen
+        name="MeditationTimerScreen"
+        component={MeditationTimerScreen}
+        options={{
+          headerTitle: t('Navigation.Screen.timer'),
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTitleStyle: { color: onPrimary },
+          headerTintColor: onPrimary,
         }}
       />
     </Stack.Navigator>

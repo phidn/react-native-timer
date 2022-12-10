@@ -9,9 +9,15 @@ const useSound = () => {
     Sound.setCategory('Playback')
   }, [])
 
-  const play = (soundFile, volume = 1) => {
+  /**
+   * 
+   * @param {*} soundFile : require('../assets/sounds/bell_10.mp3')
+   * @param {*} volume : 0 -> 1
+   * @param {*} interrupt : true = stop exist sound before play new sound
+   */
+  const play = (soundFile, volume = 1, numberOfLoops = 0, interrupt = true) => {
     // Release playback instance if exists
-    if (playbackInstance) {
+    if (interrupt && playbackInstance) {
       release()
     }
 
@@ -24,6 +30,7 @@ const useSound = () => {
       // loaded successfully
       logger('loaded successfully, duration in seconds', whoosh.getDuration())
       whoosh.setVolume(volume)
+      whoosh.setNumberOfLoops(numberOfLoops)
       setPlaybackInstance(whoosh)
 
       // Play the sound with an onEnd callback
@@ -34,8 +41,10 @@ const useSound = () => {
           logger('playback failed due to audio decoding errors')
         }
 
-        whoosh.release()
-        setPlaybackInstance(null)
+        if (interrupt) {
+          whoosh.release()
+          setPlaybackInstance(null)
+        }
       })
     })
   }
