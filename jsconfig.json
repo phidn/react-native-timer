@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "esnext",
+    "module": "commonjs",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["./src/components/*"],
@@ -12,5 +13,5 @@
       "@translations/*": ["./src/translations/*"],
       "@utilities/*": ["./src/utilities/*"]
     }
-  }
+  },
 }

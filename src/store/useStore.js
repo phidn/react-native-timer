@@ -1,15 +1,23 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-import { createThemeSlice } from './createThemeSlice'
+import { storageKeys } from '@config/storageKeys'
 
 export const useStore = create(
   persist(
     (set, get, api) => ({
-      ...createThemeSlice(set, get, api),
+      /**
+       * Theme
+       */
+      isDarkMode: true,
+      themeColor: 'Meditation Color 1',
+      toggleMode: () => {
+        set((state) => ({ isDarkMode: !state.isDarkMode }))
+      },
+      setThemeColor: (themeColor) => set({ themeColor }),
     }),
     {
-      name: 'appStorage',
+      name: storageKeys.appStorage,
       getStorage: () => AsyncStorage,
     }
   )

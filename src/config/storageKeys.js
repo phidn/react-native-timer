@@ -1,3 +1,4 @@
 export const storageKeys = {
-  appLang: 'APP_LANG'
+  appStorage: 'appStorage',
+  appLanguage: 'appLanguage'
 }

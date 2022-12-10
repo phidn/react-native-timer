@@ -5,87 +5,94 @@ import { useTranslation } from 'react-i18next'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import ScreenOne from '@screens/ScreenOne'
-import ScreenTwo from '@screens/ScreenTwo'
-import ScreenThree from '@screens/ScreenThree'
-import ScreenFour from '@screens/ScreenFour'
-import AdminScreen from '@screens/AdminScreen'
-import NavigationBar from '@components/NavigationBar/NavigationBar'
 import SettingsScreen from '@screens/SettingsScreen'
+import PrepareScreen from '@screens/PrepareScreen'
+import LanguageSettingScreen from '@screens/LanguageSettingScreen'
+import AdminScreen from '@screens/AdminScreen'
 
 const Stack = createNativeStackNavigator()
 
 const MainNavigator = () => {
-  const theme = useTheme()
+  const { t } = useTranslation()
+  const { onPrimary } = useTheme().colors
 
   return (
-    <Stack.Navigator
-      initialRouteName="BottomTabNavigator"
-      screenOptions={{
-        header: (props) => <NavigationBar {...props} />,
-      }}
-    >
+    <Stack.Navigator initialRouteName="BottomTabNavigator">
       <Stack.Screen
         name="BottomTabNavigator"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTitleStyle: { color: onPrimary },
+        }}
       />
-      <Stack.Screen name="ScreenOne" component={ScreenOne} />
-      <Stack.Screen name="ScreenTwo" component={ScreenTwo} />
+      <Stack.Screen
+        name="LanguageSettingScreen"
+        component={LanguageSettingScreen}
+        options={{
+          headerTitle: t('Settings.language'),
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTitleStyle: { color: onPrimary },
+          headerTintColor: onPrimary
+        }}
+      />
     </Stack.Navigator>
   )
 }
 
 const Tab = createMaterialBottomTabNavigator()
 
-const BottomTabNavigator = () => {
+const BottomTabNavigator = ({ navigation }) => {
   const { t } = useTranslation()
-  const theme = useTheme()
-  const { tertiary } = theme.colors
+  const { tertiary } = useTheme().colors
 
   return (
-    <Tab.Navigator initialRouteName="Preset" activeColor={tertiary}>
+    <Tab.Navigator
+      initialRouteName="PrepareTab"
+      activeColor={tertiary}
+      screenListeners={() => ({
+        state: (e) => {
+          const { routeNames, index } = e.data.state
+          const activeTab = routeNames[index]
+          navigation.setOptions({ title: t(`Navigation.BottomTab.${activeTab}`) })
+        },
+      })}
+    >
       <Tab.Screen
         name="Admin"
         component={AdminScreen}
         options={{
           title: 'Admin',
           tabBarLabel: 'Admin',
-          headerTitleAlign: 'center',
-          // headerTransparent: true,
-          // headerShadowVisible: false,
-          // headerTitleStyle: { color: onPrimary },
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, color }) => (
             <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="ScreenThree"
-        component={ScreenThree}
+        name="PrepareTab"
+        component={PrepareScreen}
         options={{
-          title: t('Navigation.BottomTabNavigator.TabScreen.preset'),
-          tabBarLabel: t('Navigation.BottomTabNavigator.TabScreen.preset'),
-          headerTitleAlign: 'center',
-          // headerTransparent: true,
-          // headerShadowVisible: false,
-          // headerTitleStyle: { color: onPrimary },
-          tabBarIcon: ({ focused, color, size }) => (
+          title: t('Navigation.BottomTab.PrepareTab'),
+          tabBarLabel: t('Navigation.BottomTab.PrepareTab'),
+          tabBarIcon: ({ focused, color }) => (
             <Ionicons name={focused ? 'heart' : 'heart-outline'} size={26} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="SettingsScreen"
+        name="SettingsTab"
         component={SettingsScreen}
         options={{
-          title: t('Navigation.BottomTabNavigator.TabScreen.settings'),
-          tabBarLabel: t('Navigation.BottomTabNavigator.TabScreen.settings'),
-          headerTitleAlign: 'center',
-          // headerTransparent: true,
-          // headerShadowVisible: false,
-          // headerTitleStyle: { color: onPrimary },
-          tabBarIcon: ({ focused, color, size }) => (
+          title: t('Navigation.BottomTab.SettingsTab'),
+          tabBarLabel: t('Navigation.BottomTab.SettingsTab'),
+          tabBarIcon: ({ focused, color }) => (
             <Ionicons name={focused ? 'settings' : 'settings-outline'} size={26} color={color} />
           ),
         }}
