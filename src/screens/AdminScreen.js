@@ -9,12 +9,14 @@ const AdminScreen = () => {
     AsyncStorage.clear()
   }
   const logAsyncStorage = () => {
-    AsyncStorage.getAllKeys((err, keys) => {
-      AsyncStorage.multiGet(keys, (error, stores) => {
-        stores.map((result, i, store) => {
-          logger('AsyncStorage item', { [store[i][0]]: store[i][1] })
-          return true
-        })
+    AsyncStorage.getAllKeys().then((keyArray) => {
+      AsyncStorage.multiGet(keyArray).then((keyValArray) => {
+        let result = {}
+        for (let keyVal of keyValArray) {
+          result[keyVal[0]] = keyVal[1]
+        }
+
+        logger('AsyncStorage', result)
       })
     })
   }

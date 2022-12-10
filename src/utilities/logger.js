@@ -23,13 +23,17 @@ const defaultConfig = {
   enabled: true,
 }
 
-const log = _logger.createLogger(defaultConfig)
+const _loggerInstance = _logger.createLogger(defaultConfig)
 
 const logger = (prefix, message, level = 'info') => {
-  if (message) {
-    log[level](`>> ${prefix}:`, message)
-  } else {
-    log[level](`>> :`, prefix)
+  if (message && typeof message !== 'object') {
+    _loggerInstance[level](`>> ${prefix}: ${message}`)
+  }
+  if (message && typeof message === 'object') {
+    _loggerInstance[level](`>> ${prefix}:`, message)
+  }
+  if (!message && prefix) {
+    _loggerInstance[level]('>>', prefix)
   }
 }
 
