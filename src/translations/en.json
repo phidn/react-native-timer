@@ -1,4 +1,6 @@
 {
+  "App.Name": "Meditation Tracker",
+  
   "Common.save": "Save",
   "Common.saved": "Saved",
   "Common.error.wrong": "Something went wrong...",
@@ -43,14 +45,14 @@
   "Auth.ResetPasswordScreen.navigation.trouble-logging-in": "Didn't get a code?",
   "Auth.ResetPasswordScreen.navigation.login": "Back to login",
 
-  "Settings.SettingsScreen.item.profile.label": "Profile",
-  "Settings.SettingsScreen.item.change-password.label": "Change password",
-  "Settings.SettingsScreen.item.logout.label": "Logout",
-  "Settings.SettingsScreen.item.color-mode.label": "Color mode",
-  "Settings.SettingsScreen.item.color-mode.light": "Light",
-  "Settings.SettingsScreen.item.color-mode.dark": "Dark",
-  "Settings.SettingsScreen.item.language.label": "Language",
-  "Settings.SettingsScreen.item.theme-colors.label": "Theme colors",
+  "Settings.profile": "Profile",
+  "Settings.change-password": "Change password",
+  "Settings.logout": "Logout",
+  "Settings.color-mode": "Color mode",
+  "Settings.color-mode.light": "Light",
+  "Settings.color-mode.dark": "Dark",
+  "Settings.language": "Language",
+  "Settings.theme-colors": "Theme colors",
 
   "Settings.ProfileScreen.first-name.label": "First name",
   "Settings.ProfileScreen.last-name.label": "Last name",
@@ -68,8 +70,10 @@
   "Navigation.MainNavigator.StackScreen.language": "Language",
   "Navigation.MainNavigator.StackScreen.theme-colors": "Theme colors",
 
-  "Navigation.BottomTabNavigator.TabScreen.admin": "Admin",
-  "Navigation.BottomTabNavigator.TabScreen.meditation": "Meditation",
-  "Navigation.BottomTabNavigator.TabScreen.settings": "Settings",
-  "Navigation.BottomTabNavigator.TabScreen.preset": "Meditation"
+  "Navigation.BottomTab.admin": "Admin",
+  "Navigation.BottomTab.meditation": "Meditation",
+  "Navigation.BottomTab.settings": "Settings",
+  "Navigation.BottomTab.preset": "Meditation",
+  "Navigation.BottomTab.PrepareTab": "Meditation",
+  "Navigation.BottomTab.SettingsTab": "Settings"
 }

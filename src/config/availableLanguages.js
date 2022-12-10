@@ -8,6 +8,6 @@ const availableLanguages = [
   { label: 'German', code: 'de' },
 ]
 
-export { en, vi, de }
+const availableCodes = availableLanguages.map((language) => language.code)
 
-export default availableLanguages
+export { availableLanguages, availableCodes, en, vi, de }

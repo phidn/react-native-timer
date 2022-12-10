@@ -6,7 +6,11 @@ import MainNavigator from './MainNavigator'
 const AppNavigator = ({ theme }) => {
   return (
     <NavigationContainer theme={theme}>
-      <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'} />
+      <StatusBar
+        translucent={true}
+        backgroundColor="transparent"
+        barStyle={theme.dark ? 'light-content' : 'dark-content'}
+      />
       <MainNavigator />
     </NavigationContainer>
   )
