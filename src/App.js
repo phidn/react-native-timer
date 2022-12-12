@@ -2,8 +2,9 @@ import React from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
 import AppNavigator from '@navigation/AppNavigator'
 import { useStore } from '@store/useStore'
-import '@config/i18n'
 import { combineTheme } from '@utilities/themeHelper'
+import { I18nextProvider } from 'react-i18next'
+import i18nInstance from '@config/i18n'
 
 const App = () => {
   const isDarkMode = useStore((state) => state.isDarkMode)
@@ -13,7 +14,9 @@ const App = () => {
 
   return (
     <PaperProvider theme={theme}>
-      <AppNavigator theme={theme} />
+      <I18nextProvider i18n={i18nInstance}>
+        <AppNavigator theme={theme} />
+      </I18nextProvider>
     </PaperProvider>
   )
 }

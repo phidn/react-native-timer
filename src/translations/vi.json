@@ -1,14 +1,27 @@
 {
   "App.Name": "Thiền",
+  "Time.hms": "giờ_phút_giây",
+  "Time.weekdays-short": "CN_T2_T3_T4_T5_T6_T7",
+  "Time.months-short": "Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12",
+
   "Common.save": "Cứu!",
   "Common.saved": "Cứu!",
   "Common.error.wrong": "Có gì đó đã sai.",
   "Common.error.occurred": "Một sai lầm đã xảy ra",
+
   "Settings.color-mode": "Chế độ màu",
   "Settings.color-mode.light": "Ánh sáng",
   "Settings.color-mode.dark": "Bóng tối",
   "Settings.language": "Ngôn ngữ",
   "Settings.theme-colors": "Màu sắc chủ đề",
+
+  "Prepare.duration": "Thời gian",
+  "Prepare.interval-bells": "Chuông liên bang",
+  "Prepare.sound": "Nghe này",
+  "Prepare.start": "Bắt đầu",
+  "Prepare.bell": "Chuông",
+  "Prepare.choose-a-bell": "Chọn tiếng chuông",
+
   "Navigation.Screen.timer": "Thật sự tự tin",
   "Navigation.BottomTab.admin": "Quản lý",
   "Navigation.BottomTab.meditation": "Thiền",

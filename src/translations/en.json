@@ -1,6 +1,10 @@
 {
   "App.Name": "Meditation Tracker",
   
+  "Time.hms": "hour_minute_second",
+  "Time.weekdays-short": "Sun_Mon_Tue_Wed_Thu_Fri_Sat",
+  "Time.months-short": "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec",
+
   "Common.save": "Save",
   "Common.saved": "Saved",
   "Common.error.wrong": "Something went wrong...",
@@ -11,6 +15,13 @@
   "Settings.color-mode.dark": "Dark",
   "Settings.language": "Language",
   "Settings.theme-colors": "Theme colors",
+
+  "Prepare.duration": "Duration",
+  "Prepare.interval-bells": "Interval bells",
+  "Prepare.sound": "Sound",
+  "Prepare.start": "Start",
+  "Prepare.bell": "Bell",
+  "Prepare.choose-a-bell": "Bell",
 
   "Navigation.Screen.timer": "Mindfulness Meditation Timer",
 

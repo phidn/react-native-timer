@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
 import { useTheme } from 'react-native-paper'
 import Svg, { Path } from 'react-native-svg'
@@ -6,22 +6,23 @@ import { useHeaderHeight } from '@react-navigation/elements'
 import Color from 'color'
 
 const waveWidth = 1366
-const waveHeight = 447
+const waveHeight = 446
 const aspectRatio = waveWidth / waveHeight
-const waveScaleY = 1.5
 
 const WaveContainer = ({ padding, style, children }) => {
   const { primary, background } = useTheme().colors
   const navigationHeaderHeight = useHeaderHeight()
+
   const statusBarHeight = StatusBar.currentHeight
   const bodyTop = navigationHeaderHeight + statusBarHeight
+  const waveScaleY = bodyTop > 123 ? bodyTop / 123 : 1
 
   const color_1 = Color(primary).alpha(0.6).string()
   const color_2 = Color(primary).alpha(0.2).string()
 
   return (
     <View style={[styles.container, { backgroundColor: background }, style]}>
-      <View style={[styles.wave, { aspectRatio }]}>
+      <View style={[styles.wave, { aspectRatio, top: -10 }]}>
         <Svg
           style={styles.waveSvg}
           xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
   wave: {
     position: 'absolute',
     width: '100%',
-    top: 0,
   },
   body: {
     flex: 1,
