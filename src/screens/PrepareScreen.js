@@ -1,11 +1,9 @@
+import React, { useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import WaveContainer from '@components/Containers/WaveContainer'
 import {
   Text,
   List,
   useTheme,
-  Switch,
   RadioButton,
   Button,
   IconButton,
@@ -13,12 +11,25 @@ import {
   Portal,
 } from 'react-native-paper'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
-import { getDuration, getInterval } from '@utilities/timeHelper'
 import Feather from 'react-native-vector-icons/Feather'
-import RowContainer from '@components/Containers/RowContainer'
 import Slider from '@react-native-community/slider'
+import { useTranslation } from 'react-i18next'
+import Color from 'color'
+
+import RowContainer from '@components/Containers/RowContainer'
+import CalendarHeatmap from '@components/CalendarHeatmap/CalendarHeatmap'
+import WaveContainer from '@components/Containers/WaveContainer'
+
+import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import duration from 'dayjs/plugin/duration'
+dayjs.extend(weekOfYear)
+dayjs.extend(duration)
+
 import useSound from '@hooks/useSound'
+import { getDuration, getInterval } from '@utilities/timeHelper'
 import { getAsset } from '@utilities/assetsHelper'
+import logger from '@utilities/logger'
 
 const min_30 = 60 * 30 * 1000
 const min_5 = 60 * 5 * 1000
@@ -27,8 +38,11 @@ const initDuration = initTime + min_30
 const initInterval = initTime + min_5
 
 const PresetScreen = ({ navigation }) => {
-  const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
+  const { elevation, primary, onBackground, outlineVariant, secondary, tertiary } =
+    useTheme().colors
   const { play, release } = useSound()
+
+  const { t } = useTranslation()
 
   const [duration, setDuration] = useState(min_30 / 1000)
   const [interval, setInterval] = useState(min_5 / 1000)
@@ -84,26 +98,28 @@ const PresetScreen = ({ navigation }) => {
     })
   }
 
+  const endWeek = dayjs().endOf('month').week()
+  const endWeekday = dayjs().week(endWeek).day(6)
+  const startWeekday = dayjs().week(endWeek).subtract(12, 'weeks').startOf('day')
+  const diffDay = endWeekday.diff(startWeekday, 'd') + 2
+
+  // logger({
+  //   endWeek,
+  //   startWeek: dayjs().week(endWeek).subtract(12, 'weeks').week(),
+  //   endWeekday,
+  //   startWeekday,
+  //   diffDay
+  // })
+
   return (
-    <WaveContainer padding={30}>
-      <View style={styles.container}>
+    <WaveContainer>
+      <ScrollView style={styles.container}>
         <List.Item
-          title={<Text variant="titleMedium">Show Countdown</Text>}
-          right={() => (
-            <Switch
-              style={{ marginRight: isShowCountdown ? 5 : 0 }}
-              value={isShowCountdown}
-              onValueChange={toggleDisplayCountdown}
-            />
-          )}
-          style={{ display: 'none' }}
-        />
-        <List.Item
-          title={<Text variant="titleMedium">Duration</Text>}
+          title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
           right={() => (
             <RowContainer style={{}}>
               <Text variant="titleMedium" style={[{ color: primary }]}>
-                {getDuration(duration, 'H[h] m[m]')}
+                {getDuration(duration, t)}
               </Text>
               <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
             </RowContainer>
@@ -111,11 +127,11 @@ const PresetScreen = ({ navigation }) => {
           onPress={() => showTimePicker('duration')}
         />
         <List.Item
-          title={<Text variant="titleMedium">Interval bells</Text>}
+          title={<Text variant="titleMedium">{t('Prepare.interval-bells')}</Text>}
           right={() => (
             <RowContainer style={{}}>
               <Text variant="titleMedium" style={[{ color: primary }]}>
-                {getInterval(interval, 'm[m]')}
+                {getInterval(interval, t)}
               </Text>
               <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
             </RowContainer>
@@ -123,11 +139,11 @@ const PresetScreen = ({ navigation }) => {
           onPress={() => showTimePicker('interval')}
         />
         <List.Item
-          title={<Text variant="titleMedium">Sound</Text>}
+          title={<Text variant="titleMedium">{t('Prepare.sound')}</Text>}
           right={() => (
             <RowContainer style={{}}>
               <Text variant="titleMedium" style={[{ color: primary }]}>
-                {`Bell ${bellId.split('_').pop()}`}
+                {`${t('Prepare.bell')} ${bellId.split('_').pop()}`}
               </Text>
               <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
             </RowContainer>
@@ -163,12 +179,35 @@ const PresetScreen = ({ navigation }) => {
           icon="star-three-points-outline"
           mode="elevated"
           style={styles.buttonPlay}
-          contentStyle={styles.buttonPlayContent}
+          contentStyle={{ flexDirection: 'row-reverse' }}
           onPress={startSession}
         >
-          Start
+          {t('Prepare.start')}
         </Button>
-      </View>
+
+        {/* Heatmap */}
+        <View style={styles.calendarHeatmapContainer}>
+          <CalendarHeatmap
+            endDate={endWeekday}
+            numDays={diffDay}
+            values={[
+              { date: '2022-12-12', count: 9 },
+              { date: '2022-12-11', count: 20 },
+              { date: '2022-12-10', count: 1 },
+            ]}
+            labelColor={secondary}
+            colorArray={[
+              Color(tertiary).alpha(0.1).toString(),
+              Color(tertiary).alpha(0.4).toString(),
+              Color(tertiary).alpha(0.6).toString(),
+              Color(tertiary).alpha(0.8).toString(),
+              Color(tertiary).alpha(1).toString(),
+            ]}
+          />
+        </View>
+      </ScrollView>
+
+      {/* Modal choose bell sound */}
       <Portal>
         <Modal
           visible={isShowSoundDialog}
@@ -180,11 +219,15 @@ const PresetScreen = ({ navigation }) => {
             height: '80%',
           }}
         >
-          <Text variant="headlineSmall">Choose a bell</Text>
+          <Text variant="headlineSmall">{t('Prepare.choose-a-bell')}</Text>
           <ScrollView style={[styles.modalScrollView, { borderColor: outlineVariant }]}>
             <RadioButton.Group onValueChange={onBellChange} value={bellId}>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) => (
-                <RadioButton.Item key={`bell_${x}`} label={`Bell ${x}`} value={`bell_${x}`} />
+                <RadioButton.Item
+                  key={`bell_${x}`}
+                  label={`${t('Prepare.bell')} ${x}`}
+                  value={`bell_${x}`}
+                />
               ))}
             </RadioButton.Group>
           </ScrollView>
@@ -202,7 +245,7 @@ export default PresetScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
+    paddingHorizontal: 30,
   },
   rightIcon: {
     marginLeft: 10,
@@ -211,9 +254,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 15,
     marginRight: 30,
-  },
-  buttonPlayContent: {
-    flexDirection: 'row-reverse',
   },
   modalScrollView: {
     borderTopWidth: 1,
@@ -225,5 +265,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: -10,
+  },
+  calendarHeatmapContainer: {
+    marginTop: 30,
+    // marginLeft: 20,
+    // marginRight: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,7 @@ import PrepareScreen from '@screens/PrepareScreen'
 import LanguageSettingScreen from '@screens/LanguageSettingScreen'
 import AdminScreen from '@screens/AdminScreen'
 import MeditationTimerScreen from '@screens/MeditationTimerScreen'
+import logger from '@utilities/logger'
 
 const Stack = createNativeStackNavigator()
 
@@ -63,9 +64,16 @@ const MainNavigator = () => {
 const Tab = createMaterialBottomTabNavigator()
 
 const BottomTabNavigator = ({ navigation }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { tertiary } = useTheme().colors
+  const [activeTab, setActiveTab] = useState('')
 
+  useEffect(() => {
+    if (activeTab) {
+      navigation.setOptions({ title: t(`Navigation.BottomTab.${activeTab}`) })
+    }
+  }, [i18n.language, activeTab])
+  
   return (
     <Tab.Navigator
       initialRouteName="PrepareTab"
@@ -73,12 +81,11 @@ const BottomTabNavigator = ({ navigation }) => {
       screenListeners={() => ({
         state: (e) => {
           const { routeNames, index } = e.data.state
-          const activeTab = routeNames[index]
-          navigation.setOptions({ title: t(`Navigation.BottomTab.${activeTab}`) })
+          setActiveTab(routeNames[index])
         },
       })}
     >
-      <Tab.Screen
+      {false && <Tab.Screen
         name="Admin"
         component={AdminScreen}
         options={{
@@ -88,7 +95,7 @@ const BottomTabNavigator = ({ navigation }) => {
             <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
           ),
         }}
-      />
+      />}
       <Tab.Screen
         name="PrepareTab"
         component={PrepareScreen}

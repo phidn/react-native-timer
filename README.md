@@ -14,3 +14,5 @@ org.gradle.java.home=C:\\Program Files\\Java\\jdk-11.0.17
 
 - https://github.com/remigallego/react-native-sound
 - https://github.com/remigallego/react-native-use-sound
+
+- https://youmightnotneed.com/lodash
