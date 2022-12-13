@@ -66,14 +66,14 @@ const Tab = createMaterialBottomTabNavigator()
 const BottomTabNavigator = ({ navigation }) => {
   const { t, i18n } = useTranslation()
   const { tertiary } = useTheme().colors
-  const [activeTab, setActiveTab] = useState('')
+  const [activeTab, setActiveTab] = useState()
 
   useEffect(() => {
     if (activeTab) {
       navigation.setOptions({ title: t(`Navigation.BottomTab.${activeTab}`) })
     }
   }, [i18n.language, activeTab])
-  
+
   return (
     <Tab.Navigator
       initialRouteName="PrepareTab"
@@ -85,17 +85,19 @@ const BottomTabNavigator = ({ navigation }) => {
         },
       })}
     >
-      {false && <Tab.Screen
-        name="Admin"
-        component={AdminScreen}
-        options={{
-          title: 'Admin',
-          tabBarLabel: 'Admin',
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
-          ),
-        }}
-      />}
+      {false && (
+        <Tab.Screen
+          name="Admin"
+          component={AdminScreen}
+          options={{
+            title: 'Admin',
+            tabBarLabel: 'Admin',
+            tabBarIcon: ({ focused, color }) => (
+              <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
+            ),
+          }}
+        />
+      )}
       <Tab.Screen
         name="PrepareTab"
         component={PrepareScreen}
