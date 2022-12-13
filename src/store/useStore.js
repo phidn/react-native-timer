@@ -9,8 +9,8 @@ export const useStore = create(
       /**
        * Theme
        */
-      isDarkMode: true,
-      themeColor: 'Meditation Color 1',
+      isDarkMode: undefined,
+      themeColor: undefined,
       toggleMode: () => {
         set((state) => ({ isDarkMode: !state.isDarkMode }))
       },
