@@ -74,10 +74,6 @@ const PresetScreen = ({ navigation }) => {
     })
   }
 
-  const toggleDisplayCountdown = () => {
-    setIsShowCountdown(!isShowCountdown)
-  }
-
   const onBellChange = (value) => {
     setBellId(value)
     play(getAsset(value + '_short'), bellVolume)

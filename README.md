@@ -16,3 +16,4 @@ org.gradle.java.home=C:\\Program Files\\Java\\jdk-11.0.17
 - https://github.com/remigallego/react-native-use-sound
 
 - https://youmightnotneed.com/lodash
+- https://buildicon.netlify.app/?color=2196f3&emoji=dog
