@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React from 'react'
 import { ScrollView } from 'react-native'
 import Svg, { G, Rect, Text } from 'react-native-svg'
 import {
   SQUARE_SIZE,
   DAYS_IN_WEEK,
   MONTH_LABEL_GUTTER_SIZE,
-  MILLISECONDS_IN_ONE_DAY,
-} from './constants'
+} from '@config/calendarHeatmap'
+
 import {
   shiftDate,
   getWeekCount,
@@ -21,10 +21,12 @@ import {
   getHeight,
   getWidth,
   getValueCache,
-} from './utils'
-import logger from '@utilities/logger'
+} from '@utilities/calendarHeatmapAction'
+
 import { useTranslation } from 'react-i18next'
 import { range } from '@utilities/commonHelper'
+import { useTheme } from 'react-native-paper'
+import Color from 'color'
 
 const CalendarHeatmap = (props) => {
   const {
@@ -37,24 +39,29 @@ const CalendarHeatmap = (props) => {
     tooltipDataAttrs,
     onPress,
     showOutOfRangeDays,
-    labelColor,
     showMonthLabels,
     monthLabelForIndex,
-    colorArray,
     showWeekdayLabels,
   } = props
 
   const { t } = useTranslation()
+  const { colors } = useTheme()
+
+  const labelColor = colors.secondary
+  const colorArray = [
+    Color(colors.tertiary).alpha(0.1).toString(),
+    Color(colors.tertiary).alpha(0.3).toString(),
+    Color(colors.tertiary).alpha(0.5).toString(),
+    Color(colors.tertiary).alpha(0.7).toString(),
+    Color(colors.tertiary).alpha(0.9).toString(),
+    Color(colors.tertiary).alpha(1).toString(),
+  ]
 
   const monthsShort = t('Time.months-short').split('_')
   const monthLabels = { ...monthsShort }
-
   const weekdaysShort = t('Time.weekdays-short').split('_')
 
-  const valueCache = useMemo(
-    () => getValueCache(values, numDays, endDate),
-    [values, numDays, endDate]
-  )
+  const valueCache = getValueCache(values, numDays, endDate)
 
   const handleClick = (value) => {
     if (onPress) {
@@ -71,6 +78,23 @@ const CalendarHeatmap = (props) => {
     }
     const [x, y] = getSquareCoordinates(dayIndex, horizontal, gutterSize)
     const fillColor = getFillColor(index, valueCache, colorArray)
+
+    if (valueCache[index]?.value?.count === -1) {
+      return (
+        <Rect
+          key={index}
+          width={SQUARE_SIZE - 2}
+          height={SQUARE_SIZE - 2}
+          x={x + 1}
+          y={y + 1}
+          title={getTitleForIndex(index, valueCache, titleForValue)}
+          onPress={() => handleClick(index)}
+          fill={fillColor}
+          {...getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs)}
+          stroke={colors.tertiary}
+        />
+      )
+    }
 
     return (
       <Rect
@@ -169,7 +193,7 @@ const CalendarHeatmap = (props) => {
 }
 
 CalendarHeatmap.defaultProps = {
-  numDays: 200,
+  numDays: 91,
   endDate: new Date(),
   gutterSize: 1,
   horizontal: true,

@@ -6,8 +6,9 @@ import RNBootSplash from 'react-native-bootsplash'
 import { navigationRef } from '@utilities/navigationHelper'
 
 const AppNavigator = ({ theme }) => {
+  
   const onReadyNavigation = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     RNBootSplash.hide({ duration: 500, fade: true })
   }
 

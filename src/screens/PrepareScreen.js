@@ -30,6 +30,7 @@ import useSound from '@hooks/useSound'
 import { getDuration, getInterval } from '@utilities/timeHelper'
 import { getAsset } from '@utilities/assetsHelper'
 import logger from '@utilities/logger'
+import { PREPARE_MEDITATION_DAYS } from '@config/calendarHeatmap'
 
 const min_30 = 60 * 30 * 1000
 const min_5 = 60 * 5 * 1000
@@ -38,15 +39,12 @@ const initDuration = initTime + min_30
 const initInterval = initTime + min_5
 
 const PresetScreen = ({ navigation }) => {
-  const { elevation, primary, onBackground, outlineVariant, secondary, tertiary } =
-    useTheme().colors
+  const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
   const { play, release } = useSound()
-
   const { t } = useTranslation()
 
   const [duration, setDuration] = useState(min_30 / 1000)
   const [interval, setInterval] = useState(min_5 / 1000)
-  const [isShowCountdown, setIsShowCountdown] = useState(true)
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
   const [bellId, setBellId] = useState('bell_10')
   const [bellVolume, setBellVolume] = useState(0.5)
@@ -96,16 +94,6 @@ const PresetScreen = ({ navigation }) => {
 
   const endWeek = dayjs().endOf('month').week()
   const endWeekday = dayjs().week(endWeek).day(6)
-  const startWeekday = dayjs().week(endWeek).subtract(12, 'weeks').startOf('day')
-  const diffDay = endWeekday.diff(startWeekday, 'd') + 2
-
-  // logger({
-  //   endWeek,
-  //   startWeek: dayjs().week(endWeek).subtract(12, 'weeks').week(),
-  //   endWeekday,
-  //   startWeekday,
-  //   diffDay
-  // })
 
   return (
     <WaveContainer>
@@ -185,19 +173,12 @@ const PresetScreen = ({ navigation }) => {
         <View style={styles.calendarHeatmapContainer}>
           <CalendarHeatmap
             endDate={endWeekday}
-            numDays={diffDay}
+            numDays={PREPARE_MEDITATION_DAYS}
             values={[
+              { date: '2022-12-13', count: -1 },
               { date: '2022-12-12', count: 9 },
               { date: '2022-12-11', count: 20 },
               { date: '2022-12-10', count: 1 },
-            ]}
-            labelColor={secondary}
-            colorArray={[
-              Color(tertiary).alpha(0.1).toString(),
-              Color(tertiary).alpha(0.4).toString(),
-              Color(tertiary).alpha(0.6).toString(),
-              Color(tertiary).alpha(0.8).toString(),
-              Color(tertiary).alpha(1).toString(),
             ]}
           />
         </View>
@@ -264,8 +245,6 @@ const styles = StyleSheet.create({
   },
   calendarHeatmapContainer: {
     marginTop: 30,
-    // marginLeft: 20,
-    // marginRight: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
