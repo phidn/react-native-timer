@@ -663,12 +663,195 @@ const dark_7 = {
 
 const color_7 = { source: source_7, light: light_7, dark: dark_7 }
 
+const source_8 = '#DD8858'
+const light_8 = {
+  "colors": {
+    "primary": "rgb(151, 72, 19)",
+    "onPrimary": "rgb(255, 255, 255)",
+    "primaryContainer": "rgb(255, 219, 202)",
+    "onPrimaryContainer": "rgb(51, 17, 0)",
+    "secondary": "rgb(118, 88, 72)",
+    "onSecondary": "rgb(255, 255, 255)",
+    "secondaryContainer": "rgb(255, 219, 202)",
+    "onSecondaryContainer": "rgb(43, 22, 10)",
+    "tertiary": "rgb(99, 96, 50)",
+    "onTertiary": "rgb(255, 255, 255)",
+    "tertiaryContainer": "rgb(235, 229, 171)",
+    "onTertiaryContainer": "rgb(30, 28, 0)",
+    "error": "rgb(186, 26, 26)",
+    "onError": "rgb(255, 255, 255)",
+    "errorContainer": "rgb(255, 218, 214)",
+    "onErrorContainer": "rgb(65, 0, 2)",
+    "background": "rgb(255, 251, 255)",
+    "onBackground": "rgb(32, 26, 23)",
+    "surface": "rgb(255, 251, 255)",
+    "onSurface": "rgb(32, 26, 23)",
+    "surfaceVariant": "rgb(244, 222, 212)",
+    "onSurfaceVariant": "rgb(82, 68, 61)",
+    "outline": "rgb(133, 116, 107)",
+    "outlineVariant": "rgb(215, 194, 185)",
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(54, 47, 44)",
+    "inverseOnSurface": "rgb(251, 238, 233)",
+    "inversePrimary": "rgb(255, 182, 143)",
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(250, 242, 243)",
+      "level2": "rgb(247, 237, 236)",
+      "level3": "rgb(244, 231, 229)",
+      "level4": "rgb(243, 230, 227)",
+      "level5": "rgb(240, 226, 222)"
+    },
+    "surfaceDisabled": "rgba(32, 26, 23, 0.12)",
+    "onSurfaceDisabled": "rgba(32, 26, 23, 0.38)",
+    "backdrop": "rgba(59, 46, 39, 0.4)"
+  }
+}
+const dark_8 = {
+  "colors": {
+    "primary": "rgb(255, 182, 143)",
+    "onPrimary": "rgb(84, 33, 0)",
+    "primaryContainer": "rgb(119, 50, 0)",
+    "onPrimaryContainer": "rgb(255, 219, 202)",
+    "secondary": "rgb(230, 190, 171)",
+    "onSecondary": "rgb(67, 43, 29)",
+    "secondaryContainer": "rgb(92, 65, 50)",
+    "onSecondaryContainer": "rgb(255, 219, 202)",
+    "tertiary": "rgb(206, 200, 145)",
+    "onTertiary": "rgb(52, 49, 8)",
+    "tertiaryContainer": "rgb(75, 72, 29)",
+    "onTertiaryContainer": "rgb(235, 229, 171)",
+    "error": "rgb(255, 180, 171)",
+    "onError": "rgb(105, 0, 5)",
+    "errorContainer": "rgb(147, 0, 10)",
+    "onErrorContainer": "rgb(255, 180, 171)",
+    "background": "rgb(32, 26, 23)",
+    "onBackground": "rgb(236, 224, 219)",
+    "surface": "rgb(32, 26, 23)",
+    "onSurface": "rgb(236, 224, 219)",
+    "surfaceVariant": "rgb(82, 68, 61)",
+    "onSurfaceVariant": "rgb(215, 194, 185)",
+    "outline": "rgb(159, 141, 132)",
+    "outlineVariant": "rgb(82, 68, 61)",
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(236, 224, 219)",
+    "inverseOnSurface": "rgb(54, 47, 44)",
+    "inversePrimary": "rgb(151, 72, 19)",
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(43, 34, 29)",
+      "level2": "rgb(50, 39, 33)",
+      "level3": "rgb(57, 43, 36)",
+      "level4": "rgb(59, 45, 37)",
+      "level5": "rgb(63, 48, 40)"
+    },
+    "surfaceDisabled": "rgba(236, 224, 219, 0.12)",
+    "onSurfaceDisabled": "rgba(236, 224, 219, 0.38)",
+    "backdrop": "rgba(59, 46, 39, 0.4)"
+  }
+}
+
+const color_8 = { source: source_8, light: light_8, dark: dark_8 }
+
+const source_9 = '#AEE295'
+const light_9 = {
+  "colors": {
+    "primary": "rgb(53, 106, 33)",
+    "onPrimary": "rgb(255, 255, 255)",
+    "primaryContainer": "rgb(181, 243, 153)",
+    "onPrimaryContainer": "rgb(5, 33, 0)",
+    "secondary": "rgb(85, 98, 76)",
+    "onSecondary": "rgb(255, 255, 255)",
+    "secondaryContainer": "rgb(216, 231, 203)",
+    "onSecondaryContainer": "rgb(19, 31, 13)",
+    "tertiary": "rgb(56, 102, 103)",
+    "onTertiary": "rgb(255, 255, 255)",
+    "tertiaryContainer": "rgb(187, 235, 237)",
+    "onTertiaryContainer": "rgb(0, 32, 33)",
+    "error": "rgb(186, 26, 26)",
+    "onError": "rgb(255, 255, 255)",
+    "errorContainer": "rgb(255, 218, 214)",
+    "onErrorContainer": "rgb(65, 0, 2)",
+    "background": "rgb(253, 253, 246)",
+    "onBackground": "rgb(26, 28, 24)",
+    "surface": "rgb(253, 253, 246)",
+    "onSurface": "rgb(26, 28, 24)",
+    "surfaceVariant": "rgb(223, 228, 215)",
+    "onSurfaceVariant": "rgb(67, 72, 63)",
+    "outline": "rgb(115, 121, 110)",
+    "outlineVariant": "rgb(195, 200, 187)",
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(47, 49, 45)",
+    "inverseOnSurface": "rgb(241, 241, 234)",
+    "inversePrimary": "rgb(154, 214, 128)",
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(243, 246, 235)",
+      "level2": "rgb(237, 241, 229)",
+      "level3": "rgb(231, 237, 223)",
+      "level4": "rgb(229, 235, 220)",
+      "level5": "rgb(225, 232, 216)"
+    },
+    "surfaceDisabled": "rgba(26, 28, 24, 0.12)",
+    "onSurfaceDisabled": "rgba(26, 28, 24, 0.38)",
+    "backdrop": "rgba(45, 50, 41, 0.4)"
+  }
+}
+const dark_9 = {
+  "colors": {
+    "primary": "rgb(154, 214, 128)",
+    "onPrimary": "rgb(13, 57, 0)",
+    "primaryContainer": "rgb(29, 81, 9)",
+    "onPrimaryContainer": "rgb(181, 243, 153)",
+    "secondary": "rgb(188, 203, 176)",
+    "onSecondary": "rgb(39, 52, 33)",
+    "secondaryContainer": "rgb(61, 75, 54)",
+    "onSecondaryContainer": "rgb(216, 231, 203)",
+    "tertiary": "rgb(160, 207, 208)",
+    "onTertiary": "rgb(0, 55, 56)",
+    "tertiaryContainer": "rgb(30, 78, 79)",
+    "onTertiaryContainer": "rgb(187, 235, 237)",
+    "error": "rgb(255, 180, 171)",
+    "onError": "rgb(105, 0, 5)",
+    "errorContainer": "rgb(147, 0, 10)",
+    "onErrorContainer": "rgb(255, 180, 171)",
+    "background": "rgb(26, 28, 24)",
+    "onBackground": "rgb(227, 227, 220)",
+    "surface": "rgb(26, 28, 24)",
+    "onSurface": "rgb(227, 227, 220)",
+    "surfaceVariant": "rgb(67, 72, 63)",
+    "onSurfaceVariant": "rgb(195, 200, 187)",
+    "outline": "rgb(141, 147, 135)",
+    "outlineVariant": "rgb(67, 72, 63)",
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(227, 227, 220)",
+    "inverseOnSurface": "rgb(47, 49, 45)",
+    "inversePrimary": "rgb(53, 106, 33)",
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(32, 37, 29)",
+      "level2": "rgb(36, 43, 32)",
+      "level3": "rgb(40, 49, 35)",
+      "level4": "rgb(41, 50, 37)",
+      "level5": "rgb(44, 54, 39)"
+    },
+    "surfaceDisabled": "rgba(227, 227, 220, 0.12)",
+    "onSurfaceDisabled": "rgba(227, 227, 220, 0.38)",
+    "backdrop": "rgba(45, 50, 41, 0.4)"
+  }
+}
+const color_9 = { source: source_9, light: light_9, dark: dark_9 }
+
 export const meditationColors = [
+  color_8,
   color_1,
   color_2,
-  color_3,
   color_4,
   color_5,
   color_6,
-  color_7,
+  color_9,
 ]

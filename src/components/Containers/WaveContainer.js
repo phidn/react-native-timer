@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
 import { useTheme } from 'react-native-paper'
 import Svg, { Path } from 'react-native-svg'
@@ -15,7 +15,7 @@ const WaveContainer = ({ padding, style, children }) => {
 
   const statusBarHeight = StatusBar.currentHeight
   const bodyTop = navigationHeaderHeight + statusBarHeight
-  const waveScaleY = bodyTop > 123 ? bodyTop / 123 : 1
+  const waveScaleY = bodyTop > 123 ? (bodyTop + 20) / 123 : 1
 
   const color_1 = Color(primary).alpha(0.6).string()
   const color_2 = Color(primary).alpha(0.2).string()
