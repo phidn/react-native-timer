@@ -31,6 +31,7 @@ import { getDuration, getInterval } from '@utilities/timeHelper'
 import { getAsset } from '@utilities/assetsHelper'
 import logger from '@utilities/logger'
 import { PREPARE_MEDITATION_DAYS } from '@config/calendarHeatmap'
+import { useStore } from '@store/useStore'
 
 const min_30 = 60 * 30 * 1000
 const min_5 = 60 * 5 * 1000
@@ -38,16 +39,26 @@ const initTime = 1640970000000
 const initDuration = initTime + min_30
 const initInterval = initTime + min_5
 
-const PresetScreen = ({ navigation }) => {
+const PrepareScreen = ({ navigation }) => {
   const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
   const { play, release } = useSound()
   const { t } = useTranslation()
 
-  const [duration, setDuration] = useState(min_30 / 1000)
-  const [interval, setInterval] = useState(min_5 / 1000)
+  // const [duration, setDuration] = useState(min_30 / 1000)
+  // const [interval, setInterval] = useState(min_5 / 1000)
+  // const [bellId, setBellId] = useState('bell_10')
+  // const [bellVolume, setBellVolume] = useState(0.5)
+  
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
-  const [bellId, setBellId] = useState('bell_10')
-  const [bellVolume, setBellVolume] = useState(0.5)
+  const { duration, interval, bellId, bellVolume } = useStore(state => state.prepare)
+  const setPrepare = useStore(state => state.setPrepare)
+  
+  const setDuration = (duration) => setPrepare({ duration })
+  const setInterval = (interval) => setPrepare({ interval })
+  const setBellId = (bellId) => setPrepare({ bellId })
+  const setBellVolume = (bellVolume) => setPrepare({ bellVolume })
+
+  logger({ duration, interval, bellId, bellVolume })
 
   const showTimePicker = (type) => {
     const onChange = (event, value) => {
@@ -217,7 +228,7 @@ const PresetScreen = ({ navigation }) => {
   )
 }
 
-export default PresetScreen
+export default PrepareScreen
 
 const styles = StyleSheet.create({
   container: {

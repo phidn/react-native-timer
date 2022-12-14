@@ -8,11 +8,15 @@ import RowContainer from '@components/Containers/RowContainer'
 import ListColor from '@components/Color/ListColor'
 import { useStore } from '@store/useStore'
 import WaveContainer from '@components/Containers/WaveContainer'
+import { availableLanguages } from '@config/availableLanguages'
+import logger from '@utilities/logger'
 
 const SettingsScreen = ({ navigation }) => {
-  const { t } = useTranslation()
-  const isDarkMode = useStore(state => state.isDarkMode)
-  const toggleMode = useStore(state => state.toggleMode)
+  const { t, i18n } = useTranslation()
+  const isDarkMode = useStore((state) => state.isDarkMode)
+  const toggleMode = useStore((state) => state.toggleMode)
+
+  const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
 
   return (
     <WaveContainer>
@@ -20,6 +24,7 @@ const SettingsScreen = ({ navigation }) => {
         <List.Section>
           <List.Item
             title={t('Settings.language')}
+            description={language?.label ? language.label : ''}
             left={(props) => <MaterialIcons {...props} name="language" size={24} />}
             right={() => <List.Icon icon="chevron-right" />}
             onPress={() => navigation.navigate('LanguageSettingScreen')}

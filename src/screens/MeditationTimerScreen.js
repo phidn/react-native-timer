@@ -10,22 +10,20 @@ import Color from 'color'
 import useSound from '@hooks/useSound'
 import logger from '@utilities/logger'
 import { getAsset } from '@utilities/assetsHelper'
+import { useStore } from '@store/useStore'
 
 const preparationTime = 10
 
 const MeditationTimerScreen = ({ route, navigation }) => {
   const { duration, interval, bellId, bellVolume } = route.params
-  // const interval = 10
-  // const duration = route.params.duration
-  // const bellId = route.params.bellId
-  // const bellVolume = route.params.bellVolume
 
-  const { primary, surfaceVariant } = useTheme().colors
-
+  const { colors } = useTheme()
   const { play } = useSound()
   const { width } = useWindowDimensions()
 
-  const [isShowCountdown, setIsShowCountdown] = useState(true)
+  const isShowCountdown = useStore(state => state.isShowCountdown)
+  const setIsShowCountdown = useStore(state => state.setIsShowCountdown)
+
   const [isPlaying, setIsPlaying] = useState(true)
   const [countdownKey, setCountdownKey] = useState(uuid.v4())
   const [isPrepared, setIsPrepared] = useState(true)
@@ -69,11 +67,11 @@ const MeditationTimerScreen = ({ route, navigation }) => {
           key={countdownKey}
           isPlaying={isPlaying}
           duration={activeTime}
-          colors={isPrepared ? [Color(primary).hex()] : [Color(surfaceVariant).hex()]}
+          colors={isPrepared ? [Color(colors.primary).hex()] : [Color(colors.surfaceVariant).hex()]}
           colorsTime={[activeTime]}
           size={width - 40}
           strokeWidth={10}
-          trailColor={isPrepared ? Color(surfaceVariant).hex() : Color(primary).hex()}
+          trailColor={isPrepared ? Color(colors.surfaceVariant).hex() : Color(colors.primary).hex()}
           strokeLinecap="round"
           onUpdate={onUpdateCountdown}
           onComplete={onCompleteCountdown}
@@ -104,18 +102,27 @@ const MeditationTimerScreen = ({ route, navigation }) => {
         </CountdownCircleTimer>
         <RowContainer style={{ marginTop: 40 }}>
           <IconButton
-            icon={'stop'}
-            iconColor={primary}
+            icon="close"
+            iconColor={colors.onSurfaceVariant}
             size={25}
             onPress={onBreakCountdown}
-            style={[styles.iconAction, { backgroundColor: surfaceVariant }]}
+            style={[
+              styles.iconAction,
+              { backgroundColor: colors.surfaceVariant, opacity: isPlaying ? 0 : 1 },
+            ]}
           />
           <IconButton
             icon={isPlaying ? 'pause' : 'play'}
-            iconColor={primary}
+            iconColor={colors.primary}
             size={25}
             onPress={() => setIsPlaying(!isPlaying)}
-            style={[styles.iconAction, { backgroundColor: surfaceVariant }]}
+            style={[styles.iconAction, { backgroundColor: colors.surfaceVariant }]}
+          />
+          <IconButton
+            icon={'stop'}
+            iconColor={colors.primary}
+            size={25}
+            style={[styles.iconAction, { opacity: 0 }]}
           />
         </RowContainer>
       </View>
@@ -137,6 +144,11 @@ const styles = StyleSheet.create({
   timerTouchableContent: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  actionsContainer: {
+    flex: 1,
+    marginTop: 40,
+    flexDirection: 'row',
   },
   iconAction: {
     width: 50,
