@@ -99,6 +99,13 @@ function getFillColor(index, valueCache, rectColor) {
   return rectColor[0]
 }
 
+function getFillColorV2(index, valueCache, rectColor) {
+  if (valueCache[index]) {
+    return valueCache[index].value.selectedColor
+  }
+  return rectColor[0]
+}
+
 function getTitleForIndex(index, valueCache, titleForValue) {
   if (valueCache[index]) return valueCache[index].title
   return titleForValue ? titleForValue(null) : null
@@ -181,6 +188,7 @@ export {
   getSquareCoordinates,
   getTitleForIndex,
   getFillColor,
+  getFillColorV2,
   getCountByDuplicateValues,
   getTooltipDataAttrsForIndex,
   getTooltipDataAttrsForValue,

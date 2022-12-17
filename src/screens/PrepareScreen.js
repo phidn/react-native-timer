@@ -14,7 +14,6 @@ import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import Feather from 'react-native-vector-icons/Feather'
 import Slider from '@react-native-community/slider'
 import { useTranslation } from 'react-i18next'
-import Color from 'color'
 
 import RowContainer from '@components/Containers/RowContainer'
 import CalendarHeatmap from '@components/CalendarHeatmap/CalendarHeatmap'
@@ -32,51 +31,75 @@ import { getAsset } from '@utilities/assetsHelper'
 import logger from '@utilities/logger'
 import { PREPARE_MEDITATION_DAYS } from '@config/calendarHeatmap'
 import { useStore } from '@store/useStore'
-
-const min_30 = 60 * 30 * 1000
-const min_5 = 60 * 5 * 1000
-const initTime = 1640970000000
-const initDuration = initTime + min_30
-const initInterval = initTime + min_5
+import { initPicker } from '@config/initPicker'
+import { isNumber } from '@utilities/commonHelper'
+import Color from 'color'
 
 const PrepareScreen = ({ navigation }) => {
-  const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
-  const { play, release } = useSound()
   const { t } = useTranslation()
-
-  // const [duration, setDuration] = useState(min_30 / 1000)
-  // const [interval, setInterval] = useState(min_5 / 1000)
-  // const [bellId, setBellId] = useState('bell_10')
-  // const [bellVolume, setBellVolume] = useState(0.5)
+  const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
+  const { colors } = useTheme()
+  const { play, release } = useSound()
   
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
   const { duration, interval, bellId, bellVolume } = useStore(state => state.prepare)
   const setPrepare = useStore(state => state.setPrepare)
+  const sessions = useStore((state) => state.sessions)
+
+  const calendarHeatmapValues = (() => {
+    const result = []
+    for (const [key, value] of Object.entries(sessions)) {
+      const totalTime = value.logs.reduce((accumulator, currentValue) => {
+        const time = +currentValue.split('|')[0]
+        if (isNumber(time)) {
+          accumulator += time
+        }
+        return accumulator
+      }, 0)
+      const level = totalTime / 60
+      
+      result.push({
+        date: key,
+        selectedColor: Color(colors.tertiary).alpha(level).toString(),
+        count: level
+      })
+    }
+
+    const today = dayjs().format('YYYY-MM-DD')
+    if (!sessions[today]) {
+      result.push({ date: today, count: -1 })
+    }
+    return result
+  })()
+
   
   const setDuration = (duration) => setPrepare({ duration })
   const setInterval = (interval) => setPrepare({ interval })
   const setBellId = (bellId) => setPrepare({ bellId })
   const setBellVolume = (bellVolume) => setPrepare({ bellVolume })
 
-  logger({ duration, interval, bellId, bellVolume })
+  // logger({ duration, interval, bellId, bellVolume })
 
   const showTimePicker = (type) => {
     const onChange = (event, value) => {
+      if (event.type === 'dismissed') return
+
       if (type === 'duration') {
-        setDuration((value.getTime() - initTime) / 1000)
+        setDuration((value.getTime() - initPicker.time) / 1000)
       } else {
-        setInterval((value.getTime() - initTime) / 1000)
+        setInterval((value.getTime() - initPicker.time) / 1000)
       }
     }
 
-    const value = new Date(type === 'duration' ? initDuration : initInterval)
+    const initTime = type === 'duration' ? initPicker.duration : initPicker.interval
+    const value = new Date(initTime)
     DateTimePickerAndroid.open({
       value,
       onChange,
       mode: 'time',
       display: 'spinner',
       is24Hour: true,
-      minuteInterval: 5,
+      minuteInterval: 1,
       positiveButton: { textColor: primary },
       neutralButton: { textColor: primary },
       negativeButton: { textColor: primary },
@@ -185,12 +208,7 @@ const PrepareScreen = ({ navigation }) => {
           <CalendarHeatmap
             endDate={endWeekday}
             numDays={PREPARE_MEDITATION_DAYS}
-            values={[
-              { date: '2022-12-13', count: -1 },
-              { date: '2022-12-12', count: 9 },
-              { date: '2022-12-11', count: 20 },
-              { date: '2022-12-10', count: 1 },
-            ]}
+            values={calendarHeatmapValues}
           />
         </View>
       </ScrollView>

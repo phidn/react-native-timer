@@ -1,3 +1,6 @@
+// WARNING: This is not a drop in replacement solution and
+export const isNumber = a => typeof a === 'number'
+
 export const range = (start, end, increment) => {
   const isEndDef = typeof end !== 'undefined'
   end = isEndDef ? end : start

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, StatusBar } from 'react-native'
+import { View, StyleSheet, StatusBar, ScrollView } from 'react-native'
 import { useTheme } from 'react-native-paper'
 import Svg, { Path } from 'react-native-svg'
 import { useHeaderHeight } from '@react-navigation/elements'
@@ -9,7 +9,7 @@ const waveWidth = 1366
 const waveHeight = 446
 const aspectRatio = waveWidth / waveHeight
 
-const WaveContainer = ({ padding, style, children }) => {
+const WaveContainer = ({ padding, paddingHorizontal, style, isScroll, children }) => {
   const { primary, background } = useTheme().colors
   const navigationHeaderHeight = useHeaderHeight()
 
@@ -48,7 +48,16 @@ const WaveContainer = ({ padding, style, children }) => {
           <Path d="M375.9,374.2c.7,0,1.4,0,2.1-.2-.7,1.2-1.4,1.2-2.1,.2Z" fill={color_2} />
         </Svg>
       </View>
-      <View style={[styles.body, { marginTop: bodyTop, padding }]}>{children}</View>
+      {isScroll && (
+        <ScrollView style={[styles.body, { marginTop: bodyTop, padding, paddingHorizontal }]}>
+          {children}
+        </ScrollView>
+      )}
+      {!isScroll && (
+        <View style={[styles.body, { marginTop: bodyTop, padding, paddingHorizontal }]}>
+          {children}
+        </View>
+      )}
     </View>
   )
 }
