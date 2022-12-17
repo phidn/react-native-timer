@@ -9,44 +9,43 @@ const useSound = () => {
     Sound.setCategory('Playback')
   }, [])
 
-  /**
-   * 
-   * @param {*} soundFile : require('../assets/sounds/bell_10.mp3')
-   * @param {*} volume : 0 -> 1
-   * @param {*} interrupt : true = stop exist sound before play new sound
-   */
-  const play = (soundFile, volume = 1, numberOfLoops = 0, interrupt = true) => {
-    // Release playback instance if exists
-    if (interrupt && playbackInstance) {
-      release()
-    }
-
-    const whoosh = new Sound(soundFile, (error) => {
-      if (error) {
-        logger('failed to load the sound', error)
-        return
+  const playAsync = (soundFile, volume = 1, interrupt = false) => {
+    console.log('→ playAsync interrupt:', interrupt)
+    return new Promise((resolve, reject) => {
+      // Release playback instance if exists
+      if (interrupt && playbackInstance) {
+        release()
       }
 
-      // loaded successfully
-      logger('loaded successfully, duration in seconds', whoosh.getDuration())
-      whoosh.setVolume(volume)
-      whoosh.setNumberOfLoops(numberOfLoops)
-      setPlaybackInstance(whoosh)
-
-      // Play the sound with an onEnd callback
-      whoosh.play((success) => {
-        if (success) {
-          logger('successfully finished playing')
-        } else {
-          logger('playback failed due to audio decoding errors')
+      const whoosh = new Sound(soundFile, (error) => {
+        if (error) {
+          logger('failed to load the sound', error, 'error')
+          return
         }
 
-        if (interrupt) {
-          whoosh.release()
-          setPlaybackInstance(null)
-        }
+        logger('loaded, duration in seconds', whoosh.getDuration())
+        whoosh.setVolume(volume)
+        setPlaybackInstance(whoosh)
+
+        whoosh.play((success) => {
+          if (success) {
+            logger('finished playing')
+          } else {
+            logger('playback failed due to audio decoding errors')
+          }
+          if (interrupt) {
+            release()
+          }
+          resolve()
+        })
       })
     })
+  }
+
+  const play = async (soundFile, volume = 1, numberOfLoops = 1) => {
+    for (let i = 0; i < numberOfLoops; i++) {
+      await playAsync(soundFile, volume, numberOfLoops === i + 1)
+    }
   }
 
   const release = () => {
@@ -54,6 +53,7 @@ const useSound = () => {
       playbackInstance.release()
       setPlaybackInstance(null)
     }
+    logger('>>> released playback')
   }
 
   return { play, release }

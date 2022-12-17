@@ -2,43 +2,60 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storageKeys } from '@config/storageKeys'
+import { immer } from 'zustand/middleware/immer'
 import logger from '@utilities/logger'
 
-export const useStore = create(
-  persist(
-    (set, get, api) => ({
-      /**
-       * Theme
-       */
-      isDarkMode: false,
-      themeColor: 'Meditation Color 1',
-      toggleMode: () => {
-        set((state) => ({ isDarkMode: !state.isDarkMode }))
-      },
-      setThemeColor: (themeColor) => set({ themeColor }),
+const themeSlice = (set) => ({
+  isDarkMode: false,
+  themeColor: 'Meditation Color 1',
+  toggleMode: () => {
+    set((state) => ({ isDarkMode: !state.isDarkMode }))
+  },
+  setThemeColor: (themeColor) => set({ themeColor }),
+})
 
-      /**
-       * Prepare Screen
-       */
-      prepare: {
-        duration: 60 * 30, // 30 minutes
-        interval: 60 * 5, // 5 minutes
-        bellId: 'bell_10',
-        bellVolume: 0.5,
-      },
-      setPrepare: (payload) => {
-        set((state) => ({ prepare: { ...state.prepare, ...payload } }))
-      },
+const prepareSlice = (set) => ({
+  prepare: {
+    duration: 60 * 30, // 30 minutes
+    interval: 60 * 5, // 5 minutes
+    bellId: 'bell_10',
+    bellVolume: 0.5,
+  },
+  setPrepare: (payload) => {
+    set((state) => {
+      state.prepare = { ...state.prepare, ...payload }
+    })
+  },
+})
 
-      /**
-       * Meditation Screen
-       */
-      isShowCountdown: true,
-      setIsShowCountdown: (isShowCountdown) => set({ isShowCountdown }),
+const meditationSlice = (set) => ({
+  isShowCountdown: true,
+  setIsShowCountdown: (isShowCountdown) => set({ isShowCountdown }),
+})
+
+const sessionSlice = (set) => ({
+  sessions: {},
+  setSessions: (sessions) => set({ sessions }),
+  setSessionLogs: (date, duration, started, ended) =>
+    set((state) => {
+      if (!state.sessions[date]?.logs) {
+        state.sessions[date] = { logs: [] }
+      }
+      state.sessions[date].logs.push([duration, started, ended].join('|'))
     }),
-    {
-      name: storageKeys.appStorage,
-      getStorage: () => AsyncStorage,
-    }
-  )
+  clearSession: () => set({ sessions: {} }),
+})
+
+const store = (set) => ({
+  ...themeSlice(set),
+  ...prepareSlice(set),
+  ...meditationSlice(set),
+  ...sessionSlice(set),
+})
+
+export const useStore = create(
+  persist(immer(store), {
+    name: storageKeys.appStorage,
+    getStorage: () => AsyncStorage,
+  })
 )

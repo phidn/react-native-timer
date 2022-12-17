@@ -4,6 +4,7 @@ import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import SettingsScreen from '@screens/SettingsScreen'
 import PrepareScreen from '@screens/PrepareScreen'
@@ -11,6 +12,7 @@ import LanguageSettingScreen from '@screens/LanguageSettingScreen'
 import AdminScreen from '@screens/AdminScreen'
 import MeditationTimerScreen from '@screens/MeditationTimerScreen'
 import logger from '@utilities/logger'
+import StatsScreen from '@screens/StatsScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -76,7 +78,7 @@ const BottomTabNavigator = ({ navigation }) => {
 
   return (
     <Tab.Navigator
-      initialRouteName="PrepareTab"
+      initialRouteName="StatsTab"
       activeColor={tertiary}
       screenListeners={() => ({
         state: (e) => {
@@ -85,9 +87,9 @@ const BottomTabNavigator = ({ navigation }) => {
         },
       })}
     >
-      {false && (
+      {true && (
         <Tab.Screen
-          name="Admin"
+          name="AdminTab"
           component={AdminScreen}
           options={{
             title: 'Admin',
@@ -106,6 +108,21 @@ const BottomTabNavigator = ({ navigation }) => {
           tabBarLabel: t('Navigation.BottomTab.PrepareTab'),
           tabBarIcon: ({ focused, color }) => (
             <Ionicons name={focused ? 'heart' : 'heart-outline'} size={26} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="StatsTab"
+        component={StatsScreen}
+        options={{
+          title: t('Navigation.BottomTab.StatsTab'),
+          tabBarLabel: t('Navigation.BottomTab.StatsTab'),
+          tabBarIcon: ({ focused, color }) => (
+            <MaterialCommunityIcons
+              name={focused ? 'chart-box' : 'chart-box-outline'}
+              size={26}
+              color={color}
+            />
           ),
         }}
       />

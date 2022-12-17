@@ -1,11 +1,7 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
 import Svg, { G, Rect, Text } from 'react-native-svg'
-import {
-  SQUARE_SIZE,
-  DAYS_IN_WEEK,
-  MONTH_LABEL_GUTTER_SIZE,
-} from '@config/calendarHeatmap'
+import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE } from '@config/calendarHeatmap'
 
 import {
   shiftDate,
@@ -21,6 +17,7 @@ import {
   getHeight,
   getWidth,
   getValueCache,
+  getFillColorV2,
 } from '@utilities/calendarHeatmapAction'
 
 import { useTranslation } from 'react-i18next'
@@ -77,7 +74,7 @@ const CalendarHeatmap = (props) => {
       return null
     }
     const [x, y] = getSquareCoordinates(dayIndex, horizontal, gutterSize)
-    const fillColor = getFillColor(index, valueCache, colorArray)
+    const fillColor = getFillColorV2(index, valueCache, colorArray)
 
     if (valueCache[index]?.value?.count === -1) {
       return (
@@ -89,7 +86,7 @@ const CalendarHeatmap = (props) => {
           y={y + 1}
           title={getTitleForIndex(index, valueCache, titleForValue)}
           onPress={() => handleClick(index)}
-          fill={fillColor}
+          fill={colorArray[0]}
           {...getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs)}
           stroke={colors.tertiary}
         />

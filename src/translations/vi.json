@@ -1,8 +1,17 @@
 {
   "App.Name": "Thiền",
+
+  "Time.minutes": "phút",
   "Time.hms": "giờ_phút_giây",
   "Time.weekdays-short": "CN_T2_T3_T4_T5_T6_T7",
   "Time.months-short": "Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12",
+
+  "Calendar.monthNames": "Tháng 1_Tháng 2_Tháng 3_Tháng 4_Tháng 5_Tháng 6_Tháng 7_Tháng 8_Tháng 9_Tháng 10_Tháng 11_Tháng 12",
+  "Calendar.monthNamesShort": "Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12",
+  "Calendar.dayNames": "chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy",
+  "Calendar.dayNamesShort": "CN_T2_T3_T4_T5_T6_T7",
+  "Calendar.amDesignator": "SA",
+  "Calendar.pmDesignator": "CH",
 
   "Common.save": "Cứu!",
   "Common.saved": "Cứu!",
@@ -22,11 +31,14 @@
   "Prepare.bell": "Chuông",
   "Prepare.choose-a-bell": "Chọn tiếng chuông",
 
+  "Statistics.meditation-log": "Nhật kí thiền",
+
   "Navigation.Screen.timer": "Thật sự tự tin",
   "Navigation.BottomTab.admin": "Quản lý",
   "Navigation.BottomTab.meditation": "Thiền",
   "Navigation.BottomTab.settings": "Cài đặt",
   "Navigation.BottomTab.preset": "Thiền",
   "Navigation.BottomTab.PrepareTab": "Thiền",
-  "Navigation.BottomTab.SettingsTab": "Cài đặt"
+  "Navigation.BottomTab.SettingsTab": "Cài đặt",
+  "Navigation.BottomTab.StatsTab": "Thống kê"
 }

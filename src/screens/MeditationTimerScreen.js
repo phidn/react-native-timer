@@ -11,6 +11,7 @@ import useSound from '@hooks/useSound'
 import logger from '@utilities/logger'
 import { getAsset } from '@utilities/assetsHelper'
 import { useStore } from '@store/useStore'
+import dayjs from 'dayjs'
 
 const preparationTime = 10
 
@@ -21,30 +22,41 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const { play } = useSound()
   const { width } = useWindowDimensions()
 
-  const isShowCountdown = useStore(state => state.isShowCountdown)
-  const setIsShowCountdown = useStore(state => state.setIsShowCountdown)
+  const isShowCountdown = useStore((state) => state.isShowCountdown)
+  const setIsShowCountdown = useStore((state) => state.setIsShowCountdown)
 
   const [isPlaying, setIsPlaying] = useState(true)
   const [countdownKey, setCountdownKey] = useState(uuid.v4())
   const [isPrepared, setIsPrepared] = useState(true)
+  const activeTime = isPrepared ? preparationTime : duration
 
-  const activeTime = useMemo(() => {
-    return isPrepared ? preparationTime : duration
-  }, [isPrepared, preparationTime, duration])
+  const [startedSession, setStartedSession] = useState()
+  const setSessionLogs = useStore((state) => state.setSessionLogs)
 
-  const onUpdateCountdown = (value) => {
-    if (!isPrepared && interval > 0 && value % interval === 0 && value < duration) {
-      play(getAsset(bellId + '_long'), bellVolume)
+  // prettier-ignore
+  const onUpdateCountdown = async (value) => {
+    if (
+      !isPrepared &&
+      interval > 0 &&
+      value > 0 &&
+      value % interval === 0 &&
+      value >= duration
+    ) {
+      await play(getAsset(bellId + '_long'), bellVolume)
     }
   }
 
-  const onCompleteCountdown = () => {
-    play(getAsset(bellId + '_short'), bellVolume, 3)
+  const onCompleteCountdown = async () => {
+    await play(getAsset(bellId + '_short'), bellVolume, 3)
     if (isPrepared) {
       setIsPrepared(false)
       setCountdownKey(uuid.v4())
+      setStartedSession(dayjs().format('HH:mm'))
       return {}
     } else {
+      const dateSession = dayjs().format('YYYY-MM-DD')
+      const endedSession = dayjs().format('HH:mm')
+      setSessionLogs(dateSession, duration / 60, startedSession, endedSession)
       navigation.goBack()
     }
   }
