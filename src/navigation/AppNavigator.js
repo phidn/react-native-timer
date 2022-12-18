@@ -17,7 +17,6 @@ const AppNavigator = ({ theme }) => {
         translucent={false}
         backgroundColor={theme.colors.primary}
         barStyle={theme.dark ? 'dark-content' : 'light-content'}
-        // barStyle="light-content"
       />
       <MainNavigator />
     </NavigationContainer>

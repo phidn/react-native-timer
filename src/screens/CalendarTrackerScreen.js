@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import WaveContainer from '@components/Containers/WaveContainer'
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { Button, List, Modal, Portal, Text, useTheme } from 'react-native-paper'
 import { useStore } from '@store/useStore'
@@ -11,7 +10,7 @@ import { isNumber } from '@utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
 import PageContainer from '@components/Containers/PageContainer'
 
-const StatsScreen = () => {
+const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
   const { colors } = useTheme()
 
@@ -145,7 +144,7 @@ const StatsScreen = () => {
   )
 }
 
-export default StatsScreen
+export default CalendarTrackerScreen
 
 const styles = StyleSheet.create({
   modalScrollView: {
