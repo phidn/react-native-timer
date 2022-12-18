@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx b/node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx
+index b3c1071..4207942 100644
+--- a/node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx
++++ b/node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx
+@@ -1177,7 +1177,7 @@ const styles = StyleSheet.create({
+   v3IconContainer: {
+     height: 32,
+     width: 32,
+-    marginBottom: 4,
++    marginBottom: 0,
+     marginTop: 0,
+     justifyContent: 'center',
+   },
+@@ -1217,7 +1217,7 @@ const styles = StyleSheet.create({
+     paddingBottom: 16,
+   },
+   v3NoLabelContainer: {
+-    height: 80,
++    height: 50,
+     justifyContent: 'center',
+     alignItems: 'center',
+   },

@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "emulator": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
     "device": "adb -s 62d6ca7c reverse tcp:8081 tcp:8081",
-    "trans": "jsontt src/translations/en.json"
+    "trans": "jsontt src/translations/en.json",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
@@ -52,6 +53,8 @@
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "react-test-renderer": "18.1.0"
   },
   "jest": {
