@@ -6,9 +6,7 @@
 org.gradle.java.home=C:\\Program Files\\Java\\jdk-11.0.17
 ```
 
-## Override node_modules
-"react-native-paper": "github:phidnhh/react-native-paper",
-
+## Patch react-native-paper
 `node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx#L1181`
 
 ```css
