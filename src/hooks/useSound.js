@@ -10,7 +10,6 @@ const useSound = () => {
   }, [])
 
   const playAsync = (soundFile, volume = 1, interrupt = false) => {
-    console.log('→ playAsync interrupt:', interrupt)
     return new Promise((resolve, reject) => {
       // Release playback instance if exists
       if (interrupt && playbackInstance) {

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import logger from '@utilities/logger'
 import { useStore } from '@store/useStore'
 import dayjs from 'dayjs'
+import PageContainer from '@components/Containers/PageContainer'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -66,7 +67,7 @@ const AdminScreen = () => {
   }
 
   return (
-    <WaveContainer>
+    <PageContainer>
       <Button onPress={clearAsyncStorage}>Clear AsyncStorage</Button>
       <Button onPress={logAsyncStorage}>Log AsyncStorage</Button>
       <Button onPress={() => logger(store)}>Log app zustand store</Button>
@@ -74,7 +75,7 @@ const AdminScreen = () => {
       <Button onPress={devSession}>Dev Session</Button>
       <Button onPress={clearSession}>Clear session</Button>
       <Button onPress={() => logger(sessions)}>Log session</Button>
-    </WaveContainer>
+    </PageContainer>
   )
 }
 

@@ -10,7 +10,9 @@ const waveHeight = 446
 const aspectRatio = waveWidth / waveHeight
 
 const WaveContainer = ({ padding, paddingHorizontal, style, isScroll, children }) => {
-  const { primary, background } = useTheme().colors
+  const theme = useTheme()
+  const { primary, background } = theme.colors
+
   const navigationHeaderHeight = useHeaderHeight()
 
   const statusBarHeight = StatusBar.currentHeight

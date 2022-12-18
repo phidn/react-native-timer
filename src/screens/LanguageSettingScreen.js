@@ -2,7 +2,7 @@ import React from 'react'
 import { List, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import { availableLanguages } from '@config/availableLanguages'
-import WaveContainer from '@components/Containers/WaveContainer'
+import PageContainer from '@components/Containers/PageContainer'
 import { storageKeys } from '@config/storageKeys'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -16,7 +16,7 @@ const LanguageSettingScreen = () => {
   }
 
   return (
-    <WaveContainer>
+    <PageContainer>
       {availableLanguages.map((language) => (
         <List.Item
           key={language.code}
@@ -34,7 +34,7 @@ const LanguageSettingScreen = () => {
           )}
         />
       ))}
-    </WaveContainer>
+    </PageContainer>
   )
 }
 
