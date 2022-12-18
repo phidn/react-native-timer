@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import logger from '@utilities/logger'
 import { isNumber } from '@utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
+import PageContainer from '@components/Containers/PageContainer'
 
 const StatsScreen = () => {
   const { t, i18n } = useTranslation()
@@ -79,7 +80,7 @@ const StatsScreen = () => {
   }
 
   return (
-    <WaveContainer paddingHorizontal={20} isScroll={true}>
+    <PageContainer paddingHorizontal={20} isScroll={true}>
       <Calendar
         key={calendarKey}
         markedDates={markedDates}
@@ -140,11 +141,7 @@ const StatsScreen = () => {
           </View>
         </Modal>
       </Portal>
-
-
-      
-
-    </WaveContainer>
+    </PageContainer>
   )
 }
 

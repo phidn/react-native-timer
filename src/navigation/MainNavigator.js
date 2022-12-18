@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -13,12 +13,15 @@ import AdminScreen from '@screens/AdminScreen'
 import MeditationTimerScreen from '@screens/MeditationTimerScreen'
 import logger from '@utilities/logger'
 import StatsScreen from '@screens/StatsScreen'
+import { useStore } from '@store/useStore'
+
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
 const Stack = createNativeStackNavigator()
 
 const MainNavigator = () => {
   const { t } = useTranslation()
-  const { onPrimary } = useTheme().colors
 
   return (
     <Stack.Navigator initialRouteName="BottomTabNavigator">
@@ -26,11 +29,9 @@ const MainNavigator = () => {
         name="BottomTabNavigator"
         component={BottomTabNavigator}
         options={{
-          headerShown: true,
           headerTitleAlign: 'center',
-          headerTransparent: true,
-          headerShadowVisible: false,
-          headerTitleStyle: { color: onPrimary },
+          headerShown: true,
+          headerShadowVisible: true,
         }}
       />
       <Stack.Screen
@@ -40,10 +41,6 @@ const MainNavigator = () => {
           headerTitle: t('Settings.language'),
           headerShown: true,
           headerTitleAlign: 'center',
-          headerTransparent: true,
-          headerShadowVisible: false,
-          headerTitleStyle: { color: onPrimary },
-          headerTintColor: onPrimary,
         }}
       />
       <Stack.Screen
@@ -53,92 +50,118 @@ const MainNavigator = () => {
           headerTitle: t('Navigation.Screen.timer'),
           headerShown: true,
           headerTitleAlign: 'center',
-          headerTransparent: true,
-          headerShadowVisible: false,
-          headerTitleStyle: { color: onPrimary },
-          headerTintColor: onPrimary,
         }}
       />
     </Stack.Navigator>
   )
 }
 
-const Tab = createMaterialBottomTabNavigator()
+const TopTab = createMaterialTopTabNavigator()
+
+function StatsTopTabs() {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Stats" component={StatsScreen} />
+      <TopTab.Screen name="Admin" component={AdminScreen} />
+    </TopTab.Navigator>
+  )
+}
+
+const BottomTab = createMaterialBottomTabNavigator()
 
 const BottomTabNavigator = ({ navigation }) => {
   const { t, i18n } = useTranslation()
   const { tertiary } = useTheme().colors
-  const [activeTab, setActiveTab] = useState()
+
+  const bottomTabRoutes = [
+    {
+      name: 'AdminTab',
+      title: t('Navigation.BottomTab.AdminTab'),
+      component: AdminScreen,
+      IconComponent: Ionicons,
+      icon: 'person',
+      show: true,
+    },
+    {
+      name: 'PrepareTab',
+      title: t('Navigation.BottomTab.PrepareTab'),
+      component: PrepareScreen,
+      IconComponent: Ionicons,
+      icon: 'heart',
+      show: true,
+    },
+    {
+      name: 'StatsTab',
+      title: t('Navigation.BottomTab.StatsTab'),
+      component: StatsTopTabs,
+      IconComponent: MaterialCommunityIcons,
+      icon: 'chart-box',
+      show: true,
+    },
+    {
+      name: 'SettingsTab',
+      title: t('Navigation.BottomTab.SettingsTab'),
+      component: SettingsScreen,
+      IconComponent: Ionicons,
+      icon: 'settings',
+      show: true,
+    },
+  ].filter((x) => x.show)
+
+  const [isMounted, setIsMounted] = useState(false)
+  const bottomActiveTab = useStore((state) => state.bottomActiveTab)
+  const setBottomActiveTab = useStore((state) => state.setBottomActiveTab)
 
   useEffect(() => {
-    if (activeTab) {
-      navigation.setOptions({ title: t(`Navigation.BottomTab.${activeTab}`) })
+    if (bottomActiveTab && isMounted === false) {
+      setIsMounted(true)
     }
-  }, [i18n.language, activeTab])
+  }, [bottomActiveTab, isMounted])
 
-  return (
-    <Tab.Navigator
-      initialRouteName="StatsTab"
+  useEffect(() => {
+    if (bottomActiveTab) {
+      navigation.setOptions({ title: t(`Navigation.BottomTab.${bottomActiveTab}`) })
+    }
+  }, [i18n.language, bottomActiveTab])
+
+  return isMounted ? (
+    <BottomTab.Navigator
+      initialRouteName={bottomActiveTab}
       activeColor={tertiary}
+      labeled={false}
+      // style={{ height: 30, marginBottom: 20 }}
+      // barStyle={{ height: 50, marginBottom: 50, overflow: 'hidden' }}
+      // shifting={false}
+      // sceneAnimationEnabled={false}
       screenListeners={() => ({
-        state: (e) => {
-          const { routeNames, index } = e.data.state
-          setActiveTab(routeNames[index])
+        state: (event) => {
+          const { routeNames, index } = event.data.state
+          setBottomActiveTab(routeNames[index])
         },
       })}
     >
-      {true && (
-        <Tab.Screen
-          name="AdminTab"
-          component={AdminScreen}
+      {bottomTabRoutes.map((bottomTabRoute) => (
+        <BottomTab.Screen
+          key={bottomTabRoute.name}
+          name={bottomTabRoute.name}
+          component={bottomTabRoute.component}
           options={{
-            title: 'Admin',
-            tabBarLabel: 'Admin',
+            title: bottomTabRoute.title,
+            tabBarLabel: bottomTabRoute.title,
             tabBarIcon: ({ focused, color }) => (
-              <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
+              <bottomTabRoute.IconComponent
+                name={focused ? bottomTabRoute.icon : `${bottomTabRoute.icon}-outline`}
+                size={26}
+                color={color}
+                style={{ marginBottom: 0 }}
+              />
             ),
+            tabBarBadge: bottomTabRoute.name === bottomActiveTab,
           }}
         />
-      )}
-      <Tab.Screen
-        name="PrepareTab"
-        component={PrepareScreen}
-        options={{
-          title: t('Navigation.BottomTab.PrepareTab'),
-          tabBarLabel: t('Navigation.BottomTab.PrepareTab'),
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons name={focused ? 'heart' : 'heart-outline'} size={26} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="StatsTab"
-        component={StatsScreen}
-        options={{
-          title: t('Navigation.BottomTab.StatsTab'),
-          tabBarLabel: t('Navigation.BottomTab.StatsTab'),
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? 'chart-box' : 'chart-box-outline'}
-              size={26}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="SettingsTab"
-        component={SettingsScreen}
-        options={{
-          title: t('Navigation.BottomTab.SettingsTab'),
-          tabBarLabel: t('Navigation.BottomTab.SettingsTab'),
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons name={focused ? 'settings' : 'settings-outline'} size={26} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  )
+      ))}
+    </BottomTab.Navigator>
+  ) : null
 }
 
 export default MainNavigator

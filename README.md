@@ -6,6 +6,27 @@
 org.gradle.java.home=C:\\Program Files\\Java\\jdk-11.0.17
 ```
 
+## Override node_modules
+"react-native-paper": "github:phidnhh/react-native-paper",
+
+`node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx#L1181`
+
+```css
+v3IconContainer: {
+  height: 32,
+  width: 32,
+  marginBottom: 0,
+  marginTop: 0,
+  justifyContent: 'center',
+},
+
+v3NoLabelContainer: {
+  height: 50,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+```
+
 ## References
 - https://github.com/pmndrs/zustand
 - https://github.com/girish54321/react-native-starter

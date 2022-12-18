@@ -17,7 +17,6 @@ import { useTranslation } from 'react-i18next'
 
 import RowContainer from '@components/Containers/RowContainer'
 import CalendarHeatmap from '@components/CalendarHeatmap/CalendarHeatmap'
-import WaveContainer from '@components/Containers/WaveContainer'
 
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -34,16 +33,17 @@ import { useStore } from '@store/useStore'
 import { initPicker } from '@config/initPicker'
 import { isNumber } from '@utilities/commonHelper'
 import Color from 'color'
+import PageContainer from '@components/Containers/PageContainer'
 
 const PrepareScreen = ({ navigation }) => {
   const { t } = useTranslation()
   const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
   const { colors } = useTheme()
   const { play, release } = useSound()
-  
+
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
-  const { duration, interval, bellId, bellVolume } = useStore(state => state.prepare)
-  const setPrepare = useStore(state => state.setPrepare)
+  const { duration, interval, bellId, bellVolume } = useStore((state) => state.prepare)
+  const setPrepare = useStore((state) => state.setPrepare)
   const sessions = useStore((state) => state.sessions)
 
   const calendarHeatmapValues = (() => {
@@ -57,11 +57,11 @@ const PrepareScreen = ({ navigation }) => {
         return accumulator
       }, 0)
       const level = totalTime / 60
-      
+
       result.push({
         date: key,
         selectedColor: Color(colors.tertiary).alpha(level).toString(),
-        count: level
+        count: level,
       })
     }
 
@@ -72,7 +72,6 @@ const PrepareScreen = ({ navigation }) => {
     return result
   })()
 
-  
   const setDuration = (duration) => setPrepare({ duration })
   const setInterval = (interval) => setPrepare({ interval })
   const setBellId = (bellId) => setPrepare({ bellId })
@@ -130,88 +129,86 @@ const PrepareScreen = ({ navigation }) => {
   const endWeekday = dayjs().week(endWeek).day(6)
 
   return (
-    <WaveContainer>
-      <ScrollView style={styles.container}>
-        <List.Item
-          title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
-          right={() => (
-            <RowContainer style={{}}>
-              <Text variant="titleMedium" style={[{ color: primary }]}>
-                {getDuration(duration, t)}
-              </Text>
-              <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
-            </RowContainer>
-          )}
-          onPress={() => showTimePicker('duration')}
-        />
-        <List.Item
-          title={<Text variant="titleMedium">{t('Prepare.interval-bells')}</Text>}
-          right={() => (
-            <RowContainer style={{}}>
-              <Text variant="titleMedium" style={[{ color: primary }]}>
-                {getInterval(interval, t)}
-              </Text>
-              <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
-            </RowContainer>
-          )}
-          onPress={() => showTimePicker('interval')}
-        />
-        <List.Item
-          title={<Text variant="titleMedium">{t('Prepare.sound')}</Text>}
-          right={() => (
-            <RowContainer style={{}}>
-              <Text variant="titleMedium" style={[{ color: primary }]}>
-                {`${t('Prepare.bell')} ${bellId.split('_').pop()}`}
-              </Text>
-              <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
-            </RowContainer>
-          )}
-          onPress={() => setIsShowSoundDialog(!isShowSoundDialog)}
-        />
+    <PageContainer>
+      <List.Item
+        title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
+        right={() => (
+          <RowContainer style={{}}>
+            <Text variant="titleMedium" style={[{ color: primary }]}>
+              {getDuration(duration, t)}
+            </Text>
+            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+          </RowContainer>
+        )}
+        onPress={() => showTimePicker('duration')}
+      />
+      <List.Item
+        title={<Text variant="titleMedium">{t('Prepare.interval-bells')}</Text>}
+        right={() => (
+          <RowContainer style={{}}>
+            <Text variant="titleMedium" style={[{ color: primary }]}>
+              {getInterval(interval, t)}
+            </Text>
+            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+          </RowContainer>
+        )}
+        onPress={() => showTimePicker('interval')}
+      />
+      <List.Item
+        title={<Text variant="titleMedium">{t('Prepare.sound')}</Text>}
+        right={() => (
+          <RowContainer style={{}}>
+            <Text variant="titleMedium" style={[{ color: primary }]}>
+              {`${t('Prepare.bell')} ${bellId.split('_').pop()}`}
+            </Text>
+            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+          </RowContainer>
+        )}
+        onPress={() => setIsShowSoundDialog(!isShowSoundDialog)}
+      />
 
-        <RowContainer style={{ paddingRight: 15 }}>
-          <IconButton
-            icon="volume-minus"
-            iconColor={onBackground}
-            size={20}
-            onPress={() => onBellVolumeChangeComplete(bellVolume - 0.1)}
-          />
-          <Slider
-            style={{ flex: 1 }}
-            value={bellVolume}
-            onSlidingComplete={onBellVolumeChangeComplete}
-            minimumValue={0}
-            maximumValue={1}
-            minimumTrackTintColor={primary}
-            maximumTrackTintColor={onBackground}
-          />
-          <IconButton
-            icon="volume-plus"
-            iconColor={primary}
-            size={20}
-            onPress={() => onBellVolumeChangeComplete(bellVolume + 0.1)}
-          />
-        </RowContainer>
+      <RowContainer style={{ paddingRight: 15 }}>
+        <IconButton
+          icon="volume-minus"
+          iconColor={onBackground}
+          size={20}
+          onPress={() => onBellVolumeChangeComplete(bellVolume - 0.1)}
+        />
+        <Slider
+          style={{ flex: 1 }}
+          value={bellVolume}
+          onSlidingComplete={onBellVolumeChangeComplete}
+          minimumValue={0}
+          maximumValue={1}
+          minimumTrackTintColor={primary}
+          maximumTrackTintColor={onBackground}
+        />
+        <IconButton
+          icon="volume-plus"
+          iconColor={primary}
+          size={20}
+          onPress={() => onBellVolumeChangeComplete(bellVolume + 0.1)}
+        />
+      </RowContainer>
 
-        <Button
-          icon="star-three-points-outline"
-          mode="elevated"
-          style={styles.buttonPlay}
-          contentStyle={{ flexDirection: 'row-reverse' }}
-          onPress={startSession}
-        >
-          {t('Prepare.start')}
-        </Button>
+      <Button
+        icon="star-three-points-outline"
+        mode="elevated"
+        style={styles.buttonPlay}
+        contentStyle={{ flexDirection: 'row-reverse' }}
+        onPress={startSession}
+      >
+        {t('Prepare.start')}
+      </Button>
 
-        {/* Heatmap */}
-        <View style={styles.calendarHeatmapContainer}>
-          <CalendarHeatmap
-            endDate={endWeekday}
-            numDays={PREPARE_MEDITATION_DAYS}
-            values={calendarHeatmapValues}
-          />
-        </View>
-      </ScrollView>
+      {/* Heatmap */}
+      <View style={styles.calendarHeatmapContainer}>
+        <CalendarHeatmap
+          endDate={endWeekday}
+          numDays={PREPARE_MEDITATION_DAYS}
+          values={calendarHeatmapValues}
+        />
+      </View>
 
       {/* Modal choose bell sound */}
       <Portal>
@@ -242,17 +239,13 @@ const PrepareScreen = ({ navigation }) => {
           </View>
         </Modal>
       </Portal>
-    </WaveContainer>
+    </PageContainer>
   )
 }
 
 export default PrepareScreen
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 30,
-  },
   rightIcon: {
     marginLeft: 10,
   },

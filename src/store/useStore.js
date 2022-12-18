@@ -46,11 +46,17 @@ const sessionSlice = (set) => ({
   clearSession: () => set({ sessions: {} }),
 })
 
+const navigationSlice = (set) => ({
+  bottomActiveTab: '',
+  setBottomActiveTab: (bottomActiveTab) => set({ bottomActiveTab }),
+})
+
 const store = (set) => ({
   ...themeSlice(set),
   ...prepareSlice(set),
   ...meditationSlice(set),
   ...sessionSlice(set),
+  ...navigationSlice(set)
 })
 
 export const useStore = create(

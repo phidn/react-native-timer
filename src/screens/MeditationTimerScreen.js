@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { StyleSheet, View, useWindowDimensions } from 'react-native'
 import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
-import WaveContainer from '@components/Containers/WaveContainer'
+import PageContainer from '@components/Containers/PageContainer'
 import RowContainer from '@components/Containers/RowContainer'
 import { getCountdown } from '@utilities/timeHelper'
 import uuid from 'react-native-uuid'
@@ -73,7 +73,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   return (
-    <WaveContainer>
+    <PageContainer>
       <View style={styles.countdownContainer}>
         <CountdownCircleTimer
           key={countdownKey}
@@ -138,7 +138,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
           />
         </RowContainer>
       </View>
-    </WaveContainer>
+    </PageContainer>
   )
 }
 
