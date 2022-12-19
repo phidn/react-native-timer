@@ -34,6 +34,7 @@ import { initPicker } from '@config/initPicker'
 import { isNumber } from '@utilities/commonHelper'
 import Color from 'color'
 import PageContainer from '@components/Containers/PageContainer'
+import CenterContainer from '@components/Containers/CenterContainer'
 
 const PrepareScreen = ({ navigation }) => {
   const { t } = useTranslation()
@@ -125,7 +126,7 @@ const PrepareScreen = ({ navigation }) => {
     })
   }
 
-  const endWeek = dayjs().endOf('month').week()
+  const endWeek = dayjs().endOf('month').week() + 1
   const endWeekday = dayjs().week(endWeek).day(6)
 
   return (
@@ -202,13 +203,13 @@ const PrepareScreen = ({ navigation }) => {
       </Button>
 
       {/* Heatmap */}
-      <View style={styles.calendarHeatmapContainer}>
+      <CenterContainer style={{ marginLeft: -30 }}>
         <CalendarHeatmap
           endDate={endWeekday}
           numDays={PREPARE_MEDITATION_DAYS}
           values={calendarHeatmapValues}
         />
-      </View>
+      </CenterContainer>
 
       {/* Modal choose bell sound */}
       <Portal>
@@ -266,8 +267,13 @@ const styles = StyleSheet.create({
     marginBottom: -10,
   },
   calendarHeatmapContainer: {
-    marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    margin: 0,
+    padding: 0,
+    backgroundColor: 'yellow',
   },
 })

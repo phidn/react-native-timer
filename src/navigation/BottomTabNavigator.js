@@ -11,6 +11,8 @@ import AdminScreen from '@screens/AdminScreen'
 import StatsTopTabs from './StatsTopTabs'
 
 import { useStore } from '@store/useStore'
+import useHydration from '@hooks/useHydration'
+import useIsReady from '@hooks/useIsReady'
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 const BottomTab = createMaterialBottomTabNavigator()
@@ -54,15 +56,10 @@ const BottomTabNavigator = ({ navigation }) => {
     },
   ].filter((x) => x.show)
 
-  const [isMounted, setIsMounted] = useState(false)
   const bottomActiveTab = useStore((state) => state.bottomActiveTab)
   const setBottomActiveTab = useStore((state) => state.setBottomActiveTab)
-
-  useEffect(() => {
-    if (bottomActiveTab && isMounted === false) {
-      setIsMounted(true)
-    }
-  }, [bottomActiveTab, isMounted])
+  const hydrated = useHydration()
+  const isReady = useIsReady(hydrated, bottomActiveTab)
 
   useEffect(() => {
     if (bottomActiveTab) {
@@ -70,7 +67,7 @@ const BottomTabNavigator = ({ navigation }) => {
     }
   }, [i18n.language, bottomActiveTab])
 
-  return isMounted ? (
+  return isReady ? (
     <BottomTab.Navigator
       initialRouteName={bottomActiveTab}
       activeColor={tertiary}

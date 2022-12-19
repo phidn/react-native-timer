@@ -40,5 +40,8 @@
   "Navigation.BottomTab.preset": "Thiền",
   "Navigation.BottomTab.PrepareTab": "Thiền",
   "Navigation.BottomTab.SettingsTab": "Cài đặt",
-  "Navigation.BottomTab.StatsTab": "Thống kê"
+  "Navigation.BottomTab.StatsTab": "Thống kê",
+
+  "StatsTopTabs.calendar": "Lịch theo dõi",
+  "StatsTopTabs.chart": "Biểu đồ"
 }

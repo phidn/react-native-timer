@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import Svg, { G, Rect, Text } from 'react-native-svg'
 import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE } from '@config/calendarHeatmap'
 
@@ -168,7 +168,7 @@ const CalendarHeatmap = (props) => {
       const [x, y] = getWeekdayLabelCoordinates(dayIndex)
 
       return dayIndex & 1 ? (
-        <Text key={`${x}${y}`} x={x} y={y - 6} fill={labelColor}>
+        <Text key={`${x}${y}`} x={x} y={y - 4} fill={labelColor} textAnchor="end">
           {weekdayLabel}
         </Text>
       ) : null
@@ -179,13 +179,13 @@ const CalendarHeatmap = (props) => {
   const height = getHeight(gutterSize, showMonthLabels, horizontal)
 
   return (
-    <ScrollView>
-      <Svg width={width + 65} height={height} viewBox={`0 0 ${width} ${height}`}>
-        <G>{renderMonthLabels()}</G>
-        <G>{renderAllWeeks()}</G>
-        <G translateX={-30}>{renderWeekdayLabels()}</G>
+    <View>
+      <Svg width={width + 35} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <G translateX={15}>{renderMonthLabels()}</G>
+        <G translateX={15}>{renderAllWeeks()}</G>
+        <G translateX={10}>{renderWeekdayLabels()}</G>
       </Svg>
-    </ScrollView>
+    </View>
   )
 }
 

@@ -36,11 +36,6 @@ const AdminScreen = () => {
   const clearSession = useStore((state) => state.clearSession)
 
   const devSession = () => {
-    // const date = dayjs().format('YYYY-MM-DD')
-    // const started = dayjs().format('HH:mm')
-    // const ended = dayjs(Date.now() + 30 * 60 *1000).format('HH:mm')
-    // setSessionLogs(date, 30, started, ended)
-
     setSessions({
       '2022-12-08': {
         logs: ['30|13:38|14:08'],

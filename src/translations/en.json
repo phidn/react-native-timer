@@ -41,5 +41,8 @@
   "Navigation.BottomTab.AdminTab": "Admin",
   "Navigation.BottomTab.PrepareTab": "Meditation",
   "Navigation.BottomTab.SettingsTab": "Settings",
-  "Navigation.BottomTab.StatsTab": "Statistics"
+  "Navigation.BottomTab.StatsTab": "Statistics",
+
+  "StatsTopTabs.calendar": "Calendar Tracker",
+  "StatsTopTabs.chart": "Chart"
 }
