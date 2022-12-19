@@ -3,13 +3,16 @@ import CalendarTrackerScreen from '@screens/CalendarTrackerScreen'
 import ChartScreen from '@screens/ChartScreen'
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { useTranslation } from 'react-i18next'
 const TopTab = createMaterialTopTabNavigator()
 
 function StatsTopTabs() {
+  const { t } = useTranslation()
+
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="Calendar Tracker" component={CalendarTrackerScreen} />
-      <TopTab.Screen name="Chart" component={ChartScreen} />
+      <TopTab.Screen name={t('StatsTopTabs.calendar')} component={CalendarTrackerScreen} />
+      <TopTab.Screen name={t('StatsTopTabs.chart')} component={ChartScreen} />
     </TopTab.Navigator>
   )
 }

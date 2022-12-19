@@ -1,9 +1,14 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storageKeys } from '@config/storageKeys'
-import { immer } from 'zustand/middleware/immer'
 import logger from '@utilities/logger'
+
+const rehydrateStorageSlice = (set) => ({
+  _hasHydrated: false,
+  setHasHydrated: (state) => set({ _hasHydrated: state }),
+})
 
 const themeSlice = (set) => ({
   isDarkMode: false,
@@ -47,21 +52,25 @@ const sessionSlice = (set) => ({
 })
 
 const navigationSlice = (set) => ({
-  bottomActiveTab: '',
+  bottomActiveTab: 'PrepareTab',
   setBottomActiveTab: (bottomActiveTab) => set({ bottomActiveTab }),
 })
 
 const store = (set) => ({
+  ...rehydrateStorageSlice(set),
   ...themeSlice(set),
   ...prepareSlice(set),
   ...meditationSlice(set),
   ...sessionSlice(set),
-  ...navigationSlice(set)
+  ...navigationSlice(set),
 })
 
 export const useStore = create(
   persist(immer(store), {
     name: storageKeys.appStorage,
     getStorage: () => AsyncStorage,
+    onRehydrateStorage: () => (state) => {
+      state.setHasHydrated(true)
+    },
   })
 )
