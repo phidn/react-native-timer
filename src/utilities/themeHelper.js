@@ -4,7 +4,7 @@ import {
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native'
 
-import { themeColors } from '@config/theme'
+import { themeColors } from '@/config/theme'
 
 export const combineTheme = (label, isDarkMode) => {
   const selectedSchema = themeColors.find((x) => x.label === label) || themeColors[0]

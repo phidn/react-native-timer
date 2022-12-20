@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
-import AppNavigator from '@navigation/AppNavigator'
-import { combineTheme } from '@utilities/themeHelper'
+import AppNavigator from '@/navigation/AppNavigator'
+import { combineTheme } from '@/utilities/themeHelper'
 import { I18nextProvider } from 'react-i18next'
-import i18nInstance from '@config/i18n'
-import { useStore } from '@store/useStore'
+import i18nInstance from '@/config/i18n'
+import { useStore } from '@/store/useStore'
 
 const App = () => {
   const isDarkMode = useStore((state) => state.isDarkMode)

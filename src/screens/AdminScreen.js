@@ -1,11 +1,11 @@
 import React from 'react'
-import WaveContainer from '@components/Containers/WaveContainer'
+import WaveContainer from '@/components/Containers/WaveContainer'
 import { Button, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import logger from '@utilities/logger'
-import { useStore } from '@store/useStore'
+import logger from '@/utilities/logger'
+import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
-import PageContainer from '@components/Containers/PageContainer'
+import PageContainer from '@/components/Containers/PageContainer'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {

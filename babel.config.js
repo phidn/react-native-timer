@@ -5,17 +5,7 @@ module.exports = {
       'module-resolver',
       {
         root: ['.'],
-        alias: {
-          '@assets': './src/assets',
-          '@components': './src/components',
-          '@config': './src/config',
-          '@hooks': './src/hooks',
-          '@navigation': './src/navigation',
-          '@screens': './src/screens',
-          '@store': './src/store',
-          '@translations': './src/translations',
-          '@utilities': './src/utilities',
-        },
+        alias: { '@': './src' },
       },
     ],
   ],

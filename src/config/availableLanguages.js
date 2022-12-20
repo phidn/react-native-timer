@@ -1,6 +1,6 @@
-import en from '@translations/en.json'
-import vi from '@translations/vi.json'
-import de from '@translations/de.json'
+import en from '@/translations/en.json'
+import vi from '@/translations/vi.json'
+import de from '@/translations/de.json'
 
 const availableLanguages = [
   { label: 'English', code: 'en' },

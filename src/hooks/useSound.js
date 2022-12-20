@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Sound from 'react-native-sound'
-import logger from '@utilities/logger'
+import logger from '@/utilities/logger'
 
 const useSound = () => {
   const [playbackInstance, setPlaybackInstance] = useState(null)

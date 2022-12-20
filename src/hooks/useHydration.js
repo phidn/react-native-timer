@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useStore } from '@store/useStore'
+import { useStore } from '@/store/useStore'
 
 const useHydration = () => {
   const [hydrated, setHydrated] = useState(useStore.persist.hasHydrated)

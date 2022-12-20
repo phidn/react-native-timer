@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import SettingsScreen from '@screens/SettingsScreen'
-import PrepareScreen from '@screens/PrepareScreen'
-import AdminScreen from '@screens/AdminScreen'
+import SettingsScreen from '@/screens/SettingsScreen'
+import PrepareScreen from '@/screens/PrepareScreen'
+import AdminScreen from '@/screens/AdminScreen'
 import StatsTopTabs from './StatsTopTabs'
 
-import { useStore } from '@store/useStore'
-import useHydration from '@hooks/useHydration'
-import useIsReady from '@hooks/useIsReady'
+import { useStore } from '@/store/useStore'
+import useHydration from '@/hooks/useHydration'
+import useIsReady from '@/hooks/useIsReady'
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 const BottomTab = createMaterialBottomTabNavigator()

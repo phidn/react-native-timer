@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { Button, List, Modal, Portal, Text, useTheme } from 'react-native-paper'
-import { useStore } from '@store/useStore'
+import { useStore } from '@/store/useStore'
 import Color from 'color'
 import dayjs from 'dayjs'
-import logger from '@utilities/logger'
-import { isNumber } from '@utilities/commonHelper'
+import logger from '@/utilities/logger'
+import { isNumber } from '@/utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
-import PageContainer from '@components/Containers/PageContainer'
+import PageContainer from '@/components/Containers/PageContainer'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()

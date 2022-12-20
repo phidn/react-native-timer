@@ -4,12 +4,12 @@ import { List, Switch } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import RowContainer from '@components/Containers/RowContainer'
-import ListColor from '@components/Color/ListColor'
-import { useStore } from '@store/useStore'
-import PageContainer from '@components/Containers/PageContainer'
-import { availableLanguages } from '@config/availableLanguages'
-import logger from '@utilities/logger'
+import RowContainer from '@/components/Containers/RowContainer'
+import ListColor from '@/components/Color/ListColor'
+import { useStore } from '@/store/useStore'
+import PageContainer from '@/components/Containers/PageContainer'
+import { availableLanguages } from '@/config/availableLanguages'
+import logger from '@/utilities/logger'
 
 const PAGE_PADDING_HORIZONTAL = 20
 

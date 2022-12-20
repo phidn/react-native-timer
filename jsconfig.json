@@ -1,18 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@config/*": ["./src/config/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@navigation/*": ["./src/navigation/*"],
-      "@screens/*": ["./src/screens/*"],
-      "@store/*": ["./src/store/*"],
-      "@translations/*": ["./src/translations/*"],
-      "@utilities/*": ["./src/utilities/*"]
+      "@/*": ["./src/*"]
     }
-  },
+  }
 }
