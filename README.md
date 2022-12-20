@@ -36,3 +36,11 @@ v3NoLabelContainer: {
 
 - https://youmightnotneed.com/lodash
 - https://buildicon.netlify.app/?color=2196f3&emoji=dog
+
+
+## Repo
+- https://github.com/AudiusProject/audius-client
+- https://github.com/zensayyy/ZenMusic
+- https://github.com/Vetrivel-VP/react-native-musicplayer
+- https://github.com/dr0id007/forest-native
+
