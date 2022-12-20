@@ -15,8 +15,8 @@ import Feather from 'react-native-vector-icons/Feather'
 import Slider from '@react-native-community/slider'
 import { useTranslation } from 'react-i18next'
 
-import RowContainer from '@components/Containers/RowContainer'
-import CalendarHeatmap from '@components/CalendarHeatmap/CalendarHeatmap'
+import RowContainer from '@/components/Containers/RowContainer'
+import CalendarHeatmap from '@/components/CalendarHeatmap/CalendarHeatmap'
 
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -24,17 +24,17 @@ import duration from 'dayjs/plugin/duration'
 dayjs.extend(weekOfYear)
 dayjs.extend(duration)
 
-import useSound from '@hooks/useSound'
-import { getDuration, getInterval } from '@utilities/timeHelper'
-import { getAsset } from '@utilities/assetsHelper'
-import logger from '@utilities/logger'
-import { PREPARE_MEDITATION_DAYS } from '@config/calendarHeatmap'
-import { useStore } from '@store/useStore'
-import { initPicker } from '@config/initPicker'
-import { isNumber } from '@utilities/commonHelper'
+import useSound from '@/hooks/useSound'
+import { getDuration, getInterval } from '@/utilities/timeHelper'
+import { getAsset } from '@/utilities/assetsHelper'
+import logger from '@/utilities/logger'
+import { PREPARE_MEDITATION_DAYS } from '@/config/calendarHeatmap'
+import { useStore } from '@/store/useStore'
+import { initPicker } from '@/config/initPicker'
+import { isNumber } from '@/utilities/commonHelper'
 import Color from 'color'
-import PageContainer from '@components/Containers/PageContainer'
-import CenterContainer from '@components/Containers/CenterContainer'
+import PageContainer from '@/components/Containers/PageContainer'
+import CenterContainer from '@/components/Containers/CenterContainer'
 
 const PrepareScreen = ({ navigation }) => {
   const { t } = useTranslation()

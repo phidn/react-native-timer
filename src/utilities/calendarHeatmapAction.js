@@ -3,7 +3,7 @@ import {
   DAYS_IN_WEEK,
   MONTH_LABEL_GUTTER_SIZE,
   MILLISECONDS_IN_ONE_DAY,
-} from '@config/calendarHeatmap'
+} from '@/config/calendarHeatmap'
 
 const getValueCache = (values, numDays, endDate) => {
   return values.reduce((memo, value) => {

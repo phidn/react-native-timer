@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView, View } from 'react-native'
 import Svg, { G, Rect, Text } from 'react-native-svg'
-import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE } from '@config/calendarHeatmap'
+import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE } from '@/config/calendarHeatmap'
 
 import {
   shiftDate,
@@ -18,10 +18,10 @@ import {
   getWidth,
   getValueCache,
   getFillColorV2,
-} from '@utilities/calendarHeatmapAction'
+} from '@/utilities/calendarHeatmapAction'
 
 import { useTranslation } from 'react-i18next'
-import { range } from '@utilities/commonHelper'
+import { range } from '@/utilities/commonHelper'
 import { useTheme } from 'react-native-paper'
 import Color from 'color'
 

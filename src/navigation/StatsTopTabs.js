@@ -1,6 +1,6 @@
 import React from 'react'
-import CalendarTrackerScreen from '@screens/CalendarTrackerScreen'
-import ChartScreen from '@screens/ChartScreen'
+import CalendarTrackerScreen from '@/screens/CalendarTrackerScreen'
+import ChartScreen from '@/screens/ChartScreen'
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { useTranslation } from 'react-i18next'

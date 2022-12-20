@@ -3,8 +3,8 @@ import { StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import MainNavigator from './MainNavigator'
 import RNBootSplash from 'react-native-bootsplash'
-import { navigationRef } from '@utilities/navigationHelper'
-import useHydration from '@hooks/useHydration'
+import { navigationRef } from '@/utilities/navigationHelper'
+import useHydration from '@/hooks/useHydration'
 
 const AppNavigator = ({ theme }) => {
   const onReadyNavigation = async () => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { TouchableOpacity, useWindowDimensions } from 'react-native'
 import { Avatar } from 'react-native-paper'
-import { themeMeditationColors } from '@config/theme'
-import { useStore } from '@store/useStore'
+import { themeMeditationColors } from '@/config/theme'
+import { useStore } from '@/store/useStore'
 import Color from 'color'
 
 const ListColor = ({ amount = themeMeditationColors.length, gap }) => {

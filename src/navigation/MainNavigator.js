@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import LanguageSettingScreen from '@screens/LanguageSettingScreen'
-import MeditationTimerScreen from '@screens/MeditationTimerScreen'
+import LanguageSettingScreen from '@/screens/LanguageSettingScreen'
+import MeditationTimerScreen from '@/screens/MeditationTimerScreen'
 import BottomTabNavigator from './BottomTabNavigator'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
