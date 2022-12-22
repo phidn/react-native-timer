@@ -25,7 +25,7 @@ const defaultConfig = {
 
 const _loggerInstance = _logger.createLogger(defaultConfig)
 
-const logger = (prefix, message, level = 'info') => {
+export const logger = (prefix, message, level = 'info') => {
   if (message && typeof message !== 'object') {
     _loggerInstance[level](`>> ${prefix}: ${message}`)
   }
@@ -37,4 +37,4 @@ const logger = (prefix, message, level = 'info') => {
   }
 }
 
-export default logger
+export const logger0 = () => {}

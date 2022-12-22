@@ -9,7 +9,7 @@ import ListColor from '@/components/Color/ListColor'
 import { useStore } from '@/store/useStore'
 import PageContainer from '@/components/Containers/PageContainer'
 import { availableLanguages } from '@/config/availableLanguages'
-import logger from '@/utilities/logger'
+import { logger } from '@/utilities/logger'
 
 const PAGE_PADDING_HORIZONTAL = 20
 

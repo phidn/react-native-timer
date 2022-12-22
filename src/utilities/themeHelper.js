@@ -3,8 +3,8 @@ import {
   DefaultTheme as NavigationLightTheme,
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native'
-
 import { themeColors } from '@/config/theme'
+import color from 'color'
 
 export const combineTheme = (label, isDarkMode) => {
   const selectedSchema = themeColors.find((x) => x.label === label) || themeColors[0]
@@ -16,6 +16,11 @@ export const combineTheme = (label, isDarkMode) => {
     ? adaptNavigationTheme({ reactNavigationDark: NavigationDarkTheme }).DarkTheme
     : adaptNavigationTheme({ reactNavigationLight: NavigationLightTheme }).LightTheme
 
+  const customCardColor = color(selectedSchemaColors.surface)
+    .mix(color(selectedSchemaColors.primary), 0.08)
+    .rgb()
+    .string()
+
   const combinedTheme = {
     ...MD3Theme,
     ...NavigationTheme,
@@ -23,6 +28,7 @@ export const combineTheme = (label, isDarkMode) => {
       ...MD3Theme.colors,
       ...NavigationTheme.colors,
       ...selectedSchemaColors,
+      card: customCardColor,
     },
   }
 
