@@ -27,7 +27,7 @@ dayjs.extend(duration)
 import useSound from '@/hooks/useSound'
 import { getDuration, getInterval } from '@/utilities/timeHelper'
 import { getAsset } from '@/utilities/assetsHelper'
-import logger from '@/utilities/logger'
+import { logger } from '@/utilities/logger'
 import { PREPARE_MEDITATION_DAYS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'

@@ -37,6 +37,8 @@ v3NoLabelContainer: {
 - https://youmightnotneed.com/lodash
 - https://buildicon.netlify.app/?color=2196f3&emoji=dog
 
+- https://github.com/remigallego/react-native-use-sound
+
 ## Repo
 - https://github.com/AudiusProject/audius-client
 - https://github.com/zensayyy/ZenMusic

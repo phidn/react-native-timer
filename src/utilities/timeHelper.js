@@ -41,3 +41,6 @@ export const getDuration = (duration, t) => {
     .format(`H[${h}] m[${m}]`)
     .replace(re, '')
 }
+
+export const sToMs = (seconds) => seconds * 1000
+export const sToMin = (seconds) => seconds / 60

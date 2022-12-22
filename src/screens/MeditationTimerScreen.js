@@ -1,22 +1,30 @@
-import React, { useMemo, useState } from 'react'
-import { StyleSheet, View, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { StyleSheet, View, useWindowDimensions, AppState } from 'react-native'
 import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
 import RowContainer from '@/components/Containers/RowContainer'
-import { getCountdown } from '@/utilities/timeHelper'
+import { getCountdown, sToMin, sToMs } from '@/utilities/timeHelper'
 import uuid from 'react-native-uuid'
 import Color from 'color'
 import useSound from '@/hooks/useSound'
-import logger from '@/utilities/logger'
+import { logger } from '@/utilities/logger'
 import { getAsset } from '@/utilities/assetsHelper'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
+import _BackgroundTimer from '@/utilities/BackgroundTimer'
 
 const preparationTime = 10
 
 const MeditationTimerScreen = ({ route, navigation }) => {
-  const { duration, interval, bellId, bellVolume } = route.params
+  const { params } = route
+  if (__DEV__) {
+    params.duration = 30
+    params.interval = 10
+  }
+  const msDuration = sToMs(params.duration)
+  const msInterval = sToMs(params.interval)
+  const isInterval = params.interval > 0
 
   const { colors } = useTheme()
   const { play } = useSound()
@@ -28,54 +36,137 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const [isPlaying, setIsPlaying] = useState(true)
   const [countdownKey, setCountdownKey] = useState(uuid.v4())
   const [isPrepared, setIsPrepared] = useState(true)
-  const activeTime = isPrepared ? preparationTime : duration
+  const activeTime = isPrepared ? preparationTime : params.duration
 
   const [startedSession, setStartedSession] = useState()
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
-  // prettier-ignore
-  const onUpdateCountdown = async (value) => {
-    if (
-      !isPrepared &&
-      interval > 0 &&
-      value > 0 &&
-      value % interval === 0 &&
-      value >= duration
-    ) {
-      await play(getAsset(bellId + '_long'), bellVolume)
-    }
+  const remainingTimeRef = useRef(preparationTime)
+
+  const playLongBell = () => play(getAsset(params.bellId + '_long'), params.bellVolume)
+  const playShortBell = () => play(getAsset(params.bellId + '_short'), params.bellVolume, 2)
+
+  const intervalTask = async () => {
+    _BackgroundTimer.setInterval(() => {
+      const remainingTime = remainingTimeRef.current
+      if (remainingTime >= params.interval) {
+        playLongBell()
+      }
+    }, msInterval)
   }
 
-  const onCompleteCountdown = async () => {
-    await play(getAsset(bellId + '_short'), bellVolume, 3)
-    if (isPrepared) {
-      setIsPrepared(false)
-      setCountdownKey(uuid.v4())
-      setStartedSession(dayjs().format('HH:mm'))
-      return {}
-    } else {
-      const dateSession = dayjs().format('YYYY-MM-DD')
-      const endedSession = dayjs().format('HH:mm')
-      setSessionLogs(dateSession, duration / 60, startedSession, endedSession)
-      navigation.goBack()
-    }
+  const endSession = async (started) => {
+    const date = dayjs().format('YYYY-MM-DD')
+    const ended = dayjs().format('HH:mm')
+    setSessionLogs(date, sToMin(params.duration), started, ended)
+    await playShortBell()
+    navigation.goBack()
   }
 
-  const onStopCountdown = () => {
-    setIsPlaying(false)
-    setIsPrepared(true)
-    setCountdownKey(uuid.v4())
-  }
+  useEffect(() => {
+    const prepareTask = () => {
+      const _startedSession = dayjs().format('HH:mm')
+      const sessionDelay = (params.duration + preparationTime) * 1000
+      const prepareDelay = preparationTime * 1000
+
+      const startSession = () => {
+        playShortBell()
+        setIsPrepared(false)
+        remainingTimeRef.current = params.duration
+        setCountdownKey(uuid.v4())
+        setStartedSession(_startedSession)
+
+        if (isInterval) {
+          intervalTask()
+        }
+      }
+
+      _BackgroundTimer.setTimeout(() => startSession(), prepareDelay)
+      _BackgroundTimer.setTimeout(() => endSession(_startedSession), sessionDelay)
+    }
+
+    prepareTask()
+
+    return () => {
+      _BackgroundTimer.clearAll()
+    }
+  }, [])
+
+  const appState = useRef(AppState.currentState)
+  const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
+  const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (appState.current === 'active' && nextAppState.match(/inactive|background/)) {
+        if (isPrepared) {
+          setAppComeBackgroundTime(Date.now())
+          setAppComeBgRemainingTime(remainingTimeRef.current * 1000)
+        }
+      }
+      if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
+        if (!isPrepared && appComeBackgroundTime) {
+          const appComeToActiveTime = Date.now()
+          const inactiveDuration = appComeToActiveTime - appComeBackgroundTime
+          params.duration(msDuration - inactiveDuration + appComeBgRemainingTime) / 1000
+          setCountdownKey(uuid.v4())
+        }
+      }
+      appState.current = nextAppState
+    })
+
+    return () => {
+      subscription.remove()
+    }
+  }, [isPrepared, appComeBackgroundTime, appComeBgRemainingTime])
 
   const onBreakCountdown = () => {
-    onStopCountdown()
     navigation.goBack()
+  }
+
+  const startAfterPauseTask = (delayTime) => {
+    const remainingTime = remainingTimeRef.current - 1
+
+    const playSession = () => {
+      if (remainingTime >= params.interval) {
+        playLongBell()
+      }
+      if (isInterval) {
+        intervalTask()
+      }
+    }
+
+    _BackgroundTimer.setTimeout(() => playSession(), delayTime * 1000)
+    _BackgroundTimer.setTimeout(() => endSession(startedSession), remainingTime * 1000)
+  }
+
+  const onPauseCountdown = () => {
+    // Pause countdown:
+    if (isPlaying) {
+      _BackgroundTimer.clearAll()
+    }
+
+    // Start countdown => start background interval
+    if (!isPlaying) {
+      const remainingTime = remainingTimeRef.current
+
+      for (let nextTime = remainingTime; nextTime > 0; nextTime--) {
+        if (nextTime % params.interval === 0) {
+          const delay = remainingTime - nextTime
+          startAfterPauseTask(delay - 1)
+          break
+        }
+      }
+    }
+
+    setIsPlaying(!isPlaying)
   }
 
   return (
     <PageContainer>
       <View style={styles.countdownContainer}>
         <CountdownCircleTimer
+          initialRemainingTime={remainingTimeRef.current}
           key={countdownKey}
           isPlaying={isPlaying}
           duration={activeTime}
@@ -85,58 +176,62 @@ const MeditationTimerScreen = ({ route, navigation }) => {
           strokeWidth={10}
           trailColor={isPrepared ? Color(colors.surfaceVariant).hex() : Color(colors.primary).hex()}
           strokeLinecap="round"
-          onUpdate={onUpdateCountdown}
-          onComplete={onCompleteCountdown}
         >
-          {({ remainingTime }) => (
-            <TouchableRipple
-              onPress={() => setIsShowCountdown(!isShowCountdown)}
-              rippleColor="rgba(0, 0, 0, .32)"
-              borderless={true}
-              style={[
-                styles.timeTouchable,
-                { width: width - 40, height: width - 40, borderRadius: (width - 40) / 2 },
-              ]}
-              centered={true}
-            >
-              <View style={styles.timerTouchableContent}>
-                {isShowCountdown && !isPrepared && (
-                  <Text variant="displayMedium" style={{ textAlign: 'center' }}>
-                    {getCountdown(remainingTime)}
-                  </Text>
-                )}
-                {isShowCountdown && isPrepared && (
-                  <Text variant="displayMedium">{remainingTime}</Text>
-                )}
-              </View>
-            </TouchableRipple>
-          )}
+          {({ remainingTime }) => {
+            remainingTimeRef.current = remainingTime
+
+            return (
+              <TouchableRipple
+                onPress={() => setIsShowCountdown(!isShowCountdown)}
+                rippleColor="rgba(0, 0, 0, .32)"
+                borderless={true}
+                style={[
+                  styles.timeTouchable,
+                  { width: width - 40, height: width - 40, borderRadius: (width - 40) / 2 },
+                ]}
+                centered={true}
+              >
+                <View style={styles.timerTouchableContent}>
+                  {isShowCountdown && !isPrepared && (
+                    <Text variant="displayMedium" style={{ textAlign: 'center' }}>
+                      {getCountdown(remainingTime)}
+                    </Text>
+                  )}
+                  {isShowCountdown && isPrepared && (
+                    <Text variant="displayMedium">{remainingTime}</Text>
+                  )}
+                </View>
+              </TouchableRipple>
+            )
+          }}
         </CountdownCircleTimer>
-        <RowContainer style={{ marginTop: 40 }}>
-          <IconButton
-            icon="close"
-            iconColor={colors.onSurfaceVariant}
-            size={25}
-            onPress={onBreakCountdown}
-            style={[
-              styles.iconAction,
-              { backgroundColor: colors.surfaceVariant, opacity: isPlaying ? 0 : 1 },
-            ]}
-          />
-          <IconButton
-            icon={isPlaying ? 'pause' : 'play'}
-            iconColor={colors.primary}
-            size={25}
-            onPress={() => setIsPlaying(!isPlaying)}
-            style={[styles.iconAction, { backgroundColor: colors.surfaceVariant }]}
-          />
-          <IconButton
-            icon={'stop'}
-            iconColor={colors.primary}
-            size={25}
-            style={[styles.iconAction, { opacity: 0 }]}
-          />
-        </RowContainer>
+        {!isPrepared && (
+          <RowContainer style={{ marginTop: 40 }}>
+            <IconButton
+              icon="close"
+              iconColor={colors.onSurfaceVariant}
+              size={25}
+              onPress={onBreakCountdown}
+              style={[
+                styles.iconAction,
+                { backgroundColor: colors.surfaceVariant, opacity: isPlaying ? 0 : 1 },
+              ]}
+            />
+            <IconButton
+              icon={isPlaying ? 'pause' : 'play'}
+              iconColor={colors.primary}
+              size={25}
+              onPress={onPauseCountdown}
+              style={[styles.iconAction, { backgroundColor: colors.surfaceVariant }]}
+            />
+            <IconButton
+              icon={'stop'}
+              iconColor={colors.primary}
+              size={25}
+              style={[styles.iconAction, { opacity: 0 }]}
+            />
+          </RowContainer>
+        )}
       </View>
     </PageContainer>
   )
