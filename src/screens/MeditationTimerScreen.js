@@ -4,7 +4,7 @@ import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
 import RowContainer from '@/components/Containers/RowContainer'
-import { getCountdown, sToMin, sToMs } from '@/utilities/timeHelper'
+import { getCountdown, getDuration, getCountdownV2, sToMin, sToMs } from '@/utilities/timeHelper'
 import uuid from 'react-native-uuid'
 import Color from 'color'
 import useSound from '@/hooks/useSound'
@@ -13,19 +13,21 @@ import { getAsset } from '@/utilities/assetsHelper'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
 import _BackgroundTimer from '@/utilities/BackgroundTimer'
+import { useTranslation } from 'react-i18next'
 
 const preparationTime = 10
 
 const MeditationTimerScreen = ({ route, navigation }) => {
   const { params } = route
   if (__DEV__) {
-    params.duration = 30
-    params.interval = 10
+    // params.duration = 30
+    // params.interval = 10
   }
   const msDuration = sToMs(params.duration)
   const msInterval = sToMs(params.interval)
   const isInterval = params.interval > 0
 
+  const { t } = useTranslation()
   const { colors } = useTheme()
   const { play } = useSound()
   const { width } = useWindowDimensions()
@@ -42,9 +44,13 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
   const remainingTimeRef = useRef(preparationTime)
+  
+  const appState = useRef(AppState.currentState)
+  const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
+  const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
 
   const playLongBell = () => play(getAsset(params.bellId + '_long'), params.bellVolume)
-  const playShortBell = () => play(getAsset(params.bellId + '_short'), params.bellVolume, 2)
+  const playShortBell = () => play(getAsset(params.bellId + '_short'), params.bellVolume, 3)
 
   const intervalTask = async () => {
     _BackgroundTimer.setInterval(() => {
@@ -92,10 +98,6 @@ const MeditationTimerScreen = ({ route, navigation }) => {
     }
   }, [])
 
-  const appState = useRef(AppState.currentState)
-  const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
-  const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
-
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (appState.current === 'active' && nextAppState.match(/inactive|background/)) {
@@ -121,7 +123,9 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }, [isPrepared, appComeBackgroundTime, appComeBgRemainingTime])
 
   const onBreakCountdown = () => {
-    navigation.goBack()
+    if (!isPlaying) {
+      navigation.goBack()
+    }
   }
 
   const startAfterPauseTask = (delayTime) => {

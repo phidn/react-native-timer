@@ -19,6 +19,11 @@ const themeSlice = (set) => ({
   setThemeColor: (themeColor) => set({ themeColor }),
 })
 
+const navigationSlice = (set) => ({
+  bottomActiveTab: 'PrepareTab',
+  setBottomActiveTab: (bottomActiveTab) => set({ bottomActiveTab }),
+})
+
 const prepareSlice = (set) => ({
   prepare: {
     duration: 60 * 30, // 30 minutes
@@ -51,18 +56,19 @@ const sessionSlice = (set) => ({
   clearSession: () => set({ sessions: {} }),
 })
 
-const navigationSlice = (set) => ({
-  bottomActiveTab: 'PrepareTab',
-  setBottomActiveTab: (bottomActiveTab) => set({ bottomActiveTab }),
+const chartSlice = (set) => ({
+  chartType: '7d',
+  setChartType: (chartType) => set({ chartType }),
 })
 
 const store = (set) => ({
   ...rehydrateStorageSlice(set),
+  ...navigationSlice(set),
   ...themeSlice(set),
   ...prepareSlice(set),
   ...meditationSlice(set),
   ...sessionSlice(set),
-  ...navigationSlice(set),
+  ...chartSlice(set),
 })
 
 export const useStore = create(
