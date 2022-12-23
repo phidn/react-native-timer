@@ -44,7 +44,7 @@ const CalendarHeatmap = (props) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
 
-  const labelColor = colors.secondary
+  const labelColor = colors.onSurface
   const colorArray = [
     Color(colors.tertiary).alpha(0.1).toString(),
     Color(colors.tertiary).alpha(0.3).toString(),
@@ -56,7 +56,7 @@ const CalendarHeatmap = (props) => {
 
   const monthsShort = t('Time.months-short').split('_')
   const monthLabels = { ...monthsShort }
-  const weekdaysShort = t('Time.weekdays-short').split('_')
+  const weekdaysShort = t('Time.weekdays-short').split('_').map(x => x.slice(0, 2))
 
   const valueCache = getValueCache(values, numDays, endDate)
 
@@ -138,7 +138,7 @@ const CalendarHeatmap = (props) => {
       )
       const [x, y] = getMonthLabelCoordinates(weekIndex, horizontal, gutterSize)
       return endOfWeek.getDate() >= 1 && endOfWeek.getDate() <= DAYS_IN_WEEK ? (
-        <Text key={weekIndex} x={x} y={y + 20} fill={labelColor}>
+        <Text key={weekIndex} x={x} y={y + 15} fill={labelColor}>
           {monthLabelForIndex
             ? monthLabelForIndex(endOfWeek.getMonth())
             : monthLabels[endOfWeek.getMonth()]}
@@ -180,10 +180,10 @@ const CalendarHeatmap = (props) => {
 
   return (
     <View>
-      <Svg width={width + 35} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <Svg width={width + 40} height={height} viewBox={`0 0 ${width} ${height}`}>
         <G translateX={15}>{renderMonthLabels()}</G>
         <G translateX={15}>{renderAllWeeks()}</G>
-        <G translateX={10}>{renderWeekdayLabels()}</G>
+        <G translateX={5}>{renderWeekdayLabels()}</G>
       </Svg>
     </View>
   )

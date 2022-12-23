@@ -3,10 +3,12 @@ import { StyleSheet, SafeAreaView, View } from 'react-native'
 import { BarChart, LineChart, XAxis, Grid, YAxis } from 'react-native-svg-charts'
 import { Text } from 'react-native-svg'
 import PageContainer from '@/components/Containers/PageContainer'
-import { SegmentedButtons, useTheme } from 'react-native-paper'
+import { Card, SegmentedButtons, useTheme } from 'react-native-paper'
 import { useStore } from '@/store/useStore'
 import { logger } from '@/utilities/logger'
 import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
+
 import {
   getWeekDates,
   getMonthDates,
@@ -22,6 +24,8 @@ import { calcTotalTime } from '@/utilities/sessionHelper'
 import { Text as TextPaper } from 'react-native-paper'
 import * as scale from 'd3-scale'
 import Color from 'color'
+import CenterContainer from '@/components/Containers/CenterContainer'
+import { useTranslation } from 'react-i18next'
 
 // 7 days
 const weekDates = getWeekDates()
@@ -40,6 +44,9 @@ const monthDatesInYear = getMonthDatesInYear()
 
 const ChartScreen = () => {
   const { colors } = useTheme()
+  const { t, i18n } = useTranslation()
+
+  const [dayString, monthString, yearString] = t('Time.DMS').split('_').map(x => x.charAt(0))
 
   const chartType = useStore((state) => state.chartType)
   const setChartType = useStore((state) => state.setChartType)
@@ -150,13 +157,58 @@ const ChartScreen = () => {
     }
   }
 
-  const axesSvg = { fontSize: 10, fill: colors.onSurface }
+  const renderRangeDates = () => {
+    let _dayjs, formatDate = 'MMMM DD, YYYY', result
+    if (i18n.resolvedLanguage === 'vi') {
+      _dayjs = (param) => dayjs(param).locale('vi')
+      formatDate = 'DD MMMM, YYYY'
+    }
+
+    if (chartType === '7d') {
+      const start = _dayjs().day(0).format(formatDate)
+      const end = _dayjs().day(7).format(formatDate)
+      result = `${start} - ${end}`
+    }
+    if (chartType === '1m') {
+      const start = _dayjs().startOf('month').format(formatDate)
+      const end = _dayjs().endOf('month').format(formatDate)
+      result = `${start} - ${end}`
+    }
+    if (chartType === '3m') {
+      const currentMonth = _dayjs().month()
+      const start = _dayjs()
+        .month(currentMonth - 3)
+        .endOf('month')
+        .format(formatDate)
+      const end = _dayjs().month(currentMonth).endOf('month').format(formatDate)
+
+      result = `${start} - ${end}`
+    }
+    if (chartType === '1y') {
+      const start = _dayjs().startOf('year').format(formatDate)
+      const end = _dayjs().endOf('year').format(formatDate)
+      result = `${start} - ${end}`
+    }
+    if (chartType === 'all') {
+      const start = _dayjs(datesInAll[0]).format(formatDate)
+      const end = _dayjs(datesInAll[datesInAll.length - 1]).format(formatDate)
+      result = `${start} - ${end}`
+    }
+    
+    if (i18n.resolvedLanguage === 'vi') {
+      result = result.replace(/tháng/g, 'Tháng')
+    }
+
+    return result
+  }
+
+  const axesSvg = { fontSize: 10, fill: Color(colors.onSurface).alpha(0.5).toString() }
   const verticalContentInset = { top: 10, bottom: 10 }
   const xAxisHeight = 30
 
   return (
-    <PageContainer paddingHorizontal={30}>
-      <SafeAreaView style={styles.segmentedButtonsContainer}>
+    <PageContainer style={{ padding: 20, paddingTop: 30 }}>
+      <SafeAreaView style={{ alignItems: 'center', marginBottom: 20 }}>
         <SegmentedButtons
           value={chartType}
           onValueChange={setChartType}
@@ -164,19 +216,19 @@ const ChartScreen = () => {
           buttons={[
             {
               value: '7d',
-              label: '7D',
+              label: '7' + dayString,
             },
             {
               value: '1m',
-              label: '1M',
+              label: '1' + monthString,
             },
             {
               value: '3m',
-              label: '3M',
+              label: '3' + monthString,
             },
             {
               value: '1y',
-              label: '1Y',
+              label: '1' + yearString,
             },
             {
               value: 'all',
@@ -185,6 +237,14 @@ const ChartScreen = () => {
           ]}
         />
       </SafeAreaView>
+
+      <CenterContainer>
+        <TextPaper variant="titleLarge">{t('Statistics.Chart.daily-meditation')}</TextPaper>
+      </CenterContainer>
+      <CenterContainer style={{ marginBottom: 10 }}>
+        <TextPaper>{renderRangeDates()}</TextPaper>
+      </CenterContainer>
+
       <View style={{ height: 250, flexDirection: 'row' }}>
         <YAxis
           data={data}
@@ -216,18 +276,5 @@ const ChartScreen = () => {
     </PageContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  segmentedButtonsContainer: {
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  chartContainer: {
-    height: 250,
-  },
-  week: {
-    flexDirection: 'row',
-  },
-})
 
 export default ChartScreen

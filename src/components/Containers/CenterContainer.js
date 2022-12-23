@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 const CenterContainer = ({ style, children }) => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', ...style }}>
+    <View style={{ justifyContent: 'center', ...style }}>
       <View
         style={{
           flexDirection: 'row',

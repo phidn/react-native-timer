@@ -21,7 +21,7 @@ const SettingsScreen = ({ navigation }) => {
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
 
   return (
-    <PageContainer paddingHorizontal={PAGE_PADDING_HORIZONTAL}>
+    <PageContainer style={{ paddingHorizontal: PAGE_PADDING_HORIZONTAL, marginTop: 20 }}>
       <Card style={styles.card}>
         <List.Item
           title={t('Settings.language')}

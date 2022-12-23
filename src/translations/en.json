@@ -1,6 +1,7 @@
 {
   "App.Name": "Meditation Tracker",
 
+  "Time.DMS": "Day_Month_Year",
   "Time.minutes": "minutes",
   "Time.hms": "hour_minute_second",
   "Time.weekdays-short": "Sun_Mon_Tue_Wed_Thu_Fri_Sat",
@@ -31,7 +32,8 @@
   "Prepare.bell": "Bell",
   "Prepare.choose-a-bell": "Bell",
 
-  "Statistics.meditation-log": "Meditation Log",
+  "Statistics.CalendarTracker.meditation-log": "Meditation Log",
+  "Statistics.Chart.daily-meditation": "Daily Meditation Chart",
 
   "Navigation.Screen.timer": "Mindfulness Meditation Timer",
 

@@ -9,6 +9,7 @@ import {
   IconButton,
   Modal,
   Portal,
+  Card,
 } from 'react-native-paper'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import Feather from 'react-native-vector-icons/Feather'
@@ -130,7 +131,7 @@ const PrepareScreen = ({ navigation }) => {
   const endWeekday = dayjs().week(endWeek).day(6)
 
   return (
-    <PageContainer>
+    <PageContainer style={{ marginLeft: 10, padding: 20 }}>
       <List.Item
         title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
         right={() => (
@@ -203,7 +204,7 @@ const PrepareScreen = ({ navigation }) => {
       </Button>
 
       {/* Heatmap */}
-      <CenterContainer style={{ marginLeft: -30 }}>
+      <CenterContainer style={{ flex: 1, marginLeft: -20 }}>
         <CalendarHeatmap
           endDate={endWeekday}
           numDays={PREPARE_MEDITATION_DAYS}
