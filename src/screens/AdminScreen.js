@@ -68,7 +68,7 @@ const AdminScreen = () => {
   }
 
   return (
-    <PageContainer>
+    <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
         <Button onPress={clearAsyncStorage}>Clear AsyncStorage</Button>
         <Button onPress={logAsyncStorage}>Log AsyncStorage</Button>

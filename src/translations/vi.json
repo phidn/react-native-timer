@@ -1,6 +1,7 @@
 {
   "App.Name": "Thiền",
 
+  "Time.DMS": "Ngày_Tháng_Năm",
   "Time.minutes": "phút",
   "Time.hms": "giờ_phút_giây",
   "Time.weekdays-short": "CN_T2_T3_T4_T5_T6_T7",
@@ -31,7 +32,8 @@
   "Prepare.bell": "Chuông",
   "Prepare.choose-a-bell": "Chọn tiếng chuông",
 
-  "Statistics.meditation-log": "Nhật kí thiền",
+  "Statistics.CalendarTracker.meditation-log": "Nhật ký thực hành",
+  "Statistics.Chart.daily-meditation": "Biểu đồ thực hành mỗi ngày",
 
   "Navigation.Screen.timer": "Thật sự tự tin",
   "Navigation.BottomTab.admin": "Quản lý",

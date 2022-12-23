@@ -16,7 +16,7 @@ const LanguageSettingScreen = () => {
   }
 
   return (
-    <PageContainer paddingHorizontal={0} paddingVertical={20}>
+    <PageContainer style={{ paddingVertical: 20 }}>
       {availableLanguages.map((language) => (
         <List.Item
           key={language.code}

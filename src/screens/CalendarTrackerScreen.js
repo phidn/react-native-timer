@@ -79,7 +79,7 @@ const CalendarTrackerScreen = () => {
   }
 
   return (
-    <PageContainer paddingHorizontal={20} isScroll={true}>
+    <PageContainer isScroll={true} style={{ padding: 20 }}>
       <Calendar
         key={calendarKey}
         markedDates={markedDates}
@@ -117,7 +117,7 @@ const CalendarTrackerScreen = () => {
             margin: 20,
           }}
         >
-          <Text variant="headlineSmall">{t('Statistics.meditation-log')}</Text>
+          <Text variant="headlineSmall">{t('Statistics.CalendarTracker.meditation-log')}</Text>
           <ScrollView style={[styles.modalScrollView, { borderColor: colors.outlineVariant }]}>
             {sessions[modalDatePressed]?.logs.map((sessionLog) => {
               const [duration, started, ended] = sessionLog.split('|')
