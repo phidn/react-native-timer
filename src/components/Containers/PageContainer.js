@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, ScrollView, StatusBar } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { useTheme } from 'react-native-paper'
 
 // prettier-ignore

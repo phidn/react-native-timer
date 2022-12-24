@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, SafeAreaView, View } from 'react-native'
-import { BarChart, LineChart, XAxis, Grid, YAxis } from 'react-native-svg-charts'
+import { SafeAreaView, View } from 'react-native'
+import { BarChart, XAxis, Grid, YAxis } from 'react-native-svg-charts'
 import { Text } from 'react-native-svg'
 import PageContainer from '@/components/Containers/PageContainer'
-import { Card, SegmentedButtons, useTheme } from 'react-native-paper'
+import { SegmentedButtons, useTheme } from 'react-native-paper'
 import { useStore } from '@/store/useStore'
 import { logger } from '@/utilities/logger'
 import dayjs from 'dayjs'
@@ -19,7 +19,7 @@ import {
   getYearsDates,
   getMonthDatesInYear,
   sortDates,
-} from '@/utilities/timeHelper'
+} from '@/utilities/chartHelper'
 import { calcTotalTime } from '@/utilities/sessionHelper'
 import { Text as TextPaper } from 'react-native-paper'
 import * as scale from 'd3-scale'
@@ -46,7 +46,9 @@ const ChartScreen = () => {
   const { colors } = useTheme()
   const { t, i18n } = useTranslation()
 
-  const [dayString, monthString, yearString] = t('Time.DMS').split('_').map(x => x.charAt(0))
+  const [dayString, monthString, yearString] = t('Time.DMY')
+    .split('_')
+    .map((x) => x.charAt(0))
 
   const chartType = useStore((state) => state.chartType)
   const setChartType = useStore((state) => state.setChartType)
@@ -158,10 +160,14 @@ const ChartScreen = () => {
   }
 
   const renderRangeDates = () => {
-    let _dayjs, formatDate = 'MMMM DD, YYYY', result
+    let _dayjs,
+      formatDate = 'MMMM DD, YYYY',
+      result
     if (i18n.resolvedLanguage === 'vi') {
       _dayjs = (param) => dayjs(param).locale('vi')
       formatDate = 'DD MMMM, YYYY'
+    } else {
+      _dayjs = dayjs
     }
 
     if (chartType === '7d') {
@@ -194,7 +200,7 @@ const ChartScreen = () => {
       const end = _dayjs(datesInAll[datesInAll.length - 1]).format(formatDate)
       result = `${start} - ${end}`
     }
-    
+
     if (i18n.resolvedLanguage === 'vi') {
       result = result.replace(/tháng/g, 'Tháng')
     }

@@ -57,7 +57,7 @@ const sessionSlice = (set) => ({
 })
 
 const chartSlice = (set) => ({
-  chartType: '7d',
+  chartType: '1m',
   setChartType: (chartType) => set({ chartType }),
 })
 

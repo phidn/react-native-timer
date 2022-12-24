@@ -1,7 +1,8 @@
 {
   "App.Name": "Thiền",
-
-  "Time.DMS": "Ngày_Tháng_Năm",
+  
+  "Time.dmy": "ngày_tháng_năm",
+  "Time.DMY": "Ngày_Tháng_Năm",
   "Time.minutes": "phút",
   "Time.hms": "giờ_phút_giây",
   "Time.weekdays-short": "CN_T2_T3_T4_T5_T6_T7",
@@ -45,5 +46,12 @@
   "Navigation.BottomTab.StatsTab": "Thống kê",
 
   "StatsTopTabs.calendar": "Lịch theo dõi",
-  "StatsTopTabs.chart": "Biểu đồ"
+  "StatsTopTabs.chart": "Biểu đồ",
+  "StatsTopTabs.session": "Thời thiền",
+  "StatsTopTabs.session.current-streak": "Chuỗi hiện tại",
+  "StatsTopTabs.session.longest-streak": "Chuỗi dài nhất",
+  "StatsTopTabs.session.number-of-sessions": "Tổng thời thiền",
+  "StatsTopTabs.session.avg-duration": "Trung bình mỗi thời",
+  "StatsTopTabs.session.longest-session": "Thời dài nhất",
+  "StatsTopTabs.session.shortest-session": "Thời ngắn nhất"
 }
