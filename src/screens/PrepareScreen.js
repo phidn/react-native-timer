@@ -36,6 +36,7 @@ import { isNumber } from '@/utilities/commonHelper'
 import Color from 'color'
 import PageContainer from '@/components/Containers/PageContainer'
 import CenterContainer from '@/components/Containers/CenterContainer'
+import { getAlphaByPercent } from '@/utilities/colorHelper'
 
 const PrepareScreen = ({ navigation }) => {
   const { t } = useTranslation()
@@ -58,11 +59,13 @@ const PrepareScreen = ({ navigation }) => {
         }
         return accumulator
       }, 0)
+      
       const level = totalTime / 60
+      const alpha = getAlphaByPercent(level * 100)
 
       result.push({
         date: key,
-        selectedColor: Color(colors.tertiary).alpha(level).toString(),
+        selectedColor: Color(colors.tertiary).alpha(alpha).toString(),
         count: level,
       })
     }
@@ -145,7 +148,7 @@ const PrepareScreen = ({ navigation }) => {
         onPress={() => showTimePicker('duration')}
       />
       <List.Item
-        title={<Text variant="titleMedium">{t('Prepare.interval-bells')}</Text>}
+        title={<Text variant="titleMedium">{t('Prepare.invite-bell')}</Text>}
         right={() => (
           <RowContainer style={{}}>
             <Text variant="titleMedium" style={[{ color: primary }]}>

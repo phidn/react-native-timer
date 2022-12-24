@@ -1,5 +1,5 @@
 // WARNING: This is not a drop in replacement solution and
-export const isNumber = a => typeof a === 'number'
+export const isNumber = (a) => typeof a === 'number'
 
 export const range = (start, end, increment) => {
   const isEndDef = typeof end !== 'undefined'
@@ -20,5 +20,11 @@ export const range = (start, end, increment) => {
     { current: start, result: [] }
   )
 
+  return result
+}
+
+export const roundNumber = (number, decimal_places = 0) => {
+  const places = 10 ** decimal_places
+  const result = Math.round(number * places) / places
   return result
 }

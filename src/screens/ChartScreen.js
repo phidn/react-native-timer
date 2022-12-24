@@ -247,7 +247,7 @@ const ChartScreen = () => {
       <CenterContainer>
         <TextPaper variant="titleLarge">{t('Statistics.Chart.daily-meditation')}</TextPaper>
       </CenterContainer>
-      <CenterContainer style={{ marginBottom: 10 }}>
+      <CenterContainer style={{ marginBottom: 30 }}>
         <TextPaper>{renderRangeDates()}</TextPaper>
       </CenterContainer>
 

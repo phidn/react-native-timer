@@ -22,6 +22,8 @@ const themeSlice = (set) => ({
 const navigationSlice = (set) => ({
   bottomActiveTab: 'PrepareTab',
   setBottomActiveTab: (bottomActiveTab) => set({ bottomActiveTab }),
+  statsTopInitTab: 'StatsTopTabs.chart',
+  setStatsTopInitTab: (statsTopInitTab) => set({ statsTopInitTab }),
 })
 
 const prepareSlice = (set) => ({

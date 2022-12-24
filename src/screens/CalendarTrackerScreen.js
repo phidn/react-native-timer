@@ -9,6 +9,7 @@ import { logger } from '@/utilities/logger'
 import { isNumber } from '@/utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
 import PageContainer from '@/components/Containers/PageContainer'
+import { getAlphaByPercent } from '@/utilities/colorHelper'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
@@ -30,16 +31,20 @@ const CalendarTrackerScreen = () => {
         }
         return accumulator
       }, 0)
-      const level = totalTime / 60
 
       const dots = value.logs.map((sessionLog) => {
         const [duration, ,] = sessionLog.split('|')
-        const _level = duration / 60
-        return { key: sessionLog, color: Color(colors.onSurface).alpha(_level).toString() }
+        const dotLevel = duration / 60
+        const dotAlpha = getAlphaByPercent(dotLevel * 100)
+        return { key: sessionLog, color: Color(colors.onSurface).alpha(dotAlpha).toString() }
       })
+
+      const level = totalTime / 60
+      const alpha = getAlphaByPercent(level * 100)
+
       result[key] = {
         selected: true,
-        selectedColor: Color(colors.tertiary).alpha(level).toString(),
+        selectedColor: Color(colors.tertiary).alpha(alpha).toString(),
         selectedTextColor: colors.onTertiary,
         dots,
       }

@@ -4,7 +4,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { Card, Paragraph, Title, Text } from 'react-native-paper'
 import { useStore } from '@/store/useStore'
 import { calcTotalTime } from '@/utilities/sessionHelper'
-import { isNumber } from '@/utilities/commonHelper'
+import { isNumber, roundNumber } from '@/utilities/commonHelper'
 import summary from '@/utilities/dateStreaks'
 import { useTranslation } from 'react-i18next'
 import { logger } from '@/utilities/logger'
@@ -38,7 +38,7 @@ const SessionStatsScreen = () => {
     if (totalSessions === 0) {
       return 0
     }
-    return totalTime / totalSessions
+    return roundNumber(totalTime / totalSessions)
   }
 
   const getLongShortSession = () => {

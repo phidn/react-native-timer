@@ -15,20 +15,15 @@
   "Calendar.amDesignator": "SA",
   "Calendar.pmDesignator": "CH",
 
-  "Common.save": "Cứu!",
-  "Common.saved": "Cứu!",
-  "Common.error.wrong": "Có gì đó đã sai.",
-  "Common.error.occurred": "Một sai lầm đã xảy ra",
-
   "Settings.color-mode": "Chế độ màu",
   "Settings.color-mode.light": "Ánh sáng",
   "Settings.color-mode.dark": "Bóng tối",
   "Settings.language": "Ngôn ngữ",
   "Settings.theme-colors": "Màu sắc chủ đề",
 
-  "Prepare.duration": "Thời gian",
-  "Prepare.interval-bells": "Chuông liên bang",
-  "Prepare.sound": "Nghe này",
+  "Prepare.duration": "Thời thiền",
+  "Prepare.invite-bell": "Thỉnh chuông mỗi",
+  "Prepare.sound": "Âm thanh",
   "Prepare.start": "Bắt đầu",
   "Prepare.bell": "Chuông",
   "Prepare.choose-a-bell": "Chọn tiếng chuông",
@@ -36,7 +31,7 @@
   "Statistics.CalendarTracker.meditation-log": "Nhật ký thực hành",
   "Statistics.Chart.daily-meditation": "Biểu đồ thực hành mỗi ngày",
 
-  "Navigation.Screen.timer": "Thật sự tự tin",
+  "Navigation.Screen.timer": "Thời hành thiền",
   "Navigation.BottomTab.admin": "Quản lý",
   "Navigation.BottomTab.meditation": "Thiền",
   "Navigation.BottomTab.settings": "Cài đặt",

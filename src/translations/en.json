@@ -15,11 +15,6 @@
   "Calendar.amDesignator": "AM",
   "Calendar.pmDesignator": "PM",
 
-  "Common.save": "Save",
-  "Common.saved": "Saved",
-  "Common.error.wrong": "Something went wrong...",
-  "Common.error.occurred": "An error occurred",
-
   "Settings.color-mode": "Color mode",
   "Settings.color-mode.light": "Light",
   "Settings.color-mode.dark": "Dark",
@@ -27,7 +22,7 @@
   "Settings.theme-colors": "Theme colors",
 
   "Prepare.duration": "Duration",
-  "Prepare.interval-bells": "Interval bells",
+  "Prepare.invite-bell": "Invite bell every",
   "Prepare.sound": "Sound",
   "Prepare.start": "Start",
   "Prepare.bell": "Bell",
@@ -36,7 +31,7 @@
   "Statistics.CalendarTracker.meditation-log": "Meditation Log",
   "Statistics.Chart.daily-meditation": "Daily Meditation Chart",
 
-  "Navigation.Screen.timer": "Mindfulness Meditation Timer",
+  "Navigation.Screen.timer": "Meditation Session",
 
   "Navigation.BottomTab.meditation": "Meditation",
   "Navigation.BottomTab.settings": "Settings",

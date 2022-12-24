@@ -1,9 +1,7 @@
-function findColorLevel(count, rectColor) {
-  if (count === 0) return rectColor[0]
-  if (count >= 1 && count <= 3) return rectColor[1]
-  if (count >= 4 && count <= 9) return rectColor[2]
-  if (count >= 10 && count <= 17) return rectColor[3]
-  if (count >= 18 && count <= 25) return rectColor[4]
-  if (count >= 26) return rectColor[5]
-  return rectColor[0]
+export const getAlphaByPercent = (percent) => {
+  if (percent > 0 && percent < 40) return 0.4
+  if (percent >= 40 && percent < 60) return 0.6
+  if (percent >= 60 && percent < 80) return 0.8
+  if (percent >= 80) return 1
+  return 0
 }
