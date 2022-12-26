@@ -25,9 +25,21 @@ function StatsTopTabs() {
         },
       })}
     >
-      <TopTab.Screen name={t('StatsTopTabs.calendar')} component={CalendarTrackerScreen} />
-      <TopTab.Screen name={t('StatsTopTabs.chart')} component={ChartScreen} />
-      <TopTab.Screen name={t('StatsTopTabs.session')} component={SessionStatsScreen} />
+      <TopTab.Screen
+        name="CalendarTab"
+        component={CalendarTrackerScreen}
+        options={{ title: t('StatsTopTabs.CalendarTab') }}
+      />
+      <TopTab.Screen
+        name="ChartTab"
+        component={ChartScreen}
+        options={{ title: t('StatsTopTabs.ChartTab') }}
+      />
+      <TopTab.Screen
+        name="SessionStatsTab"
+        component={SessionStatsScreen}
+        options={{ title: t('StatsTopTabs.SessionStatsTab') }}
+      />
     </TopTab.Navigator>
   )
 }

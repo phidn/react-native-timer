@@ -5,25 +5,28 @@ import { themeMeditationColors } from '@/config/theme'
 import { useStore } from '@/store/useStore'
 import Color from 'color'
 
-const ListColor = ({ amount = themeMeditationColors.length, gap }) => {
+const ListColor = ({ gap, range }) => {
+  const amount = range[1] - range[0]
+
   const isDarkMode = useStore((state) => state.isDarkMode)
   const themeColor = useStore((state) => state.themeColor)
   const setThemeColor = useStore((state) => state.setThemeColor)
 
   const { width: windowWidth } = useWindowDimensions()
   const size = (windowWidth - 10 * (amount - 1) - gap) / amount
+  const _size = size < 30? size: 30
 
   return (
     <>
-      {themeMeditationColors.slice(0, amount).map((color) => {
+      {themeMeditationColors.slice(range[0], range[1]).map((color) => {
         const alpha = color.label === themeColor ? 1 : 0
-        const { primary, onPrimary } = isDarkMode? color.value.dark.colors: color.value.light.colors
+        const { primary, onPrimary } = isDarkMode? color.dark.colors: color.light.colors
         const onPrimaryAlpha = Color(onPrimary).alpha(alpha).toString()
 
         return (
-          <TouchableOpacity key={color.value.source} onPress={() => setThemeColor(color.label)}>
+          <TouchableOpacity key={color.source} onPress={() => setThemeColor(color.label)}>
             <Avatar.Icon
-              size={size}
+              size={_size}
               style={{ backgroundColor: primary, marginHorizontal: 5 }}
               icon="check"
               color={onPrimaryAlpha}

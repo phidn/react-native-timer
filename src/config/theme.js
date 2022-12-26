@@ -1,8 +1,26 @@
-import { meditationColors } from './colors/meditationColors'
+import createDynamicThemeColors from '@/utilities/themeHelper'
 
-export const themeMeditationColors = meditationColors.map((meditationColor, index) => ({
-  label: `Meditation Color ${index + 1}`,
-  value: meditationColor,
-}))
+const sources = [
+  'purple',
+  'pink',
+  'indigo',
+  'blue',
+  'teal',
+  'green',
+  'yellow',
+  'orange',
+  'brown',
+]
+
+export const themeMeditationColors = sources.map((source, index) => {
+  const theme = createDynamicThemeColors({ sourceColor: source })
+
+  return {
+    source,
+    label: `Meditation Color ${index + 1}`,
+    light: { colors: theme.light },
+    dark: { colors: theme.dark }
+  }
+})
 
 export const themeColors = [...themeMeditationColors]

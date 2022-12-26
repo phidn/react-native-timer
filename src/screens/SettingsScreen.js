@@ -41,7 +41,7 @@ const SettingsScreen = ({ navigation }) => {
           left={(props) => <Ionicons {...props} name="color-palette-outline" size={24} />}
         />
         <RowContainer style={{ justifyContent: 'flex-start', marginLeft: 50 }}>
-          <ListColor gap={85 + PAGE_PADDING_HORIZONTAL * 2} />
+          <ListColor gap={85 + PAGE_PADDING_HORIZONTAL * 2} range={[0, 9]} />
         </RowContainer>
       </Card>
     </PageContainer>

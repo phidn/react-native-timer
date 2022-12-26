@@ -57,55 +57,6 @@ function getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs) {
   return getTooltipDataAttrsForValue({ date: null, count: null }, tooltipDataAttrs)
 }
 
-function getCountByDuplicateValues(array) {
-  let hashMap = {}
-
-  for (var item of array) {
-    //if that date exists
-    if (item.date in hashMap) {
-      //up the prev count
-      hashMap[item.date] = hashMap[item.date] + 1
-    } else {
-      hashMap[item.date] = 1
-    }
-  }
-
-  //now we will iterate through those keys of the Map and format it for Array 2
-  let outputArray = []
-  Object.keys(hashMap).forEach((key) => {
-    outputArray.push({
-      key,
-      count: hashMap[key],
-    })
-  })
-  return outputArray
-}
-
-function findColorLevel(count, rectColor) {
-  if (count === 0) return rectColor[0]
-  if (count >= 1 && count <= 3) return rectColor[1]
-  if (count >= 4 && count <= 9) return rectColor[2]
-  if (count >= 10 && count <= 17) return rectColor[3]
-  if (count >= 18 && count <= 25) return rectColor[4]
-  if (count >= 26) return rectColor[5]
-  return rectColor[0]
-}
-
-function getFillColor(index, valueCache, rectColor) {
-  if (valueCache[index]) {
-    const fillColor = findColorLevel(valueCache[index].value.count, rectColor)
-    return fillColor
-  }
-  return rectColor[0]
-}
-
-function getFillColorV2(index, valueCache, rectColor) {
-  if (valueCache[index]) {
-    return valueCache[index].value.selectedColor
-  }
-  return rectColor[0]
-}
-
 function getTitleForIndex(index, valueCache, titleForValue) {
   if (valueCache[index]) return valueCache[index].title
   return titleForValue ? titleForValue(null) : null
@@ -178,8 +129,6 @@ function getWeekCount(numDays, endDate) {
 
 export {
   shiftDate,
-  getBeginningTimeForDate,
-  convertToDate,
   getWeekCount,
   getStartDateWithEmptyDays,
   getMonthLabelCoordinates,
@@ -187,11 +136,7 @@ export {
   getNumEmptyDaysAtStart,
   getSquareCoordinates,
   getTitleForIndex,
-  getFillColor,
-  getFillColorV2,
-  getCountByDuplicateValues,
   getTooltipDataAttrsForIndex,
-  getTooltipDataAttrsForValue,
   getHeight,
   getWidth,
   getValueCache,
