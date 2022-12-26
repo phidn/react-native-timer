@@ -40,9 +40,9 @@
   "Navigation.BottomTab.SettingsTab": "Cài đặt",
   "Navigation.BottomTab.StatsTab": "Thống kê",
 
-  "StatsTopTabs.calendar": "Lịch theo dõi",
-  "StatsTopTabs.chart": "Biểu đồ",
-  "StatsTopTabs.session": "Thời thiền",
+  "StatsTopTabs.CalendarTab": "Lịch theo dõi",
+  "StatsTopTabs.ChartTab": "Biểu đồ",
+  "StatsTopTabs.SessionStatsTab": "Thời thiền",
   "StatsTopTabs.session.current-streak": "Chuỗi hiện tại",
   "StatsTopTabs.session.longest-streak": "Chuỗi dài nhất",
   "StatsTopTabs.session.number-of-sessions": "Tổng thời thiền",

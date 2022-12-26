@@ -41,9 +41,9 @@
   "Navigation.BottomTab.SettingsTab": "Settings",
   "Navigation.BottomTab.StatsTab": "Statistics",
 
-  "StatsTopTabs.calendar": "Calendar Tracker",
-  "StatsTopTabs.chart": "Chart",
-  "StatsTopTabs.session": "Meditation Sessions",
+  "StatsTopTabs.CalendarTab": "Calendar Tracker",
+  "StatsTopTabs.ChartTab": "Chart",
+  "StatsTopTabs.SessionStatsTab": "Meditation Sessions",
   "StatsTopTabs.session.current-streak": "Current Streak",
   "StatsTopTabs.session.longest-streak": "Longest Streak",
   "StatsTopTabs.session.number-of-sessions": "Num. of Sessions",

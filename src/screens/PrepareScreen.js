@@ -61,12 +61,14 @@ const PrepareScreen = ({ navigation }) => {
       }, 0)
       
       const level = totalTime / 60
+      const percent = level < 1? level * 100: 1
       const alpha = getAlphaByPercent(level * 100)
 
       result.push({
         date: key,
         selectedColor: Color(colors.tertiary).alpha(alpha).toString(),
         count: level,
+        percent
       })
     }
 
@@ -103,7 +105,7 @@ const PrepareScreen = ({ navigation }) => {
       mode: 'time',
       display: 'spinner',
       is24Hour: true,
-      minuteInterval: 1,
+      minuteInterval: 5,
       positiveButton: { textColor: primary },
       neutralButton: { textColor: primary },
       negativeButton: { textColor: primary },

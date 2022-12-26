@@ -12,12 +12,10 @@ import {
   getNumEmptyDaysAtStart,
   getSquareCoordinates,
   getTitleForIndex,
-  getFillColor,
   getTooltipDataAttrsForIndex,
   getHeight,
   getWidth,
   getValueCache,
-  getFillColorV2,
 } from '@/utilities/calendarHeatmapAction'
 
 import { useTranslation } from 'react-i18next'
@@ -34,7 +32,6 @@ const CalendarHeatmap = (props) => {
     endDate,
     titleForValue,
     tooltipDataAttrs,
-    onPress,
     showOutOfRangeDays,
     showMonthLabels,
     monthLabelForIndex,
@@ -42,28 +39,28 @@ const CalendarHeatmap = (props) => {
   } = props
 
   const { t } = useTranslation()
-  const { colors } = useTheme()
-
+  const { colors, dark } = useTheme()
+  
+  const colorArray = ['#9BE9A8', '#40C463', '#30A14E', '#216E39']
   const labelColor = colors.onSurface
-  const colorArray = [
-    Color(colors.tertiary).alpha(0.1).toString(),
-    Color(colors.tertiary).alpha(0.3).toString(),
-    Color(colors.tertiary).alpha(0.5).toString(),
-    Color(colors.tertiary).alpha(0.7).toString(),
-    Color(colors.tertiary).alpha(0.9).toString(),
-    Color(colors.tertiary).alpha(1).toString(),
-  ]
+  const bgColor = dark
+    ? Color(colors.surfaceVariant).alpha(0.3).toString()
+    : Color(colors.surfaceVariant).alpha(0.5).toString()
+  const borderColor = Color.rgb(255, 255, 255).alpha(0.05).toString()
 
   const monthsShort = t('Time.months-short').split('_')
   const monthLabels = { ...monthsShort }
-  const weekdaysShort = t('Time.weekdays-short').split('_').map(x => x.slice(0, 2))
-
+  const weekdaysShort = t('Time.weekdays-short')
+    .split('_')
+    .map((x) => x.slice(0, 2))
   const valueCache = getValueCache(values, numDays, endDate)
 
-  const handleClick = (value) => {
-    if (onPress) {
-      onPress(value)
-    }
+  const findColorLevel = (percent) => {
+    if (percent > 0 && percent <= 40) return colorArray[0]
+    if (percent > 40 && percent < 60) return colorArray[1]
+    if (percent >= 60 && percent < 80) return colorArray[2]
+    if (percent > 80) return colorArray[3]
+    return bgColor
   }
 
   const renderSquare = (dayIndex, index) => {
@@ -74,24 +71,10 @@ const CalendarHeatmap = (props) => {
       return null
     }
     const [x, y] = getSquareCoordinates(dayIndex, horizontal, gutterSize)
-    const fillColor = getFillColorV2(index, valueCache, colorArray)
+    const fillColor = findColorLevel(valueCache[index]?.value?.percent)
 
-    if (valueCache[index]?.value?.count === -1) {
-      return (
-        <Rect
-          key={index}
-          width={SQUARE_SIZE - 2}
-          height={SQUARE_SIZE - 2}
-          x={x + 1}
-          y={y + 1}
-          title={getTitleForIndex(index, valueCache, titleForValue)}
-          onPress={() => handleClick(index)}
-          fill={colorArray[0]}
-          {...getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs)}
-          stroke={colors.tertiary}
-        />
-      )
-    }
+    let stroke = valueCache[index]?.value?.count === -1? colorArray[1]: null
+    stroke = stroke === null && fillColor !== bgColor? borderColor: stroke
 
     return (
       <Rect
@@ -101,9 +84,11 @@ const CalendarHeatmap = (props) => {
         x={x}
         y={y}
         title={getTitleForIndex(index, valueCache, titleForValue)}
-        onPress={() => handleClick(index)}
         fill={fillColor}
         {...getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs)}
+        stroke={stroke}
+        rx={1}
+        ry={1}
       />
     )
   }

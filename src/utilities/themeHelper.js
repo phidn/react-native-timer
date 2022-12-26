@@ -5,10 +5,11 @@ import {
 } from '@react-navigation/native'
 import { themeColors } from '@/config/theme'
 import color from 'color'
+import { argbFromHex, themeFromSourceColor } from '@material/material-color-utilities'
 
 export const combineTheme = (label, isDarkMode) => {
   const selectedSchema = themeColors.find((x) => x.label === label) || themeColors[0]
-  const selectedSchemaColors = selectedSchema.value[isDarkMode ? 'dark' : 'light'].colors
+  const selectedSchemaColors = selectedSchema[isDarkMode ? 'dark' : 'light'].colors
 
   const MD3Theme = isDarkMode ? MD3DarkTheme : MD3LightTheme
 
@@ -34,3 +35,50 @@ export const combineTheme = (label, isDarkMode) => {
 
   return combinedTheme
 }
+
+export const createDynamicThemeColors = ({ sourceColor }) => {
+  const opacity = {
+    level1: 0.08,
+    level2: 0.12,
+    level3: 0.16,
+    level4: 0.38,
+  }
+
+  const modes = ['light', 'dark']
+  const { schemes, palettes } = themeFromSourceColor(argbFromHex(color(sourceColor).hex()))
+  const { light, dark } = modes.reduce(
+    (prev, curr) => {
+      const elevations = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14]
+      const schemeModeJSON = schemes[curr].toJSON()
+      const elevation = elevations.reduce(
+        (a, v, index) =>
+          Object.assign(Object.assign({}, a), {
+            [`level${index}`]:
+              index === 0
+                ? v
+                : color(schemeModeJSON.surface)
+                    .mix(color(schemeModeJSON.primary), Number(v))
+                    .rgb()
+                    .string(),
+          }),
+        {}
+      )
+      const customColors = {
+        surfaceDisabled: color(schemeModeJSON.onSurface).alpha(opacity.level2).rgb().string(),
+        onSurfaceDisabled: color(schemeModeJSON.onSurface).alpha(opacity.level4).rgb().string(),
+        backdrop: color(palettes.neutralVariant.tone(20)).alpha(0.4).rgb().string(),
+      }
+      const dynamicThemeColors = Object.assign(
+        {},
+        ...Object.entries(schemeModeJSON).map(([colorName, colorValue]) => ({
+          [colorName]: color(colorValue).rgb().string(),
+        })),
+        Object.assign({ elevation }, customColors)
+      )
+      return Object.assign(Object.assign({}, prev), { [curr]: dynamicThemeColors })
+    },
+    { light: {}, dark: {} }
+  )
+  return { light, dark }
+}
+export default createDynamicThemeColors
