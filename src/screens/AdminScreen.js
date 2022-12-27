@@ -9,6 +9,7 @@ import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
 import _BackgroundTimer from 'react-native-background-timer'
 import { StyleSheet } from 'react-native'
+import notifee from '@notifee/react-native'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -67,6 +68,26 @@ const AdminScreen = () => {
     }, 1000 * 10)
   }
 
+  const onDisplayNotification = async () => {
+    // Request permissions (required for iOS)
+    await notifee.requestPermission()
+
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    })
+
+    // Display a notification
+    await notifee.displayNotification({
+      title: 'Notification Title',
+      body: 'Main body content of the notification',
+      android: {
+        channelId,
+      },
+    })
+  }
+
   return (
     <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
@@ -83,6 +104,7 @@ const AdminScreen = () => {
 
       <Card style={styles.card}>
         <Button onPress={testBackgroundTimer}>Test background timer</Button>
+        <Button onPress={onDisplayNotification}>Display notifee</Button>
       </Card>
     </PageContainer>
   )
