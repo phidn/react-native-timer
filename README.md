@@ -39,6 +39,8 @@ v3NoLabelContainer: {
 
 - https://github.com/remigallego/react-native-use-sound
 
+- https://materialdesignicons.com/
+
 ## Repo
 - https://github.com/AudiusProject/audius-client
 - https://github.com/zensayyy/ZenMusic
