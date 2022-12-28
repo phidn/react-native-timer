@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button, Card, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
@@ -68,6 +68,11 @@ const AdminScreen = () => {
     }, 1000 * 10)
   }
 
+  useEffect(() => {
+    notifee.onForegroundEvent(async ({ type, detail }) => {})
+    notifee.onBackgroundEvent(async ({ type, detail }) => {})
+  }, [])
+
   const onDisplayNotification = async () => {
     // Request permissions (required for iOS)
     await notifee.requestPermission()
@@ -90,6 +95,7 @@ const AdminScreen = () => {
         timestamp: Date.now() + 300000,
         showChronometer: true,
         chronometerDirection: 'down',
+        autoCancel: false
       },
     })
   }

@@ -19,35 +19,15 @@ import { logger } from '@/utilities/logger'
 let preparationTime = 10
 let numberOfInviteBell = 3
 
-const actions = [
-  {
-    title: 'Pause',
-    pressAction: { id: 'pause' },
-  },
-  {
-    title: 'Play',
-    pressAction: { id: 'play' },
-  },
-  {
-    title: 'Stop',
-    pressAction: { id: 'play' },
-  },
-]
-
 const channelMT = {
   id: 'meditation_timer_channel',
   name: 'Meditation Timer Channel',
 }
 
-const baseNotifeeMT = {
-  id: 'meditation_timer',
-  title: 'Meditation Timer',
-  body: 'Tap to return to the app',
-}
-
 const baseNotifeeMTAndroid = {
   channelId: channelMT.id,
   largeIcon: require('../assets/images/imageTransparent600.png'),
+  autoCancel: false,
   pressAction: {
     id: 'default',
     launchActivity: 'default',
@@ -71,6 +51,12 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const { play, release } = useSound()
   const { width } = useWindowDimensions()
 
+  const baseNotifeeMT = {
+    id: 'meditation_timer',
+    title: 'Meditation Timer',
+    body: t('notifee.return-to-app'),
+  }
+
   const isShowCountdown = useStore((state) => state.isShowCountdown)
   const setIsShowCountdown = useStore((state) => state.setIsShowCountdown)
 
@@ -88,9 +74,11 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
   const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
 
-  const playLongBell = () => play(getAsset(params.bellId + '_long'), params.bellVolume)
-  const playShortBell = () => {
-    play(getAsset(params.bellId + '_short'), params.bellVolume, numberOfInviteBell)
+  const playLongBell = async () => {
+    await play(getAsset(params.bellId + '_long'), params.bellVolume)
+  }
+  const playShortBell = async () => {
+    await play(getAsset(params.bellId + '_short'), params.bellVolume, numberOfInviteBell)
   }
 
   const intervalTask = async () => {
@@ -111,15 +99,21 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   useEffect(() => {
+    notifee.onForegroundEvent(({ type, detail }) => {})
+    notifee.onBackgroundEvent(async ({ type, detail }) => {})
+  }, [])
+
+  useEffect(() => {
     const prepareTask = async () => {
       /**
        * notifee
        */
+      await notifee.requestPermission()
       await notifee.createChannel(channelMT)
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: 'Inviting the bell',
+        subtitle: t('notifee.inviting-bell'),
         android: {
           ...baseNotifeeMTAndroid,
           showChronometer: true,
@@ -144,7 +138,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
 
         notifee.displayNotification({
           ...baseNotifeeMT,
-          subtitle: 'In progress',
+          subtitle: t('notifee.in-progress'),
           android: {
             ...baseNotifeeMTAndroid,
             showChronometer: true,
@@ -162,6 +156,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
       _BackgroundTimer.setTimeout(() => endSession(_startedSession), sessionDelay)
     }
     prepareTask()
+
     return () => {
       release()
       _BackgroundTimer.clearAll()
@@ -193,22 +188,6 @@ const MeditationTimerScreen = ({ route, navigation }) => {
     }
   }, [isPrepared, appComeBackgroundTime, appComeBgRemainingTime])
 
-  useEffect(() => {
-    notifee.onForegroundEvent(({ type, detail }) => {
-      // const { notification, pressAction } = detail
-      // if (
-      //   type === EventType.ACTION_PRESS &&
-      //   (pressAction?.id === 'play' || pressAction?.id === 'pause')
-      // ) {
-      //   onPauseCountdown()
-      // }
-    })
-
-    notifee.onBackgroundEvent(async ({ type, detail }) => {
-      // const { notification, pressAction } = detail
-    })
-  }, [])
-
   const onBreakCountdown = () => {
     if (!isPlaying) {
       navigation.goBack()
@@ -232,6 +211,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   const onPauseCountdown = () => {
+
     // Pause countdown:
     if (isPlaying) {
       release()
@@ -239,7 +219,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: 'In progress',
+        subtitle: t('notifee.in-progress'),
         android: {
           ...baseNotifeeMTAndroid,
         },
@@ -260,7 +240,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: 'In progress',
+        subtitle: t('notifee.in-progress'),
         android: {
           ...baseNotifeeMTAndroid,
           showChronometer: true,
