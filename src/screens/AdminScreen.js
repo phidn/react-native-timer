@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button, Card, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
@@ -8,7 +8,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
 import _BackgroundTimer from 'react-native-background-timer'
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import notifee from '@notifee/react-native'
 
 const AdminScreen = () => {
@@ -68,28 +68,48 @@ const AdminScreen = () => {
     }, 1000 * 10)
   }
 
+  useEffect(() => {
+    notifee.onForegroundEvent(async ({ type, detail }) => {})
+    notifee.onBackgroundEvent(async ({ type, detail }) => {})
+  }, [])
+
   const onDisplayNotification = async () => {
     // Request permissions (required for iOS)
     await notifee.requestPermission()
 
     // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
+      id: 'AdminScreen',
+      name: 'AdminScreen Channel',
     })
 
     // Display a notification
-    await notifee.displayNotification({
-      title: 'Notification Title',
-      body: 'Main body content of the notification',
+    notifee.displayNotification({
+      id: 'admin_notification',
+      title: 'Meditation Timer',
+      body: 'Tap to go back to the app',
+      subtitle: 'In progress',
       android: {
         channelId,
+        largeIcon: require('../assets/images/imageTransparent600.png'),
+        timestamp: Date.now() + 300000,
+        showChronometer: true,
+        chronometerDirection: 'down',
+        autoCancel: false
       },
     })
   }
 
+  const getPlatform = () => {
+    logger('getPlatform constants', Platform.constants)
+  }
+
   return (
     <PageContainer style={{ padding: 40 }}>
+      <Card style={styles.card}>
+        <Button onPress={getPlatform}>Platform</Button>
+      </Card>
+
       <Card style={styles.card}>
         <Button onPress={clearAsyncStorage}>Clear AsyncStorage</Button>
         <Button onPress={logAsyncStorage}>Log AsyncStorage</Button>

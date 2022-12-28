@@ -59,6 +59,7 @@ const SessionStatsScreen = () => {
       }
     }
 
+    if (shortSession === 999999999999999) shortSession = 0
     return [longSession, shortSession]
   }
 

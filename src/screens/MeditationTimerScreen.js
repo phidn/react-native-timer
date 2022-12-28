@@ -8,20 +8,39 @@ import { getCountdown, sToMin, sToMs } from '@/utilities/timeHelper'
 import uuid from 'react-native-uuid'
 import Color from 'color'
 import useSound from '@/hooks/useSound'
-import { logger } from '@/utilities/logger'
 import { getAsset } from '@/utilities/assetsHelper'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
 import _BackgroundTimer from '@/utilities/BackgroundTimer'
 import { useTranslation } from 'react-i18next'
+import notifee, { EventType } from '@notifee/react-native'
+import { logger } from '@/utilities/logger'
 
-const preparationTime = 10
+let preparationTime = 10
+let numberOfInviteBell = 3
+
+const channelMT = {
+  id: 'meditation_timer_channel',
+  name: 'Meditation Timer Channel',
+}
+
+const baseNotifeeMTAndroid = {
+  channelId: channelMT.id,
+  largeIcon: require('../assets/images/imageTransparent600.png'),
+  autoCancel: false,
+  pressAction: {
+    id: 'default',
+    launchActivity: 'default',
+  },
+}
 
 const MeditationTimerScreen = ({ route, navigation }) => {
   const { params } = route
   if (__DEV__) {
-    // params.duration = 30
-    // params.interval = 10
+    params.duration = 40
+    params.interval = 10
+    preparationTime = 5
+    numberOfInviteBell = 2
   }
   const msDuration = sToMs(params.duration)
   const msInterval = sToMs(params.interval)
@@ -29,8 +48,14 @@ const MeditationTimerScreen = ({ route, navigation }) => {
 
   const { t } = useTranslation()
   const { colors } = useTheme()
-  const { play } = useSound()
+  const { play, release } = useSound()
   const { width } = useWindowDimensions()
+
+  const baseNotifeeMT = {
+    id: 'meditation_timer',
+    title: 'Meditation Timer',
+    body: t('notifee.return-to-app'),
+  }
 
   const isShowCountdown = useStore((state) => state.isShowCountdown)
   const setIsShowCountdown = useStore((state) => state.setIsShowCountdown)
@@ -44,13 +69,17 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
   const remainingTimeRef = useRef(preparationTime)
-  
+
   const appState = useRef(AppState.currentState)
   const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
   const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
 
-  const playLongBell = () => play(getAsset(params.bellId + '_long'), params.bellVolume)
-  const playShortBell = () => play(getAsset(params.bellId + '_short'), params.bellVolume, 3)
+  const playLongBell = async () => {
+    await play(getAsset(params.bellId + '_long'), params.bellVolume)
+  }
+  const playShortBell = async () => {
+    await play(getAsset(params.bellId + '_short'), params.bellVolume, numberOfInviteBell)
+  }
 
   const intervalTask = async () => {
     _BackgroundTimer.setInterval(() => {
@@ -70,7 +99,32 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    const prepareTask = () => {
+    notifee.onForegroundEvent(({ type, detail }) => {})
+    notifee.onBackgroundEvent(async ({ type, detail }) => {})
+  }, [])
+
+  useEffect(() => {
+    const prepareTask = async () => {
+      /**
+       * notifee
+       */
+      await notifee.requestPermission()
+      await notifee.createChannel(channelMT)
+
+      notifee.displayNotification({
+        ...baseNotifeeMT,
+        subtitle: t('notifee.inviting-bell'),
+        android: {
+          ...baseNotifeeMTAndroid,
+          showChronometer: true,
+          chronometerDirection: 'down',
+          timestamp: Date.now() + preparationTime * 1000,
+        },
+      })
+
+      /**
+       * Background Timer
+       */
       const _startedSession = dayjs().format('HH:mm')
       const sessionDelay = (params.duration + preparationTime) * 1000
       const prepareDelay = preparationTime * 1000
@@ -82,6 +136,17 @@ const MeditationTimerScreen = ({ route, navigation }) => {
         setCountdownKey(uuid.v4())
         setStartedSession(_startedSession)
 
+        notifee.displayNotification({
+          ...baseNotifeeMT,
+          subtitle: t('notifee.in-progress'),
+          android: {
+            ...baseNotifeeMTAndroid,
+            showChronometer: true,
+            chronometerDirection: 'down',
+            timestamp: Date.now() + msDuration + 1000,
+          },
+        })
+
         if (isInterval) {
           intervalTask()
         }
@@ -90,11 +155,12 @@ const MeditationTimerScreen = ({ route, navigation }) => {
       _BackgroundTimer.setTimeout(() => startSession(), prepareDelay)
       _BackgroundTimer.setTimeout(() => endSession(_startedSession), sessionDelay)
     }
-
     prepareTask()
 
     return () => {
+      release()
       _BackgroundTimer.clearAll()
+      notifee.cancelNotification(baseNotifeeMT.id)
     }
   }, [])
 
@@ -110,7 +176,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
         if (!isPrepared && appComeBackgroundTime) {
           const appComeToActiveTime = Date.now()
           const inactiveDuration = appComeToActiveTime - appComeBackgroundTime
-          params.duration(msDuration - inactiveDuration + appComeBgRemainingTime) / 1000
+          remainingTimeRef.current = (msDuration - inactiveDuration + appComeBgRemainingTime) / 1000
           setCountdownKey(uuid.v4())
         }
       }
@@ -145,9 +211,19 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   const onPauseCountdown = () => {
+
     // Pause countdown:
     if (isPlaying) {
+      release()
       _BackgroundTimer.clearAll()
+
+      notifee.displayNotification({
+        ...baseNotifeeMT,
+        subtitle: t('notifee.in-progress'),
+        android: {
+          ...baseNotifeeMTAndroid,
+        },
+      })
     }
 
     // Start countdown => start background interval
@@ -161,6 +237,17 @@ const MeditationTimerScreen = ({ route, navigation }) => {
           break
         }
       }
+
+      notifee.displayNotification({
+        ...baseNotifeeMT,
+        subtitle: t('notifee.in-progress'),
+        android: {
+          ...baseNotifeeMTAndroid,
+          showChronometer: true,
+          chronometerDirection: 'down',
+          timestamp: Date.now() + remainingTime * 1000,
+        },
+      })
     }
 
     setIsPlaying(!isPlaying)

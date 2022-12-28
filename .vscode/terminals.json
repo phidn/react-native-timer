@@ -15,16 +15,26 @@
       "icon": "code",
       "color": "terminal.ansiBlue",
       "execute": false,
-      "command": "yarn android"
+      "command": "npx react-native run-android"
     },
     {
-      "name": "Emulator",
+      "name": "Pixel_4_API_29",
       "icon": "device-mobile",
       "color": "terminal.ansiBlue",
       "execute": true, 
       "commands": [
         "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
         "emulator.exe -avd Pixel_4_API_29"
+      ]
+    },
+    {
+      "name": "Pixel_4_API_33",
+      "icon": "device-mobile",
+      "color": "terminal.ansiBlue",
+      "execute": false, 
+      "commands": [
+        "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
+        "emulator.exe -avd Pixel_4_API_33"
       ]
     },
     {
