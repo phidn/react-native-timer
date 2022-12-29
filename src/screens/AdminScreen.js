@@ -91,7 +91,7 @@ const AdminScreen = () => {
       subtitle: 'In progress',
       android: {
         channelId,
-        largeIcon: require('../assets/images/imageTransparent600.png'),
+        largeIcon: require('../assets/images/logoBg600.png'),
         timestamp: Date.now() + 300000,
         showChronometer: true,
         chronometerDirection: 'down',

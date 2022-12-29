@@ -65,7 +65,7 @@ const getDatesParameter = (param = {}) => {
   }
 }
 
-function summary(datesParam = []) {
+export const summary = (datesParam = []) => {
   const dates = getDatesParameter(datesParam)
   const { today, yesterday } = relativeDates()
   const allDates = filterInvalidDates(dates)
@@ -116,5 +116,3 @@ function summary(datesParam = []) {
 
   return rest
 }
-
-export default summary

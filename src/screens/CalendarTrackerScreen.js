@@ -10,6 +10,7 @@ import { isNumber } from '@/utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
 import PageContainer from '@/components/Containers/PageContainer'
 import { getAlphaByPercent } from '@/utilities/colorHelper'
+import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
@@ -40,12 +41,20 @@ const CalendarTrackerScreen = () => {
       })
 
       const level = totalTime / 60
-      const alpha = getAlphaByPercent(level * 100)
+      const percent = level < 1 ? level * 100 : 100
+
+      const findColorLevel = (percent) => {
+        const colorArray = COLOR_LEVELS
+        if (percent > 0 && percent <= 40) return colorArray[0]
+        if (percent > 40 && percent < 60) return colorArray[1]
+        if (percent >= 60 && percent < 80) return colorArray[2]
+        if (percent > 80) return colorArray[3]
+      }
 
       result[key] = {
         selected: true,
-        selectedColor: Color(colors.tertiary).alpha(alpha).toString(),
-        selectedTextColor: colors.onTertiary,
+        selectedColor: findColorLevel(percent),
+        selectedTextColor: colors.onPrimary,
         dots,
       }
     }

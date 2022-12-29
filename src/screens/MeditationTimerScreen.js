@@ -25,8 +25,9 @@ const channelMT = {
 }
 
 const baseNotifeeMTAndroid = {
+  smallIcon: 'ic_small_icon',
+  largeIcon: require('../assets/images/logoBg600.png'),
   channelId: channelMT.id,
-  largeIcon: require('../assets/images/imageTransparent600.png'),
   autoCancel: false,
   pressAction: {
     id: 'default',

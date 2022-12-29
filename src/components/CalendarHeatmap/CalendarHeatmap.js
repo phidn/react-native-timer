@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView, View } from 'react-native'
 import Svg, { G, Rect, Text } from 'react-native-svg'
-import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE } from '@/config/calendarHeatmap'
+import { SQUARE_SIZE, DAYS_IN_WEEK, MONTH_LABEL_GUTTER_SIZE, COLOR_LEVELS } from '@/config/calendarHeatmap'
 
 import {
   shiftDate,
@@ -41,7 +41,7 @@ const CalendarHeatmap = (props) => {
   const { t } = useTranslation()
   const { colors, dark } = useTheme()
   
-  const colorArray = ['#9BE9A8', '#40C463', '#30A14E', '#216E39']
+  const colorArray = COLOR_LEVELS
   const labelColor = colors.onSurface
   const bgColor = dark
     ? Color(colors.surfaceVariant).alpha(0.3).toString()

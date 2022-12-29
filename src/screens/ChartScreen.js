@@ -26,6 +26,7 @@ import * as scale from 'd3-scale'
 import Color from 'color'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import { useTranslation } from 'react-i18next'
+import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 
 // 7 days
 const weekDates = getWeekDates()
@@ -262,7 +263,7 @@ const ChartScreen = () => {
           <BarChart
             style={{ flex: 1 }}
             data={data}
-            svg={{ fill: colors.tertiary }}
+            svg={{ fill: colors.primary }}
             contentInset={verticalContentInset}
             spacing={0.2}
             gridMin={0}
