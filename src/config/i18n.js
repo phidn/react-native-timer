@@ -1,12 +1,11 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { languageDetector } from '@/utilities/languageDetector'
-import { en, vi, de } from '@/config/availableLanguages'
+import { en, vi } from '@/translations/translations'
 
 const resources = {
   en: { translation: en },
   vi: { translation: vi },
-  de: { translation: de },
 }
 
 i18n

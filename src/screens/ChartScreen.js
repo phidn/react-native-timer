@@ -49,7 +49,7 @@ const ChartScreen = () => {
 
   const [dayString, monthString, yearString] = t('Time.DMY')
     .split('_')
-    .map((x) => x.charAt(0))
+    .map((x) => x.charAt(0).toLocaleUpperCase())
 
   const chartType = useStore((state) => state.chartType)
   const setChartType = useStore((state) => state.setChartType)

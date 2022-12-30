@@ -1,10 +1,10 @@
 import React from 'react'
 import { List, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
-import { availableLanguages } from '@/config/availableLanguages'
 import PageContainer from '@/components/Containers/PageContainer'
 import { storageKeys } from '@/config/storageKeys'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { availableLanguages } from '@/translations/translations'
 
 const LanguageSettingScreen = () => {
   const { i18n } = useTranslation()

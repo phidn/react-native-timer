@@ -1,5 +1,9 @@
-import en from '@/translations/en.json'
-import vi from '@/translations/vi.json'
+import viCommon from './common/vi.json'
+import enCommon from './common/en.json'
+import { times } from './times'
+
+const en = { ...enCommon, ...times.en }
+const vi = { ...viCommon, ...times.vi }
 
 const availableLanguages = [
   { label: 'English', code: 'en' },

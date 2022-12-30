@@ -8,8 +8,8 @@ import RowContainer from '@/components/Containers/RowContainer'
 import ListColor from '@/components/Color/ListColor'
 import { useStore } from '@/store/useStore'
 import PageContainer from '@/components/Containers/PageContainer'
-import { availableLanguages } from '@/config/availableLanguages'
 import { logger } from '@/utilities/logger'
+import { availableLanguages } from '@/translations/translations'
 
 const PAGE_PADDING_HORIZONTAL = 0
 

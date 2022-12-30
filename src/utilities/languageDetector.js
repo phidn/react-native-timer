@@ -2,7 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as RNLocalize from 'react-native-localize'
 import { storageKeys } from '@/config/storageKeys'
 import { logger } from './logger'
-import { availableCodes } from '@/config/availableLanguages'
+import { availableCodes } from '@/translations/translations'
+
 
 const languageDetector = {
   type: 'languageDetector',
