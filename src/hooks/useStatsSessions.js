@@ -2,8 +2,20 @@ import { useStore } from '@/store/useStore'
 import { calcTotalTime } from '@/utilities/sessionHelper'
 import { isNumber, roundNumber } from '@/utilities/commonHelper'
 import { summary } from '@/utilities/dateStreaks'
+import { useTranslation } from 'react-i18next'
+
+import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
+import 'dayjs/locale/en'
+import 'dayjs/locale/de'
+
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 const useStatsSessions = () => {
+  const { t, i18n } = useTranslation()
   const sessions = useStore((state) => state.sessions)
 
   const getNumberOfSessions = () => {
@@ -64,13 +76,24 @@ const useStatsSessions = () => {
   const [longestSession, shortestSession] = getLongShortSession()
   const { currentStreak, longestStreak } = summaryStreak()
 
+  const avgSessionDurationHuman = dayjs
+    .duration(avgSessionDuration, 'minute')
+    .locale(i18n.resolvedLanguage)
+    .humanize()
+  const longestStreakHuman = dayjs
+    .duration(longestStreak, 'day')
+    .locale(i18n.resolvedLanguage)
+    .humanize()
+
   return {
     numberOfSessions,
     avgSessionDuration,
+    avgSessionDurationHuman,
     longestSession,
+    longestStreakHuman,
     shortestSession,
     currentStreak,
-    longestStreak
+    longestStreak,
   }
 }
 

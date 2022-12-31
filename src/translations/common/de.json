@@ -1,0 +1,41 @@
+{
+  "App.Name": "Mindful Check-in",
+
+  "notifee.return-to-app": "Tippen Sie auf , um zur App zurückzukehren",
+  "notifee.inviting-bell": "Die Glocke einladen",
+  "notifee.in-progress": "In Bearbeitung",
+
+  "Einstellungen.Farbmodus": "Farbmodus",
+  "Settings.color-mode.light": "Hell",
+  "Einstellungen.Farbmodus.dunkel": "Dunkel",
+  "Einstellungen.Sprache": "Sprache",
+  "Einstellungen.Themen-Farben": "Themenfarben",
+
+  "Vorbereiten.Dauer": "Dauer",
+  "Vorbereiten.einladen-Glocke": "Einladungsglocke alle",
+  "Vorbereiten.Ton": "Ton",
+  "Vorbereiten.Start": "Start",
+  "Prepare.bell": "Glocke",
+  "Prepare.choose-a-bell": "Wähle eine Glocke",
+
+  "Statistik.CalendarTracker.Meditationsprotokoll": "Achtsame Sitzungen",
+  "Statistik.Chart.Tägliche-Meditation": "Tägliches achtsames Einchecken",
+
+  "Navigation.Screen.Timer": "Achtsame Sitzung",
+  "Navigation.BottomTab.AdminTab": "Admin",
+  "Navigation.BottomTab.PrepareTab": "Achtsames Einchecken",
+  "Navigation.BottomTab.SettingsTab": "Einstellungen",
+  "Navigation.BottomTab.StatsTab": "Statistiken",
+
+  "StatsTopTabs.CalendarTab": "Kalender-Tracker",
+  "StatsTopTabs.ChartTab": "Diagramm",
+  "StatsTopTabs.SessionStatsTab": "Meditationssitzungen",
+  "StatsTopTabs.session.mindfulStreak": "Achtsamer Streifzug",
+  "StatsTopTabs.session.mindfulSessions": "Achtsame Sitzungen",
+  "StatsTopTabs.session.current-streak": "Aktueller Streak",
+  "StatsTopTabs.session.longest-streak": "Längste Serie",
+  "StatsTopTabs.session.number-of-sessions": "Anzahl der Sitzungen",
+  "StatsTopTabs.session.avg-duration": "Durchschnittliche Sitzungsdauer",
+  "StatsTopTabs.session.longest-session": "Längste Sitzung",
+  "StatsTopTabs.session.shortest-session": "Kürzeste Sitzung"
+}

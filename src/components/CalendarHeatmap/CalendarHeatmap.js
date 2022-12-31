@@ -48,9 +48,9 @@ const CalendarHeatmap = (props) => {
     : Color(colors.surfaceVariant).alpha(0.5).toString()
   const borderColor = Color.rgb(255, 255, 255).alpha(0.05).toString()
 
-  const monthsShort = t('Time.months-short').split('_')
+  const monthsShort = t('Time.monthNamesShort').split('_')
   const monthLabels = { ...monthsShort }
-  const weekdaysShort = t('Time.weekdays-short')
+  const weekdaysShort = t('Time.dayNamesShort')
     .split('_')
     .map((x) => x.slice(0, 2))
   const valueCache = getValueCache(values, numDays, endDate)

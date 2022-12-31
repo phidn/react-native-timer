@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import PageContainer from '@/components/Containers/PageContainer'
-import { Card, Paragraph, Title, Text } from 'react-native-paper'
+import { Card, Paragraph, Title, Text, Divider, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
-import { logger } from '@/utilities/logger'
-import { getDayString, getMinString } from '@/utilities/timeHelper'
+import { getDayText, getMinText } from '@/utilities/timeHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
+import color from 'color'
 
 const SessionStatsScreen = () => {
   const { t, i18n } = useTranslation()
+  const { colors } = useTheme()
 
   const {
     numberOfSessions,
@@ -22,6 +23,9 @@ const SessionStatsScreen = () => {
   return (
     <PageContainer style={{ padding: 5, paddingTop: 30 }}>
       {/* Streak */}
+      <Text variant="titleLarge" style={{ marginLeft: 5 }}>
+        {t('StatsTopTabs.session.mindfulStreak')}
+      </Text>
       <View style={{ flexDirection: 'row' }}>
         <Card style={styles.card}>
           <Card.Content>
@@ -29,7 +33,7 @@ const SessionStatsScreen = () => {
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{currentStreak}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
-                {getDayString(currentStreak, t, i18n.resolvedLanguage)}
+                {getDayText(currentStreak, i18n.resolvedLanguage)}
               </Text>
             </View>
           </Card.Content>
@@ -40,12 +44,25 @@ const SessionStatsScreen = () => {
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{longestStreak}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
-                {getDayString(longestStreak, t, i18n.resolvedLanguage)}
+                {getDayText(longestStreak, i18n.resolvedLanguage)}
               </Text>
             </View>
           </Card.Content>
         </Card>
       </View>
+
+      <Divider
+        horizontalInset={true}
+        style={{
+          height: 1,
+          marginVertical: 20,
+          backgroundColor: color(colors.primary).alpha(0.3).toString(),
+        }}
+      />
+
+      <Text variant="titleLarge" style={{ marginLeft: 5 }}>
+        {t('StatsTopTabs.session.mindfulSessions')}
+      </Text>
 
       {/* Number of sessions | Avg */}
       <View style={{ flexDirection: 'row' }}>
@@ -61,7 +78,7 @@ const SessionStatsScreen = () => {
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{avgSessionDuration}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
-                {getMinString(avgSessionDuration, t, i18n.resolvedLanguage)}
+                {getMinText(avgSessionDuration, i18n.resolvedLanguage)}
               </Text>
             </View>
           </Card.Content>
@@ -76,7 +93,7 @@ const SessionStatsScreen = () => {
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{longestSession}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
-                {getMinString(longestSession, t, i18n.resolvedLanguage)}
+                {getMinText(longestSession, i18n.resolvedLanguage)}
               </Text>
             </View>
           </Card.Content>
@@ -87,7 +104,7 @@ const SessionStatsScreen = () => {
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{shortestSession}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
-                {getMinString(shortestSession, t, i18n.resolvedLanguage)}
+                {getMinText(shortestSession, i18n.resolvedLanguage)}
               </Text>
             </View>
           </Card.Content>

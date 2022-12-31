@@ -1,5 +1,5 @@
 {
-  "App.Name": "Meditation Tracker",
+  "App.Name": "Mindful Check-in",
 
   "notifee.return-to-app": "Tap to return to the app",
   "notifee.inviting-bell": "Inviting the bell",
@@ -16,28 +16,26 @@
   "Prepare.sound": "Sound",
   "Prepare.start": "Start",
   "Prepare.bell": "Bell",
-  "Prepare.choose-a-bell": "Bell",
+  "Prepare.choose-a-bell": "Choose a bell",
 
-  "Statistics.CalendarTracker.meditation-log": "Meditation Log",
-  "Statistics.Chart.daily-meditation": "Daily Meditation Chart",
+  "Statistics.CalendarTracker.meditation-log": "Mindful sessions",
+  "Statistics.Chart.daily-meditation": "Daily mindful check-in",
 
-  "Navigation.Screen.timer": "Meditation Session",
-
-  "Navigation.BottomTab.meditation": "Meditation",
-  "Navigation.BottomTab.settings": "Settings",
-  "Navigation.BottomTab.preset": "Meditation",
+  "Navigation.Screen.timer": "Mindful Session",
   "Navigation.BottomTab.AdminTab": "Admin",
-  "Navigation.BottomTab.PrepareTab": "Meditation",
+  "Navigation.BottomTab.PrepareTab": "Mindful Check-in",
   "Navigation.BottomTab.SettingsTab": "Settings",
   "Navigation.BottomTab.StatsTab": "Statistics",
 
-  "StatsTopTabs.CalendarTab": "Calendar Tracker",
+  "StatsTopTabs.CalendarTab": "Calendar tracker",
   "StatsTopTabs.ChartTab": "Chart",
-  "StatsTopTabs.SessionStatsTab": "Meditation Sessions",
-  "StatsTopTabs.session.current-streak": "Current Streak",
-  "StatsTopTabs.session.longest-streak": "Longest Streak",
-  "StatsTopTabs.session.number-of-sessions": "Num. of Sessions",
-  "StatsTopTabs.session.avg-duration": "Avg. Session Duration",
-  "StatsTopTabs.session.longest-session": "Longest Session",
-  "StatsTopTabs.session.shortest-session": "Shortest Sessions"
+  "StatsTopTabs.SessionStatsTab": "Meditation sessions",
+  "StatsTopTabs.session.mindfulStreak": "Mindful streak",
+  "StatsTopTabs.session.mindfulSessions": "Mindful sessions",
+  "StatsTopTabs.session.current-streak": "Current streak",
+  "StatsTopTabs.session.longest-streak": "Longest streak",
+  "StatsTopTabs.session.number-of-sessions": "Number of Sessions",
+  "StatsTopTabs.session.avg-duration": "Average session duration",
+  "StatsTopTabs.session.longest-session": "Longest session",
+  "StatsTopTabs.session.shortest-session": "Shortest session"
 }

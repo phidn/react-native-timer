@@ -28,7 +28,7 @@ const BottomTabNavigator = ({ navigation }) => {
       component: AdminScreen,
       IconComponent: Ionicons,
       icon: 'person',
-      show: false,
+      show: true,
     },
     {
       name: 'PrepareTab',

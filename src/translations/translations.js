@@ -1,15 +1,18 @@
 import viCommon from './common/vi.json'
 import enCommon from './common/en.json'
+import deCommon from './common/de.json'
 import { times } from './times'
 
-const en = { ...enCommon, ...times.en }
 const vi = { ...viCommon, ...times.vi }
+const en = { ...enCommon, ...times.en }
+const de = { ...deCommon, ...times.de || times.en }
 
-const availableLanguages = [
-  { label: 'English', code: 'en' },
-  { label: 'Vietnamese', code: 'vi' },
-]
+const resources = {
+  vi: { translation: vi },
+  en: { translation: en },
+  de: { translation: de },
+}
 
-const availableCodes = availableLanguages.map((language) => language.code)
+export * from './availableTranslations'
+export { resources }
 
-export { availableLanguages, availableCodes, en, vi }
