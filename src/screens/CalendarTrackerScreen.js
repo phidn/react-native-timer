@@ -6,11 +6,12 @@ import { useStore } from '@/store/useStore'
 import Color from 'color'
 import dayjs from 'dayjs'
 import { logger } from '@/utilities/logger'
-import { isNumber } from '@/utilities/commonHelper'
+import { isNumber, roundNumber } from '@/utilities/commonHelper'
 import { useTranslation } from 'react-i18next'
 import PageContainer from '@/components/Containers/PageContainer'
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
+import { getMinText } from '@/utilities/timeHelper'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
@@ -68,12 +69,12 @@ const CalendarTrackerScreen = () => {
   useEffect(() => {
     if (i18n.resolvedLanguage) {
       LocaleConfig.locales[i18n.resolvedLanguage] = {
-        monthNames: t('Calendar.monthNames').split('_'),
-        monthNamesShort: t('Calendar.monthNamesShort').split('_'),
-        dayNames: t('Calendar.dayNames').split('_'),
-        dayNamesShort: t('Calendar.dayNamesShort').split('_'),
-        amDesignator: t('Calendar.amDesignator'),
-        pmDesignator: t('Calendar.pmDesignator'),
+        monthNames: t('Time.monthNames').split('_'),
+        monthNamesShort: t('Time.monthNamesShort').split('_'),
+        dayNames: t('Time.dayNames').split('_'),
+        dayNamesShort: t('Time.dayNamesShort').split('_'),
+        amDesignator: 'AM',
+        pmDesignator: 'PM',
       }
 
       LocaleConfig.defaultLocale = i18n.resolvedLanguage
@@ -135,6 +136,7 @@ const CalendarTrackerScreen = () => {
           <ScrollView style={[styles.modalScrollView, { borderColor: colors.outlineVariant }]}>
             {sessions[modalDatePressed]?.logs.map((sessionLog) => {
               const [duration, started, ended] = sessionLog.split('|')
+              const _duration = roundNumber(duration)
               return (
                 <List.Item
                   key={sessionLog}
@@ -142,7 +144,7 @@ const CalendarTrackerScreen = () => {
                   left={(props) => <List.Icon {...props} icon="timer-outline" />}
                   right={() => (
                     <Text variant="titleMedium">
-                      {duration} {t('Time.minutes')}
+                      {_duration} {getMinText(_duration, i18n.resolvedLanguage)}
                     </Text>
                   )}
                 />

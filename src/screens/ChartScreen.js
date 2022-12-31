@@ -27,6 +27,7 @@ import Color from 'color'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import { useTranslation } from 'react-i18next'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
+import { getDMYFirstChar } from '@/utilities/timeHelper'
 
 // 7 days
 const weekDates = getWeekDates()
@@ -47,9 +48,7 @@ const ChartScreen = () => {
   const { colors } = useTheme()
   const { t, i18n } = useTranslation()
 
-  const [dayString, monthString, yearString] = t('Time.DMY')
-    .split('_')
-    .map((x) => x.charAt(0).toLocaleUpperCase())
+  const [dayString, monthString, yearString] = getDMYFirstChar(i18n.reloadResources)
 
   const chartType = useStore((state) => state.chartType)
   const setChartType = useStore((state) => state.setChartType)

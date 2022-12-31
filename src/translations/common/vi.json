@@ -1,5 +1,6 @@
 {
-  "App.Name": "Thiền",
+  "App.Name": "Trở về Chánh niệm",
+  "App.Language": "Vietnamese_vi",
 
   "notifee.return-to-app": "Nhấp để quay lại ứng dụng",
   "notifee.inviting-bell": "Đang thỉnh chuông",
@@ -18,21 +19,20 @@
   "Prepare.bell": "Chuông",
   "Prepare.choose-a-bell": "Chọn tiếng chuông",
 
-  "Statistics.CalendarTracker.meditation-log": "Nhật ký thiền",
-  "Statistics.Chart.daily-meditation": "Biểu đồ thiền mỗi ngày",
+  "Statistics.CalendarTracker.meditation-log": "Thời chánh niệm",
+  "Statistics.Chart.daily-meditation": "Trở về mỗi ngày",
 
-  "Navigation.Screen.timer": "Thời thiền",
-  "Navigation.BottomTab.admin": "Quản lý",
-  "Navigation.BottomTab.meditation": "Thiền",
-  "Navigation.BottomTab.settings": "Cài đặt",
-  "Navigation.BottomTab.preset": "Thiền",
-  "Navigation.BottomTab.PrepareTab": "Thiền",
-  "Navigation.BottomTab.SettingsTab": "Cài đặt",
+  "Navigation.Screen.timer": "Thời gian chánh niệm",
+  "Navigation.BottomTab.AdminTab": "Quản lý",
+  "Navigation.BottomTab.PrepareTab": "Trở về Chánh niệm",
+  "Navigation.BottomTab.SettingsTab": "Thiết lập",
   "Navigation.BottomTab.StatsTab": "Thống kê",
 
   "StatsTopTabs.CalendarTab": "Lịch theo dõi",
   "StatsTopTabs.ChartTab": "Biểu đồ",
   "StatsTopTabs.SessionStatsTab": "Thời thiền",
+  "StatsTopTabs.session.mindfulStreak": "Chuỗi liên tục",
+  "StatsTopTabs.session.mindfulSessions": "Thời thiền",
   "StatsTopTabs.session.current-streak": "Chuỗi hiện tại",
   "StatsTopTabs.session.longest-streak": "Chuỗi dài nhất",
   "StatsTopTabs.session.number-of-sessions": "Tổng thời thiền",

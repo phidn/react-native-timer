@@ -40,6 +40,7 @@ v3NoLabelContainer: {
 - https://github.com/remigallego/react-native-use-sound
 
 - https://materialdesignicons.com/
+- https://cdn.jsdelivr.net/npm/dayjs@1/locale.json
 
 ## Repo
 - https://github.com/AudiusProject/audius-client

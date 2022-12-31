@@ -11,8 +11,14 @@
     "lint": "eslint .",
     "emulator": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
     "device": "adb -s 62d6ca7c reverse tcp:8081 tcp:8081",
-    "trans": "jsontt src/translations/en.json",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "trans": "jsontt src/translations/common/en.json",
+    "deepl": "node ./deeplServer/deeplServer.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./deeplServer/output"
+    ]
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.2.0",
@@ -53,6 +59,8 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.1.0",
+    "deepl-node": "^1.7.2",
+    "dotenv": "^16.0.3",
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",

@@ -13,7 +13,6 @@ import {
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Fontisto from 'react-native-vector-icons/Fontisto'
 import Slider from '@react-native-community/slider'
 import { useTranslation } from 'react-i18next'
 
@@ -21,13 +20,18 @@ import RowContainer from '@/components/Containers/RowContainer'
 import CalendarHeatmap from '@/components/CalendarHeatmap/CalendarHeatmap'
 
 import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
+import 'dayjs/locale/en'
+import 'dayjs/locale/de'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(weekOfYear)
 dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 import useSound from '@/hooks/useSound'
-import { getDuration, getInterval } from '@/utilities/timeHelper'
+import { getDayText, getMinText } from '@/utilities/timeHelper'
 import { getAsset } from '@/utilities/assetsHelper'
 import { logger } from '@/utilities/logger'
 import { COLOR_LEVELS, PREPARE_MEDITATION_DAYS } from '@/config/calendarHeatmap'
@@ -39,7 +43,6 @@ import PageContainer from '@/components/Containers/PageContainer'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
-import { getDayString, getMinString } from '@/utilities/timeHelper'
 
 const PrepareScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation()
@@ -52,7 +55,7 @@ const PrepareScreen = ({ navigation }) => {
   const setPrepare = useStore((state) => state.setPrepare)
   const sessions = useStore((state) => state.sessions)
 
-  const { currentStreak, longestStreak } = useStatsSessions()
+  const { avgSessionDuration, longestStreak } = useStatsSessions()
 
   const calendarHeatmapValues = (() => {
     const result = []
@@ -147,7 +150,8 @@ const PrepareScreen = ({ navigation }) => {
         right={() => (
           <RowContainer style={{}}>
             <Text variant="titleMedium" style={[{ color: primary }]}>
-              {getDuration(duration, t)}
+              {`${duration / 60} `}
+              {getMinText(duration / 60, i18n.resolvedLanguage)}
             </Text>
             <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
           </RowContainer>
@@ -159,7 +163,8 @@ const PrepareScreen = ({ navigation }) => {
         right={() => (
           <RowContainer style={{}}>
             <Text variant="titleMedium" style={[{ color: primary }]}>
-              {getInterval(interval, t)}
+              {`${interval / 60} `}
+              {getMinText(interval / 60, i18n.resolvedLanguage)}
             </Text>
             <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
           </RowContainer>
@@ -215,25 +220,25 @@ const PrepareScreen = ({ navigation }) => {
           values={calendarHeatmapValues}
         />
       </View>
-      <CenterContainer style={{ marginTop: 20 }}>
-        <RowContainer style={{ marginRight: 15 }}>
-          <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[1] }} />
-          <Text variant="labelSmall">{t('StatsTopTabs.session.current-streak')}</Text>
-          <Text variant="labelSmall">{`: ${currentStreak} ${getDayString(
-            currentStreak,
-            t,
-            i18n.resolvedLanguage
-          )}`}</Text>
-        </RowContainer>
-        <RowContainer>
-          <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[2] }} />
-          <Text variant="labelSmall">{t('StatsTopTabs.session.longest-streak')}</Text>
-          <Text variant="labelSmall">{`: ${longestStreak} ${getDayString(
-            longestStreak,
-            t,
-            i18n.resolvedLanguage
-          )}`}</Text>
-        </RowContainer>
+      <CenterContainer>
+        <View style={{ marginTop: 20, alignItems: 'baseline' }}>
+          <RowContainer style={{ marginRight: 15 }}>
+            <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[1] }} />
+            <Text variant="labelSmall">{t('StatsTopTabs.session.avg-duration')}</Text>
+            <Text variant="labelSmall">
+              {`: ${avgSessionDuration} `}
+              {getMinText(avgSessionDuration, i18n.resolvedLanguage)}
+            </Text>
+          </RowContainer>
+          <RowContainer>
+            <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[2] }} />
+            <Text variant="labelSmall">{t('StatsTopTabs.session.longest-streak')}</Text>
+            <Text variant="labelSmall">
+              {`: ${longestStreak} `}
+              {getDayText(longestStreak, i18n.resolvedLanguage)}
+            </Text>
+          </RowContainer>
+        </View>
       </CenterContainer>
 
       {/* Modal choose bell sound */}
