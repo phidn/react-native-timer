@@ -1,5 +1,5 @@
 {
-  "name": "mediation-tracker",
+  "name": "mindful-checkin",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,11 +13,13 @@
     "device": "adb -s 62d6ca7c reverse tcp:8081 tcp:8081",
     "postinstall": "patch-package",
     "trans": "jsontt src/translations/common/en.json",
-    "deepl": "node ./deeplServer/deeplServer.js"
+    "deepl": "node ./server/deeplServer.js",
+    "fixTrans": "nodemon ./server/fixTranslate.js"
   },
   "nodemonConfig": {
     "ignore": [
-      "./deeplServer/output"
+      "./server/output",
+      "./server/fix"
     ]
   },
   "dependencies": {
@@ -56,6 +58,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@iamtraction/google-translate": "^2.0.1",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.1.0",

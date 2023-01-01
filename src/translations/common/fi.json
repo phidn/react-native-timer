@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Istuntojen määrä",
   "StatsTopTabs.session.avg-duration": "Istunnon keskimääräinen kesto",
   "StatsTopTabs.session.longest-session": "Pisin istunto",
-  "StatsTopTabs.session.shortest-session": "Lyhin istunto",
-  "App.Language": "Finnish_fi"
+  "StatsTopTabs.session.shortest-session": "Lyhin istunto"
 }

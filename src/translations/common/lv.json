@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Sesiju skaits",
   "StatsTopTabs.session.avg-duration": "Vidējais sesijas ilgums",
   "StatsTopTabs.session.longest-session": "Ilgākā sesija",
-  "StatsTopTabs.session.shortest-session": "Īsākā sesija",
-  "App.Language": "Latvian_lv"
+  "StatsTopTabs.session.shortest-session": "Īsākā sesija"
 }

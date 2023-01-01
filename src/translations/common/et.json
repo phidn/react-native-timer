@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Seansside arv",
   "StatsTopTabs.session.avg-duration": "Seansi keskmine kestus",
   "StatsTopTabs.session.longest-session": "Pikim seanss",
-  "StatsTopTabs.session.shortest-session": "Lühim seanss",
-  "App.Language": "Estonian_et"
+  "StatsTopTabs.session.shortest-session": "Lühim seanss"
 }

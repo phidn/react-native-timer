@@ -34,7 +34,6 @@ dayjs.extend(localeData)
 
 import { availableCodes } from './availableTranslations'
 
-
 const times = {}
 
 availableCodes.forEach((code) => {

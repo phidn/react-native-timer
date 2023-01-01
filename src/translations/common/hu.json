@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Ülések száma",
   "StatsTopTabs.session.avg-duration": "A munkamenet átlagos időtartama",
   "StatsTopTabs.session.longest-session": "Leghosszabb munkamenet",
-  "StatsTopTabs.session.shortest-session": "Legrövidebb munkamenet",
-  "App.Language": "Hungarian_hu"
+  "StatsTopTabs.session.shortest-session": "Legrövidebb munkamenet"
 }

@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Número de Sessões",
   "StatsTopTabs.session.avg-duration": "Duração média da sessão",
   "StatsTopTabs.session.longest-session": "Sessão mais longa",
-  "StatsTopTabs.session.shortest-session": "Sessão mais curta",
-  "App.Language": "Portuguese_pt-PT"
+  "StatsTopTabs.session.shortest-session": "Sessão mais curta"
 }

@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "会议数量",
   "StatsTopTabs.session.avg-duration": "平均会话时间",
   "StatsTopTabs.session.longest-session": "最长的会议",
-  "StatsTopTabs.session.shortest-session": "最短的会议",
-  "App.Language": "Chinese_zh"
+  "StatsTopTabs.session.shortest-session": "最短的会议"
 }

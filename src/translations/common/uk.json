@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Кількість сесій",
   "StatsTopTabs.session.avg-duration": "Середня тривалість сеансу",
   "StatsTopTabs.session.longest-session": "Найдовша сесія",
-  "StatsTopTabs.session.shortest-session": "Найкоротша сесія",
-  "App.Language": "Ukrainian_uk"
+  "StatsTopTabs.session.shortest-session": "Найкоротша сесія"
 }

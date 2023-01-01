@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Брой сесии",
   "StatsTopTabs.session.avg-duration": "Средна продължителност на сесията",
   "StatsTopTabs.session.longest-session": "Най-дългата сесия",
-  "StatsTopTabs.session.shortest-session": "Най-кратка сесия",
-  "App.Language": "Bulgarian_bg"
+  "StatsTopTabs.session.shortest-session": "Най-кратка сесия"
 }

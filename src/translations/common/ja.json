@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "セッション数",
   "StatsTopTabs.session.avg-duration": "平均セッション時間",
   "StatsTopTabs.session.longest-session": "最長セッション",
-  "StatsTopTabs.session.shortest-session": "最短セッション",
-  "App.Language": "Japanese_ja"
+  "StatsTopTabs.session.shortest-session": "最短セッション"
 }

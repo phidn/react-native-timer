@@ -42,10 +42,14 @@ export const getWeekDatesInMonth = () => {
 
 export const getThreeMonthsDates = () => {
   const currentMonth = dayjs().month()
+
+  // 2022-10-31
   const startOfPrevThreeMonths = dayjs()
     .month(currentMonth - 3)
     .endOf('month')
     .format('YYYY-MM-DD')
+
+  // 2023-01-31
   const endOfCurrentMonth = dayjs().month(currentMonth).endOf('month').format('YYYY-MM-DD')
 
   const dates = rangeDates(startOfPrevThreeMonths, endOfCurrentMonth, 'day')
@@ -65,16 +69,26 @@ export const getMonthDatesInThreeMonths = () => {
 }
 
 export const getYearsDates = () => {
-  const start = dayjs().startOf('year').format('YYYY-MM-DD')
-  const end = dayjs().endOf('year').format('YYYY-MM-DD')
-  const dates = rangeDates(start, end, 'day')
+  const currentMonth = dayjs().month()
+  const start = dayjs()
+    .month(currentMonth - 12)
+    .endOf('month')
+    .format('YYYY-MM-DD')
+  const endOfCurrentMonth = dayjs().month(currentMonth).endOf('month').format('YYYY-MM-DD')
+
+  const dates = rangeDates(start, endOfCurrentMonth, 'day')
   return dates.map((date) => dayjs(date).format('YYYY-MM-DD'))
 }
 
 export const getMonthDatesInYear = () => {
-  const start = dayjs().startOf('year').format('YYYY-MM-DD')
-  const end = dayjs().endOf('year').format('YYYY-MM-DD')
-  const dates = rangeDates(start, end, 'month')
+  const currentMonth = dayjs().month()
+  const startOfPrevThreeMonths = dayjs()
+    .month(currentMonth - 11)
+    .startOf('month')
+    .format('YYYY-MM-DD')
+  const endOfCurrentMonth = dayjs().month(currentMonth).endOf('month').format('YYYY-MM-DD')
+
+  const dates = rangeDates(startOfPrevThreeMonths, endOfCurrentMonth, 'month')
   return dates.map((date) => dayjs(date).format('YYYY-MM-DD'))
 }
 

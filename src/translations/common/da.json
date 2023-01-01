@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Antal sessioner",
   "StatsTopTabs.session.avg-duration": "Gennemsnitlig varighed af sessionen",
   "StatsTopTabs.session.longest-session": "Længste session",
-  "StatsTopTabs.session.shortest-session": "Korteste session",
-  "App.Language": "Danish_da"
+  "StatsTopTabs.session.shortest-session": "Korteste session"
 }

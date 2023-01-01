@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Αριθμός συνεδριών",
   "StatsTopTabs.session.avg-duration": "Μέση διάρκεια συνεδρίας",
   "StatsTopTabs.session.longest-session": "Μεγαλύτερη σύνοδος",
-  "StatsTopTabs.session.shortest-session": "Συντομότερη σύνοδος",
-  "App.Language": "Greek_el"
+  "StatsTopTabs.session.shortest-session": "Συντομότερη σύνοδος"
 }

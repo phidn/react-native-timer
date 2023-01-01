@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Počet relací",
   "StatsTopTabs.session.avg-duration": "Průměrná délka relace",
   "StatsTopTabs.session.longest-session": "Nejdelší sezení",
-  "StatsTopTabs.session.shortest-session": "Nejkratší sezení",
-  "App.Language": "Czech_cs"
+  "StatsTopTabs.session.shortest-session": "Nejkratší sezení"
 }

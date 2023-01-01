@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Количество сеансов",
   "StatsTopTabs.session.avg-duration": "Средняя продолжительность сеанса",
   "StatsTopTabs.session.longest-session": "Самая продолжительная сессия",
-  "StatsTopTabs.session.shortest-session": "Самая короткая сессия",
-  "App.Language": "Russian_ru"
+  "StatsTopTabs.session.shortest-session": "Самая короткая сессия"
 }

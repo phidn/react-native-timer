@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { BarChart, XAxis, Grid, YAxis } from 'react-native-svg-charts'
-import { Text } from 'react-native-svg'
 import PageContainer from '@/components/Containers/PageContainer'
 import { SegmentedButtons, useTheme } from 'react-native-paper'
 import { useStore } from '@/store/useStore'
-import { logger } from '@/utilities/logger'
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
 
@@ -26,7 +24,6 @@ import * as scale from 'd3-scale'
 import Color from 'color'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import { useTranslation } from 'react-i18next'
-import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { getDMYFirstChar } from '@/utilities/timeHelper'
 
 // 7 days
@@ -60,10 +57,12 @@ const ChartScreen = () => {
     '1m': [],
     '3m': [],
     '1y': [],
-    all: [],
+    'all': [],
   })
   const [datesInAll, setDatesInAll] = useState([])
   const [yearInAll, setYearInAll] = useState([])
+
+  const [chartDatesByType, setChartDatesByType] = useState([])
 
   const sessions = useStore((state) => state.sessions)
 
@@ -91,7 +90,13 @@ const ChartScreen = () => {
     setDatesInAll(_datesInAll)
   }, [sessions])
 
-  const getChartData = (_chartType) => {
+  useEffect(() => {
+    const dates = getChartDates(chartType)
+    setChartDatesByType(dates)
+  }, [chartType])
+  
+
+  const getChartDates = (_chartType) => {
     let dates = []
     switch (_chartType) {
       case '7d':
@@ -115,6 +120,10 @@ const ChartScreen = () => {
         dates = rangeDates(start, end, 'day').map((date) => dayjs(date).format('YYYY-MM-DD'))
       }
     }
+    return dates
+  }
+  const getChartData = (_chartType) => {
+    const dates = getChartDates(_chartType)
 
     if (dates.length) {
       const chartData = dates.map((date) => {
@@ -159,47 +168,16 @@ const ChartScreen = () => {
     }
   }
 
-  const renderRangeDates = () => {
-    let _dayjs,
-      formatDate = 'MMMM DD, YYYY',
-      result
+  const renderRangeDates = () => {  
+    let formatDate = 'MMMM DD, YYYY'
     if (i18n.resolvedLanguage === 'vi') {
-      _dayjs = (param) => dayjs(param).locale('vi')
       formatDate = 'DD MMMM, YYYY'
-    } else {
-      _dayjs = dayjs
     }
-
-    if (chartType === '7d') {
-      const start = _dayjs().day(0).format(formatDate)
-      const end = _dayjs().day(7).format(formatDate)
-      result = `${start} - ${end}`
-    }
-    if (chartType === '1m') {
-      const start = _dayjs().startOf('month').format(formatDate)
-      const end = _dayjs().endOf('month').format(formatDate)
-      result = `${start} - ${end}`
-    }
-    if (chartType === '3m') {
-      const currentMonth = _dayjs().month()
-      const start = _dayjs()
-        .month(currentMonth - 3)
-        .endOf('month')
-        .format(formatDate)
-      const end = _dayjs().month(currentMonth).endOf('month').format(formatDate)
-
-      result = `${start} - ${end}`
-    }
-    if (chartType === '1y') {
-      const start = _dayjs().startOf('year').format(formatDate)
-      const end = _dayjs().endOf('year').format(formatDate)
-      result = `${start} - ${end}`
-    }
-    if (chartType === 'all') {
-      const start = _dayjs(datesInAll[0]).format(formatDate)
-      const end = _dayjs(datesInAll[datesInAll.length - 1]).format(formatDate)
-      result = `${start} - ${end}`
-    }
+    dayjs.locale(i18n.resolvedLanguage)
+    
+    const start = dayjs(chartDatesByType[0]).format(formatDate)
+    const end = dayjs(chartDatesByType[chartDatesByType.length - 1]).format(formatDate)
+    result = `${start} - ${end}`
 
     if (i18n.resolvedLanguage === 'vi') {
       result = result.replace(/tháng/g, 'Tháng')

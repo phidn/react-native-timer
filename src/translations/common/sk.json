@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Počet relácií",
   "StatsTopTabs.session.avg-duration": "Priemerné trvanie relácie",
   "StatsTopTabs.session.longest-session": "Najdlhšia relácia",
-  "StatsTopTabs.session.shortest-session": "Najkratšia relácia",
-  "App.Language": "Slovak_sk"
+  "StatsTopTabs.session.shortest-session": "Najkratšia relácia"
 }

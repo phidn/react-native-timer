@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Oturum Sayısı",
   "StatsTopTabs.session.avg-duration": "Ortalama oturum süresi",
   "StatsTopTabs.session.longest-session": "En uzun seans",
-  "StatsTopTabs.session.shortest-session": "En kısa oturum",
-  "App.Language": "Turkish_tr"
+  "StatsTopTabs.session.shortest-session": "En kısa oturum"
 }

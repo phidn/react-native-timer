@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Numărul de sesiuni",
   "StatsTopTabs.session.avg-duration": "Durata medie a sesiunii",
   "StatsTopTabs.session.longest-session": "Cea mai lungă sesiune",
-  "StatsTopTabs.session.shortest-session": "Cea mai scurtă sesiune",
-  "App.Language": "Romanian_ro"
+  "StatsTopTabs.session.shortest-session": "Cea mai scurtă sesiune"
 }

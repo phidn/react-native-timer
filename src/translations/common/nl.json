@@ -31,6 +31,5 @@
   "StatsTopTabs.session.number-of-sessions": "Aantal sessies",
   "StatsTopTabs.session.avg-duration": "Gemiddelde duur van de sessie",
   "StatsTopTabs.session.longest-session": "Langste sessie",
-  "StatsTopTabs.session.shortest-session": "Kortste sessie",
-  "App.Language": "Dutch_nl"
+  "StatsTopTabs.session.shortest-session": "Kortste sessie"
 }
