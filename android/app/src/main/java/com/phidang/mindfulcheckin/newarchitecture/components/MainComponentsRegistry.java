@@ -1,4 +1,4 @@
-package com.mediationtracker.newarchitecture.components;
+package com.phidang.mindfulcheckin.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
