@@ -14,7 +14,8 @@
     "postinstall": "patch-package",
     "trans": "jsontt src/translations/common/en.json",
     "deepl": "node ./server/deeplServer.js",
-    "fixTrans": "nodemon ./server/fixTranslate.js"
+    "fixTrans": "nodemon ./server/fixTranslate.js",
+    "android:clean": "cd android && gradlew clean"
   },
   "nodemonConfig": {
     "ignore": [
