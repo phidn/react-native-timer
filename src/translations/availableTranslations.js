@@ -30,3 +30,9 @@ export const availableLanguages = [
 ]
 
 export const availableCodes = availableLanguages.map((language) => language.code)
+
+export const getLanguageName = (code) => {
+  const language = availableLanguages.find(x => x.code === code)
+  if (language) return language.name
+  return ''
+}

@@ -5,11 +5,16 @@
   "notifee.inviting-bell": "Đang thỉnh chuông",
   "notifee.in-progress": "Đang trong thời thiền",
 
+  "Settings.appearance": "Hiển thị",
   "Settings.color-mode": "Chế độ màu",
   "Settings.color-mode.light": "Sáng",
   "Settings.color-mode.dark": "Tối",
   "Settings.language": "Ngôn ngữ",
   "Settings.theme-colors": "Màu sắc chủ đề",
+  "Settings.moreSetting": "Khác",
+  "Settings.rateApp": "Đánh giá ứng dụng",
+  "Settings.feedback": "Phản hồi",
+  "Settings.privacyPolicy": "Chính sách bảo mật",
 
   "Prepare.duration": "Thời gian",
   "Prepare.invite-bell": "Thỉnh chuông mỗi",

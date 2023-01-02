@@ -1,5 +1,15 @@
 # Mindfulness Meditation Tracker
 
+## Release
+- https://www.youtube.com/watch?v=A3--3Ozxz6o
+
+### Version
+- https://www.npmjs.com/package/react-native-version
+- npm install -g react-native-version
+- react-native-version --never-amend
+### Icon
+- https://www.appicon.co/
+
 ## Bugs
 1. Fix "Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8"
 ```
@@ -25,6 +35,10 @@ v3NoLabelContainer: {
 },
 ```
 
+## Icons
+- https://materialdesignicons.com/
+- https://oblador.github.io/react-native-vector-icons/
+
 ## References
 - https://github.com/pmndrs/zustand
 - https://github.com/girish54321/react-native-starter
@@ -39,8 +53,8 @@ v3NoLabelContainer: {
 
 - https://github.com/remigallego/react-native-use-sound
 
-- https://materialdesignicons.com/
 - https://cdn.jsdelivr.net/npm/dayjs@1/locale.json
+- In app purchase: https://www.youtube.com/watch?v=bKhTCX3l24o
 
 ## Repo
 - https://github.com/AudiusProject/audius-client

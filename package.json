@@ -1,9 +1,11 @@
 {
   "name": "mindful-checkin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:clean": "cd android && gradlew clean",
+    "android:bundleRelease": "cd android && gradlew bundleRelease",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "start:rc": "react-native start --reset-cache",
@@ -15,7 +17,6 @@
     "trans": "jsontt src/translations/common/en.json",
     "deepl": "node ./server/deeplServer.js",
     "fixTrans": "nodemon ./server/fixTranslate.js",
-    "android:clean": "cd android && gradlew clean",
     "bootsplash": "react-native generate-bootsplash ./src/assets/images/logo.png"
   },
   "nodemonConfig": {
@@ -43,6 +44,7 @@
     "react-native-bootsplash": "^4.4.0",
     "react-native-calendars": "^1.1292.0",
     "react-native-countdown-circle-timer": "^3.1.0",
+    "react-native-device-info": "^10.3.0",
     "react-native-localize": "^2.2.4",
     "react-native-logs": "^5.0.1",
     "react-native-pager-view": "^6.1.2",

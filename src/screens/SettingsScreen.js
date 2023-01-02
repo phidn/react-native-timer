@@ -1,39 +1,67 @@
-import { StyleSheet, View } from 'react-native'
+import { Linking, StyleSheet } from 'react-native'
 import React from 'react'
 import { Card, List, Switch } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
 import RowContainer from '@/components/Containers/RowContainer'
 import ListColor from '@/components/Color/ListColor'
 import { useStore } from '@/store/useStore'
 import PageContainer from '@/components/Containers/PageContainer'
-import { logger } from '@/utilities/logger'
-import { availableLanguages } from '@/translations/translations'
+import { availableLanguages, getLanguageName } from '@/translations/translations'
+import SettingCardTitle from '@/components/SettingCardTitle/SettingCardTitle'
+import DeviceInfo from 'react-native-device-info'
 
-const PAGE_PADDING_HORIZONTAL = 0
+const PAGE_PADDING_HORIZONTAL = 10
 
 const SettingsScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation()
   const isDarkMode = useStore((state) => state.isDarkMode)
   const toggleMode = useStore((state) => state.toggleMode)
-
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
+
+  const feedbackHandler = async () => {
+    const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.feedback')}`
+
+    // - Package: ${await DeviceInfo.getInstallerPackageName()}
+    const message = `
+      - Version: ${DeviceInfo.getVersion()}
+      - OS API: ${await DeviceInfo.getApiLevel()}
+      - Language: ${getLanguageName(i18n.resolvedLanguage)}
+      - Device: ${await DeviceInfo.getDevice()} | ${await DeviceInfo.getDeviceName()}
+    `
+
+    const _break = '%0D%0A'
+    const _message = message.replace(/      - /g, '').trim() + _break + _break + _break
+
+    Linking.openURL(`mailto:hello.dangnhatphi@gmail.com?subject=${subject}&body=${_message}`).catch(
+      (err) => console.error('ERROR > cannot open send email', err)
+    )
+  }
 
   return (
     <PageContainer style={{ paddingHorizontal: PAGE_PADDING_HORIZONTAL, marginTop: 20 }}>
-      <Card style={styles.card}>
+      <SettingCardTitle title={t('Settings.appearance')} />
+      <Card style={[styles.card, { paddingBottom: 20 }]}>
         <List.Item
           title={t('Settings.language')}
           description={language?.label ? language.label : ''}
-          left={(props) => <MaterialIcons {...props} name="language" size={24} />}
+          left={(props) => <Entypo {...props} name="language" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => navigation.navigate('LanguageSettingScreen')}
         />
         <List.Item
           title={t('Settings.color-mode')}
           description={isDarkMode ? t('Settings.color-mode.dark') : t('Settings.color-mode.light')}
-          left={(props) => <List.Icon {...props} icon="theme-light-dark" />}
+          left={(props) => (
+            <MaterialIcons
+              {...props}
+              name={isDarkMode ? 'lightbulb' : 'lightbulb-outline'}
+              size={24}
+            />
+          )}
           right={() => <Switch value={isDarkMode} onValueChange={toggleMode} />}
         />
         <List.Item
@@ -43,6 +71,31 @@ const SettingsScreen = ({ navigation }) => {
         <RowContainer style={{ justifyContent: 'flex-start', marginLeft: 50 }}>
           <ListColor gap={85 + PAGE_PADDING_HORIZONTAL * 2} range={[0, 9]} />
         </RowContainer>
+      </Card>
+      <SettingCardTitle title={t('Settings.moreSetting')} />
+      <Card style={styles.card}>
+        {/* Todo: when app stored */}
+        {/* <List.Item
+          title={t('Settings.rateApp')}
+          left={(props) => <MaterialIcons {...props} name="star-outline" size={24} />}
+          onPress={() => {}}
+        /> */}
+        <List.Item
+          title={t('Settings.feedback')}
+          left={(props) => (
+            <MaterialCommunityIcons {...props} name="email-send-outline" size={24} />
+          )}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={feedbackHandler}
+        />
+        <List.Item
+          title={t('Settings.privacyPolicy')}
+          left={(props) => (
+            <MaterialCommunityIcons {...props} name="file-document-outline" size={24} />
+          )}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={feedbackHandler}
+        />
       </Card>
     </PageContainer>
   )
@@ -55,6 +108,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    paddingBottom: 20,
+    marginBottom: 20,
   },
 })

@@ -5,11 +5,16 @@
   "notifee.inviting-bell": "Inviting the bell",
   "notifee.in-progress": "In progress",
 
+  "Settings.appearance": "Appearance",
   "Settings.color-mode": "Color mode",
   "Settings.color-mode.light": "Light",
   "Settings.color-mode.dark": "Dark",
   "Settings.language": "Language",
   "Settings.theme-colors": "Theme colors",
+  "Settings.moreSetting": "More",
+  "Settings.rateApp": "Rate app",
+  "Settings.feedback": "Feedback",
+  "Settings.privacyPolicy": "Privacy policy",
 
   "Prepare.duration": "Duration",
   "Prepare.invite-bell": "Invite bell every",
