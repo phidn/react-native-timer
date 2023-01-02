@@ -39,13 +39,10 @@ const bootTranslate = async () => {
 }
 
 const fix = async (langCode) => {
-  const enKeys = Object.keys(enJson)
+  // const _langCode = langCode === 'pt'? 'pt-PT' : langCode
 
-  let fileName = langCode
-  if (langCode === 'pt') {
-    fileName = 'pt-PT'
-  }
-  const translated = fs.readFileSync(`./server/origin/${fileName}.json`)
+  const enKeys = Object.keys(enJson)
+  const translated = fs.readFileSync(`./server/origin/${langCode}.json`)
   const translatedJSON = JSON.parse(translated)
 
   const needFix = {}
@@ -91,4 +88,4 @@ const bootFix = async () => {
 }
 
 // bootServer()
-bootFix()
+// bootFix()

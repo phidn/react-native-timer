@@ -16,7 +16,7 @@ const sourceLanguages = [
   { name: 'Latvian', code: 'lv' },
   { name: 'Dutch', code: 'nl' },
   { name: 'Polish', code: 'pl' },
-  { name: 'Portuguese', code: 'pt' },
+  { name: 'Portuguese', code: 'pt-PT' },
   { name: 'Romanian', code: 'ro' },
   { name: 'Russian', code: 'ru' },
   { name: 'Slovak', code: 'sk' },
