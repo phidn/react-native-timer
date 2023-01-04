@@ -20,7 +20,7 @@
     {
       "name": "Pixel_4_API_29",
       "icon": "device-mobile",
-      "color": "terminal.ansiBlue",
+      "color": "terminal.ansiMagenta",
       "execute": true, 
       "commands": [
         "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
@@ -28,13 +28,23 @@
       ]
     },
     {
-      "name": "Pixel_4_API_33",
+      "name": "Nexus_7_API_33",
       "icon": "device-mobile",
-      "color": "terminal.ansiBlue",
+      "color": "terminal.ansiMagenta",
       "execute": false, 
       "commands": [
         "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
-        "emulator.exe -avd Pixel_4_API_33"
+        "emulator.exe -avd Nexus_7_API_33"
+      ]
+    },
+    {
+      "name": "Nexus_10_API_33",
+      "icon": "device-mobile",
+      "color": "terminal.ansiMagenta",
+      "execute": false, 
+      "commands": [
+        "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator",
+        "emulator.exe -avd Nexus_10_API_33"
       ]
     },
     {

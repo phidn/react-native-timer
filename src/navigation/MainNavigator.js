@@ -15,11 +15,13 @@ const MainNavigator = () => {
       name: 'LanguageSettingScreen',
       component: LanguageSettingScreen,
       headerTitle: t('Settings.language'),
+      headerShown: true
     },
     {
       name: 'MeditationTimerScreen',
       component: MeditationTimerScreen,
       headerTitle: t('Navigation.Screen.timer'),
+      headerShown: false
     },
   ]
 
@@ -40,7 +42,7 @@ const MainNavigator = () => {
           component={stack.component}
           options={{
             headerTitle: stack.headerTitle,
-            headerShown: true,
+            headerShown: stack.headerShown,
             headerTitleAlign: 'center',
           }}
         />

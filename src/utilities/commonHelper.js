@@ -28,3 +28,19 @@ export const roundNumber = (number, decimal_places = 0) => {
   const result = Math.round(number * places) / places
   return result
 }
+
+// console.log(roundNearest5(13)); // 👉️ 15
+// console.log(roundNearest5(-12)); // 👉️ -10
+export const roundNearest = (num, numNearest = 5) => {
+  return Math.round(num / numNearest) * numNearest
+}
+
+/**
+ *
+ * Getting a random integer between two values, inclusive
+ */
+export const getRandomIntInclusive = (min, max) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}

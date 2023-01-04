@@ -88,4 +88,4 @@ const bootFix = async () => {
 }
 
 // bootServer()
-// bootFix()
+bootFix()

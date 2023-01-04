@@ -39,6 +39,9 @@ v3NoLabelContainer: {
 - https://materialdesignicons.com/
 - https://oblador.github.io/react-native-vector-icons/
 
+## Privacy Policy Generator
+- https://app-privacy-policy-generator.nisrulz.com/
+
 ## References
 - https://github.com/pmndrs/zustand
 - https://github.com/girish54321/react-native-starter
@@ -55,6 +58,7 @@ v3NoLabelContainer: {
 
 - https://cdn.jsdelivr.net/npm/dayjs@1/locale.json
 - In app purchase: https://www.youtube.com/watch?v=bKhTCX3l24o
+- ADS: https://docs.page/invertase/react-native-google-mobile-ads/displaying-ads#banner-ads-component
 
 ## Repo
 - https://github.com/AudiusProject/audius-client

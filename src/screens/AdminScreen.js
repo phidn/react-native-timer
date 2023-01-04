@@ -10,6 +10,8 @@ import useSound from '@/hooks/useSound'
 import _BackgroundTimer from 'react-native-background-timer'
 import { Platform, StyleSheet } from 'react-native'
 import notifee from '@notifee/react-native'
+import { getYearsDates } from '@/utilities/chartHelper'
+import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -61,6 +63,26 @@ const AdminScreen = () => {
     })
   }
 
+  const randomSetSessions = () => {
+    const yearDates = getYearsDates()
+    const _sessions = {}
+    for (let i = 0; i < yearDates.length; i++) {
+      const flag = getRandomIntInclusive(0, 1)
+      if (flag) {
+        const count = getRandomIntInclusive(1, 3)
+        const logs = []
+        for (let j = 0; j < count; j++) {
+          let minutes = getRandomIntInclusive(15, 35)
+          minutes = roundNearest(minutes)
+          logs.push(`${minutes}|00:00|00:${minutes}`)
+        }
+        _sessions[yearDates[i]] = { logs }
+      }
+    }
+
+    setSessions(_sessions)
+  }
+
   const { play } = useSound()
   const testBackgroundTimer = () => {
     console.log('testBackgroundTimer run')
@@ -96,7 +118,7 @@ const AdminScreen = () => {
         timestamp: Date.now() + 300000,
         showChronometer: true,
         chronometerDirection: 'down',
-        autoCancel: false
+        autoCancel: false,
       },
     })
   }
@@ -118,6 +140,7 @@ const AdminScreen = () => {
       </Card>
 
       <Card style={styles.card}>
+        <Button onPress={randomSetSessions}>Random set sessions</Button>
         <Button onPress={devSession}>Dev Session</Button>
         <Button onPress={clearSession}>Clear session</Button>
         <Button onPress={() => logger(sessions)}>Log session</Button>

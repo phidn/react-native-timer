@@ -1,4 +1,7 @@
 {
   "name": "mindfulcheckin",
-  "displayName": "Mindfulness: Daily Check-in"
+  "displayName": "Mindfulness: Daily Check-in",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-1040556008280910~5322812586"
+  }
 }

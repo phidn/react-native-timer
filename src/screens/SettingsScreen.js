@@ -13,6 +13,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { availableLanguages, getLanguageName } from '@/translations/translations'
 import SettingCardTitle from '@/components/SettingCardTitle/SettingCardTitle'
 import DeviceInfo from 'react-native-device-info'
+import { privacyPolicyLink, termsAndConditionsLink } from '@/config/config'
 
 const PAGE_PADDING_HORIZONTAL = 10
 
@@ -83,7 +84,7 @@ const SettingsScreen = ({ navigation }) => {
         <List.Item
           title={t('Settings.feedback')}
           left={(props) => (
-            <MaterialCommunityIcons {...props} name="email-send-outline" size={24} />
+            <MaterialCommunityIcons {...props} name="email-edit-outline" size={24} />
           )}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={feedbackHandler}
@@ -94,7 +95,15 @@ const SettingsScreen = ({ navigation }) => {
             <MaterialCommunityIcons {...props} name="file-document-outline" size={24} />
           )}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={feedbackHandler}
+          onPress={() => Linking.openURL(privacyPolicyLink)}
+        />
+        <List.Item
+          title={t('Settings.termsAndConditions')}
+          left={(props) => (
+            <MaterialCommunityIcons {...props} name="file-document-outline" size={24} />
+          )}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => Linking.openURL(termsAndConditionsLink)}
         />
       </Card>
     </PageContainer>

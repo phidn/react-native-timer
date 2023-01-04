@@ -2,7 +2,7 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { storageKeys } from '@/config/storageKeys'
+import { storageKeys } from '@/config/config'
 import { logger } from '@/utilities/logger'
 
 const rehydrateStorageSlice = (set) => ({
