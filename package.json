@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "android:clean": "cd android && gradlew clean",
-    "android:bundleRelease": "cd android && gradlew bundleRelease",
+    "android:bundleRelease": "react-native-version --never-amend && cd android && gradlew bundleRelease",
     "android:openReleaseFolder": "cd android\\app\\build\\outputs\\bundle\\release && start .",
     "android:releaseCode": "react-native-version --never-amend",
     "ios": "react-native run-ios",
