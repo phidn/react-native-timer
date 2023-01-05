@@ -12,6 +12,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { getMinText } from '@/utilities/timeHelper'
+import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
@@ -97,7 +98,7 @@ const CalendarTrackerScreen = () => {
   }
 
   return (
-    <PageContainer isScroll={true} style={{ padding: 20 }}>
+    <TopBannerAdContainer style={{ padding: 20 }}>
       <Calendar
         key={calendarKey}
         markedDates={markedDates}
@@ -161,7 +162,7 @@ const CalendarTrackerScreen = () => {
           </View>
         </Modal>
       </Portal>
-    </PageContainer>
+    </TopBannerAdContainer>
   )
 }
 

@@ -4,6 +4,7 @@ export const storageKeys = {
 }
 
 export const admobId = 'ca-app-pub-1040556008280910~5322812586'
+export const admobBannerId = 'ca-app-pub-1040556008280910/4693161152'
 
 export const privacyPolicyLink =
   'https://phidev.notion.site/Privacy-Policy-750786e461c341cbba51a0a0fa4e3f11'

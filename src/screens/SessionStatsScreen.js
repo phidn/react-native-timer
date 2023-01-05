@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
 import color from 'color'
+import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 const SessionStatsScreen = () => {
   const { t, i18n } = useTranslation()
@@ -21,7 +22,7 @@ const SessionStatsScreen = () => {
   } = useStatsSessions()
 
   return (
-    <PageContainer style={{ padding: 5, paddingTop: 30 }}>
+    <TopBannerAdContainer style={{ padding: 5, paddingTop: 30 }}>
       {/* Streak */}
       <Text variant="titleLarge" style={{ marginLeft: 5 }}>
         {t('StatsTopTabs.session.mindfulStreak')}
@@ -110,7 +111,7 @@ const SessionStatsScreen = () => {
           </Card.Content>
         </Card>
       </View>
-    </PageContainer>
+    </TopBannerAdContainer>
   )
 }
 

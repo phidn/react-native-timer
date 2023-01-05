@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import Octicons from 'react-native-vector-icons/Octicons'
 import RowContainer from '@/components/Containers/RowContainer'
 import ListColor from '@/components/Color/ListColor'
 import { useStore } from '@/store/useStore'
@@ -24,7 +25,7 @@ const SettingsScreen = ({ navigation }) => {
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
 
   const feedbackHandler = async () => {
-    const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.feedback')}`
+    const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.moreSetting.feedback')}`
 
     // - Package: ${await DeviceInfo.getInstallerPackageName()}
     const message = `
@@ -43,7 +44,10 @@ const SettingsScreen = ({ navigation }) => {
   }
 
   return (
-    <PageContainer style={{ paddingHorizontal: PAGE_PADDING_HORIZONTAL, marginTop: 20 }}>
+    <PageContainer
+      isScroll={true}
+      style={{ paddingHorizontal: PAGE_PADDING_HORIZONTAL, marginTop: 20 }}
+    >
       <SettingCardTitle title={t('Settings.appearance')} />
       <Card style={[styles.card, { paddingBottom: 20 }]}>
         <List.Item
@@ -54,8 +58,8 @@ const SettingsScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('LanguageSettingScreen')}
         />
         <List.Item
-          title={t('Settings.color-mode')}
-          description={isDarkMode ? t('Settings.color-mode.dark') : t('Settings.color-mode.light')}
+          title={t('Settings.colorMode')}
+          description={isDarkMode ? t('Settings.colorMode.dark') : t('Settings.colorMode.light')}
           left={(props) => (
             <MaterialIcons
               {...props}
@@ -66,23 +70,34 @@ const SettingsScreen = ({ navigation }) => {
           right={() => <Switch value={isDarkMode} onValueChange={toggleMode} />}
         />
         <List.Item
-          title={t('Settings.theme-colors')}
+          title={t('Settings.themeColors')}
           left={(props) => <Ionicons {...props} name="color-palette-outline" size={24} />}
         />
         <RowContainer style={{ justifyContent: 'flex-start', marginLeft: 50 }}>
           <ListColor gap={85 + PAGE_PADDING_HORIZONTAL * 2} range={[0, 9]} />
         </RowContainer>
       </Card>
+
+      <SettingCardTitle title={t('Settings.support')} />
+      <Card style={styles.card}>
+        <List.Item
+          title={t('Settings.support.goPremium') + '. With metta !!!'}
+          left={(props) => <Octicons {...props} name="ruby" size={24} />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={feedbackHandler}
+        />
+      </Card>
+
       <SettingCardTitle title={t('Settings.moreSetting')} />
       <Card style={styles.card}>
         {/* Todo: when app stored */}
         {/* <List.Item
-          title={t('Settings.rateApp')}
+          title={t('Settings.moreSetting.rateApp')}
           left={(props) => <MaterialIcons {...props} name="star-outline" size={24} />}
           onPress={() => {}}
         /> */}
         <List.Item
-          title={t('Settings.feedback')}
+          title={t('Settings.moreSetting.feedback')}
           left={(props) => (
             <MaterialCommunityIcons {...props} name="email-edit-outline" size={24} />
           )}
@@ -90,7 +105,7 @@ const SettingsScreen = ({ navigation }) => {
           onPress={feedbackHandler}
         />
         <List.Item
-          title={t('Settings.privacyPolicy')}
+          title={t('Settings.moreSetting.privacyPolicy')}
           left={(props) => (
             <MaterialCommunityIcons {...props} name="file-document-outline" size={24} />
           )}
@@ -98,7 +113,7 @@ const SettingsScreen = ({ navigation }) => {
           onPress={() => Linking.openURL(privacyPolicyLink)}
         />
         <List.Item
-          title={t('Settings.termsAndConditions')}
+          title={t('Settings.moreSetting.terms')}
           left={(props) => (
             <MaterialCommunityIcons {...props} name="file-document-outline" size={24} />
           )}

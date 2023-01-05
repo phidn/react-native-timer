@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
 import {
   Text,
@@ -34,18 +34,13 @@ import { logger } from '@/utilities/logger'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'
-import { fitTwoText, isNumber, roundNumber } from '@/utilities/commonHelper'
+import { isNumber, roundNumber } from '@/utilities/commonHelper'
 import Color from 'color'
-import PageContainer from '@/components/Containers/PageContainer'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
-
-import { admobId } from '@/config/config'
-import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads'
-const adUnitId = __DEV__ ? TestIds.BANNER : admobId
 
 const PrepareScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation()
@@ -151,17 +146,6 @@ const PrepareScreen = ({ navigation }) => {
 
   return (
     <TopBannerAdContainer style={{ margin: 20, marginLeft: 30 }}>
-      {longestStreak > 999 ? (
-        <BannerAd
-          unitId={adUnitId}
-          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-          }}
-        />
-      ) : (
-        <View></View>
-      )}
       <List.Item
         title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
         right={() => (

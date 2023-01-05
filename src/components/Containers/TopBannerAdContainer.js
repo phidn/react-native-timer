@@ -1,17 +1,33 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, useWindowDimensions } from 'react-native'
 import { useTheme } from 'react-native-paper'
+import { roundNumber } from '@/utilities/commonHelper'
+
+import { admobBannerId } from '@/config/config'
+import { BannerAd, TestIds } from 'react-native-google-mobile-ads'
+import useStatsSessions from '@/hooks/useStatsSessions'
+const adUnitId = __DEV__ ? TestIds.BANNER : admobBannerId
 
 const TopBannerAdContainer = ({ style, children }) => {
-  const childrenAdMob = children[0]
-  const childrenContent = children.slice(1)
-  
   const { colors } = useTheme()
+  const { width } = useWindowDimensions()
+  const _width = roundNumber(width)
+
+  const { longestStreak } = useStatsSessions()
+  const showBanner = longestStreak > 2
 
   return (
     <ScrollView style={[{ flex: 1, backgroundColor: colors.background }]}>
-      <View>{childrenAdMob}</View>
-      <View style={[{ flex: 1 }, style]}>{childrenContent}</View>
+      {showBanner && (
+        <BannerAd
+          unitId={adUnitId}
+          size={`${_width}x50`}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
+      )}
+      <View style={[{ flex: 1 }, style]}>{children}</View>
     </ScrollView>
   )
 }
