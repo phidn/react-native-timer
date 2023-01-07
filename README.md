@@ -3,6 +3,20 @@
 ## Release
 - https://www.youtube.com/watch?v=A3--3Ozxz6o
 
+## Release hacks
+- npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+
+- apk release
+  + cd android && gradlew clean && gradlew assembleRelease
+  + adb install app/build/outputs/apk/release/app-release.apk
+
+- apk debug: 
+  + cd android && gradlew clean && gradlew assembleDebug
+  + adb install android/app/build/outputs/apk/debug/app-debug.apk
+
+- aab: cd android && gradlew clean && gradlew bundleRelease
+
+
 ### Version
 - https://www.npmjs.com/package/react-native-version
 - npm install -g react-native-version
@@ -59,6 +73,9 @@ v3NoLabelContainer: {
 - https://cdn.jsdelivr.net/npm/dayjs@1/locale.json
 - In app purchase: https://www.youtube.com/watch?v=bKhTCX3l24o
 - ADS: https://docs.page/invertase/react-native-google-mobile-ads/displaying-ads#banner-ads-component
+
+- API Access: https://www.youtube.com/watch?v=Ls2wkAwXftk
+
 
 ## Repo
 - https://github.com/AudiusProject/audius-client

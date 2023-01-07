@@ -6572,6 +6572,11 @@ react-native-paper@5.1.2:
     color "^3.1.2"
     use-event-callback "^0.1.0"
 
+react-native-purchases@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-5.4.0.tgz#17c3a83a39be8c1709b3a38ef8e257facb0c525e"
+  integrity sha512-7Qbvq4dT+VrpJcvQf7mKtLyNeQeL0eEBNezT9KLdxbHC6CV2HGsP73T8l6Q/s7TT9PwhMDhsMyWy1L4h33YNkg==
+
 react-native-safe-area-context@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.4.1.tgz#239c60b8a9a80eac70a38a822b04c0f1d15ffc01"

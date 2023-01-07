@@ -3,7 +3,6 @@ import { Button, Card, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
 import { useStore } from '@/store/useStore'
-import dayjs from 'dayjs'
 import PageContainer from '@/components/Containers/PageContainer'
 import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
@@ -12,6 +11,7 @@ import { Platform, StyleSheet } from 'react-native'
 import notifee from '@notifee/react-native'
 import { getYearsDates } from '@/utilities/chartHelper'
 import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
+import DeviceInfo from 'react-native-device-info'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -127,10 +127,19 @@ const AdminScreen = () => {
     logger('getPlatform constants', Platform.constants)
   }
 
+  const getDevice = async () => {
+    const device = {
+      version: DeviceInfo.getVersion(),
+      package: await DeviceInfo.getInstallerPackageName()
+    }
+    logger('→ getDevice', device)
+  }
+
   return (
     <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
         <Button onPress={getPlatform}>Platform</Button>
+        <Button onPress={getDevice}>Device</Button>
       </Card>
 
       <Card style={styles.card}>

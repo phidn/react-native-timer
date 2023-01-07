@@ -84,7 +84,7 @@ const SettingsScreen = ({ navigation }) => {
           title={t('Settings.support.goPremium') + '. With metta !!!'}
           left={(props) => <Octicons {...props} name="ruby" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={feedbackHandler}
+          onPress={() => navigation.navigate('GoPremiumScreen')}
         />
       </Card>
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSettingScreen from '@/screens/LanguageSettingScreen'
 import MeditationTimerScreen from '@/screens/MeditationTimerScreen'
+import GoPremiumScreen from '@/screens/GoPremiumScreen'
 import BottomTabNavigator from './BottomTabNavigator'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -22,6 +23,12 @@ const MainNavigator = () => {
       component: MeditationTimerScreen,
       headerTitle: t('Navigation.Screen.timer'),
       headerShown: false
+    },
+    {
+      name: 'GoPremiumScreen',
+      component: GoPremiumScreen,
+      headerTitle: t('Settings.goPremium'),
+      headerShown: true
     },
   ]
 
