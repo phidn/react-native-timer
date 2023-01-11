@@ -1,27 +1,36 @@
 {
   "name": "mindful-checkin",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "release": "yarn release-code && yarn bundle && yarn release-build && yarn release-folder",
+    "bundle": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle",
+    "release-code": "react-native-version --never-amend",
+    "release-build": "cd android && gradlew clean && gradlew bundleRelease",
+    "release-folder": "cd android\\app\\build\\outputs\\bundle\\release && start .",
+    "debug-build": "cd android && gradlew assembleDebug",
+    "debug-install": "adb install android/app/build/outputs/apk/debug/app-debug.apk",
     "ios": "react-native run-ios",
+    "android": "npx react-native run-android",
     "start": "react-native start",
     "start:rc": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint .",
+    "adb-reverse": "adb reverse tcp:8081 tcp:8081",
     "emulator": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
-    "device": "adb -s 62d6ca7c reverse tcp:8081 tcp:8081",
+    "phone": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
+    "tablet7in": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Nexus_7_API_33",
+    "tablet10in": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Nexus_10_API_33",
     "postinstall": "patch-package",
     "trans": "jsontt src/translations/common/en.json",
-    "deepl": "node ./server/deeplServer.js",
-    "fixTrans": "nodemon ./server/fixTranslate.js",
-    "android:clean": "cd android && gradlew clean",
+    "deepl": "node ./scripts/deeplServer.js",
+    "fixTrans": "nodemon ./scripts/fixTranslate.js",
     "bootsplash": "react-native generate-bootsplash ./src/assets/images/logo.png"
   },
   "nodemonConfig": {
     "ignore": [
-      "./server/output",
-      "./server/fix"
+      "./scripts/output",
+      "./scripts/fix"
     ]
   },
   "dependencies": {
@@ -43,10 +52,13 @@
     "react-native-bootsplash": "^4.4.0",
     "react-native-calendars": "^1.1292.0",
     "react-native-countdown-circle-timer": "^3.1.0",
+    "react-native-device-info": "^10.3.0",
+    "react-native-google-mobile-ads": "^8.2.2",
     "react-native-localize": "^2.2.4",
     "react-native-logs": "^5.0.1",
     "react-native-pager-view": "^6.1.2",
     "react-native-paper": "5.1.2",
+    "react-native-purchases": "^5.4.0",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
     "react-native-sound": "^0.11.2",

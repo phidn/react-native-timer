@@ -12,6 +12,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { getMinText } from '@/utilities/timeHelper'
+import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 const CalendarTrackerScreen = () => {
   const { t, i18n } = useTranslation()
@@ -34,14 +35,17 @@ const CalendarTrackerScreen = () => {
         return accumulator
       }, 0)
 
-      const dots = value.logs.map((sessionLog) => {
+      const dots = value.logs.map((sessionLog, index) => {
         const [duration, ,] = sessionLog.split('|')
-        const dotLevel = duration / 60
+        const dotLevel = duration / 90
         const dotAlpha = getAlphaByPercent(dotLevel * 100)
-        return { key: sessionLog, color: Color(colors.onSurface).alpha(dotAlpha).toString() }
+        return {
+          key: `${index}_${sessionLog}`,
+          color: Color(colors.onSurface).alpha(dotAlpha).toString(),
+        }
       })
 
-      const level = totalTime / 60
+      const level = totalTime / 90
       const percent = level < 1 ? level * 100 : 100
 
       const findColorLevel = (percent) => {
@@ -94,7 +98,7 @@ const CalendarTrackerScreen = () => {
   }
 
   return (
-    <PageContainer isScroll={true} style={{ padding: 20 }}>
+    <TopBannerAdContainer style={{ padding: 20 }}>
       <Calendar
         key={calendarKey}
         markedDates={markedDates}
@@ -134,16 +138,18 @@ const CalendarTrackerScreen = () => {
         >
           <Text variant="headlineSmall">{t('Statistics.CalendarTracker.meditation-log')}</Text>
           <ScrollView style={[styles.modalScrollView, { borderColor: colors.outlineVariant }]}>
-            {sessions[modalDatePressed]?.logs.map((sessionLog) => {
+            {sessions[modalDatePressed]?.logs.map((sessionLog, index) => {
               const [duration, started, ended] = sessionLog.split('|')
-              const _duration = roundNumber(duration)
+              let _duration = roundNumber(duration)
+              _duration = String(_duration).padStart(4, ' ')
+
               return (
                 <List.Item
-                  key={sessionLog}
+                  key={`${index}_${sessionLog}`}
                   title={`${started} - ${ended}`}
                   left={(props) => <List.Icon {...props} icon="timer-outline" />}
                   right={() => (
-                    <Text variant="titleMedium">
+                    <Text variant="titleMedium" style={{}}>
                       {_duration} {getMinText(_duration, i18n.resolvedLanguage)}
                     </Text>
                   )}
@@ -156,7 +162,7 @@ const CalendarTrackerScreen = () => {
           </View>
         </Modal>
       </Portal>
-    </PageContainer>
+    </TopBannerAdContainer>
   )
 }
 

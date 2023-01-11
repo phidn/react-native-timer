@@ -18,7 +18,7 @@ export const availableLanguages = [
   { name: 'Latvian', code: 'lv' },
   { name: 'Dutch', code: 'nl' },
   { name: 'Polish', code: 'pl' },
-  { name: 'Portuguese', code: 'pt' },
+  { name: 'Portuguese', code: 'pt-PT' },
   { name: 'Romanian', code: 'ro' },
   { name: 'Russian', code: 'ru' },
   { name: 'Slovak', code: 'sk' },
@@ -30,3 +30,9 @@ export const availableLanguages = [
 ]
 
 export const availableCodes = availableLanguages.map((language) => language.code)
+
+export const getLanguageName = (code) => {
+  const language = availableLanguages.find(x => x.code === code)
+  if (language) return language.name
+  return ''
+}

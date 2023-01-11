@@ -2,7 +2,6 @@ import React from 'react'
 import { View, ScrollView } from 'react-native'
 import { useTheme } from 'react-native-paper'
 
-// prettier-ignore
 const PageContainer = ({ containerStyle, style, isScroll, children }) => {
   const { colors } = useTheme()
 

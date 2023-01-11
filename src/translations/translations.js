@@ -1,6 +1,6 @@
 import { times } from './times'
 import { commons } from './commons'
-import { availableCodes, availableLanguages } from './availableTranslations'
+import { availableCodes } from './availableTranslations'
 
 const resources = {}
 
@@ -9,4 +9,5 @@ availableCodes.forEach((code) => {
   resources[code] = { translation }
 })
 
-export { availableLanguages, availableCodes, resources }
+export * from './availableTranslations'
+export { resources }

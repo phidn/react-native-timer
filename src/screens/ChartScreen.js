@@ -25,6 +25,7 @@ import Color from 'color'
 import CenterContainer from '@/components/Containers/CenterContainer'
 import { useTranslation } from 'react-i18next'
 import { getDMYFirstChar } from '@/utilities/timeHelper'
+import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 // 7 days
 const weekDates = getWeekDates()
@@ -191,7 +192,7 @@ const ChartScreen = () => {
   const xAxisHeight = 30
 
   return (
-    <PageContainer style={{ padding: 20, paddingTop: 30 }}>
+    <TopBannerAdContainer style={{ padding: 20, paddingTop: 30 }}>
       <SafeAreaView style={{ alignItems: 'center', marginBottom: 20 }}>
         <SegmentedButtons
           value={chartType}
@@ -257,7 +258,7 @@ const ChartScreen = () => {
           />
         </View>
       </View>
-    </PageContainer>
+    </TopBannerAdContainer>
   )
 }
 

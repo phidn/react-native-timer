@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as RNLocalize from 'react-native-localize'
-import { storageKeys } from '@/config/storageKeys'
+import { storageKeys } from '@/config/config'
 import { logger } from './logger'
 import { availableCodes } from '@/translations/translations'
 

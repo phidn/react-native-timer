@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
 import {
   Text,
   List,
@@ -20,9 +20,6 @@ import RowContainer from '@/components/Containers/RowContainer'
 import CalendarHeatmap from '@/components/CalendarHeatmap/CalendarHeatmap'
 
 import dayjs from 'dayjs'
-import 'dayjs/locale/vi'
-import 'dayjs/locale/en'
-import 'dayjs/locale/de'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import duration from 'dayjs/plugin/duration'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -34,13 +31,14 @@ import useSound from '@/hooks/useSound'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
 import { getAsset } from '@/utilities/assetsHelper'
 import { logger } from '@/utilities/logger'
-import { COLOR_LEVELS, PREPARE_MEDITATION_DAYS } from '@/config/calendarHeatmap'
+import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'
-import { isNumber } from '@/utilities/commonHelper'
+import { isNumber, roundNumber } from '@/utilities/commonHelper'
 import Color from 'color'
-import PageContainer from '@/components/Containers/PageContainer'
 import CenterContainer from '@/components/Containers/CenterContainer'
+import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
+
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
 
@@ -68,7 +66,7 @@ const PrepareScreen = ({ navigation }) => {
         return accumulator
       }, 0)
 
-      const level = totalTime / 60
+      const level = totalTime / 90
       const percent = level < 1 ? level * 100 : 100
       const alpha = getAlphaByPercent(level * 100)
 
@@ -143,14 +141,17 @@ const PrepareScreen = ({ navigation }) => {
   const endWeek = dayjs().endOf('month').week() + 1
   const endWeekday = dayjs().week(endWeek).day(6)
 
+  const { width } = useWindowDimensions()
+  const numDays = roundNumber((width - 40 - 100) / 15) * 7
+
   return (
-    <PageContainer style={{ marginLeft: 10, padding: 20 }} isScroll={true}>
+    <TopBannerAdContainer style={{ margin: 20, marginLeft: 30 }}>
       <List.Item
         title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
         right={() => (
-          <RowContainer style={{}}>
+          <RowContainer>
             <Text variant="titleMedium" style={[{ color: primary }]}>
-              {`${duration / 60} `}
+              {String(`${duration / 60} `).padStart(4, ' ')}
               {getMinText(duration / 60, i18n.resolvedLanguage)}
             </Text>
             <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
@@ -161,9 +162,9 @@ const PrepareScreen = ({ navigation }) => {
       <List.Item
         title={<Text variant="titleMedium">{t('Prepare.invite-bell')}</Text>}
         right={() => (
-          <RowContainer style={{}}>
+          <RowContainer>
             <Text variant="titleMedium" style={[{ color: primary }]}>
-              {`${interval / 60} `}
+              {String(`${interval / 60} `).padStart(4, ' ')}
               {getMinText(interval / 60, i18n.resolvedLanguage)}
             </Text>
             <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
@@ -174,7 +175,7 @@ const PrepareScreen = ({ navigation }) => {
       <List.Item
         title={<Text variant="titleMedium">{t('Prepare.sound')}</Text>}
         right={() => (
-          <RowContainer style={{}}>
+          <RowContainer>
             <Text variant="titleMedium" style={[{ color: primary }]}>
               {`${t('Prepare.bell')} ${bellId.split('_').pop()}`}
             </Text>
@@ -213,12 +214,8 @@ const PrepareScreen = ({ navigation }) => {
       </Button>
 
       {/* Heatmap */}
-      <View style={{ marginTop: 50 }}>
-        <CalendarHeatmap
-          endDate={endWeekday}
-          numDays={PREPARE_MEDITATION_DAYS}
-          values={calendarHeatmapValues}
-        />
+      <View style={styles.heatmapContainer}>
+        <CalendarHeatmap endDate={endWeekday} numDays={numDays} values={calendarHeatmapValues} />
       </View>
       <CenterContainer>
         <View style={{ marginTop: 20, alignItems: 'baseline' }}>
@@ -270,7 +267,7 @@ const PrepareScreen = ({ navigation }) => {
           </View>
         </Modal>
       </Portal>
-    </PageContainer>
+    </TopBannerAdContainer>
   )
 }
 
@@ -296,14 +293,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginBottom: -10,
   },
-  calendarHeatmapContainer: {
+  heatmapContainer: {
+    marginTop: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    margin: 0,
-    padding: 0,
-    backgroundColor: 'yellow',
+    marginLeft: -25,
   },
 })

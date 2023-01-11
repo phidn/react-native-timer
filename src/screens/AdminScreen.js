@@ -3,13 +3,15 @@ import { Button, Card, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
 import { useStore } from '@/store/useStore'
-import dayjs from 'dayjs'
 import PageContainer from '@/components/Containers/PageContainer'
 import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
 import _BackgroundTimer from 'react-native-background-timer'
 import { Platform, StyleSheet } from 'react-native'
 import notifee from '@notifee/react-native'
+import { getYearsDates } from '@/utilities/chartHelper'
+import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
+import DeviceInfo from 'react-native-device-info'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -57,7 +59,28 @@ const AdminScreen = () => {
       '2022-12-15': { logs: ['30|13:38|14:08', '60|17:33|18:34', '60|17:48|18:49'] },
       '2022-12-21': { logs: ['10|13:38|13:48', '60|17:48|18:49'] },
       '2022-12-22': { logs: ['10|13:38|13:48', '60|17:48|18:49'] },
+      '2023-01-01': { logs: ['10|13:38|13:48', '60|17:48|18:49'] },
     })
+  }
+
+  const randomSetSessions = () => {
+    const yearDates = getYearsDates()
+    const _sessions = {}
+    for (let i = 0; i < yearDates.length; i++) {
+      const flag = getRandomIntInclusive(0, 1)
+      if (flag) {
+        const count = getRandomIntInclusive(1, 3)
+        const logs = []
+        for (let j = 0; j < count; j++) {
+          let minutes = getRandomIntInclusive(15, 35)
+          minutes = roundNearest(minutes)
+          logs.push(`${minutes}|00:00|00:${minutes}`)
+        }
+        _sessions[yearDates[i]] = { logs }
+      }
+    }
+
+    setSessions(_sessions)
   }
 
   const { play } = useSound()
@@ -95,19 +118,29 @@ const AdminScreen = () => {
         timestamp: Date.now() + 300000,
         showChronometer: true,
         chronometerDirection: 'down',
-        autoCancel: false
+        autoCancel: false,
       },
     })
   }
 
-  const getPlatform = () => {
-    logger('getPlatform constants', Platform.constants)
+  const getDevice = async () => {
+    const device = await DeviceInfo.getInstallerPackageName()
+    logger('→ getDevice', device)
+  }
+
+  const isPremium = useStore((state) => state.isPremium)
+  const setIsPremium = useStore((state) => state.setIsPremium)
+
+  const togglePremium = () => {
+    setIsPremium(!isPremium)
+    console.log('premium status', !isPremium)
   }
 
   return (
     <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
-        <Button onPress={getPlatform}>Platform</Button>
+        <Button onPress={getDevice}>Device</Button>
+        <Button onPress={togglePremium}>Toggle premium</Button>
       </Card>
 
       <Card style={styles.card}>
@@ -117,6 +150,7 @@ const AdminScreen = () => {
       </Card>
 
       <Card style={styles.card}>
+        <Button onPress={randomSetSessions}>Random set sessions</Button>
         <Button onPress={devSession}>Dev Session</Button>
         <Button onPress={clearSession}>Clear session</Button>
         <Button onPress={() => logger(sessions)}>Log session</Button>

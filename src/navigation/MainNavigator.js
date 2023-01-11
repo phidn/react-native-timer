@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSettingScreen from '@/screens/LanguageSettingScreen'
 import MeditationTimerScreen from '@/screens/MeditationTimerScreen'
+import GoPremiumScreen from '@/screens/GoPremiumScreen'
 import BottomTabNavigator from './BottomTabNavigator'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -15,11 +16,19 @@ const MainNavigator = () => {
       name: 'LanguageSettingScreen',
       component: LanguageSettingScreen,
       headerTitle: t('Settings.language'),
+      headerShown: true
     },
     {
       name: 'MeditationTimerScreen',
       component: MeditationTimerScreen,
       headerTitle: t('Navigation.Screen.timer'),
+      headerShown: false
+    },
+    {
+      name: 'GoPremiumScreen',
+      component: GoPremiumScreen,
+      headerTitle: t('Navigation.Screen.goPremium'),
+      headerShown: true
     },
   ]
 
@@ -40,7 +49,7 @@ const MainNavigator = () => {
           component={stack.component}
           options={{
             headerTitle: stack.headerTitle,
-            headerShown: true,
+            headerShown: stack.headerShown,
             headerTitleAlign: 'center',
           }}
         />

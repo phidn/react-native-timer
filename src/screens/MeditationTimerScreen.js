@@ -190,9 +190,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }, [isPrepared, appComeBackgroundTime, appComeBgRemainingTime])
 
   const onBreakCountdown = () => {
-    if (!isPlaying) {
-      navigation.goBack()
-    }
+    navigation.goBack()
   }
 
   const startAfterPauseTask = (delayTime) => {
@@ -297,6 +295,20 @@ const MeditationTimerScreen = ({ route, navigation }) => {
             )
           }}
         </CountdownCircleTimer>
+        {isPrepared && (
+          <RowContainer style={{ marginTop: 40 }}>
+            <IconButton
+              icon="close"
+              iconColor={colors.onSurfaceVariant}
+              size={25}
+              onPress={onBreakCountdown}
+              style={[
+                styles.iconAction,
+                { backgroundColor: colors.surfaceVariant },
+              ]}
+            />
+          </RowContainer>
+        )}
         {!isPrepared && (
           <RowContainer style={{ marginTop: 40 }}>
             <IconButton

@@ -2,7 +2,7 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { storageKeys } from '@/config/storageKeys'
+import { storageKeys } from '@/config/config'
 import { logger } from '@/utilities/logger'
 
 const rehydrateStorageSlice = (set) => ({
@@ -63,6 +63,11 @@ const chartSlice = (set) => ({
   setChartType: (chartType) => set({ chartType }),
 })
 
+const userSlice = (set) => ({
+  isPremium: false,
+  setIsPremium: (isPremium) => set({ isPremium }),
+})
+
 const store = (set) => ({
   ...rehydrateStorageSlice(set),
   ...navigationSlice(set),
@@ -71,6 +76,7 @@ const store = (set) => ({
   ...meditationSlice(set),
   ...sessionSlice(set),
   ...chartSlice(set),
+  ...userSlice(set),
 })
 
 export const useStore = create(

@@ -65,3 +65,5 @@ buck-out/
 
 # Environment
 .env
+server/**/*.json
+scripts/**/*.json
