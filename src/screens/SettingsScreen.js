@@ -15,6 +15,7 @@ import { availableLanguages, getLanguageName } from '@/translations/translations
 import SettingCardTitle from '@/components/SettingCardTitle/SettingCardTitle'
 import DeviceInfo from 'react-native-device-info'
 import { privacyPolicyLink, termsAndConditionsLink } from '@/config/config'
+import RateHelper, { AndroidMarket } from '@/utilities/rateHelper'
 
 const PAGE_PADDING_HORIZONTAL = 10
 
@@ -23,6 +24,8 @@ const SettingsScreen = ({ navigation }) => {
   const isDarkMode = useStore((state) => state.isDarkMode)
   const toggleMode = useStore((state) => state.toggleMode)
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
+
+  const isPremium = useStore((state) => state.isPremium)
 
   const feedbackHandler = async () => {
     const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.moreSetting.feedback')}`
@@ -41,6 +44,16 @@ const SettingsScreen = ({ navigation }) => {
     Linking.openURL(`mailto:hello.dangnhatphi@gmail.com?subject=${subject}&body=${_message}`).catch(
       (err) => console.error('ERROR > cannot open send email', err)
     )
+  }
+
+  const rateApp = () => {
+    const options = {
+      GooglePackageName: 'com.phidang.mindfulcheckin',
+      preferredAndroidMarket: AndroidMarket.Google,
+      preferInApp: false,
+      openAppStoreIfInAppFails: true,
+    }
+    RateHelper.rate(options, (success, errorMessage) => {})
   }
 
   return (
@@ -78,24 +91,16 @@ const SettingsScreen = ({ navigation }) => {
         </RowContainer>
       </Card>
 
+      {/* TODO: when app stored && in-app products are working */}
       <SettingCardTitle title={t('Settings.support')} />
       <Card style={styles.card}>
         <List.Item
-          title={t('Settings.support.goPremium') + '. With metta !!!'}
+          title={t('Settings.support.goPremium')}
+          description={isPremium ? t('Settings.support.goPremium.purchased') : ''}
           left={(props) => <Octicons {...props} name="ruby" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => navigation.navigate('GoPremiumScreen')}
         />
-      </Card>
-
-      <SettingCardTitle title={t('Settings.moreSetting')} />
-      <Card style={styles.card}>
-        {/* Todo: when app stored */}
-        {/* <List.Item
-          title={t('Settings.moreSetting.rateApp')}
-          left={(props) => <MaterialIcons {...props} name="star-outline" size={24} />}
-          onPress={() => {}}
-        /> */}
         <List.Item
           title={t('Settings.moreSetting.feedback')}
           left={(props) => (
@@ -104,6 +109,15 @@ const SettingsScreen = ({ navigation }) => {
           right={() => <List.Icon icon="chevron-right" />}
           onPress={feedbackHandler}
         />
+        <List.Item
+          title={t('Settings.moreSetting.rateApp')}
+          left={(props) => <MaterialIcons {...props} name="star-outline" size={24} />}
+          onPress={rateApp}
+        />
+      </Card>
+
+      <SettingCardTitle title={t('Settings.moreSetting')} />
+      <Card style={styles.card}>
         <List.Item
           title={t('Settings.moreSetting.privacyPolicy')}
           left={(props) => (

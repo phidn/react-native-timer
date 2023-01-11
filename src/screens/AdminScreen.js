@@ -123,23 +123,24 @@ const AdminScreen = () => {
     })
   }
 
-  const getPlatform = () => {
-    logger('getPlatform constants', Platform.constants)
+  const getDevice = async () => {
+    const device = await DeviceInfo.getInstallerPackageName()
+    logger('→ getDevice', device)
   }
 
-  const getDevice = async () => {
-    const device = {
-      version: DeviceInfo.getVersion(),
-      package: await DeviceInfo.getInstallerPackageName()
-    }
-    logger('→ getDevice', device)
+  const isPremium = useStore((state) => state.isPremium)
+  const setIsPremium = useStore((state) => state.setIsPremium)
+
+  const togglePremium = () => {
+    setIsPremium(!isPremium)
+    console.log('premium status', !isPremium)
   }
 
   return (
     <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
-        <Button onPress={getPlatform}>Platform</Button>
         <Button onPress={getDevice}>Device</Button>
+        <Button onPress={togglePremium}>Toggle premium</Button>
       </Card>
 
       <Card style={styles.card}>

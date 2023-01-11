@@ -27,7 +27,7 @@ const MainNavigator = () => {
     {
       name: 'GoPremiumScreen',
       component: GoPremiumScreen,
-      headerTitle: t('Settings.goPremium'),
+      headerTitle: t('Navigation.Screen.goPremium'),
       headerShown: true
     },
   ]

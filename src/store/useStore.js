@@ -63,6 +63,11 @@ const chartSlice = (set) => ({
   setChartType: (chartType) => set({ chartType }),
 })
 
+const userSlice = (set) => ({
+  isPremium: false,
+  setIsPremium: (isPremium) => set({ isPremium }),
+})
+
 const store = (set) => ({
   ...rehydrateStorageSlice(set),
   ...navigationSlice(set),
@@ -71,6 +76,7 @@ const store = (set) => ({
   ...meditationSlice(set),
   ...sessionSlice(set),
   ...chartSlice(set),
+  ...userSlice(set),
 })
 
 export const useStore = create(

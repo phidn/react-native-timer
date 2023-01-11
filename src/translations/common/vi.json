@@ -1,10 +1,8 @@
 {
   "App.Name": "Trở về Chánh niệm",
-
   "notifee.return-to-app": "Nhấp để quay lại ứng dụng",
   "notifee.inviting-bell": "Đang thỉnh chuông",
   "notifee.in-progress": "Đang trong thời thiền",
-
   "Settings.appearance": "Hiển thị",
   "Settings.colorMode": "Chế độ màu",
   "Settings.colorMode.light": "Sáng",
@@ -16,23 +14,29 @@
   "Settings.moreSetting.feedback": "Phản hồi",
   "Settings.moreSetting.privacyPolicy": "Chính sách bảo mật",
   "Settings.moreSetting.terms": "Điều khoản sử dụng",
-
+  "Settings.support": "Hỗ trợ",
+  "Settings.support.goPremium": "Phiên bản cao cấp, với tâm từ !!!",
+  "Settings.support.goPremium.purchased": "Đã mua",
+  "GoPremium.banner": "Bạn có thể tùy chọn gói ủng hộ mà bạn cảm thấy phù hợp để giúp đỡ dự án cũng như không bị làm phiền bởi quảng cáo.",
+  "GoPremium.noMoreAds": "Không còn quảng cáo nữa",
+  "GoPremium.moreSounds": "Nhiều âm thanh hơn cho \"tiếng chuông chánh niệm\"",
+  "GoPremium.advancedStats": "Thống kê nâng cao giúp bạn dễ dàng theo dõi tiến trình thực hành",
+  "GoPremium.customStyling": "Tùy chỉnh giao diện của ứng dụng bằng mã màu yêu thích của bạn, ví dụ",
+  "GoPremium.developmentSupport": "Với sự hỗ trợ của bạn, chúng tôi có thể dành nhiều thời gian hơn để cải thiện ứng dụng",
   "Prepare.duration": "Thời gian",
   "Prepare.invite-bell": "Thỉnh chuông mỗi",
   "Prepare.sound": "Âm thanh",
   "Prepare.start": "Bắt đầu",
   "Prepare.bell": "Chuông",
   "Prepare.choose-a-bell": "Chọn tiếng chuông",
-
   "Statistics.CalendarTracker.meditation-log": "Thời chánh niệm",
   "Statistics.Chart.daily-meditation": "Trở về mỗi ngày",
-
   "Navigation.Screen.timer": "Thời gian chánh niệm",
+  "Navigation.Screen.goPremium": "Phiên bản cap cấp",
   "Navigation.BottomTab.AdminTab": "Quản lý",
   "Navigation.BottomTab.PrepareTab": "Trở về Chánh niệm",
   "Navigation.BottomTab.SettingsTab": "Thiết lập",
   "Navigation.BottomTab.StatsTab": "Thống kê",
-
   "StatsTopTabs.CalendarTab": "Lịch theo dõi",
   "StatsTopTabs.ChartTab": "Biểu đồ",
   "StatsTopTabs.SessionStatsTab": "Thời thiền",

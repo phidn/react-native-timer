@@ -17,8 +17,15 @@
   "Settings.moreSetting.privacyPolicy": "Privacy policy",
   "Settings.moreSetting.terms": "Terms and conditions",
   "Settings.support": "Support us",
-  "Settings.goPremium": "Go premium",
-  "Settings.support.goPremium": "Go premium",
+  "Settings.support.goPremium": "Go premium. With metta !!!",
+  "Settings.support.goPremium.purchased": "Purchased",
+
+  "GoPremium.banner": "You can choose a donation package based on your goodwill to support the project.",
+  "GoPremium.noMoreAds": "No more ads",
+  "GoPremium.moreSounds": "More sounds for \"mindfulness bell\"",
+  "GoPremium.advancedStats": "Advanced statistics make it easy to track practice progress.",
+  "GoPremium.customStyling": "Customize the appearance of your app with your favorite color code, example",
+  "GoPremium.developmentSupport": "With your support, we can spend more time improving the app.",
 
   "Prepare.duration": "Duration",
   "Prepare.invite-bell": "Invite bell every",
@@ -31,6 +38,7 @@
   "Statistics.Chart.daily-meditation": "Daily mindful check-in",
 
   "Navigation.Screen.timer": "Mindful Session",
+  "Navigation.Screen.goPremium": "Go Premium",
   "Navigation.BottomTab.AdminTab": "Admin",
   "Navigation.BottomTab.PrepareTab": "Mindful Check-in",
   "Navigation.BottomTab.SettingsTab": "Settings",

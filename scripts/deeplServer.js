@@ -24,25 +24,11 @@ const translate = async (langCode) => {
   return translated
 }
 
-const bootTranslate = async () => {
-  console.log(`Hello Alien. I'm Phidndev from the Earth.`)
-  console.log('bootServer deepl ready')
-  console.log('--------------')
-
-  for (let i = 0; i < sourceLanguages.length; i++) {
-    const lang = sourceLanguages[i]
-    console.log(`Start translate: ${lang.name} (${lang.code})`)
-    const translated = await translate(lang.code)
-    translated.language = `${lang.name}_${lang.code}`
-    fs.writeFileSync(`./server/output/${lang.code}.json`, JSON.stringify(translated, null, 2))
-  }
-}
-
 const fix = async (langCode) => {
   // const _langCode = langCode === 'pt'? 'pt-PT' : langCode
 
   const enKeys = Object.keys(enJson)
-  const translated = fs.readFileSync(`./server/origin/${langCode}.json`)
+  const translated = fs.readFileSync(`./scripts/origin/${langCode}.json`)
   const translatedJSON = JSON.parse(translated)
 
   const needFix = {}
@@ -58,10 +44,18 @@ const fix = async (langCode) => {
     console.log(`>> Found need fix: ${needFixKeys.length} text`)
     console.log('>>', needFixKeys.join(' | '))
 
-    const needFixResults = await translator.translateText(needFixValues, 'en', langCode)
-    needFixKeys.forEach((needFixKey, index) => {
-      translatedJSON[needFixKey] = needFixResults[index].text || ''
-    })
+    if (langCode === 'vi') {
+      needFixKeys.forEach((needFixKey, index) => {
+        translatedJSON[needFixKey] = needFixValues[index]
+      })
+    }
+    if (langCode !== 'vi') {
+      const needFixResults = await translator.translateText(needFixValues, 'en', langCode)
+      needFixKeys.forEach((needFixKey, index) => {
+        translatedJSON[needFixKey] = needFixResults[index].text || ''
+      })
+    }
+    
   }
 
   // Sort translatedJSON by enJSON
@@ -72,7 +66,7 @@ const fix = async (langCode) => {
   }
 
   // Write sortTranslatedJSON to fix
-  fs.writeFileSync(`./server/fix/${langCode}.json`, JSON.stringify(sortTranslatedJSON, null, 2))
+  fs.writeFileSync(`./scripts/fix/${langCode}.json`, JSON.stringify(sortTranslatedJSON, null, 2))
 }
 
 const bootFix = async () => {

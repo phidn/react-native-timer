@@ -11,7 +11,7 @@ const check = async (langCode) => {
   if (langCode === 'pt') {
     fileName = 'pt-PT'
   }
-  const translated = fs.readFileSync(`./server/output/${fileName}.json`)
+  const translated = fs.readFileSync(`./scripts/origin/${fileName}.json`)
   const translatedJSON = JSON.parse(translated)
   const needFix = []
   for (let i = 0; i < enKeys.length; i++) {
@@ -32,7 +32,7 @@ const check = async (langCode) => {
           const { enKey } = needFix[i];
           fixJSON[enKey] = translatedArray[i]
         }
-        fs.writeFileSync(`./server/fix/${langCode}.json`, JSON.stringify(fixJSON, null, 2))
+        fs.writeFileSync(`./scripts/fix/${langCode}.json`, JSON.stringify(fixJSON, null, 2))
       })
       .catch((err) => console.log('>> translate err:', err))
   }
@@ -43,11 +43,12 @@ const bootServer = async () => {
   console.log('bootServer check translate ready')
   console.log('--------------')
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < sourceLanguages.length; i++) {
     const lang = sourceLanguages[i]
     console.log(`Start check: ${lang.name} (${lang.code})`)
-    check(lang.code)
+    await check(lang.code)
   }
+
 }
 
 bootServer()
