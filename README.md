@@ -1,7 +1,8 @@
 # Mindfulness Meditation Tracker
 
 ## Release
-- https://www.youtube.com/watch?v=A3--3Ozxz6o
+- yarn release
+- https://console.firebase.google.com/u/0/project/test-apk-7ffe1/testlab/run/robo
 
 ## Release hacks
 - npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
