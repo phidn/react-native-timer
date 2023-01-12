@@ -80,6 +80,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 project.ext.react = [
     enableHermes: true,  // clean and rebuild if changing
+    deleteDebugFilesForVariant: { false }
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -138,8 +139,8 @@ android {
         applicationId "com.phidang.mindfulcheckin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 17
-        versionName "1.0.0"
+        versionCode 25
+        versionName "1.0.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -283,7 +284,7 @@ dependencies {
 
     if (enableHermes) {
         //noinspection GradleDynamicVersion
-        implementation("com.facebook.react:hermes-engine:+") { // From node_modules
+        implementation("com.facebook.react:hermes-engine") { // From node_modules
             exclude group:'com.facebook.fbjni'
         }
     } else {

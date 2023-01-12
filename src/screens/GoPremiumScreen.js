@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Image, ImageBackground, ScrollView, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import PageContainer from '@/components/Containers/PageContainer'
 import Purchases from 'react-native-purchases'
 import { logger } from '@/utilities/logger'
 import { Banner, Button, List, useTheme, SegmentedButtons } from 'react-native-paper'
-import premiumImage from '@/assets/images/premium.png'
-import plantImage from '@/assets/images/plant.png'
+import premiumImage from '../assets/images/premium.png'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useTranslation } from 'react-i18next'
-import { capitalize } from '@/utilities/commonHelper'
 import { useStore } from '@/store/useStore'
 
 const GoPremiumScreen = ({ navigation }) => {
