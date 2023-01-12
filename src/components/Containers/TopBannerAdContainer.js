@@ -7,8 +7,6 @@ import { admobBannerId } from '@/config/config'
 import { BannerAd, TestIds } from 'react-native-google-mobile-ads'
 import useStatsSessions from '@/hooks/useStatsSessions'
 import { useStore } from '@/store/useStore'
-import Purchases from 'react-native-purchases'
-import { logger } from '@/utilities/logger'
 const adUnitId = __DEV__ ? TestIds.BANNER : admobBannerId
 
 const TopBannerAdContainer = ({ style, children }) => {
@@ -17,42 +15,18 @@ const TopBannerAdContainer = ({ style, children }) => {
   const _width = roundNumber(width)
 
   const isPremium = useStore((state) => state.isPremium)
-  const setIsPremium = useStore((state) => state.setIsPremium)
-
   const { longestStreak } = useStatsSessions()
 
-  const [isShowBanner, setIsShowBanner] = useState(false)
+  const checkShowBanner = () => {
+    if (isPremium) return false
+    if (longestStreak < 4) return false
 
-  useEffect(() => {
-    const checkShowBanner = async () => {
-      try {
-        const customerInfo = await Purchases.getCustomerInfo()
-        if (customerInfo?.allPurchasedProductIdentifiers?.length > 0) {
-          setIsPremium(true)
-          return false
-        } else {
-          setIsPremium(false)
-        }
-      } catch (error) {
-        logger('→ error:', error)
-      }
-
-      if (longestStreak < 4) return false
-
-      return true
-    }
-
-    const prepareShowBanner = async () => {
-      const _isShowBanner = await checkShowBanner()
-      setIsShowBanner(_isShowBanner)
-    }
-
-    prepareShowBanner()
-  }, [longestStreak, isPremium])
+    return true
+  }
 
   return (
     <ScrollView style={[{ flex: 1, backgroundColor: colors.background }]}>
-      {isShowBanner && (
+      {checkShowBanner() && (
         <BannerAd
           unitId={adUnitId}
           size={`${_width}x50`}

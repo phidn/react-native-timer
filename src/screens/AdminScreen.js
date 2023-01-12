@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Card, Divider } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
@@ -7,11 +7,12 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
 import _BackgroundTimer from 'react-native-background-timer'
-import { Platform, StyleSheet } from 'react-native'
+import { Platform, StyleSheet, View } from 'react-native'
 import notifee from '@notifee/react-native'
 import { getYearsDates } from '@/utilities/chartHelper'
 import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
 import DeviceInfo from 'react-native-device-info'
+import ColorPicker from '@/components/ColorPicker/ColorPicker'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -161,6 +162,12 @@ const AdminScreen = () => {
         <Button onPress={onDisplayNotification}>Display notifee</Button>
       </Card>
     </PageContainer>
+  )
+}
+
+const AdminScreen2 = () => {
+  return (
+    <View></View>
   )
 }
 

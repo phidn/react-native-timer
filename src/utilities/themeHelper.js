@@ -7,35 +7,6 @@ import { themeColors } from '@/config/theme'
 import color from 'color'
 import { argbFromHex, themeFromSourceColor } from '@material/material-color-utilities'
 
-export const combineTheme = (label, isDarkMode) => {
-  const selectedSchema = themeColors.find((x) => x.label === label) || themeColors[0]
-  const selectedSchemaColors = selectedSchema[isDarkMode ? 'dark' : 'light'].colors
-
-  const MD3Theme = isDarkMode ? MD3DarkTheme : MD3LightTheme
-
-  const NavigationTheme = isDarkMode
-    ? adaptNavigationTheme({ reactNavigationDark: NavigationDarkTheme }).DarkTheme
-    : adaptNavigationTheme({ reactNavigationLight: NavigationLightTheme }).LightTheme
-
-  const customCardColor = color(selectedSchemaColors.surface)
-    .mix(color(selectedSchemaColors.primary), 0.08)
-    .rgb()
-    .string()
-
-  const combinedTheme = {
-    ...MD3Theme,
-    ...NavigationTheme,
-    colors: {
-      ...MD3Theme.colors,
-      ...NavigationTheme.colors,
-      ...selectedSchemaColors,
-      card: customCardColor,
-    },
-  }
-
-  return combinedTheme
-}
-
 export const createDynamicThemeColors = ({ sourceColor }) => {
   const opacity = {
     level1: 0.08,
@@ -81,4 +52,44 @@ export const createDynamicThemeColors = ({ sourceColor }) => {
   )
   return { light, dark }
 }
-export default createDynamicThemeColors
+
+export const combineTheme = (source, isDarkMode) => {
+  let customTheme
+  try {
+    customTheme = createDynamicThemeColors({ sourceColor: source })
+  } catch (error) {
+    logger('→ combineTheme error:', error)
+    customTheme = createDynamicThemeColors({ sourceColor: 'purple' })
+  }
+  const selectedSchema = {
+    source,
+    light: { colors: customTheme.light },
+    dark: { colors: customTheme.dark }
+  }
+
+  const selectedSchemaColors = selectedSchema[isDarkMode ? 'dark' : 'light'].colors
+
+  const MD3Theme = isDarkMode ? MD3DarkTheme : MD3LightTheme
+
+  const NavigationTheme = isDarkMode
+    ? adaptNavigationTheme({ reactNavigationDark: NavigationDarkTheme }).DarkTheme
+    : adaptNavigationTheme({ reactNavigationLight: NavigationLightTheme }).LightTheme
+
+  const customCardColor = color(selectedSchemaColors.surface)
+    .mix(color(selectedSchemaColors.primary), 0.08)
+    .rgb()
+    .string()
+
+  const combinedTheme = {
+    ...MD3Theme,
+    ...NavigationTheme,
+    colors: {
+      ...MD3Theme.colors,
+      ...NavigationTheme.colors,
+      ...selectedSchemaColors,
+      card: customCardColor,
+    },
+  }
+
+  return combinedTheme
+}

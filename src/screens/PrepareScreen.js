@@ -177,7 +177,8 @@ const PrepareScreen = ({ navigation }) => {
         right={() => (
           <RowContainer>
             <Text variant="titleMedium" style={[{ color: primary }]}>
-              {`${t('Prepare.bell')} ${bellId.split('_').pop()}`}
+              {bellId !== 'bell_default' && `${t('Prepare.bell')} ${bellId.split('_').pop()}`}
+              {bellId === 'bell_default' && t('Prepare.defaultBell')}
             </Text>
             <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
           </RowContainer>
@@ -253,11 +254,24 @@ const PrepareScreen = ({ navigation }) => {
           <Text variant="headlineSmall">{t('Prepare.choose-a-bell')}</Text>
           <ScrollView style={[styles.modalScrollView, { borderColor: outlineVariant }]}>
             <RadioButton.Group onValueChange={onBellChange} value={bellId}>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x) => (
+              <RadioButton.Item
+                key={'bell_default'}
+                label={t('Prepare.defaultBell')}
+                value={'bell_default'}
+              />
+              {[1, 2, 3].map((x) => (
                 <RadioButton.Item
                   key={`bell_${x}`}
                   label={`${t('Prepare.bell')} ${x}`}
                   value={`bell_${x}`}
+                />
+              ))}
+              {[4, 5, 6, 7, 8, 9].map((x) => (
+                <RadioButton.Item
+                  key={`bell_${x}`}
+                  label={`${t('Prepare.bell')} ${x}`}
+                  value={`bell_${x}`}
+                  disabled={true}
                 />
               ))}
             </RadioButton.Group>

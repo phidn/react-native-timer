@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Image, ImageBackground, StyleSheet, View } from 'react-native'
+import { Image, ImageBackground, ScrollView, StyleSheet, View } from 'react-native'
 import PageContainer from '@/components/Containers/PageContainer'
 import Purchases from 'react-native-purchases'
 import { logger } from '@/utilities/logger'
-import { Banner, Button, List, Text, useTheme, SegmentedButtons } from 'react-native-paper'
+import { Banner, Button, List, useTheme, SegmentedButtons } from 'react-native-paper'
 import premiumImage from '@/assets/images/premium.png'
 import plantImage from '@/assets/images/plant.png'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -14,12 +14,12 @@ import { useStore } from '@/store/useStore'
 const GoPremiumScreen = ({ navigation }) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
+  
+  const setIsPremium = useStore(state => state.setIsPremium)
 
   const [packages, setPackages] = useState([])
   const [donations, setDonations] = useState([])
   const [donationValue, setDonationValue] = useState('')
-
-  const setIsPremium = useStore(state => state.setIsPremium)
 
   useEffect(() => {
     const getPackages = async () => {
@@ -124,7 +124,7 @@ const GoPremiumScreen = ({ navigation }) => {
           style={{ marginTop: -10 }}
         />
         <List.Item
-          title={t('GoPremium.customStyling') + ': #a29bfe'}
+          title={t('GoPremium.customStyling')}
           titleNumberOfLines={4}
           left={(props) => (
             <MaterialIcons {...props} name="check-circle" size={24} color={colors.primary} />
@@ -150,7 +150,6 @@ const GoPremiumScreen = ({ navigation }) => {
           )}
         </View>
         {renderDonationButton()}
-        {/* <View style={styles.buyButtonContainer}></View> */}
       </View>
     </PageContainer>
   )

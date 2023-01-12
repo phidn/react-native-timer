@@ -1,6 +1,6 @@
-import { Linking, StyleSheet } from 'react-native'
-import React from 'react'
-import { Card, List, Switch } from 'react-native-paper'
+import { Linking, ScrollView, StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { Button, Card, List, Modal, Portal, Switch, Text, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -16,16 +16,20 @@ import SettingCardTitle from '@/components/SettingCardTitle/SettingCardTitle'
 import DeviceInfo from 'react-native-device-info'
 import { privacyPolicyLink, termsAndConditionsLink } from '@/config/config'
 import RateHelper, { AndroidMarket } from '@/utilities/rateHelper'
+import ColorPickerModal from '@/components/Modals/ColorPickerModal'
 
 const PAGE_PADDING_HORIZONTAL = 10
 
 const SettingsScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation()
+
   const isDarkMode = useStore((state) => state.isDarkMode)
   const toggleMode = useStore((state) => state.toggleMode)
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
-
   const isPremium = useStore((state) => state.isPremium)
+
+  const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
+
 
   const feedbackHandler = async () => {
     const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.moreSetting.feedback')}`
@@ -54,6 +58,10 @@ const SettingsScreen = ({ navigation }) => {
       openAppStoreIfInAppFails: true,
     }
     RateHelper.rate(options, (success, errorMessage) => {})
+  }
+
+  const togglePicker = () => {
+    setIsShowSoundDialog(!isShowSoundDialog)
   }
 
   return (
@@ -87,7 +95,11 @@ const SettingsScreen = ({ navigation }) => {
           left={(props) => <Ionicons {...props} name="color-palette-outline" size={24} />}
         />
         <RowContainer style={{ justifyContent: 'flex-start', marginLeft: 50 }}>
-          <ListColor gap={85 + PAGE_PADDING_HORIZONTAL * 2} range={[0, 9]} />
+          <ListColor
+            togglePicker={togglePicker}
+            gap={85 + PAGE_PADDING_HORIZONTAL * 2}
+            range={[0, 9]}
+          />
         </RowContainer>
       </Card>
 
@@ -135,6 +147,12 @@ const SettingsScreen = ({ navigation }) => {
           onPress={() => Linking.openURL(termsAndConditionsLink)}
         />
       </Card>
+
+      <ColorPickerModal 
+        navigation={navigation}
+        isShowSoundDialog={isShowSoundDialog}
+        setIsShowSoundDialog={setIsShowSoundDialog}
+      />
     </PageContainer>
   )
 }

@@ -12,11 +12,13 @@ const rehydrateStorageSlice = (set) => ({
 
 const themeSlice = (set) => ({
   isDarkMode: false,
-  themeColor: 'Meditation Color 1',
+  themeColor: 'purple',
+  customColor: '',
   toggleMode: () => {
     set((state) => ({ isDarkMode: !state.isDarkMode }))
   },
   setThemeColor: (themeColor) => set({ themeColor }),
+  setCustomColor: (customColor) => set({ customColor }),
 })
 
 const navigationSlice = (set) => ({

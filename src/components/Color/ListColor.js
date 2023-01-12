@@ -1,30 +1,48 @@
 import React from 'react'
 import { TouchableOpacity, useWindowDimensions } from 'react-native'
-import { Avatar } from 'react-native-paper'
-import { themeMeditationColors } from '@/config/theme'
+import { Avatar, useTheme } from 'react-native-paper'
+import { themeColors } from '@/config/theme'
 import { useStore } from '@/store/useStore'
 import Color from 'color'
 
-const ListColor = ({ gap, range }) => {
+const ListColor = ({ gap, range, togglePicker }) => {
+  const { colors } = useTheme()
   const amount = range[1] - range[0]
 
   const isDarkMode = useStore((state) => state.isDarkMode)
   const themeColor = useStore((state) => state.themeColor)
+  const customColor = useStore((state) => state.customColor)
   const setThemeColor = useStore((state) => state.setThemeColor)
+  const setCustomColor = useStore((state) => state.setCustomColor)
 
   const { width: windowWidth } = useWindowDimensions()
   const size = (windowWidth - 10 * (amount - 1) - gap) / amount
-  const _size = size < 30? size: 30
+  const _size = size < 30 ? size : 30
+
+  const newRange = [range[0], range[1] - 1]
+
+  const changeThemeColor = (colorSource) => {
+    setThemeColor(colorSource)
+    setCustomColor('')
+  }
 
   return (
     <>
-      {themeMeditationColors.slice(range[0], range[1]).map((color) => {
-        const alpha = color.label === themeColor ? 1 : 0
-        const { primary, onPrimary } = isDarkMode? color.dark.colors: color.light.colors
+      <TouchableOpacity onPress={() => togglePicker()}>
+        <Avatar.Icon
+          size={_size}
+          style={{ marginHorizontal: 5, backgroundColor: customColor || colors.surface }}
+          icon="plus"
+        />
+      </TouchableOpacity>
+
+      {themeColors.slice(newRange[0], newRange[1]).map((color) => {
+        const alpha = color.source === themeColor ? 1 : 0
+        const { primary, onPrimary } = isDarkMode ? color.dark.colors : color.light.colors
         const onPrimaryAlpha = Color(onPrimary).alpha(alpha).toString()
 
         return (
-          <TouchableOpacity key={color.source} onPress={() => setThemeColor(color.label)}>
+          <TouchableOpacity key={color.source} onPress={() => changeThemeColor(color.source)}>
             <Avatar.Icon
               size={_size}
               style={{ backgroundColor: primary, marginHorizontal: 5 }}
