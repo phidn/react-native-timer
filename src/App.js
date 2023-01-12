@@ -12,11 +12,6 @@ const App = () => {
   const themeColor = useStore((state) => state.themeColor)
   const theme = combineTheme(themeColor, isDarkMode)
 
-  useEffect(() => {
-    Purchases.setDebugLogsEnabled(true)
-    Purchases.configure({ apiKey: 'goog_lfrHjtpKlamGDZLjBzJFYdKLQUy' })
-  }, [])
-
   return (
     <PaperProvider theme={theme}>
       <I18nextProvider i18n={i18nInstance}>

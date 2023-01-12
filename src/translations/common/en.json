@@ -1,6 +1,8 @@
 {
   "App.Name": "Mindful Check-in",
 
+  "common.Cancel": "Cancel",
+
   "notifee.return-to-app": "Tap to return to the app",
   "notifee.inviting-bell": "Inviting the bell",
   "notifee.in-progress": "In progress",
@@ -24,7 +26,7 @@
   "GoPremium.noMoreAds": "No more ads",
   "GoPremium.moreSounds": "More sounds for \"mindfulness bell\"",
   "GoPremium.advancedStats": "Advanced statistics make it easy to track practice progress.",
-  "GoPremium.customStyling": "Customize the appearance of your app with your favorite color code, example",
+  "GoPremium.customStyling": "Customize the appearance with the color picker",
   "GoPremium.developmentSupport": "With your support, we can spend more time improving the app.",
 
   "Prepare.duration": "Duration",
@@ -32,15 +34,16 @@
   "Prepare.sound": "Sound",
   "Prepare.start": "Start",
   "Prepare.bell": "Bell",
+  "Prepare.defaultBell": "Default",
   "Prepare.choose-a-bell": "Choose a bell",
 
   "Statistics.CalendarTracker.meditation-log": "Mindful sessions",
   "Statistics.Chart.daily-meditation": "Daily mindful check-in",
 
-  "Navigation.Screen.timer": "Mindful Session",
-  "Navigation.Screen.goPremium": "Go Premium",
+  "Navigation.Screen.timer": "Mindful session",
+  "Navigation.Screen.goPremium": "Go premium",
   "Navigation.BottomTab.AdminTab": "Admin",
-  "Navigation.BottomTab.PrepareTab": "Mindful Check-in",
+  "Navigation.BottomTab.PrepareTab": "Mindful check-in",
   "Navigation.BottomTab.SettingsTab": "Settings",
   "Navigation.BottomTab.StatsTab": "Statistics",
 
