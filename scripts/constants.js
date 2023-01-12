@@ -1,5 +1,5 @@
 const sourceLanguages = [
-  // { name: 'Vietnamese', code: 'vi' },
+  { name: 'Vietnamese', code: 'vi' },
   { name: 'Bulgarian', code: 'bg' },
   { name: 'Czech', code: 'cs' },
   { name: 'Danish', code: 'da' },
