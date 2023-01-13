@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import PageContainer from '@/components/Containers/PageContainer'
-import { Card, Paragraph, Title, Text, Divider, useTheme } from 'react-native-paper'
+import { Card, Paragraph, Text, Divider, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'

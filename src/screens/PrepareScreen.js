@@ -30,7 +30,6 @@ dayjs.extend(relativeTime)
 import useSound from '@/hooks/useSound'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
 import { getAsset } from '@/utilities/assetsHelper'
-import { logger } from '@/utilities/logger'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'

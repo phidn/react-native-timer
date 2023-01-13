@@ -1,6 +1,6 @@
 import { createDynamicThemeColors } from '@/utilities/themeHelper'
 
-const sources = [
+const themeSources = [
   'purple',
   'pink',
   'indigo',
@@ -12,12 +12,12 @@ const sources = [
   'brown',
 ]
 
-export const themeColors = sources.map((source, index) => {
+export const themeColors = themeSources.map((source) => {
   const theme = createDynamicThemeColors({ sourceColor: source })
 
   return {
     source,
     light: { colors: theme.light },
-    dark: { colors: theme.dark }
+    dark: { colors: theme.dark },
   }
 })

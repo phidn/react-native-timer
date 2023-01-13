@@ -5,7 +5,6 @@ import { combineTheme } from '@/utilities/themeHelper'
 import { I18nextProvider } from 'react-i18next'
 import i18nInstance from '@/config/i18n'
 import { useStore } from '@/store/useStore'
-import Purchases from 'react-native-purchases'
 
 const App = () => {
   const isDarkMode = useStore((state) => state.isDarkMode)

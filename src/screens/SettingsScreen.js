@@ -1,6 +1,6 @@
-import { Linking, ScrollView, StyleSheet, View } from 'react-native'
+import { Linking, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { Button, Card, List, Modal, Portal, Switch, Text, useTheme } from 'react-native-paper'
+import { Card, List, Switch } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -29,7 +29,6 @@ const SettingsScreen = ({ navigation }) => {
   const isPremium = useStore((state) => state.isPremium)
 
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
-
 
   const feedbackHandler = async () => {
     const subject = `[${DeviceInfo.getApplicationName()}] ${t('Settings.moreSetting.feedback')}`
@@ -148,7 +147,7 @@ const SettingsScreen = ({ navigation }) => {
         />
       </Card>
 
-      <ColorPickerModal 
+      <ColorPickerModal
         navigation={navigation}
         isShowSoundDialog={isShowSoundDialog}
         setIsShowSoundDialog={setIsShowSoundDialog}

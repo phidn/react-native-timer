@@ -3,7 +3,6 @@ import {
   DefaultTheme as NavigationLightTheme,
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native'
-import { themeColors } from '@/config/theme'
 import color from 'color'
 import { argbFromHex, themeFromSourceColor } from '@material/material-color-utilities'
 

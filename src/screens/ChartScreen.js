@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { BarChart, XAxis, Grid, YAxis } from 'react-native-svg-charts'
-import PageContainer from '@/components/Containers/PageContainer'
 import { SegmentedButtons, useTheme } from 'react-native-paper'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
