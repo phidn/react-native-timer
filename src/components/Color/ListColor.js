@@ -4,6 +4,7 @@ import { Avatar, useTheme } from 'react-native-paper'
 import { themeColors } from '@/config/theme'
 import { useStore } from '@/store/useStore'
 import Color from 'color'
+import { combineTheme } from '@/utilities/themeHelper'
 
 const ListColor = ({ gap, range, togglePicker }) => {
   const { colors } = useTheme()
@@ -14,6 +15,7 @@ const ListColor = ({ gap, range, togglePicker }) => {
   const customColor = useStore((state) => state.customColor)
   const setThemeColor = useStore((state) => state.setThemeColor)
   const setCustomColor = useStore((state) => state.setCustomColor)
+  const setTheme = useStore((state) => state.setTheme)
 
   const { width: windowWidth } = useWindowDimensions()
   const size = (windowWidth - 10 * (amount - 1) - gap) / amount
@@ -24,6 +26,9 @@ const ListColor = ({ gap, range, togglePicker }) => {
   const changeThemeColor = (colorSource) => {
     setThemeColor(colorSource)
     setCustomColor('')
+
+    const newTheme = combineTheme(colorSource, isDarkMode)
+    setTheme(newTheme)
   }
 
   return (

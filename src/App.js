@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
 import AppNavigator from '@/navigation/AppNavigator'
-import { combineTheme } from '@/utilities/themeHelper'
 import { I18nextProvider } from 'react-i18next'
 import i18nInstance from '@/config/i18n'
 import { useStore } from '@/store/useStore'
-import Purchases from 'react-native-purchases'
+
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// AsyncStorage.clear()
 
 const App = () => {
-  const isDarkMode = useStore((state) => state.isDarkMode)
-  const themeColor = useStore((state) => state.themeColor)
-  const theme = combineTheme(themeColor, isDarkMode)
+  const theme = useStore((state) => state.theme)
 
   return (
     <PaperProvider theme={theme}>

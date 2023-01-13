@@ -23,8 +23,6 @@ const AppNavigator = ({ theme }) => {
     } catch (error) {
       logger('→ onReadyNavigation getCustomerInfo error:', error)
     }
-    
-    // await new Promise((resolve) => setTimeout(resolve, 1000))
     RNBootSplash.hide({ duration: 500, fade: true })
   }
 

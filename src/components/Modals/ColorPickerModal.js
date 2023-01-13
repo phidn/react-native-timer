@@ -1,9 +1,10 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import { Button, Modal, Portal, useTheme, Text, Divider } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import { useStore } from '@/store/useStore'
+import { combineTheme } from '@/utilities/themeHelper'
 
 const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation }) => {
   const { t } = useTranslation()
@@ -13,12 +14,18 @@ const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation 
   const setThemeColor = useStore((state) => state.setThemeColor)
   const setCustomColor = useStore((state) => state.setCustomColor)
   const isPremium = useStore((state) => state.isPremium)
+  
+  const isDarkMode = useStore((state) => state.isDarkMode)
+  const setTheme = useStore((state) => state.setTheme)
 
   const changeThemeColor = () => {
     setIsShowSoundDialog(false)
     if (isPremium) {
       setThemeColor(bg)
       setCustomColor(bg)
+
+      const newTheme = combineTheme(bg, isDarkMode)
+      setTheme(newTheme)
     }
     if (!isPremium) {
       navigation.navigate('GoPremiumScreen')

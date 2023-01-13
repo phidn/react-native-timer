@@ -4,6 +4,8 @@ import { immer } from 'zustand/middleware/immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storageKeys } from '@/config/config'
 import { logger } from '@/utilities/logger'
+import { initTheme } from '@/config/theme'
+import { combineTheme } from '@/utilities/themeHelper'
 
 const rehydrateStorageSlice = (set) => ({
   _hasHydrated: false,
@@ -11,14 +13,19 @@ const rehydrateStorageSlice = (set) => ({
 })
 
 const themeSlice = (set) => ({
-  isDarkMode: false,
-  themeColor: 'purple',
+  isDarkMode: initTheme.isDarkMode,
+  themeColor: initTheme.color,
+  theme: initTheme.combineTheme,
   customColor: '',
   toggleMode: () => {
-    set((state) => ({ isDarkMode: !state.isDarkMode }))
+    set((state) => ({
+      isDarkMode: !state.isDarkMode,
+      theme: combineTheme(state.themeColor, !state.isDarkMode)
+    }))
   },
   setThemeColor: (themeColor) => set({ themeColor }),
   setCustomColor: (customColor) => set({ customColor }),
+  setTheme: (theme) => set({ theme }),
 })
 
 const navigationSlice = (set) => ({
