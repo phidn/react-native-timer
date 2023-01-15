@@ -89,8 +89,6 @@ const PrepareScreen = ({ navigation }) => {
   const setBellId = (bellId) => setPrepare({ bellId })
   const setBellVolume = (bellVolume) => setPrepare({ bellVolume })
 
-  // logger({ duration, interval, bellId, bellVolume })
-
   const showTimePicker = (type) => {
     const onChange = (event, value) => {
       if (event.type === 'dismissed') return
@@ -110,7 +108,7 @@ const PrepareScreen = ({ navigation }) => {
       mode: 'time',
       display: 'spinner',
       is24Hour: true,
-      minuteInterval: 5,
+      minuteInterval: __DEV__? 1: 5,
       positiveButton: { textColor: primary },
       neutralButton: { textColor: primary },
       negativeButton: { textColor: primary },

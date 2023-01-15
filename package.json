@@ -20,6 +20,7 @@
     "test": "jest",
     "lint": "eslint .",
     "adb-reverse": "adb reverse tcp:8081 tcp:8081",
+    "adb-turnOff": "adb shell input keyevent 26",
     "emulator": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
     "phone": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Pixel_4_API_29",
     "tablet7in": "cd C:/Users/phidn/AppData/Local/Android/Sdk/emulator && emulator.exe -avd Nexus_7_API_33",

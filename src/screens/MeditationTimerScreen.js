@@ -36,12 +36,6 @@ const baseNotifeeMTAndroid = {
 
 const MeditationTimerScreen = ({ route, navigation }) => {
   const { params } = route
-  if (__DEV__) {
-    params.duration = 40
-    params.interval = 10
-    preparationTime = 5
-    numberOfInviteBell = 2
-  }
   const msDuration = sToMs(params.duration)
   const msInterval = sToMs(params.interval)
   const isInterval = params.interval > 0

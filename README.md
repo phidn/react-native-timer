@@ -90,7 +90,7 @@ v3NoLabelContainer: {
 - ADS: https://docs.page/invertase/react-native-google-mobile-ads/displaying-ads#banner-ads-component
 
 - API Access: https://www.youtube.com/watch?v=Ls2wkAwXftk
-
+- http://developer.android.com/tools/help/emulator.html#controlling
 
 ## Repo
 - https://github.com/AudiusProject/audius-client
