@@ -1,5 +1,5 @@
-import create from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storageKeys } from '@/config/config'
@@ -32,7 +32,7 @@ const prepareSlice = (set) => ({
   prepare: {
     duration: 60 * 30, // 30 minutes
     interval: 60 * 5, // 5 minutes
-    bellId: 'bell_10',
+    bellId: 'bell_default',
     bellVolume: 0.5,
   },
   setPrepare: (payload) => {
@@ -84,7 +84,7 @@ const store = (set) => ({
 export const useStore = create(
   persist(immer(store), {
     name: storageKeys.appStorage,
-    getStorage: () => AsyncStorage,
+    storage: createJSONStorage(() => AsyncStorage),
     onRehydrateStorage: () => (state) => {
       state.setHasHydrated(true)
     },

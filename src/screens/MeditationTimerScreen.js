@@ -13,8 +13,7 @@ import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
 import _BackgroundTimer from '@/utilities/BackgroundTimer'
 import { useTranslation } from 'react-i18next'
-import notifee, { EventType } from '@notifee/react-native'
-import { logger } from '@/utilities/logger'
+import notifee from '@notifee/react-native'
 
 let preparationTime = 10
 let numberOfInviteBell = 3

@@ -46,11 +46,13 @@ export const getAsset = (assetKey) => {
     case 'bell_9_long':
       return require('@/assets/sounds/bell_9_long.mp3')
 
+    case 'bell_10_short':
+    case 'bell_10_long':
     case 'bell_default_short':
     case 'bell_default_long':
       return require('@/assets/sounds/bell_10.mp3')
   }
 
-  logger('not found bell asset', bell, 'error')
+  logger('getAsset error', assetKey)
   return null
 }

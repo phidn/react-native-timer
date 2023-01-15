@@ -30,7 +30,6 @@ dayjs.extend(relativeTime)
 import useSound from '@/hooks/useSound'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
 import { getAsset } from '@/utilities/assetsHelper'
-import { logger } from '@/utilities/logger'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'
@@ -255,9 +254,9 @@ const PrepareScreen = ({ navigation }) => {
           <ScrollView style={[styles.modalScrollView, { borderColor: outlineVariant }]}>
             <RadioButton.Group onValueChange={onBellChange} value={bellId}>
               <RadioButton.Item
-                key={'bell_default'}
+                key="bell_default"
                 label={t('Prepare.defaultBell')}
-                value={'bell_default'}
+                value="bell_default"
               />
               {[1, 2, 3].map((x) => (
                 <RadioButton.Item
