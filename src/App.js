@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
 import AppNavigator from '@/navigation/AppNavigator'
 import { combineTheme } from '@/utilities/themeHelper'

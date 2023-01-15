@@ -18,6 +18,20 @@
 - aab: cd android && gradlew clean && gradlew bundleRelease
 
 
+### Fix hermes
+```
+<!-- app/build.gradle -->
+
+project.ext.react = [
+    enableHermes: true,  // clean and rebuild if changing
+]
+
+project.ext.react = [
+    enableHermes: false,
+    deleteDebugFilesForVariant: { false }
+]
+```
+
 ### Version
 - https://www.npmjs.com/package/react-native-version
 - npm install -g react-native-version
@@ -83,3 +97,4 @@ v3NoLabelContainer: {
 - https://github.com/zensayyy/ZenMusic
 - https://github.com/Vetrivel-VP/react-native-musicplayer
 - https://github.com/dr0id007/forest-native
+- https://www.npmjs.com/package/react-native-bundle-visualizer

@@ -8,13 +8,14 @@ import color from 'color'
 import Purchases from 'react-native-purchases'
 import { useStore } from '@/store/useStore'
 import { logger } from '@/utilities/logger'
+import { revenueCatApiKey } from '@/config/config'
 
 const AppNavigator = ({ theme }) => {
   const setIsPremium = useStore((state) => state.setIsPremium)
 
   const onReadyNavigation = async () => {
     Purchases.setDebugLogsEnabled(true)
-    Purchases.configure({ apiKey: 'goog_lfrHjtpKlamGDZLjBzJFYdKLQUy' })
+    Purchases.configure({ apiKey: revenueCatApiKey })
 
     try {
       const customerInfo = await Purchases.getCustomerInfo()

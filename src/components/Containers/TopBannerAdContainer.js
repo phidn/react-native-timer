@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { View, ScrollView, useWindowDimensions } from 'react-native'
 import { useTheme } from 'react-native-paper'
 import { roundNumber } from '@/utilities/commonHelper'
@@ -19,7 +19,7 @@ const TopBannerAdContainer = ({ style, children }) => {
 
   const checkShowBanner = () => {
     if (isPremium) return false
-    if (longestStreak < 4) return false
+    if (longestStreak < 7) return false
 
     return true
   }

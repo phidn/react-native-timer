@@ -254,9 +254,9 @@ const PrepareScreen = ({ navigation }) => {
           <ScrollView style={[styles.modalScrollView, { borderColor: outlineVariant }]}>
             <RadioButton.Group onValueChange={onBellChange} value={bellId}>
               <RadioButton.Item
-                key={'bell_default'}
+                key="bell_default"
                 label={t('Prepare.defaultBell')}
-                value={'bell_default'}
+                value="bell_default"
               />
               {[1, 2, 3].map((x) => (
                 <RadioButton.Item

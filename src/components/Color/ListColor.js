@@ -1,9 +1,9 @@
 import React from 'react'
 import { TouchableOpacity, useWindowDimensions } from 'react-native'
 import { Avatar, useTheme } from 'react-native-paper'
-import { themeColors } from '@/config/theme'
 import { useStore } from '@/store/useStore'
 import Color from 'color'
+import { getThemeColors } from '@/utilities/themeHelper'
 
 const ListColor = ({ gap, range, togglePicker }) => {
   const { colors } = useTheme()
@@ -36,7 +36,7 @@ const ListColor = ({ gap, range, togglePicker }) => {
         />
       </TouchableOpacity>
 
-      {themeColors.slice(newRange[0], newRange[1]).map((color) => {
+      {getThemeColors().slice(newRange[0], newRange[1]).map((color) => {
         const alpha = color.source === themeColor ? 1 : 0
         const { primary, onPrimary } = isDarkMode ? color.dark.colors : color.light.colors
         const onPrimaryAlpha = Color(onPrimary).alpha(alpha).toString()

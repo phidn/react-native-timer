@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native'
 import color from 'color'
 import { argbFromHex, themeFromSourceColor } from '@material/material-color-utilities'
+import { themeSources } from '@/config/config'
 
 export const createDynamicThemeColors = ({ sourceColor }) => {
   const opacity = {
@@ -91,4 +92,16 @@ export const combineTheme = (source, isDarkMode) => {
   }
 
   return combinedTheme
+}
+
+export const getThemeColors = () => {
+  return themeSources.map((source) => {
+    const theme = createDynamicThemeColors({ sourceColor: source })
+  
+    return {
+      source,
+      light: { colors: theme.light },
+      dark: { colors: theme.dark },
+    }
+  })
 }
