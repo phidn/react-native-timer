@@ -14,7 +14,7 @@ import PageContainer from '@/components/Containers/PageContainer'
 import { availableLanguages, getLanguageName } from '@/translations/translations'
 import SettingCardTitle from '@/components/SettingCardTitle/SettingCardTitle'
 import DeviceInfo from 'react-native-device-info'
-import { privacyPolicyLink, termsAndConditionsLink } from '@/config/config'
+import { privacyPolicyLink, screens, termsAndConditionsLink } from '@/config/config'
 import RateHelper, { AndroidMarket } from '@/utilities/rateHelper'
 import ColorPickerModal from '@/components/Modals/ColorPickerModal'
 
@@ -75,7 +75,7 @@ const SettingsScreen = ({ navigation }) => {
           description={language?.label ? language.label : ''}
           left={(props) => <Entypo {...props} name="language" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate('LanguageSettingScreen')}
+          onPress={() => navigation.navigate(screens.LanguageSettingScreen)}
         />
         <List.Item
           title={t('Settings.colorMode')}
@@ -110,7 +110,7 @@ const SettingsScreen = ({ navigation }) => {
           description={isPremium ? t('Settings.support.goPremium.purchased') : ''}
           left={(props) => <Octicons {...props} name="ruby" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate('GoPremiumScreen')}
+          onPress={() => navigation.navigate(screens.GoPremiumScreen)}
         />
         <List.Item
           title={t('Settings.moreSetting.feedback')}

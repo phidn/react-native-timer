@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Sound from 'react-native-sound'
 import { logger0 as logger } from '@/utilities/logger'
+import { getAsset } from '@/utilities/assetsHelper'
 
 const useSound = () => {
   const [playbackInstance, setPlaybackInstance] = useState(null)
@@ -47,6 +48,13 @@ const useSound = () => {
     }
   }
 
+  const playLongBell = async (bellId, bellVolume) => {
+    await play(getAsset(bellId + '_long'), bellVolume)
+  }
+  const playShortBell = async (bellId, bellVolume, number = 1) => {
+    await play(getAsset(bellId + '_short'), bellVolume, number)
+  }
+
   const release = () => {
     if (playbackInstance) {
       playbackInstance.release()
@@ -55,7 +63,7 @@ const useSound = () => {
     logger('>>> released playback')
   }
 
-  return { play, release }
+  return { play, playLongBell, playShortBell, release }
 }
 
 export default useSound

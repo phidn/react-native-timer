@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { StyleSheet, View, useWindowDimensions, AppState } from 'react-native'
+import { StyleSheet, View, useWindowDimensions } from 'react-native'
 import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
 import RowContainer from '@/components/Containers/RowContainer'
 import { getCountdown, sToMin, sToMs } from '@/utilities/timeHelper'
-import uuid from 'react-native-uuid'
 import Color from 'color'
 import useSound from '@/hooks/useSound'
-import { getAsset } from '@/utilities/assetsHelper'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
 import _BackgroundTimer from '@/utilities/BackgroundTimer'
@@ -34,15 +32,22 @@ const baseNotifeeMTAndroid = {
   },
 }
 
-const MeditationTimerScreen = ({ route, navigation }) => {
+const MeditateScreen = ({ route, navigation }) => {
   const { params } = route
+  if (__DEV__) {
+    params.duration = 40
+    params.interval = 10
+    preparationTime = 5
+    numberOfInviteBell = 2
+  }
+
   const msDuration = sToMs(params.duration)
   const msInterval = sToMs(params.interval)
   const isInterval = params.interval > 0
 
   const { t } = useTranslation()
   const { colors } = useTheme()
-  const { play, release } = useSound()
+  const { playLongBell, playShortBell, release } = useSound()
   const { width } = useWindowDimensions()
 
   const baseNotifeeMT = {
@@ -55,31 +60,18 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   const setIsShowCountdown = useStore((state) => state.setIsShowCountdown)
 
   const [isPlaying, setIsPlaying] = useState(true)
-  const [countdownKey, setCountdownKey] = useState(uuid.v4())
   const [isPrepared, setIsPrepared] = useState(true)
-  const activeTime = isPrepared ? preparationTime : params.duration
 
   const [startedSession, setStartedSession] = useState()
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
   const remainingTimeRef = useRef(preparationTime)
 
-  const appState = useRef(AppState.currentState)
-  const [appComeBackgroundTime, setAppComeBackgroundTime] = useState()
-  const [appComeBgRemainingTime, setAppComeBgRemainingTime] = useState()
-
-  const playLongBell = async () => {
-    await play(getAsset(params.bellId + '_long'), params.bellVolume)
-  }
-  const playShortBell = async () => {
-    await play(getAsset(params.bellId + '_short'), params.bellVolume, numberOfInviteBell)
-  }
-
   const intervalTask = async () => {
     _BackgroundTimer.setInterval(() => {
       const remainingTime = remainingTimeRef.current
       if (remainingTime >= params.interval) {
-        playLongBell()
+        playLongBell(params.bellId, params.bellVolume)
       }
     }, msInterval)
   }
@@ -88,7 +80,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
     const date = dayjs().format('YYYY-MM-DD')
     const ended = dayjs().format('HH:mm')
     setSessionLogs(date, sToMin(params.duration), started, ended)
-    await playShortBell()
+    await playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
     navigation.goBack()
   }
 
@@ -124,10 +116,10 @@ const MeditationTimerScreen = ({ route, navigation }) => {
       const prepareDelay = preparationTime * 1000
 
       const startSession = () => {
-        playShortBell()
+        playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
         setIsPrepared(false)
-        remainingTimeRef.current = params.duration
-        setCountdownKey(uuid.v4())
+        // remainingTimeRef.current = params.duration
+        // setCountdownKey(uuid.v4())
         setStartedSession(_startedSession)
 
         notifee.displayNotification({
@@ -158,40 +150,12 @@ const MeditationTimerScreen = ({ route, navigation }) => {
     }
   }, [])
 
-  useEffect(() => {
-    const subscription = AppState.addEventListener('change', (nextAppState) => {
-      if (appState.current === 'active' && nextAppState.match(/inactive|background/)) {
-        if (isPrepared) {
-          setAppComeBackgroundTime(Date.now())
-          setAppComeBgRemainingTime(remainingTimeRef.current * 1000)
-        }
-      }
-      if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
-        if (!isPrepared && appComeBackgroundTime) {
-          const appComeToActiveTime = Date.now()
-          const inactiveDuration = appComeToActiveTime - appComeBackgroundTime
-          remainingTimeRef.current = (msDuration - inactiveDuration + appComeBgRemainingTime) / 1000
-          setCountdownKey(uuid.v4())
-        }
-      }
-      appState.current = nextAppState
-    })
-
-    return () => {
-      subscription.remove()
-    }
-  }, [isPrepared, appComeBackgroundTime, appComeBgRemainingTime])
-
-  const onBreakCountdown = () => {
-    navigation.goBack()
-  }
-
   const startAfterPauseTask = (delayTime) => {
-    const remainingTime = remainingTimeRef.current - 1
+    const remainingTime = remainingTimeRef.current
 
     const playSession = () => {
       if (remainingTime >= params.interval) {
-        playLongBell()
+        playLongBell(params.bellId, params.bellVolume)
       }
       if (isInterval) {
         intervalTask()
@@ -203,7 +167,6 @@ const MeditationTimerScreen = ({ route, navigation }) => {
   }
 
   const onPauseCountdown = () => {
-
     // Pause countdown:
     if (isPlaying) {
       release()
@@ -224,8 +187,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
 
       for (let nextTime = remainingTime; nextTime > 0; nextTime--) {
         if (nextTime % params.interval === 0) {
-          const delay = remainingTime - nextTime
-          startAfterPauseTask(delay - 1)
+          startAfterPauseTask(remainingTime - nextTime)
           break
         }
       }
@@ -249,15 +211,17 @@ const MeditationTimerScreen = ({ route, navigation }) => {
     <PageContainer>
       <View style={styles.countdownContainer}>
         <CountdownCircleTimer
-          initialRemainingTime={remainingTimeRef.current}
-          key={countdownKey}
           isPlaying={isPlaying}
-          duration={activeTime}
-          colors={isPrepared ? [Color(colors.primary).hex()] : [Color(colors.surfaceVariant).hex()]}
-          colorsTime={[activeTime]}
+          duration={params.duration + preparationTime}
+          colors={[
+            Color(colors.secondary).hex(),
+            Color(colors.primary).hex(),
+            Color(colors.primary).hex(),
+          ]}
+          colorsTime={[params.duration + preparationTime, params.duration, 0]}
           size={width - 40}
           strokeWidth={10}
-          trailColor={isPrepared ? Color(colors.surfaceVariant).hex() : Color(colors.primary).hex()}
+          trailColor={Color(colors.surfaceVariant).hex()}
           strokeLinecap="round"
         >
           {({ remainingTime }) => {
@@ -281,7 +245,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
                     </Text>
                   )}
                   {isShowCountdown && isPrepared && (
-                    <Text variant="displayMedium">{remainingTime}</Text>
+                    <Text variant="displayMedium">{remainingTime - params.duration}</Text>
                   )}
                 </View>
               </TouchableRipple>
@@ -294,11 +258,8 @@ const MeditationTimerScreen = ({ route, navigation }) => {
               icon="close"
               iconColor={colors.onSurfaceVariant}
               size={25}
-              onPress={onBreakCountdown}
-              style={[
-                styles.iconAction,
-                { backgroundColor: colors.surfaceVariant },
-              ]}
+              onPress={() => navigation.goBack()}
+              style={[styles.iconAction, { backgroundColor: colors.surfaceVariant }]}
             />
           </RowContainer>
         )}
@@ -308,7 +269,7 @@ const MeditationTimerScreen = ({ route, navigation }) => {
               icon="close"
               iconColor={colors.onSurfaceVariant}
               size={25}
-              onPress={onBreakCountdown}
+              onPress={() => navigation.goBack()}
               style={[
                 styles.iconAction,
                 { backgroundColor: colors.surfaceVariant, opacity: isPlaying ? 0 : 1 },
@@ -362,4 +323,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MeditationTimerScreen
+export default MeditateScreen

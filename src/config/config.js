@@ -24,3 +24,9 @@ export const termsAndConditionsLink =
   'https://phidev.notion.site/Terms-Conditions-93c1d5cfd8c74149bd183ce2ee135eb3'
 
 export const revenueCatApiKey = 'goog_lfrHjtpKlamGDZLjBzJFYdKLQUy'
+
+export const screens = {
+  LanguageSettingScreen: 'LanguageSettingScreen',
+  MeditateScreen: 'MeditateScreen',
+  GoPremiumScreen: 'GoPremiumScreen',
+}

@@ -4,6 +4,7 @@ import { Button, Modal, Portal, useTheme, Text, Divider } from 'react-native-pap
 import { useTranslation } from 'react-i18next'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import { useStore } from '@/store/useStore'
+import { screens } from '@/config/config'
 
 const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation }) => {
   const { t } = useTranslation()
@@ -21,7 +22,7 @@ const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation 
       setCustomColor(bg)
     }
     if (!isPremium) {
-      navigation.navigate('GoPremiumScreen')
+      navigation.navigate(screens.GoPremiumScreen)
     }
   }
 

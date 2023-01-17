@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
-import {
-  Text,
-  List,
-  useTheme,
-  RadioButton,
-  Button,
-  IconButton,
-  Modal,
-  Portal,
-} from 'react-native-paper'
+import React, { useState } from 'react'
+import { StyleSheet, useWindowDimensions, View } from 'react-native'
+import { Text, List, useTheme, Button, IconButton } from 'react-native-paper'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
@@ -29,7 +20,6 @@ dayjs.extend(relativeTime)
 
 import useSound from '@/hooks/useSound'
 import { getDayText, getMinText } from '@/utilities/timeHelper'
-import { getAsset } from '@/utilities/assetsHelper'
 import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 import { useStore } from '@/store/useStore'
 import { initPicker } from '@/config/initPicker'
@@ -40,12 +30,13 @@ import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
 
 import { getAlphaByPercent } from '@/utilities/colorHelper'
 import useStatsSessions from '@/hooks/useStatsSessions'
+import ChooseSoundModal from '@/components/Modals/ChooseSoundModal'
+import { screens } from '@/config/config'
 
 const PrepareScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation()
-  const { elevation, primary, onBackground, outlineVariant } = useTheme().colors
   const { colors } = useTheme()
-  const { play, release } = useSound()
+  const { playShortBell, release } = useSound()
 
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
   const { duration, interval, bellId, bellVolume } = useStore((state) => state.prepare)
@@ -86,7 +77,6 @@ const PrepareScreen = ({ navigation }) => {
 
   const setDuration = (duration) => setPrepare({ duration })
   const setInterval = (interval) => setPrepare({ interval })
-  const setBellId = (bellId) => setPrepare({ bellId })
   const setBellVolume = (bellVolume) => setPrepare({ bellVolume })
 
   const showTimePicker = (type) => {
@@ -108,26 +98,21 @@ const PrepareScreen = ({ navigation }) => {
       mode: 'time',
       display: 'spinner',
       is24Hour: true,
-      minuteInterval: __DEV__? 1: 5,
-      positiveButton: { textColor: primary },
-      neutralButton: { textColor: primary },
-      negativeButton: { textColor: primary },
+      minuteInterval: __DEV__ ? 1 : 5,
+      positiveButton: { textColor: colors.primary },
+      neutralButton: { textColor: colors.primary },
+      negativeButton: { textColor: colors.primary },
     })
-  }
-
-  const onBellChange = (value) => {
-    setBellId(value)
-    play(getAsset(value + '_short'), bellVolume)
   }
 
   const onBellVolumeChangeComplete = (value) => {
     setBellVolume(value)
-    play(getAsset(bellId + '_short'), value)
+    playShortBell(bellId, value)
   }
 
   const startSession = () => {
     release()
-    navigation.navigate('MeditationTimerScreen', {
+    navigation.navigate(screens.MeditateScreen, {
       duration,
       interval,
       bellId,
@@ -147,11 +132,16 @@ const PrepareScreen = ({ navigation }) => {
         title={<Text variant="titleMedium">{t('Prepare.duration')}</Text>}
         right={() => (
           <RowContainer>
-            <Text variant="titleMedium" style={[{ color: primary }]}>
+            <Text variant="titleMedium" style={[{ color: colors.primary }]}>
               {String(`${duration / 60} `).padStart(4, ' ')}
               {getMinText(duration / 60, i18n.resolvedLanguage)}
             </Text>
-            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+            <Feather
+              color={colors.primary}
+              name="chevron-right"
+              size={24}
+              style={styles.rightIcon}
+            />
           </RowContainer>
         )}
         onPress={() => showTimePicker('duration')}
@@ -160,11 +150,16 @@ const PrepareScreen = ({ navigation }) => {
         title={<Text variant="titleMedium">{t('Prepare.invite-bell')}</Text>}
         right={() => (
           <RowContainer>
-            <Text variant="titleMedium" style={[{ color: primary }]}>
+            <Text variant="titleMedium" style={[{ color: colors.primary }]}>
               {String(`${interval / 60} `).padStart(4, ' ')}
               {getMinText(interval / 60, i18n.resolvedLanguage)}
             </Text>
-            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+            <Feather
+              color={colors.primary}
+              name="chevron-right"
+              size={24}
+              style={styles.rightIcon}
+            />
           </RowContainer>
         )}
         onPress={() => showTimePicker('interval')}
@@ -173,11 +168,16 @@ const PrepareScreen = ({ navigation }) => {
         title={<Text variant="titleMedium">{t('Prepare.sound')}</Text>}
         right={() => (
           <RowContainer>
-            <Text variant="titleMedium" style={[{ color: primary }]}>
+            <Text variant="titleMedium" style={[{ color: colors.primary }]}>
               {bellId !== 'bell_default' && `${t('Prepare.bell')} ${bellId.split('_').pop()}`}
               {bellId === 'bell_default' && t('Prepare.defaultBell')}
             </Text>
-            <Feather color={primary} name="chevron-right" size={24} style={styles.rightIcon} />
+            <Feather
+              color={colors.primary}
+              name="chevron-right"
+              size={24}
+              style={styles.rightIcon}
+            />
           </RowContainer>
         )}
         onPress={() => setIsShowSoundDialog(!isShowSoundDialog)}
@@ -186,7 +186,7 @@ const PrepareScreen = ({ navigation }) => {
       <RowContainer style={{ paddingRight: 15 }}>
         <IconButton
           icon="volume-minus"
-          iconColor={onBackground}
+          iconColor={colors.onBackground}
           size={20}
           onPress={() => onBellVolumeChangeComplete(bellVolume - 0.1)}
         />
@@ -196,12 +196,12 @@ const PrepareScreen = ({ navigation }) => {
           onSlidingComplete={onBellVolumeChangeComplete}
           minimumValue={0}
           maximumValue={1}
-          minimumTrackTintColor={primary}
-          maximumTrackTintColor={onBackground}
+          minimumTrackTintColor={colors.primary}
+          maximumTrackTintColor={colors.onBackground}
         />
         <IconButton
           icon="volume-plus"
-          iconColor={primary}
+          iconColor={colors.primary}
           size={20}
           onPress={() => onBellVolumeChangeComplete(bellVolume + 0.1)}
         />
@@ -237,47 +237,12 @@ const PrepareScreen = ({ navigation }) => {
       </CenterContainer>
 
       {/* Modal choose bell sound */}
-      <Portal>
-        <Modal
-          visible={isShowSoundDialog}
-          onDismiss={() => setIsShowSoundDialog(!isShowSoundDialog)}
-          contentContainerStyle={{
-            backgroundColor: elevation.level3,
-            padding: 20,
-            margin: 20,
-            height: '80%',
-          }}
-        >
-          <Text variant="headlineSmall">{t('Prepare.choose-a-bell')}</Text>
-          <ScrollView style={[styles.modalScrollView, { borderColor: outlineVariant }]}>
-            <RadioButton.Group onValueChange={onBellChange} value={bellId}>
-              <RadioButton.Item
-                key="bell_default"
-                label={t('Prepare.defaultBell')}
-                value="bell_default"
-              />
-              {[1, 2, 3].map((x) => (
-                <RadioButton.Item
-                  key={`bell_${x}`}
-                  label={`${t('Prepare.bell')} ${x}`}
-                  value={`bell_${x}`}
-                />
-              ))}
-              {[4, 5, 6, 7, 8, 9].map((x) => (
-                <RadioButton.Item
-                  key={`bell_${x}`}
-                  label={`${t('Prepare.bell')} ${x}`}
-                  value={`bell_${x}`}
-                  disabled={true}
-                />
-              ))}
-            </RadioButton.Group>
-          </ScrollView>
-          <View style={styles.modalActions}>
-            <Button onPress={() => setIsShowSoundDialog(!isShowSoundDialog)}>Ok</Button>
-          </View>
-        </Modal>
-      </Portal>
+      <ChooseSoundModal
+        isShow={isShowSoundDialog}
+        toggleShow={() => setIsShowSoundDialog(!isShowSoundDialog)}
+        initValue={bellId}
+        soundVolume={bellVolume}
+      />
     </TopBannerAdContainer>
   )
 }
@@ -292,17 +257,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 15,
     marginRight: 30,
-  },
-  modalScrollView: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    marginVertical: 10,
-  },
-  modalActions: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginBottom: -10,
   },
   heatmapContainer: {
     marginTop: 50,
