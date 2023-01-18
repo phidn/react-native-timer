@@ -1,6 +1,6 @@
 {
   "name": "mindful-checkin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "release": "yarn release-code && yarn clean && yarn bundle && yarn release-build && yarn release-folder",
