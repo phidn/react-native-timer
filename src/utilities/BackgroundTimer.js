@@ -1,111 +1,69 @@
-import {
-  DeviceEventEmitter,
-  NativeAppEventEmitter,
-  NativeEventEmitter,
-  NativeModules,
-  Platform,
-} from 'react-native'
-import { logger } from './logger'
+import { NativeEventEmitter, NativeModules } from 'react-native'
 
-const { RNBackgroundTimer } = NativeModules
-const Emitter = new NativeEventEmitter(RNBackgroundTimer)
+const { RNBackgroundTimerAndroid } = NativeModules
+const timerDataMap = {}
+let uniqueIdCounter = 0
 
-class BackgroundTimer {
-  constructor() {
-    this.uniqueId = 0
-    this.callbacks = {}
-
-    Emitter.addListener('backgroundTimer.timeout', (id) => {
-      if (this.callbacks[id]) {
-        const callbackById = this.callbacks[id]
-        const { callback } = callbackById
-        if (!this.callbacks[id].interval) {
-          delete this.callbacks[id]
-        } else {
-          RNBackgroundTimer.setTimeout(id, this.callbacks[id].timeout)
-        }
-        callback()
-      }
-    })
-  }
-
-  // Original API
-  start(delay = 0) {
-    return RNBackgroundTimer.start(delay)
-  }
-
-  stop() {
-    return RNBackgroundTimer.stop()
-  }
-
-  runBackgroundTimer(callback, delay) {
-    const EventEmitter = Platform.select({
-      ios: () => NativeAppEventEmitter,
-      android: () => DeviceEventEmitter,
-    })()
-    this.start(0)
-    this.backgroundListener = EventEmitter.addListener('backgroundTimer', () => {
-      this.backgroundListener.remove()
-      this.backgroundClockMethod(callback, delay)
-    })
-  }
-
-  backgroundClockMethod(callback, delay) {
-    this.backgroundTimer = this.setTimeout(() => {
+if (RNBackgroundTimerAndroid !== null) {
+  const eventEmitter = new NativeEventEmitter(RNBackgroundTimerAndroid)
+  eventEmitter.addListener(RNBackgroundTimerAndroid.TIMER_EVENT, (id) => {
+    const timerData = timerDataMap[id]
+    if (timerData) {
+      const { callback, repeats } = timerData
+      if (!repeats) delete timerDataMap[id]
       callback()
-      this.backgroundClockMethod(callback, delay)
-    }, delay)
-  }
-
-  stopBackgroundTimer() {
-    this.stop()
-    this.clearTimeout(this.backgroundTimer)
-  }
-
-  // New API, allowing for multiple timers
-  setTimeout(callback, timeout) {
-    this.uniqueId += 1
-    const timeoutId = this.uniqueId
-    this.callbacks[timeoutId] = {
-      callback,
-      interval: false,
-      timeout,
     }
-    RNBackgroundTimer.setTimeout(timeoutId, timeout)
-    return timeoutId
-  }
+  })
+}
 
-  clearAll() {
-    Object.keys(this.callbacks).forEach(key => {
-      delete this.callbacks[key]
-    })
-  }
+function setTimer(callback, millis, onError = () => {}, repeats) {
+  assertAndroid()
+  const id = ++uniqueIdCounter
+  timerDataMap[id] = { callback, repeats }
+  RNBackgroundTimerAndroid.setTimer(id, millis, repeats).catch(onError)
+  return id
+}
 
-  clearTimeout(timeoutId) {
-    if (this.callbacks[timeoutId]) {
-      delete this.callbacks[timeoutId]
-      // RNBackgroundTimer.clearTimeout(timeoutId);
-    }
-  }
-
-  setInterval(callback, timeout) {
-    this.uniqueId += 1
-    const intervalId = this.uniqueId
-    this.callbacks[intervalId] = {
-      callback,
-      interval: true,
-      timeout,
-    }
-    RNBackgroundTimer.setTimeout(intervalId, timeout)
-    return intervalId
-  }
-
-  clearInterval(intervalId) {
-    if (this.callbacks[intervalId]) {
-      delete this.callbacks[intervalId]
-      // RNBackgroundTimer.clearTimeout(intervalId);
-    }
+async function clearTimer(id) {
+  assertAndroid()
+  if (timerDataMap[id]) {
+    delete timerDataMap[id]
+    await RNBackgroundTimerAndroid.clearTimer(id)
   }
 }
 
-export default new BackgroundTimer()
+function assertAndroid() {
+  if (RNBackgroundTimerAndroid === null) {
+    throw new Error('Background timer can only be used in Android devices')
+  }
+}
+
+async function clearAll() {
+  const ids = Object.keys(timerDataMap)
+  for (let i = 0; i < ids.length; i++) {
+    await clearTimer(+ids[i])
+  } 
+}
+
+class BackgroundTimer {
+  static setTimeout(callback, millis, onError) {
+    return setTimer(callback, millis, onError, false)
+  }
+
+  static setInterval(callback, millis, onError) {
+    return setTimer(callback, millis, onError, true)
+  }
+
+  static clearTimeout(id) {
+    return clearTimer(id)
+  }
+
+  static clearInterval(id) {
+    return clearTimer(id)
+  }
+  static clearAll() {
+    return clearAll()
+  }
+}
+
+export default BackgroundTimer

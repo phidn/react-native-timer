@@ -6,13 +6,13 @@ import { useStore } from '@/store/useStore'
 import PageContainer from '@/components/Containers/PageContainer'
 import { getAsset } from '@/utilities/assetsHelper'
 import useSound from '@/hooks/useSound'
-import _BackgroundTimer from 'react-native-background-timer'
 import { Platform, StyleSheet, View } from 'react-native'
 import notifee from '@notifee/react-native'
 import { getYearsDates } from '@/utilities/chartHelper'
 import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
 import DeviceInfo from 'react-native-device-info'
 import ColorPicker from '@/components/ColorPicker/ColorPicker'
+import BackgroundTimer from '@/utilities/BackgroundTimer'
 
 const AdminScreen = () => {
   const clearAsyncStorage = () => {
@@ -86,10 +86,7 @@ const AdminScreen = () => {
 
   const { play } = useSound()
   const testBackgroundTimer = () => {
-    console.log('testBackgroundTimer run')
-    _BackgroundTimer.runBackgroundTimer(() => {
-      play(getAsset('bell_10_long'), 1)
-    }, 1000 * 10)
+    const intervalId = BackgroundTimer.setInterval(() => console.log('tic'), 500)
   }
 
   useEffect(() => {
@@ -166,9 +163,7 @@ const AdminScreen = () => {
 }
 
 const AdminScreen2 = () => {
-  return (
-    <View></View>
-  )
+  return <View></View>
 }
 
 export default AdminScreen

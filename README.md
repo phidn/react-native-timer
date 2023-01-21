@@ -98,3 +98,4 @@ v3NoLabelContainer: {
 - https://github.com/Vetrivel-VP/react-native-musicplayer
 - https://github.com/dr0id007/forest-native
 - https://www.npmjs.com/package/react-native-bundle-visualizer
+- https://github.com/juanamd/react-native-background-timer-android
