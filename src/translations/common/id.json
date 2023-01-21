@@ -1,9 +1,9 @@
 {
-  "App.Name": "Check-in yang penuh perhatian",
-  "common.Cancel": "Batal",
-  "notifee.return-to-app": "Ketuk untuk kembali ke aplikasi",
-  "notifee.inviting-bell": "Mengundang bel",
-  "notifee.in-progress": "Sedang berlangsung",
+  "app.name": "Check-in yang penuh perhatian",
+  "common.cancel": "Batal",
+  "notifee.returnToApp": "Ketuk untuk kembali ke aplikasi",
+  "notifee.invitingBell": "Mengundang bel",
+  "notifee.inProgress": "Sedang berlangsung",
   "Settings.appearance": "Penampilan",
   "Settings.colorMode": "Mode warna",
   "Settings.colorMode.light": "Cahaya",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Sesi meditasi",
   "StatsTopTabs.session.mindfulStreak": "Coretan yang penuh perhatian",
   "StatsTopTabs.session.mindfulSessions": "Sesi yang penuh perhatian",
-  "StatsTopTabs.session.current-streak": "Rekor saat ini",
-  "StatsTopTabs.session.longest-streak": "Rekor terpanjang",
-  "StatsTopTabs.session.number-of-sessions": "Jumlah Sesi",
-  "StatsTopTabs.session.avg-duration": "Durasi sesi rata-rata",
-  "StatsTopTabs.session.longest-session": "Sesi terlama",
-  "StatsTopTabs.session.shortest-session": "Sesi terpendek"
+  "StatsTopTabs.session.currentStreak": "Rekor saat ini",
+  "StatsTopTabs.session.longestStreak": "Rekor terpanjang",
+  "StatsTopTabs.session.numberOfSessions": "Jumlah Sesi",
+  "StatsTopTabs.session.avgDuration": "Durasi sesi rata-rata",
+  "StatsTopTabs.session.longestSession": "Sesi terlama",
+  "StatsTopTabs.session.shortestSession": "Sesi terpendek"
 }

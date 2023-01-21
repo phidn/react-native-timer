@@ -1,9 +1,9 @@
 {
-  "App.Name": "Интеллектуальная регистрация",
-  "common.Cancel": "Отмена",
-  "notifee.return-to-app": "Нажмите, чтобы вернуться в приложение",
-  "notifee.inviting-bell": "Приглашение колокольчика",
-  "notifee.in-progress": "В процессе выполнения",
+  "app.name": "Интеллектуальная регистрация",
+  "common.cancel": "Отмена",
+  "notifee.returnToApp": "Нажмите, чтобы вернуться в приложение",
+  "notifee.invitingBell": "Приглашение колокольчика",
+  "notifee.inProgress": "В процессе выполнения",
   "Settings.appearance": "Внешний вид",
   "Settings.colorMode": "Цветовой режим",
   "Settings.colorMode.light": "Свет",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Сеансы медитации",
   "StatsTopTabs.session.mindfulStreak": "Умственная полоса",
   "StatsTopTabs.session.mindfulSessions": "Интеллектуальные занятия",
-  "StatsTopTabs.session.current-streak": "Текущая полоса",
-  "StatsTopTabs.session.longest-streak": "Самая длинная полоса",
-  "StatsTopTabs.session.number-of-sessions": "Количество сеансов",
-  "StatsTopTabs.session.avg-duration": "Средняя продолжительность сеанса",
-  "StatsTopTabs.session.longest-session": "Самая продолжительная сессия",
-  "StatsTopTabs.session.shortest-session": "Самая короткая сессия"
+  "StatsTopTabs.session.currentStreak": "Текущая полоса",
+  "StatsTopTabs.session.longestStreak": "Самая длинная полоса",
+  "StatsTopTabs.session.numberOfSessions": "Количество сеансов",
+  "StatsTopTabs.session.avgDuration": "Средняя продолжительность сеанса",
+  "StatsTopTabs.session.longestSession": "Самая продолжительная сессия",
+  "StatsTopTabs.session.shortestSession": "Самая короткая сессия"
 }

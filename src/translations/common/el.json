@@ -1,9 +1,9 @@
 {
-  "App.Name": "Mindful Check-in",
-  "common.Cancel": "Ακύρωση",
-  "notifee.return-to-app": "Πατήστε για να επιστρέψετε στην εφαρμογή",
-  "notifee.inviting-bell": "Προσκαλώντας την καμπάνα",
-  "notifee.in-progress": "Σε εξέλιξη",
+  "app.name": "Mindful Check-in",
+  "common.cancel": "Ακύρωση",
+  "notifee.returnToApp": "Πατήστε για να επιστρέψετε στην εφαρμογή",
+  "notifee.invitingBell": "Προσκαλώντας την καμπάνα",
+  "notifee.inProgress": "Σε εξέλιξη",
   "Settings.appearance": "Εμφάνιση",
   "Settings.colorMode": "Λειτουργία χρώματος",
   "Settings.colorMode.light": "Φως",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Συνεδρίες διαλογισμού",
   "StatsTopTabs.session.mindfulStreak": "Mindful streak",
   "StatsTopTabs.session.mindfulSessions": "Mindful συνεδρίες",
-  "StatsTopTabs.session.current-streak": "Τρέχον σερί",
-  "StatsTopTabs.session.longest-streak": "Μεγαλύτερο σερί",
-  "StatsTopTabs.session.number-of-sessions": "Αριθμός συνεδριών",
-  "StatsTopTabs.session.avg-duration": "Μέση διάρκεια συνεδρίας",
-  "StatsTopTabs.session.longest-session": "Μεγαλύτερη σύνοδος",
-  "StatsTopTabs.session.shortest-session": "Συντομότερη σύνοδος"
+  "StatsTopTabs.session.currentStreak": "Τρέχον σερί",
+  "StatsTopTabs.session.longestStreak": "Μεγαλύτερο σερί",
+  "StatsTopTabs.session.numberOfSessions": "Αριθμός συνεδριών",
+  "StatsTopTabs.session.avgDuration": "Μέση διάρκεια συνεδρίας",
+  "StatsTopTabs.session.longestSession": "Μεγαλύτερη σύνοδος",
+  "StatsTopTabs.session.shortestSession": "Συντομότερη σύνοδος"
 }

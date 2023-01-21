@@ -1,9 +1,9 @@
 {
-  "App.Name": "Rozumné prihlásenie",
-  "common.Cancel": "Zrušiť",
-  "notifee.return-to-app": "Ťuknutím na položku sa vrátite do aplikácie",
-  "notifee.inviting-bell": "Pozvanie na zvonenie",
-  "notifee.in-progress": "Prebieha",
+  "app.name": "Rozumné prihlásenie",
+  "common.cancel": "Zrušiť",
+  "notifee.returnToApp": "Ťuknutím na položku sa vrátite do aplikácie",
+  "notifee.invitingBell": "Pozvanie na zvonenie",
+  "notifee.inProgress": "Prebieha",
   "Settings.appearance": "Vzhľad",
   "Settings.colorMode": "Farebný režim",
   "Settings.colorMode.light": "Svetlo",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditačné stretnutia",
   "StatsTopTabs.session.mindfulStreak": "Rozvážny pruh",
   "StatsTopTabs.session.mindfulSessions": "Rozumné sedenia",
-  "StatsTopTabs.session.current-streak": "Aktuálna pruh",
-  "StatsTopTabs.session.longest-streak": "Najdlhšia séria",
-  "StatsTopTabs.session.number-of-sessions": "Počet relácií",
-  "StatsTopTabs.session.avg-duration": "Priemerné trvanie relácie",
-  "StatsTopTabs.session.longest-session": "Najdlhšia relácia",
-  "StatsTopTabs.session.shortest-session": "Najkratšia relácia"
+  "StatsTopTabs.session.currentStreak": "Aktuálna pruh",
+  "StatsTopTabs.session.longestStreak": "Najdlhšia séria",
+  "StatsTopTabs.session.numberOfSessions": "Počet relácií",
+  "StatsTopTabs.session.avgDuration": "Priemerné trvanie relácie",
+  "StatsTopTabs.session.longestSession": "Najdlhšia relácia",
+  "StatsTopTabs.session.shortestSession": "Najkratšia relácia"
 }

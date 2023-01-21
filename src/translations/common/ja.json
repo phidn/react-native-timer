@@ -1,9 +1,9 @@
 {
-  "App.Name": "マインドフルネス・チェックイン",
-  "common.Cancel": "キャンセル",
-  "notifee.return-to-app": "をタップしてアプリに戻る",
-  "notifee.inviting-bell": "ベルを誘う",
-  "notifee.in-progress": "進行中",
+  "app.name": "マインドフルネス・チェックイン",
+  "common.cancel": "キャンセル",
+  "notifee.returnToApp": "をタップしてアプリに戻る",
+  "notifee.invitingBell": "ベルを誘う",
+  "notifee.inProgress": "進行中",
   "Settings.appearance": "外観",
   "Settings.colorMode": "カラーモード",
   "Settings.colorMode.light": "光",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "瞑想会",
   "StatsTopTabs.session.mindfulStreak": "マインドフルネス・ストリーク",
   "StatsTopTabs.session.mindfulSessions": "マインドフルネスセッション",
-  "StatsTopTabs.session.current-streak": "カレントストレーク",
-  "StatsTopTabs.session.longest-streak": "最長連勝記録",
-  "StatsTopTabs.session.number-of-sessions": "セッション数",
-  "StatsTopTabs.session.avg-duration": "平均セッション時間",
-  "StatsTopTabs.session.longest-session": "最長セッション",
-  "StatsTopTabs.session.shortest-session": "最短セッション"
+  "StatsTopTabs.session.currentStreak": "カレントストレーク",
+  "StatsTopTabs.session.longestStreak": "最長連勝記録",
+  "StatsTopTabs.session.numberOfSessions": "セッション数",
+  "StatsTopTabs.session.avgDuration": "平均セッション時間",
+  "StatsTopTabs.session.longestSession": "最長セッション",
+  "StatsTopTabs.session.shortestSession": "最短セッション"
 }

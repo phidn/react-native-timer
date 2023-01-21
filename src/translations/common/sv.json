@@ -1,9 +1,9 @@
 {
-  "App.Name": "Mindful Check-in",
-  "common.Cancel": "Avbryt",
-  "notifee.return-to-app": "Tryck på för att återgå till appen",
-  "notifee.inviting-bell": "Att bjuda in klockan",
-  "notifee.in-progress": "På gång",
+  "app.name": "Mindful Check-in",
+  "common.cancel": "Avbryt",
+  "notifee.returnToApp": "Tryck på för att återgå till appen",
+  "notifee.invitingBell": "Att bjuda in klockan",
+  "notifee.inProgress": "På gång",
   "Settings.appearance": "Utseende",
   "Settings.colorMode": "Färgläge",
   "Settings.colorMode.light": "Ljus",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditationssessioner",
   "StatsTopTabs.session.mindfulStreak": "Mindful streak",
   "StatsTopTabs.session.mindfulSessions": "Sinnfulla sessioner",
-  "StatsTopTabs.session.current-streak": "Nuvarande streak",
-  "StatsTopTabs.session.longest-streak": "Längsta serien",
-  "StatsTopTabs.session.number-of-sessions": "Antal sessioner",
-  "StatsTopTabs.session.avg-duration": "Genomsnittlig sessionslängd",
-  "StatsTopTabs.session.longest-session": "Längsta session",
-  "StatsTopTabs.session.shortest-session": "Kortaste sessionen"
+  "StatsTopTabs.session.currentStreak": "Nuvarande streak",
+  "StatsTopTabs.session.longestStreak": "Längsta serien",
+  "StatsTopTabs.session.numberOfSessions": "Antal sessioner",
+  "StatsTopTabs.session.avgDuration": "Genomsnittlig sessionslängd",
+  "StatsTopTabs.session.longestSession": "Längsta session",
+  "StatsTopTabs.session.shortestSession": "Kortaste sessionen"
 }

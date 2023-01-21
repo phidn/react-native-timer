@@ -59,7 +59,7 @@ const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation 
         </View>
         <View style={styles.modalActions}>
           <Button onPress={() => setIsShowSoundDialog(!isShowSoundDialog)}>
-            {t('common.Cancel')}
+            {t('common.cancel')}
           </Button>
           <Button onPress={changeThemeColor}>Ok</Button>
         </View>

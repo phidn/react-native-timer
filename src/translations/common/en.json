@@ -1,11 +1,11 @@
 {
-  "App.Name": "Mindful Check-in",
+  "app.name": "Mindful Check-in",
 
-  "common.Cancel": "Cancel",
+  "common.cancel": "Cancel",
 
-  "notifee.return-to-app": "Tap to return to the app",
-  "notifee.inviting-bell": "Inviting the bell",
-  "notifee.in-progress": "In progress",
+  "notifee.returnToApp": "Tap to return to the app",
+  "notifee.invitingBell": "Inviting the bell",
+  "notifee.inProgress": "In progress",
 
   "Settings.appearance": "Appearance",
   "Settings.colorMode": "Color mode",
@@ -52,10 +52,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditation sessions",
   "StatsTopTabs.session.mindfulStreak": "Mindful streak",
   "StatsTopTabs.session.mindfulSessions": "Mindful sessions",
-  "StatsTopTabs.session.current-streak": "Current streak",
-  "StatsTopTabs.session.longest-streak": "Longest streak",
-  "StatsTopTabs.session.number-of-sessions": "Number of Sessions",
-  "StatsTopTabs.session.avg-duration": "Average session duration",
-  "StatsTopTabs.session.longest-session": "Longest session",
-  "StatsTopTabs.session.shortest-session": "Shortest session"
+  "StatsTopTabs.session.currentStreak": "Current streak",
+  "StatsTopTabs.session.longestStreak": "Longest streak",
+  "StatsTopTabs.session.numberOfSessions": "Number of Sessions",
+  "StatsTopTabs.session.avgDuration": "Average session duration",
+  "StatsTopTabs.session.longestSession": "Longest session",
+  "StatsTopTabs.session.shortestSession": "Shortest session"
 }

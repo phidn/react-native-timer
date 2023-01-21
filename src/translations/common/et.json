@@ -1,9 +1,9 @@
 {
-  "App.Name": "Teadlik sisselogimine",
-  "common.Cancel": "Tühista",
-  "notifee.return-to-app": "Rakendusse naasmiseks koputage",
-  "notifee.inviting-bell": "Kella kutsumine",
-  "notifee.in-progress": "Käimas",
+  "app.name": "Teadlik sisselogimine",
+  "common.cancel": "Tühista",
+  "notifee.returnToApp": "Rakendusse naasmiseks koputage",
+  "notifee.invitingBell": "Kella kutsumine",
+  "notifee.inProgress": "Käimas",
   "Settings.appearance": "Välimus",
   "Settings.colorMode": "Värvirežiim",
   "Settings.colorMode.light": "Valgus",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditatsiooni seansid",
   "StatsTopTabs.session.mindfulStreak": "Meeleolukas vööt",
   "StatsTopTabs.session.mindfulSessions": "Meeleolukad seansid",
-  "StatsTopTabs.session.current-streak": "Praegune seeria",
-  "StatsTopTabs.session.longest-streak": "Pikim seeria",
-  "StatsTopTabs.session.number-of-sessions": "Seansside arv",
-  "StatsTopTabs.session.avg-duration": "Seansi keskmine kestus",
-  "StatsTopTabs.session.longest-session": "Pikim seanss",
-  "StatsTopTabs.session.shortest-session": "Lühim seanss"
+  "StatsTopTabs.session.currentStreak": "Praegune seeria",
+  "StatsTopTabs.session.longestStreak": "Pikim seeria",
+  "StatsTopTabs.session.numberOfSessions": "Seansside arv",
+  "StatsTopTabs.session.avgDuration": "Seansi keskmine kestus",
+  "StatsTopTabs.session.longestSession": "Pikim seanss",
+  "StatsTopTabs.session.shortestSession": "Lühim seanss"
 }

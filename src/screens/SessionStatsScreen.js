@@ -29,7 +29,7 @@ const SessionStatsScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.current-streak')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.currentStreak')}</Paragraph>
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{currentStreak}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
@@ -40,7 +40,7 @@ const SessionStatsScreen = () => {
         </Card>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.longest-streak')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.longestStreak')}</Paragraph>
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{longestStreak}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
@@ -68,13 +68,13 @@ const SessionStatsScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.number-of-sessions')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.numberOfSessions')}</Paragraph>
             <Text variant="displaySmall">{numberOfSessions}</Text>
           </Card.Content>
         </Card>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.avg-duration')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.avgDuration')}</Paragraph>
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{avgSessionDuration}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
@@ -89,7 +89,7 @@ const SessionStatsScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.longest-session')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.longestSession')}</Paragraph>
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{longestSession}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>
@@ -100,7 +100,7 @@ const SessionStatsScreen = () => {
         </Card>
         <Card style={styles.card}>
           <Card.Content>
-            <Paragraph>{t('StatsTopTabs.session.shortest-session')}</Paragraph>
+            <Paragraph>{t('StatsTopTabs.session.shortestSession')}</Paragraph>
             <View style={styles.cardTwoText}>
               <Text variant="displaySmall">{shortestSession}</Text>
               <Text variant="bodyLarge" style={{ marginLeft: 5 }}>

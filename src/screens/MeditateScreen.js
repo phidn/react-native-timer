@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { StyleSheet, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, View, useWindowDimensions, AppState } from 'react-native'
 import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
@@ -12,6 +12,7 @@ import dayjs from 'dayjs'
 import _BackgroundTimer from '@/utilities/BackgroundTimer'
 import { useTranslation } from 'react-i18next'
 import notifee from '@notifee/react-native'
+import { logger } from '@/utilities/logger'
 
 let preparationTime = 10
 let numberOfInviteBell = 3
@@ -34,16 +35,11 @@ const baseNotifeeMTAndroid = {
 
 const MeditateScreen = ({ route, navigation }) => {
   const { params } = route
-  if (__DEV__) {
-    params.duration = 40
-    params.interval = 10
-    preparationTime = 5
-    numberOfInviteBell = 2
-  }
 
   const msDuration = sToMs(params.duration)
   const msInterval = sToMs(params.interval)
   const isInterval = params.interval > 0
+  const totalTime = params.duration + preparationTime
 
   const { t } = useTranslation()
   const { colors } = useTheme()
@@ -53,7 +49,7 @@ const MeditateScreen = ({ route, navigation }) => {
   const baseNotifeeMT = {
     id: 'meditation_timer',
     title: 'Meditation Timer',
-    body: t('notifee.return-to-app'),
+    body: t('notifee.returnToApp'),
   }
 
   const isShowCountdown = useStore((state) => state.isShowCountdown)
@@ -65,15 +61,22 @@ const MeditateScreen = ({ route, navigation }) => {
   const [startedSession, setStartedSession] = useState()
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
-  const remainingTimeRef = useRef(preparationTime)
+  const remainingTimeRef = useRef(totalTime)
+  const appState = useRef(AppState.currentState)
+  const [countdownKey, setCountdownKey] = useState(0)
+
+  const [secondsLeft, setSecondsLeft] = useState(totalTime)
+  const [intervalTaskId, setIntervalTaskId] = useState()
+  const [activeIntervalNumber, setActiveIntervalNumber] = useState(0)
 
   const intervalTask = async () => {
-    _BackgroundTimer.setInterval(() => {
-      const remainingTime = remainingTimeRef.current
-      if (remainingTime >= params.interval) {
+    const _intervalTaskId = _BackgroundTimer.setInterval(() => {
+      if (activeIntervalNumber < params.countInterval) {
         playLongBell(params.bellId, params.bellVolume)
+        setActiveIntervalNumber((x) => x + 1)
       }
     }, msInterval)
+    setIntervalTaskId(_intervalTaskId)
   }
 
   const endSession = async (started) => {
@@ -90,6 +93,18 @@ const MeditateScreen = ({ route, navigation }) => {
   }, [])
 
   useEffect(() => {
+    const startTimer = () => {
+      _BackgroundTimer.setInterval(() => {
+        setSecondsLeft((secs) => {
+          if (secs > 0) return secs - 1
+          else return 0
+        })
+      }, 1000)
+    }
+    startTimer()
+  }, [])
+
+  useEffect(() => {
     const prepareTask = async () => {
       /**
        * notifee
@@ -99,7 +114,7 @@ const MeditateScreen = ({ route, navigation }) => {
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: t('notifee.inviting-bell'),
+        subtitle: t('notifee.invitingBell'),
         android: {
           ...baseNotifeeMTAndroid,
           showChronometer: true,
@@ -112,19 +127,17 @@ const MeditateScreen = ({ route, navigation }) => {
        * Background Timer
        */
       const _startedSession = dayjs().format('HH:mm')
-      const sessionDelay = (params.duration + preparationTime) * 1000
+      const sessionDelay = totalTime * 1000
       const prepareDelay = preparationTime * 1000
 
       const startSession = () => {
         playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
         setIsPrepared(false)
-        // remainingTimeRef.current = params.duration
-        // setCountdownKey(uuid.v4())
         setStartedSession(_startedSession)
 
         notifee.displayNotification({
           ...baseNotifeeMT,
-          subtitle: t('notifee.in-progress'),
+          subtitle: t('notifee.inProgress'),
           android: {
             ...baseNotifeeMTAndroid,
             showChronometer: true,
@@ -150,12 +163,33 @@ const MeditateScreen = ({ route, navigation }) => {
     }
   }, [])
 
-  const startAfterPauseTask = (delayTime) => {
-    const remainingTime = remainingTimeRef.current
+  useEffect(() => {
+    if (activeIntervalNumber === params.countInterval) {
+      _BackgroundTimer.clearInterval(intervalTaskId)
+    }
+  }, [activeIntervalNumber])
 
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (appState.current === 'active' && nextAppState.match(/inactive|background/)) {
+      }
+      if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
+        remainingTimeRef.current = secondsLeft
+        setCountdownKey((x) => x + 1)
+      }
+      appState.current = nextAppState
+    })
+
+    return () => {
+      subscription.remove()
+    }
+  }, [secondsLeft])
+
+  const startAfterPauseTask = (delayTime) => {
     const playSession = () => {
-      if (remainingTime >= params.interval) {
+      if (activeIntervalNumber < params.countInterval) {
         playLongBell(params.bellId, params.bellVolume)
+        setActiveIntervalNumber((x) => x + 1)
       }
       if (isInterval) {
         intervalTask()
@@ -163,7 +197,7 @@ const MeditateScreen = ({ route, navigation }) => {
     }
 
     _BackgroundTimer.setTimeout(() => playSession(), delayTime * 1000)
-    _BackgroundTimer.setTimeout(() => endSession(startedSession), remainingTime * 1000)
+    _BackgroundTimer.setTimeout(() => endSession(startedSession), secondsLeft * 1000)
   }
 
   const onPauseCountdown = () => {
@@ -174,7 +208,7 @@ const MeditateScreen = ({ route, navigation }) => {
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: t('notifee.in-progress'),
+        subtitle: t('notifee.inProgress'),
         android: {
           ...baseNotifeeMTAndroid,
         },
@@ -183,23 +217,22 @@ const MeditateScreen = ({ route, navigation }) => {
 
     // Start countdown => start background interval
     if (!isPlaying) {
-      const remainingTime = remainingTimeRef.current
-
-      for (let nextTime = remainingTime; nextTime > 0; nextTime--) {
-        if (nextTime % params.interval === 0) {
-          startAfterPauseTask(remainingTime - nextTime)
+      let initNext = params.duration - secondsLeft
+      for (let next = params.duration - secondsLeft; next < params.duration; next++) {
+        if (next % params.interval === 0) {
+          startAfterPauseTask(next - initNext)
           break
         }
       }
 
       notifee.displayNotification({
         ...baseNotifeeMT,
-        subtitle: t('notifee.in-progress'),
+        subtitle: t('notifee.inProgress'),
         android: {
           ...baseNotifeeMTAndroid,
           showChronometer: true,
           chronometerDirection: 'down',
-          timestamp: Date.now() + remainingTime * 1000,
+          timestamp: Date.now() + secondsLeft * 1000,
         },
       })
     }
@@ -211,14 +244,16 @@ const MeditateScreen = ({ route, navigation }) => {
     <PageContainer>
       <View style={styles.countdownContainer}>
         <CountdownCircleTimer
+          key={countdownKey}
+          initialRemainingTime={remainingTimeRef.current}
           isPlaying={isPlaying}
-          duration={params.duration + preparationTime}
+          duration={totalTime}
           colors={[
             Color(colors.secondary).hex(),
             Color(colors.primary).hex(),
             Color(colors.primary).hex(),
           ]}
-          colorsTime={[params.duration + preparationTime, params.duration, 0]}
+          colorsTime={[totalTime, params.duration, 0]}
           size={width - 40}
           strokeWidth={10}
           trailColor={Color(colors.surfaceVariant).hex()}
@@ -226,7 +261,6 @@ const MeditateScreen = ({ route, navigation }) => {
         >
           {({ remainingTime }) => {
             remainingTimeRef.current = remainingTime
-
             return (
               <TouchableRipple
                 onPress={() => setIsShowCountdown(!isShowCountdown)}

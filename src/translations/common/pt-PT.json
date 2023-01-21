@@ -1,9 +1,9 @@
 {
-  "App.Name": "Check-in consciente",
-  "common.Cancel": "Cancelar",
-  "notifee.return-to-app": "Toque para voltar à aplicação",
-  "notifee.inviting-bell": "Convidar a campainha",
-  "notifee.in-progress": "Em curso",
+  "app.name": "Check-in consciente",
+  "common.cancel": "Cancelar",
+  "notifee.returnToApp": "Toque para voltar à aplicação",
+  "notifee.invitingBell": "Convidar a campainha",
+  "notifee.inProgress": "Em curso",
   "Settings.appearance": "Aparência",
   "Settings.colorMode": "Modo cor",
   "Settings.colorMode.light": "Luz",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Sessões de meditação",
   "StatsTopTabs.session.mindfulStreak": "Riscas de atenção",
   "StatsTopTabs.session.mindfulSessions": "Sessões de sensibilização",
-  "StatsTopTabs.session.current-streak": "Corrente de corrente",
-  "StatsTopTabs.session.longest-streak": "A mais longa etapa",
-  "StatsTopTabs.session.number-of-sessions": "Número de Sessões",
-  "StatsTopTabs.session.avg-duration": "Duração média da sessão",
-  "StatsTopTabs.session.longest-session": "Sessão mais longa",
-  "StatsTopTabs.session.shortest-session": "Sessão mais curta"
+  "StatsTopTabs.session.currentStreak": "Corrente de corrente",
+  "StatsTopTabs.session.longestStreak": "A mais longa etapa",
+  "StatsTopTabs.session.numberOfSessions": "Número de Sessões",
+  "StatsTopTabs.session.avgDuration": "Duração média da sessão",
+  "StatsTopTabs.session.longestSession": "Sessão mais longa",
+  "StatsTopTabs.session.shortestSession": "Sessão mais curta"
 }

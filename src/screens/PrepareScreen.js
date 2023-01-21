@@ -112,9 +112,22 @@ const PrepareScreen = ({ navigation }) => {
 
   const startSession = () => {
     release()
+
+    let countInterval = 0
+    let total = interval
+    for (;;) {
+      if (total < duration) {
+        ++countInterval
+        total += interval
+      } else {
+        break
+      }
+    }
+
     navigation.navigate(screens.MeditateScreen, {
       duration,
       interval,
+      countInterval,
       bellId,
       bellVolume,
     })
@@ -219,7 +232,7 @@ const PrepareScreen = ({ navigation }) => {
         <View style={{ marginTop: 20, alignItems: 'baseline' }}>
           <RowContainer style={{ marginRight: 15 }}>
             <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[1] }} />
-            <Text variant="labelSmall">{t('StatsTopTabs.session.avg-duration')}</Text>
+            <Text variant="labelSmall">{t('StatsTopTabs.session.avgDuration')}</Text>
             <Text variant="labelSmall">
               {`: ${avgSessionDuration} `}
               {getMinText(avgSessionDuration, i18n.resolvedLanguage)}
@@ -227,7 +240,7 @@ const PrepareScreen = ({ navigation }) => {
           </RowContainer>
           <RowContainer>
             <FontAwesome5 name={'seedling'} style={{ marginRight: 5, color: COLOR_LEVELS[2] }} />
-            <Text variant="labelSmall">{t('StatsTopTabs.session.longest-streak')}</Text>
+            <Text variant="labelSmall">{t('StatsTopTabs.session.longestStreak')}</Text>
             <Text variant="labelSmall">
               {`: ${longestStreak} `}
               {getDayText(longestStreak, i18n.resolvedLanguage)}

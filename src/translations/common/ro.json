@@ -1,9 +1,9 @@
 {
-  "App.Name": "Verificare atentă",
-  "common.Cancel": "Anulează",
-  "notifee.return-to-app": "Atingeți ușor pentru a reveni la aplicație",
-  "notifee.inviting-bell": "Invitarea clopotului",
-  "notifee.in-progress": "În curs de desfășurare",
+  "app.name": "Verificare atentă",
+  "common.cancel": "Anulează",
+  "notifee.returnToApp": "Atingeți ușor pentru a reveni la aplicație",
+  "notifee.invitingBell": "Invitarea clopotului",
+  "notifee.inProgress": "În curs de desfășurare",
   "Settings.appearance": "Aspect",
   "Settings.colorMode": "Modul de culoare",
   "Settings.colorMode.light": "Lumină",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Sesiuni de meditație",
   "StatsTopTabs.session.mindfulStreak": "Strălucire conștientă",
   "StatsTopTabs.session.mindfulSessions": "Sesiuni de conștientizare",
-  "StatsTopTabs.session.current-streak": "Rândul curent",
-  "StatsTopTabs.session.longest-streak": "Cea mai lungă serie",
-  "StatsTopTabs.session.number-of-sessions": "Numărul de sesiuni",
-  "StatsTopTabs.session.avg-duration": "Durata medie a sesiunii",
-  "StatsTopTabs.session.longest-session": "Cea mai lungă sesiune",
-  "StatsTopTabs.session.shortest-session": "Cea mai scurtă sesiune"
+  "StatsTopTabs.session.currentStreak": "Rândul curent",
+  "StatsTopTabs.session.longestStreak": "Cea mai lungă serie",
+  "StatsTopTabs.session.numberOfSessions": "Numărul de sesiuni",
+  "StatsTopTabs.session.avgDuration": "Durata medie a sesiunii",
+  "StatsTopTabs.session.longestSession": "Cea mai lungă sesiune",
+  "StatsTopTabs.session.shortestSession": "Cea mai scurtă sesiune"
 }

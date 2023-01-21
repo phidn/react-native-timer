@@ -1,9 +1,9 @@
 {
-  "App.Name": "Tietoinen sisäänkirjautuminen",
-  "common.Cancel": "Peruuta",
-  "notifee.return-to-app": "Palaa sovellukseen napauttamalla",
-  "notifee.inviting-bell": "Kellon kutsuminen",
-  "notifee.in-progress": "Käynnissä",
+  "app.name": "Tietoinen sisäänkirjautuminen",
+  "common.cancel": "Peruuta",
+  "notifee.returnToApp": "Palaa sovellukseen napauttamalla",
+  "notifee.invitingBell": "Kellon kutsuminen",
+  "notifee.inProgress": "Käynnissä",
   "Settings.appearance": "Ulkonäkö",
   "Settings.colorMode": "Väritila",
   "Settings.colorMode.light": "Valo",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditaatioistunnot",
   "StatsTopTabs.session.mindfulStreak": "Mindful viiru",
   "StatsTopTabs.session.mindfulSessions": "Mindful-istunnot",
-  "StatsTopTabs.session.current-streak": "Nykyinen putki",
-  "StatsTopTabs.session.longest-streak": "Pisin putki",
-  "StatsTopTabs.session.number-of-sessions": "Istuntojen määrä",
-  "StatsTopTabs.session.avg-duration": "Istunnon keskimääräinen kesto",
-  "StatsTopTabs.session.longest-session": "Pisin istunto",
-  "StatsTopTabs.session.shortest-session": "Lyhin istunto"
+  "StatsTopTabs.session.currentStreak": "Nykyinen putki",
+  "StatsTopTabs.session.longestStreak": "Pisin putki",
+  "StatsTopTabs.session.numberOfSessions": "Istuntojen määrä",
+  "StatsTopTabs.session.avgDuration": "Istunnon keskimääräinen kesto",
+  "StatsTopTabs.session.longestSession": "Pisin istunto",
+  "StatsTopTabs.session.shortestSession": "Lyhin istunto"
 }

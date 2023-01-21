@@ -64,6 +64,28 @@ v3NoLabelContainer: {
 },
 ```
 
+### Saved code
+```
+if (__DEV__) {
+  params.duration = 45
+  params.interval = 10
+  preparationTime = 5
+  numberOfInviteBell = 2
+
+  let countInterval = 0
+  let total = params.interval
+  for (;;) {
+    if (total < params.duration) {
+      ++countInterval
+      total += params.interval
+    } else {
+      break
+    }
+  }
+  params.countInterval = countInterval
+}
+```
+
 ## Icons
 - https://materialdesignicons.com/
 - https://oblador.github.io/react-native-vector-icons/

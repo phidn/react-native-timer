@@ -1,9 +1,9 @@
 {
-  "App.Name": "Внимателно регистриране",
-  "common.Cancel": "Отмяна на",
-  "notifee.return-to-app": "Докоснете, за да се върнете в приложението",
-  "notifee.inviting-bell": "Привличане на камбаната",
-  "notifee.in-progress": "В процес на изпълнение",
+  "app.name": "Внимателно регистриране",
+  "common.cancel": "Отмяна на",
+  "notifee.returnToApp": "Докоснете, за да се върнете в приложението",
+  "notifee.invitingBell": "Привличане на камбаната",
+  "notifee.inProgress": "В процес на изпълнение",
   "Settings.appearance": "Външен вид",
   "Settings.colorMode": "Цветен режим",
   "Settings.colorMode.light": "Светлина",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Сесии за медитация",
   "StatsTopTabs.session.mindfulStreak": "Внимателна ивица",
   "StatsTopTabs.session.mindfulSessions": "Разумни сесии",
-  "StatsTopTabs.session.current-streak": "Текуща серия",
-  "StatsTopTabs.session.longest-streak": "Най-дълга серия",
-  "StatsTopTabs.session.number-of-sessions": "Брой сесии",
-  "StatsTopTabs.session.avg-duration": "Средна продължителност на сесията",
-  "StatsTopTabs.session.longest-session": "Най-дългата сесия",
-  "StatsTopTabs.session.shortest-session": "Най-кратка сесия"
+  "StatsTopTabs.session.currentStreak": "Текуща серия",
+  "StatsTopTabs.session.longestStreak": "Най-дълга серия",
+  "StatsTopTabs.session.numberOfSessions": "Брой сесии",
+  "StatsTopTabs.session.avgDuration": "Средна продължителност на сесията",
+  "StatsTopTabs.session.longestSession": "Най-дългата сесия",
+  "StatsTopTabs.session.shortestSession": "Най-кратка сесия"
 }

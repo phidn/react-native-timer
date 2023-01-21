@@ -1,9 +1,9 @@
 {
-  "App.Name": "心灵签到",
-  "common.Cancel": "取消",
-  "notifee.return-to-app": "点选返回应用程序",
-  "notifee.inviting-bell": "邀约钟声",
-  "notifee.in-progress": "正在进行中",
+  "app.name": "心灵签到",
+  "common.cancel": "取消",
+  "notifee.returnToApp": "点选返回应用程序",
+  "notifee.invitingBell": "邀约钟声",
+  "notifee.inProgress": "正在进行中",
   "Settings.appearance": "外观",
   "Settings.colorMode": "颜色模式",
   "Settings.colorMode.light": "亮度",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "冥想会议",
   "StatsTopTabs.session.mindfulStreak": "心灵的连贯性",
   "StatsTopTabs.session.mindfulSessions": "心灵的会议",
-  "StatsTopTabs.session.current-streak": "目前的连贯性",
-  "StatsTopTabs.session.longest-streak": "最长的连胜纪录",
-  "StatsTopTabs.session.number-of-sessions": "会议数量",
-  "StatsTopTabs.session.avg-duration": "平均会话时间",
-  "StatsTopTabs.session.longest-session": "最长的会议",
-  "StatsTopTabs.session.shortest-session": "最短的会议"
+  "StatsTopTabs.session.currentStreak": "目前的连贯性",
+  "StatsTopTabs.session.longestStreak": "最长的连胜纪录",
+  "StatsTopTabs.session.numberOfSessions": "会议数量",
+  "StatsTopTabs.session.avgDuration": "平均会话时间",
+  "StatsTopTabs.session.longestSession": "最长的会议",
+  "StatsTopTabs.session.shortestSession": "最短的会议"
 }

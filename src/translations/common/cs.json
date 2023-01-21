@@ -1,9 +1,9 @@
 {
-  "App.Name": "Rozumné odbavení",
-  "common.Cancel": "Zrušit",
-  "notifee.return-to-app": "Klepnutím se vrátíte do aplikace",
-  "notifee.inviting-bell": "Pozvání zvonu",
-  "notifee.in-progress": "Probíhá",
+  "app.name": "Rozumné odbavení",
+  "common.cancel": "Zrušit",
+  "notifee.returnToApp": "Klepnutím se vrátíte do aplikace",
+  "notifee.invitingBell": "Pozvání zvonu",
+  "notifee.inProgress": "Probíhá",
   "Settings.appearance": "Vzhled",
   "Settings.colorMode": "Barevný režim",
   "Settings.colorMode.light": "Světlo",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "Meditační sezení",
   "StatsTopTabs.session.mindfulStreak": "Pozorný pruh",
   "StatsTopTabs.session.mindfulSessions": "Rozumná sezení",
-  "StatsTopTabs.session.current-streak": "Aktuální pruh",
-  "StatsTopTabs.session.longest-streak": "Nejdelší série",
-  "StatsTopTabs.session.number-of-sessions": "Počet relací",
-  "StatsTopTabs.session.avg-duration": "Průměrná délka relace",
-  "StatsTopTabs.session.longest-session": "Nejdelší sezení",
-  "StatsTopTabs.session.shortest-session": "Nejkratší sezení"
+  "StatsTopTabs.session.currentStreak": "Aktuální pruh",
+  "StatsTopTabs.session.longestStreak": "Nejdelší série",
+  "StatsTopTabs.session.numberOfSessions": "Počet relací",
+  "StatsTopTabs.session.avgDuration": "Průměrná délka relace",
+  "StatsTopTabs.session.longestSession": "Nejdelší sezení",
+  "StatsTopTabs.session.shortestSession": "Nejkratší sezení"
 }

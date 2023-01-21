@@ -1,9 +1,9 @@
 {
-  "App.Name": "Pozorno preverjanje",
-  "common.Cancel": "Prekliči",
-  "notifee.return-to-app": "Tapnite , da se vrnete v aplikacijo",
-  "notifee.inviting-bell": "Vabljenje zvona",
-  "notifee.in-progress": "V teku",
+  "app.name": "Pozorno preverjanje",
+  "common.cancel": "Prekliči",
+  "notifee.returnToApp": "Tapnite , da se vrnete v aplikacijo",
+  "notifee.invitingBell": "Vabljenje zvona",
+  "notifee.inProgress": "V teku",
   "Settings.appearance": "Videz",
   "Settings.colorMode": "Barvni način",
   "Settings.colorMode.light": "Svetloba",
@@ -44,10 +44,10 @@
   "StatsTopTabs.SessionStatsTab": "seje meditacije",
   "StatsTopTabs.session.mindfulStreak": "Pametna črta",
   "StatsTopTabs.session.mindfulSessions": "Zavestne seje",
-  "StatsTopTabs.session.current-streak": "Trenutni niz",
-  "StatsTopTabs.session.longest-streak": "Najdaljši niz",
-  "StatsTopTabs.session.number-of-sessions": "Število sej",
-  "StatsTopTabs.session.avg-duration": "Povprečno trajanje seje",
-  "StatsTopTabs.session.longest-session": "Najdaljša seja",
-  "StatsTopTabs.session.shortest-session": "Najkrajša seja"
+  "StatsTopTabs.session.currentStreak": "Trenutni niz",
+  "StatsTopTabs.session.longestStreak": "Najdaljši niz",
+  "StatsTopTabs.session.numberOfSessions": "Število sej",
+  "StatsTopTabs.session.avgDuration": "Povprečno trajanje seje",
+  "StatsTopTabs.session.longestSession": "Najdaljša seja",
+  "StatsTopTabs.session.shortestSession": "Najkrajša seja"
 }
