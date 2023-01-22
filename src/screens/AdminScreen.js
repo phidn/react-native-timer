@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Card, Divider } from 'react-native-paper'
+import { Button, Card, Divider, useTheme } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { logger } from '@/utilities/logger'
 import { useStore } from '@/store/useStore'
 import PageContainer from '@/components/Containers/PageContainer'
-import { getAsset } from '@/utilities/assetsHelper'
-import useSound from '@/hooks/useSound'
-import { Platform, StyleSheet, View } from 'react-native'
-import notifee from '@notifee/react-native'
+import { StyleSheet, View } from 'react-native'
 import { getYearsDates } from '@/utilities/chartHelper'
 import { getRandomIntInclusive, roundNearest } from '@/utilities/commonHelper'
 import DeviceInfo from 'react-native-device-info'
-import ColorPicker from '@/components/ColorPicker/ColorPicker'
-import BackgroundTimer from '@/utilities/BackgroundTimer'
+import BackgroundService from 'react-native-background-actions'
+import { useTranslation } from 'react-i18next'
 
 const AdminScreen = () => {
+  const { t } = useTranslation()
+  const { colors } = useTheme()
+
   const clearAsyncStorage = () => {
     AsyncStorage.clear()
   }
@@ -84,43 +84,6 @@ const AdminScreen = () => {
     setSessions(_sessions)
   }
 
-  const { play } = useSound()
-  const testBackgroundTimer = () => {
-    const intervalId = BackgroundTimer.setInterval(() => console.log('tic'), 500)
-  }
-
-  useEffect(() => {
-    notifee.onForegroundEvent(async ({ type, detail }) => {})
-    notifee.onBackgroundEvent(async ({ type, detail }) => {})
-  }, [])
-
-  const onDisplayNotification = async () => {
-    // Request permissions (required for iOS)
-    await notifee.requestPermission()
-
-    // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'AdminScreen',
-      name: 'AdminScreen Channel',
-    })
-
-    // Display a notification
-    notifee.displayNotification({
-      id: 'admin_notification',
-      title: 'Meditation Timer',
-      body: 'Tap to go back to the app',
-      subtitle: 'In progress',
-      android: {
-        channelId,
-        largeIcon: require('../assets/images/logo.png'),
-        timestamp: Date.now() + 300000,
-        showChronometer: true,
-        chronometerDirection: 'down',
-        autoCancel: false,
-      },
-    })
-  }
-
   const getDevice = async () => {
     const device = await DeviceInfo.getInstallerPackageName()
     logger('→ getDevice', device)
@@ -134,8 +97,49 @@ const AdminScreen = () => {
     console.log('premium status', !isPremium)
   }
 
+  const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time))
+
+  const veryIntensiveTask = async (taskDataArguments) => {
+    // Example of an infinite loop task
+    const { delay } = taskDataArguments
+    await new Promise(async (resolve) => {
+      for (let i = 0; BackgroundService.isRunning(); i++) {
+        console.log(i)
+        await sleep(delay)
+      }
+    })
+  }
+
+  const testBackgroundActions = async () => {
+    const options = {
+      taskName: 'Example',
+      taskTitle: t('app.name'),
+      taskDesc: t('notifee.returnToApp'),
+      taskIcon: {
+        name: 'ic_small_icon',
+        type: 'drawable',
+      },
+      color: colors.primary,
+      linkingURI: 'yourSchemeHere://chat/jane',
+      parameters: {
+        delay: 1000,
+      },
+    }
+
+    await BackgroundService.start(veryIntensiveTask, options)
+  }
+
+  const stopBackgroundActions = async () => {
+    await BackgroundService.stop()
+  }
+
   return (
     <PageContainer style={{ padding: 40 }}>
+      <Card style={styles.card}>
+        <Button onPress={testBackgroundActions}>Test background actions</Button>
+        <Button onPress={stopBackgroundActions}>Stop background actions</Button>
+      </Card>
+
       <Card style={styles.card}>
         <Button onPress={getDevice}>Device</Button>
         <Button onPress={togglePremium}>Toggle premium</Button>
@@ -152,11 +156,6 @@ const AdminScreen = () => {
         <Button onPress={devSession}>Dev Session</Button>
         <Button onPress={clearSession}>Clear session</Button>
         <Button onPress={() => logger(sessions)}>Log session</Button>
-      </Card>
-
-      <Card style={styles.card}>
-        <Button onPress={testBackgroundTimer}>Test background timer</Button>
-        <Button onPress={onDisplayNotification}>Display notifee</Button>
       </Card>
     </PageContainer>
   )

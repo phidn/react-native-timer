@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.2.0",
-    "@notifee/react-native": "^7.3.0",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/datetimepicker": "^6.7.1",
     "@react-native-community/slider": "^4.3.3",
@@ -53,6 +52,7 @@
     "react": "18.1.0",
     "react-i18next": "^12.1.1",
     "react-native": "0.70.6",
+    "react-native-background-actions": "^3.0.0",
     "react-native-bootsplash": "^4.4.0",
     "react-native-calendars": "^1.1292.0",
     "react-native-countdown-circle-timer": "^3.1.0",

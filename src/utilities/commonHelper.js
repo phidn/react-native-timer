@@ -48,3 +48,5 @@ export const getRandomIntInclusive = (min, max) => {
 export const capitalize = (string) => {
   return `${string.charAt(0).toUpperCase()}${string.slice(1).toLowerCase()}`
 }
+
+export const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time))

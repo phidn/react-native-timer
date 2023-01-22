@@ -4,53 +4,27 @@ import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
 import RowContainer from '@/components/Containers/RowContainer'
-import { getCountdown, sToMin, sToMs } from '@/utilities/timeHelper'
+import { getCountdown, sToMin } from '@/utilities/timeHelper'
 import Color from 'color'
 import useSound from '@/hooks/useSound'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
-import _BackgroundTimer from '@/utilities/BackgroundTimer'
 import { useTranslation } from 'react-i18next'
-import notifee from '@notifee/react-native'
 import { logger } from '@/utilities/logger'
+import BackgroundService from 'react-native-background-actions'
 
 let preparationTime = 10
 let numberOfInviteBell = 3
-
-const channelMT = {
-  id: 'meditation_timer_channel',
-  name: 'Meditation Timer Channel',
-}
-
-const baseNotifeeMTAndroid = {
-  smallIcon: 'ic_small_icon',
-  largeIcon: require('../assets/images/logo.png'),
-  channelId: channelMT.id,
-  autoCancel: false,
-  pressAction: {
-    id: 'default',
-    launchActivity: 'default',
-  },
-}
+let myInterval
 
 const MeditateScreen = ({ route, navigation }) => {
   const { params } = route
-
-  const msDuration = sToMs(params.duration)
-  const msInterval = sToMs(params.interval)
-  const isInterval = params.interval > 0
   const totalTime = params.duration + preparationTime
-
+  
   const { t } = useTranslation()
   const { colors } = useTheme()
   const { playLongBell, playShortBell, release } = useSound()
   const { width } = useWindowDimensions()
-
-  const baseNotifeeMT = {
-    id: 'meditation_timer',
-    title: 'Meditation Timer',
-    body: t('notifee.returnToApp'),
-  }
 
   const isShowCountdown = useStore((state) => state.isShowCountdown)
   const setIsShowCountdown = useStore((state) => state.setIsShowCountdown)
@@ -66,108 +40,64 @@ const MeditateScreen = ({ route, navigation }) => {
   const [countdownKey, setCountdownKey] = useState(0)
 
   const [secondsLeft, setSecondsLeft] = useState(totalTime)
-  const [intervalTaskId, setIntervalTaskId] = useState()
-  const [activeIntervalNumber, setActiveIntervalNumber] = useState(0)
+  const [listIntervalSeconds, setListIntervalSeconds] = useState([])
 
-  const intervalTask = async () => {
-    const _intervalTaskId = _BackgroundTimer.setInterval(() => {
-      if (activeIntervalNumber < params.countInterval) {
-        playLongBell(params.bellId, params.bellVolume)
-        setActiveIntervalNumber((x) => x + 1)
-      }
-    }, msInterval)
-    setIntervalTaskId(_intervalTaskId)
-  }
-
-  const endSession = async (started) => {
+  const endSession = async () => {
     const date = dayjs().format('YYYY-MM-DD')
     const ended = dayjs().format('HH:mm')
-    setSessionLogs(date, sToMin(params.duration), started, ended)
+    setSessionLogs(date, sToMin(params.duration), startedSession, ended)
     await playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
     navigation.goBack()
   }
 
-  useEffect(() => {
-    notifee.onForegroundEvent(({ type, detail }) => {})
-    notifee.onBackgroundEvent(async ({ type, detail }) => {})
-  }, [])
-
-  useEffect(() => {
-    const startTimer = () => {
-      _BackgroundTimer.setInterval(() => {
-        setSecondsLeft((secs) => {
-          if (secs > 0) return secs - 1
-          else return 0
-        })
-      }, 1000)
-    }
-    startTimer()
-  }, [])
-
-  useEffect(() => {
-    const prepareTask = async () => {
-      /**
-       * notifee
-       */
-      await notifee.requestPermission()
-      await notifee.createChannel(channelMT)
-
-      notifee.displayNotification({
-        ...baseNotifeeMT,
-        subtitle: t('notifee.invitingBell'),
-        android: {
-          ...baseNotifeeMTAndroid,
-          showChronometer: true,
-          chronometerDirection: 'down',
-          timestamp: Date.now() + preparationTime * 1000,
-        },
+  const startTimer = async () => {
+    const veryIntensiveTask = async (taskDataArguments) => {
+      const { delay } = taskDataArguments
+      await new Promise(async (resolve) => {
+        myInterval = setInterval(() => {
+          setSecondsLeft((secs) => {
+            if (secs > 0) return secs - 1
+            else return 0
+          })
+        }, delay)
       })
-
-      /**
-       * Background Timer
-       */
-      const _startedSession = dayjs().format('HH:mm')
-      const sessionDelay = totalTime * 1000
-      const prepareDelay = preparationTime * 1000
-
-      const startSession = () => {
-        playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
-        setIsPrepared(false)
-        setStartedSession(_startedSession)
-
-        notifee.displayNotification({
-          ...baseNotifeeMT,
-          subtitle: t('notifee.inProgress'),
-          android: {
-            ...baseNotifeeMTAndroid,
-            showChronometer: true,
-            chronometerDirection: 'down',
-            timestamp: Date.now() + msDuration + 1000,
-          },
-        })
-
-        if (isInterval) {
-          intervalTask()
-        }
-      }
-
-      _BackgroundTimer.setTimeout(() => startSession(), prepareDelay)
-      _BackgroundTimer.setTimeout(() => endSession(_startedSession), sessionDelay)
     }
-    prepareTask()
 
-    return () => {
-      release()
-      _BackgroundTimer.clearAll()
-      notifee.cancelNotification(baseNotifeeMT.id)
-    }
-  }, [])
+    await BackgroundService.start(veryIntensiveTask, {
+      taskName: 'mindfulness_timer',
+      taskTitle: t('app.name'),
+      taskDesc: t('notifee.returnToApp'),
+      taskIcon: {
+        name: 'ic_small_icon',
+        type: 'drawable',
+      },
+      color: colors.primary,
+      linkingURI: 'yourSchemeHere://chat/jane',
+      parameters: {
+        delay: 1000,
+      },
+    })
+  }
 
   useEffect(() => {
-    if (activeIntervalNumber === params.countInterval) {
-      _BackgroundTimer.clearInterval(intervalTaskId)
+    startTimer()
+
+    const _startedSession = dayjs().format('HH:mm')
+    setStartedSession(_startedSession)
+
+    const listSeconds = []
+    const initSeconds = params.duration - params.interval
+    for (let i = initSeconds; i > 0; i = i - params.interval) {
+      listSeconds.push(i)
     }
-  }, [activeIntervalNumber])
+    setListIntervalSeconds(listSeconds)
+
+    return async () => {
+      release()
+      await BackgroundService.stop()
+      clearInterval(myInterval)
+    }
+  }, [])
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextAppState) => {
@@ -180,61 +110,35 @@ const MeditateScreen = ({ route, navigation }) => {
       appState.current = nextAppState
     })
 
+    if (secondsLeft === params.duration) {
+      playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
+      setIsPrepared(false)
+    }
+
+    if (secondsLeft === 0) {
+      endSession()
+    }
+
     return () => {
       subscription.remove()
     }
-  }, [secondsLeft])
+  }, [secondsLeft, startedSession])
 
-  const startAfterPauseTask = (delayTime) => {
-    const playSession = () => {
-      if (activeIntervalNumber < params.countInterval) {
-        playLongBell(params.bellId, params.bellVolume)
-        setActiveIntervalNumber((x) => x + 1)
-      }
-      if (isInterval) {
-        intervalTask()
-      }
+  useEffect(() => {
+    if (listIntervalSeconds?.indexOf(secondsLeft) !== -1) {
+      playLongBell(params.bellId, params.bellVolume)
     }
+  }, [secondsLeft, listIntervalSeconds])
 
-    _BackgroundTimer.setTimeout(() => playSession(), delayTime * 1000)
-    _BackgroundTimer.setTimeout(() => endSession(startedSession), secondsLeft * 1000)
-  }
-
-  const onPauseCountdown = () => {
-    // Pause countdown:
+  const onPauseCountdown = async () => {
     if (isPlaying) {
       release()
-      _BackgroundTimer.clearAll()
-
-      notifee.displayNotification({
-        ...baseNotifeeMT,
-        subtitle: t('notifee.inProgress'),
-        android: {
-          ...baseNotifeeMTAndroid,
-        },
-      })
+      await BackgroundService.stop()
+      clearInterval(myInterval)
     }
 
-    // Start countdown => start background interval
     if (!isPlaying) {
-      let initNext = params.duration - secondsLeft
-      for (let next = params.duration - secondsLeft; next < params.duration; next++) {
-        if (next % params.interval === 0) {
-          startAfterPauseTask(next - initNext)
-          break
-        }
-      }
-
-      notifee.displayNotification({
-        ...baseNotifeeMT,
-        subtitle: t('notifee.inProgress'),
-        android: {
-          ...baseNotifeeMTAndroid,
-          showChronometer: true,
-          chronometerDirection: 'down',
-          timestamp: Date.now() + secondsLeft * 1000,
-        },
-      })
+      startTimer()
     }
 
     setIsPlaying(!isPlaying)

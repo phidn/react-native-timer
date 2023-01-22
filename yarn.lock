@@ -1391,11 +1391,6 @@
   resolved "https://registry.yarnpkg.com/@material/material-color-utilities/-/material-color-utilities-0.2.0.tgz#adc64dfea1eb124ff0654fa833a180d7080cbbaa"
   integrity sha512-Wux17VAe27abfUyA+yPq/xN7+e6xkj1UFKd9g02KD0HhpM+GRqXLfytJ6nJKhFtliZouQfTcBcOg2cGrt/XbKA==
 
-"@notifee/react-native@^7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-7.3.0.tgz#5ded9c2c6d4dd93f65725fbdeab6071a71c13daf"
-  integrity sha512-bAZjmc08I+skS3gRCl/7KXE95N6sIiu3/8EnP9USMt2guWsvxTdoLceWl8uJ5ghP4S9VQiBJUWS29hAKhKHC/A==
-
 "@react-native-async-storage/async-storage@^1.17.11":
   version "1.17.11"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
@@ -3491,6 +3486,11 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
+
+eventemitter3@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
+  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
 
 exec-sh@^0.3.2:
   version "0.3.6"
@@ -6581,6 +6581,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-native-background-actions@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-actions/-/react-native-background-actions-3.0.0.tgz#fbdaf31a5485cea68cff03358516da8ffc2a4fe0"
+  integrity sha512-O/KFdetp8n9cwSfPJQ7hPywTaEHO1ui7ISxKTGkzHxs3IVgEV+QOvKKLxAkTcQs1w5f68KK/LoQsEVwMpbVqew==
+  dependencies:
+    eventemitter3 "^4.0.7"
 
 react-native-bootsplash@^4.4.0:
   version "4.4.0"
