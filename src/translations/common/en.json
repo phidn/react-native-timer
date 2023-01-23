@@ -1,11 +1,11 @@
 {
-  "app.name": "Mindful Check-in",
+  "common.appName": "Mindful Check-in",
 
   "common.cancel": "Cancel",
 
-  "notifee.returnToApp": "Tap to return to the app",
-  "notifee.invitingBell": "Inviting the bell",
-  "notifee.inProgress": "In progress",
+  "notify.returnToApp": "Tap to return to the app",
+  "notify.invitingBell": "Inviting the bell",
+  "notify.inProgress": "In progress",
 
   "Settings.appearance": "Appearance",
   "Settings.colorMode": "Color mode",

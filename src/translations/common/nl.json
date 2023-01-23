@@ -1,9 +1,9 @@
 {
-  "app.name": "Mindful Check-in",
+  "common.appName": "Mindful Check-in",
   "common.cancel": "Annuleren",
-  "notifee.returnToApp": "Tik om terug te keren naar de app",
-  "notifee.invitingBell": "De bel uitnodigen",
-  "notifee.inProgress": "In uitvoering",
+  "notify.returnToApp": "Tik om terug te keren naar de app",
+  "notify.invitingBell": "De bel uitnodigen",
+  "notify.inProgress": "In uitvoering",
   "Settings.appearance": "Verschijning",
   "Settings.colorMode": "Kleurmodus",
   "Settings.colorMode.light": "Licht",

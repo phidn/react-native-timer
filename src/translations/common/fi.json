@@ -1,9 +1,9 @@
 {
-  "app.name": "Tietoinen sisäänkirjautuminen",
+  "common.appName": "Tietoinen sisäänkirjautuminen",
   "common.cancel": "Peruuta",
-  "notifee.returnToApp": "Palaa sovellukseen napauttamalla",
-  "notifee.invitingBell": "Kellon kutsuminen",
-  "notifee.inProgress": "Käynnissä",
+  "notify.returnToApp": "Palaa sovellukseen napauttamalla",
+  "notify.invitingBell": "Kellon kutsuminen",
+  "notify.inProgress": "Käynnissä",
   "Settings.appearance": "Ulkonäkö",
   "Settings.colorMode": "Väritila",
   "Settings.colorMode.light": "Valo",

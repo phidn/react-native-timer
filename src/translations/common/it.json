@@ -1,9 +1,9 @@
 {
-  "app.name": "Check-in consapevole",
+  "common.appName": "Check-in consapevole",
   "common.cancel": "Annullamento",
-  "notifee.returnToApp": "Toccare per tornare all'applicazione",
-  "notifee.invitingBell": "Invitare la campana",
-  "notifee.inProgress": "In corso",
+  "notify.returnToApp": "Toccare per tornare all'applicazione",
+  "notify.invitingBell": "Invitare la campana",
+  "notify.inProgress": "In corso",
   "Settings.appearance": "Aspetto",
   "Settings.colorMode": "Modalità colore",
   "Settings.colorMode.light": "Luce",

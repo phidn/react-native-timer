@@ -1,9 +1,9 @@
 {
-  "app.name": "Pārdomāta reģistrēšanās",
+  "common.appName": "Pārdomāta reģistrēšanās",
   "common.cancel": "Atcelt",
-  "notifee.returnToApp": "Pieskarieties, lai atgrieztos lietotnē",
-  "notifee.invitingBell": "Aicinot zvanu",
-  "notifee.inProgress": "Izstrādes procesā",
+  "notify.returnToApp": "Pieskarieties, lai atgrieztos lietotnē",
+  "notify.invitingBell": "Aicinot zvanu",
+  "notify.inProgress": "Izstrādes procesā",
   "Settings.appearance": "Izskats",
   "Settings.colorMode": "Krāsu režīms",
   "Settings.colorMode.light": "Gaisma",

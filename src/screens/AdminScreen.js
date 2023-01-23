@@ -113,8 +113,8 @@ const AdminScreen = () => {
   const testBackgroundActions = async () => {
     const options = {
       taskName: 'Example',
-      taskTitle: t('app.name'),
-      taskDesc: t('notifee.returnToApp'),
+      taskTitle: t('common.appName'),
+      taskDesc: t('notify.returnToApp'),
       taskIcon: {
         name: 'ic_small_icon',
         type: 'drawable',

@@ -1,9 +1,9 @@
 {
-  "app.name": "Check-in yang penuh perhatian",
+  "common.appName": "Check-in yang penuh perhatian",
   "common.cancel": "Batal",
-  "notifee.returnToApp": "Ketuk untuk kembali ke aplikasi",
-  "notifee.invitingBell": "Mengundang bel",
-  "notifee.inProgress": "Sedang berlangsung",
+  "notify.returnToApp": "Ketuk untuk kembali ke aplikasi",
+  "notify.invitingBell": "Mengundang bel",
+  "notify.inProgress": "Sedang berlangsung",
   "Settings.appearance": "Penampilan",
   "Settings.colorMode": "Mode warna",
   "Settings.colorMode.light": "Cahaya",

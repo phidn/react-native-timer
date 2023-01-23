@@ -1,9 +1,9 @@
 {
-  "app.name": "Mindful Check-in",
+  "common.appName": "Mindful Check-in",
   "common.cancel": "Ακύρωση",
-  "notifee.returnToApp": "Πατήστε για να επιστρέψετε στην εφαρμογή",
-  "notifee.invitingBell": "Προσκαλώντας την καμπάνα",
-  "notifee.inProgress": "Σε εξέλιξη",
+  "notify.returnToApp": "Πατήστε για να επιστρέψετε στην εφαρμογή",
+  "notify.invitingBell": "Προσκαλώντας την καμπάνα",
+  "notify.inProgress": "Σε εξέλιξη",
   "Settings.appearance": "Εμφάνιση",
   "Settings.colorMode": "Λειτουργία χρώματος",
   "Settings.colorMode.light": "Φως",

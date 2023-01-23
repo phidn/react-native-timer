@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { StyleSheet, View, useWindowDimensions, AppState } from 'react-native'
+import { StyleSheet, View, useWindowDimensions, AppState, Linking } from 'react-native'
 import { IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import PageContainer from '@/components/Containers/PageContainer'
@@ -20,7 +20,7 @@ let myInterval
 const MeditateScreen = ({ route, navigation }) => {
   const { params } = route
   const totalTime = params.duration + preparationTime
-  
+
   const { t } = useTranslation()
   const { colors } = useTheme()
   const { playLongBell, playShortBell, release } = useSound()
@@ -35,7 +35,7 @@ const MeditateScreen = ({ route, navigation }) => {
   const [startedSession, setStartedSession] = useState()
   const setSessionLogs = useStore((state) => state.setSessionLogs)
 
-  const remainingTimeRef = useRef(totalTime)
+  const remainingTimeRef = useRef(null)
   const appState = useRef(AppState.currentState)
   const [countdownKey, setCountdownKey] = useState(0)
 
@@ -65,14 +65,14 @@ const MeditateScreen = ({ route, navigation }) => {
 
     await BackgroundService.start(veryIntensiveTask, {
       taskName: 'mindfulness_timer',
-      taskTitle: t('app.name'),
-      taskDesc: t('notifee.returnToApp'),
+      taskTitle: t('common.appName'),
+      taskDesc: t('notify.returnToApp'),
       taskIcon: {
         name: 'ic_small_icon',
         type: 'drawable',
       },
       color: colors.primary,
-      linkingURI: 'yourSchemeHere://chat/jane',
+      linkingURI: 'mindfulcheckin://',
       parameters: {
         delay: 1000,
       },
@@ -80,6 +80,7 @@ const MeditateScreen = ({ route, navigation }) => {
   }
 
   useEffect(() => {
+    Linking.addEventListener('url', () => {})
     startTimer()
 
     const _startedSession = dayjs().format('HH:mm')
@@ -104,8 +105,10 @@ const MeditateScreen = ({ route, navigation }) => {
       if (appState.current === 'active' && nextAppState.match(/inactive|background/)) {
       }
       if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
-        remainingTimeRef.current = secondsLeft
-        setCountdownKey((x) => x + 1)
+        if (!isPrepared) {
+          remainingTimeRef.current = secondsLeft
+          setCountdownKey((x) => x + 1)
+        }
       }
       appState.current = nextAppState
     })
@@ -113,6 +116,8 @@ const MeditateScreen = ({ route, navigation }) => {
     if (secondsLeft === params.duration) {
       playShortBell(params.bellId, params.bellVolume, numberOfInviteBell)
       setIsPrepared(false)
+      remainingTimeRef.current = secondsLeft
+      setCountdownKey((x) => x + 1)
     }
 
     if (secondsLeft === 0) {
@@ -151,20 +156,17 @@ const MeditateScreen = ({ route, navigation }) => {
           key={countdownKey}
           initialRemainingTime={remainingTimeRef.current}
           isPlaying={isPlaying}
-          duration={totalTime}
-          colors={[
-            Color(colors.secondary).hex(),
-            Color(colors.primary).hex(),
-            Color(colors.primary).hex(),
-          ]}
-          colorsTime={[totalTime, params.duration, 0]}
+          duration={isPrepared ? preparationTime : params.duration}
+          colors={isPrepared ? [Color(colors.primary).hex()] : [Color(colors.surfaceVariant).hex()]}
+          colorsTime={[isPrepared ? preparationTime : params.duration]}
           size={width - 40}
-          strokeWidth={10}
-          trailColor={Color(colors.surfaceVariant).hex()}
-          strokeLinecap="round"
+          strokeWidth={15}
+          trailColor={isPrepared ? Color(colors.surfaceVariant).hex() : Color(colors.primary).hex()}
+          strokeLinecap="butt"
         >
           {({ remainingTime }) => {
             remainingTimeRef.current = remainingTime
+
             return (
               <TouchableRipple
                 onPress={() => setIsShowCountdown(!isShowCountdown)}
@@ -177,13 +179,13 @@ const MeditateScreen = ({ route, navigation }) => {
                 centered={true}
               >
                 <View style={styles.timerTouchableContent}>
+                  {isShowCountdown && isPrepared && (
+                    <Text variant="displayMedium">{remainingTime}</Text>
+                  )}
                   {isShowCountdown && !isPrepared && (
                     <Text variant="displayMedium" style={{ textAlign: 'center' }}>
                       {getCountdown(remainingTime)}
                     </Text>
-                  )}
-                  {isShowCountdown && isPrepared && (
-                    <Text variant="displayMedium">{remainingTime - params.duration}</Text>
                   )}
                 </View>
               </TouchableRipple>

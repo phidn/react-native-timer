@@ -1,9 +1,9 @@
 {
-  "app.name": "L'enregistrement en pleine conscience",
+  "common.appName": "L'enregistrement en pleine conscience",
   "common.cancel": "Annuler",
-  "notifee.returnToApp": "Appuyez sur pour revenir à l'application",
-  "notifee.invitingBell": "Inviter la cloche",
-  "notifee.inProgress": "En cours",
+  "notify.returnToApp": "Appuyez sur pour revenir à l'application",
+  "notify.invitingBell": "Inviter la cloche",
+  "notify.inProgress": "En cours",
   "Settings.appearance": "Apparition",
   "Settings.colorMode": "Mode couleur",
   "Settings.colorMode.light": "Lumière",

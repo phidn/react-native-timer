@@ -1,9 +1,9 @@
 {
-  "app.name": "マインドフルネス・チェックイン",
+  "common.appName": "マインドフルネス・チェックイン",
   "common.cancel": "キャンセル",
-  "notifee.returnToApp": "をタップしてアプリに戻る",
-  "notifee.invitingBell": "ベルを誘う",
-  "notifee.inProgress": "進行中",
+  "notify.returnToApp": "をタップしてアプリに戻る",
+  "notify.invitingBell": "ベルを誘う",
+  "notify.inProgress": "進行中",
   "Settings.appearance": "外観",
   "Settings.colorMode": "カラーモード",
   "Settings.colorMode.light": "光",

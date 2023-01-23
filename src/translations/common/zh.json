@@ -1,9 +1,9 @@
 {
-  "app.name": "心灵签到",
+  "common.appName": "心灵签到",
   "common.cancel": "取消",
-  "notifee.returnToApp": "点选返回应用程序",
-  "notifee.invitingBell": "邀约钟声",
-  "notifee.inProgress": "正在进行中",
+  "notify.returnToApp": "点选返回应用程序",
+  "notify.invitingBell": "邀约钟声",
+  "notify.inProgress": "正在进行中",
   "Settings.appearance": "外观",
   "Settings.colorMode": "颜色模式",
   "Settings.colorMode.light": "亮度",

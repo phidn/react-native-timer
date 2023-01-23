@@ -1,9 +1,9 @@
 {
-  "app.name": "Rozumné odbavení",
+  "common.appName": "Rozumné odbavení",
   "common.cancel": "Zrušit",
-  "notifee.returnToApp": "Klepnutím se vrátíte do aplikace",
-  "notifee.invitingBell": "Pozvání zvonu",
-  "notifee.inProgress": "Probíhá",
+  "notify.returnToApp": "Klepnutím se vrátíte do aplikace",
+  "notify.invitingBell": "Pozvání zvonu",
+  "notify.inProgress": "Probíhá",
   "Settings.appearance": "Vzhled",
   "Settings.colorMode": "Barevný režim",
   "Settings.colorMode.light": "Světlo",

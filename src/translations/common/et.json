@@ -1,9 +1,9 @@
 {
-  "app.name": "Teadlik sisselogimine",
+  "common.appName": "Teadlik sisselogimine",
   "common.cancel": "Tühista",
-  "notifee.returnToApp": "Rakendusse naasmiseks koputage",
-  "notifee.invitingBell": "Kella kutsumine",
-  "notifee.inProgress": "Käimas",
+  "notify.returnToApp": "Rakendusse naasmiseks koputage",
+  "notify.invitingBell": "Kella kutsumine",
+  "notify.inProgress": "Käimas",
   "Settings.appearance": "Välimus",
   "Settings.colorMode": "Värvirežiim",
   "Settings.colorMode.light": "Valgus",

@@ -1,9 +1,9 @@
 {
-  "app.name": "Внимателно регистриране",
+  "common.appName": "Внимателно регистриране",
   "common.cancel": "Отмяна на",
-  "notifee.returnToApp": "Докоснете, за да се върнете в приложението",
-  "notifee.invitingBell": "Привличане на камбаната",
-  "notifee.inProgress": "В процес на изпълнение",
+  "notify.returnToApp": "Докоснете, за да се върнете в приложението",
+  "notify.invitingBell": "Привличане на камбаната",
+  "notify.inProgress": "В процес на изпълнение",
   "Settings.appearance": "Външен вид",
   "Settings.colorMode": "Цветен режим",
   "Settings.colorMode.light": "Светлина",

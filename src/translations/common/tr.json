@@ -1,9 +1,9 @@
 {
-  "app.name": "Dikkatli Check-in",
+  "common.appName": "Dikkatli Check-in",
   "common.cancel": "İptal",
-  "notifee.returnToApp": "Uygulamaya dönmek için dokunun",
-  "notifee.invitingBell": "Zili davet etmek",
-  "notifee.inProgress": "Devam ediyor",
+  "notify.returnToApp": "Uygulamaya dönmek için dokunun",
+  "notify.invitingBell": "Zili davet etmek",
+  "notify.inProgress": "Devam ediyor",
   "Settings.appearance": "Görünüş",
   "Settings.colorMode": "Renk modu",
   "Settings.colorMode.light": "Işık",

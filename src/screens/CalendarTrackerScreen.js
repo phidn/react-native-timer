@@ -113,6 +113,7 @@ const CalendarTrackerScreen = () => {
 
           monthTextColor: colors.primary,
           indicatorColor: colors.primary,
+          todayTextColor: colors.primary,
 
           selectedDayTextColor: colors.onSurfaceVariant,
           selectedDayBackgroundColor: 'transparent',

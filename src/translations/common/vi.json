@@ -1,9 +1,9 @@
 {
-  "app.name": "Trở về Chánh niệm",
+  "common.appName": "Trở về Chánh niệm",
   "common.cancel": "Hủy",
-  "notifee.returnToApp": "Nhấp để quay lại ứng dụng",
-  "notifee.invitingBell": "Đang thỉnh chuông",
-  "notifee.inProgress": "Đang trong thời thiền",
+  "notify.returnToApp": "Nhấp để quay lại ứng dụng",
+  "notify.invitingBell": "Đang thỉnh chuông",
+  "notify.inProgress": "Đang trong thời thiền",
   "Settings.appearance": "Hiển thị",
   "Settings.colorMode": "Chế độ màu",
   "Settings.colorMode.light": "Sáng",

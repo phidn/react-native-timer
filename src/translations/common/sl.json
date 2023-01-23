@@ -1,9 +1,9 @@
 {
-  "app.name": "Pozorno preverjanje",
+  "common.appName": "Pozorno preverjanje",
   "common.cancel": "Prekliči",
-  "notifee.returnToApp": "Tapnite , da se vrnete v aplikacijo",
-  "notifee.invitingBell": "Vabljenje zvona",
-  "notifee.inProgress": "V teku",
+  "notify.returnToApp": "Tapnite , da se vrnete v aplikacijo",
+  "notify.invitingBell": "Vabljenje zvona",
+  "notify.inProgress": "V teku",
   "Settings.appearance": "Videz",
   "Settings.colorMode": "Barvni način",
   "Settings.colorMode.light": "Svetloba",

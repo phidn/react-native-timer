@@ -1,9 +1,9 @@
 {
-  "app.name": "Registro consciente",
+  "common.appName": "Registro consciente",
   "common.cancel": "Cancelar",
-  "notifee.returnToApp": "Pulse para volver a la aplicación",
-  "notifee.invitingBell": "Invitar a la campana",
-  "notifee.inProgress": "En curso",
+  "notify.returnToApp": "Pulse para volver a la aplicación",
+  "notify.invitingBell": "Invitar a la campana",
+  "notify.inProgress": "En curso",
   "Settings.appearance": "Apariencia",
   "Settings.colorMode": "Modo de color",
   "Settings.colorMode.light": "Luz",

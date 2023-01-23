@@ -1,9 +1,9 @@
 {
-  "app.name": "Интеллектуальная регистрация",
+  "common.appName": "Интеллектуальная регистрация",
   "common.cancel": "Отмена",
-  "notifee.returnToApp": "Нажмите, чтобы вернуться в приложение",
-  "notifee.invitingBell": "Приглашение колокольчика",
-  "notifee.inProgress": "В процессе выполнения",
+  "notify.returnToApp": "Нажмите, чтобы вернуться в приложение",
+  "notify.invitingBell": "Приглашение колокольчика",
+  "notify.inProgress": "В процессе выполнения",
   "Settings.appearance": "Внешний вид",
   "Settings.colorMode": "Цветовой режим",
   "Settings.colorMode.light": "Свет",

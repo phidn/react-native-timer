@@ -1,9 +1,9 @@
 {
-  "app.name": "Achtsamer Check-in",
+  "common.appName": "Achtsamer Check-in",
   "common.cancel": "Abbrechen",
-  "notifee.returnToApp": "Tippen Sie auf , um zur App zurückzukehren.",
-  "notifee.invitingBell": "Die Glocke einladen",
-  "notifee.inProgress": "In Arbeit",
+  "notify.returnToApp": "Tippen Sie auf , um zur App zurückzukehren.",
+  "notify.invitingBell": "Die Glocke einladen",
+  "notify.inProgress": "In Arbeit",
   "Settings.appearance": "Erscheinungsbild",
   "Settings.colorMode": "Farbmodus",
   "Settings.colorMode.light": "Licht",

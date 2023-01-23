@@ -1,9 +1,9 @@
 {
-  "app.name": "Tudatos bejelentkezés",
+  "common.appName": "Tudatos bejelentkezés",
   "common.cancel": "Törölje",
-  "notifee.returnToApp": "Érintse meg az alkalmazáshoz való visszatéréshez",
-  "notifee.invitingBell": "A harang meghívása",
-  "notifee.inProgress": "Folyamatban",
+  "notify.returnToApp": "Érintse meg az alkalmazáshoz való visszatéréshez",
+  "notify.invitingBell": "A harang meghívása",
+  "notify.inProgress": "Folyamatban",
   "Settings.appearance": "Megjelenés",
   "Settings.colorMode": "Színes üzemmód",
   "Settings.colorMode.light": "Fény",

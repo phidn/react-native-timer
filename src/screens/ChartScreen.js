@@ -25,6 +25,7 @@ import CenterContainer from '@/components/Containers/CenterContainer'
 import { useTranslation } from 'react-i18next'
 import { getDMYFirstChar } from '@/utilities/timeHelper'
 import TopBannerAdContainer from '@/components/Containers/TopBannerAdContainer'
+import { COLOR_LEVELS } from '@/config/calendarHeatmap'
 
 // 7 days
 const weekDates = getWeekDates()
@@ -240,7 +241,7 @@ const ChartScreen = () => {
           <BarChart
             style={{ flex: 1 }}
             data={data}
-            svg={{ fill: colors.primary }}
+            svg={{ fill: COLOR_LEVELS[1] }}
             contentInset={verticalContentInset}
             spacing={0.2}
             gridMin={0}

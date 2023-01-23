@@ -1,9 +1,9 @@
 {
-  "app.name": "Mindful Check-in",
+  "common.appName": "Mindful Check-in",
   "common.cancel": "Anuluj",
-  "notifee.returnToApp": "Stuknij, aby powrócić do aplikacji",
-  "notifee.invitingBell": "Zaproszenie na dzwonek",
-  "notifee.inProgress": "W trakcie realizacji",
+  "notify.returnToApp": "Stuknij, aby powrócić do aplikacji",
+  "notify.invitingBell": "Zaproszenie na dzwonek",
+  "notify.inProgress": "W trakcie realizacji",
   "Settings.appearance": "Wygląd",
   "Settings.colorMode": "Tryb kolorów",
   "Settings.colorMode.light": "Światło",

@@ -1,9 +1,9 @@
 {
-  "app.name": "Verificare atentă",
+  "common.appName": "Verificare atentă",
   "common.cancel": "Anulează",
-  "notifee.returnToApp": "Atingeți ușor pentru a reveni la aplicație",
-  "notifee.invitingBell": "Invitarea clopotului",
-  "notifee.inProgress": "În curs de desfășurare",
+  "notify.returnToApp": "Atingeți ușor pentru a reveni la aplicație",
+  "notify.invitingBell": "Invitarea clopotului",
+  "notify.inProgress": "În curs de desfășurare",
   "Settings.appearance": "Aspect",
   "Settings.colorMode": "Modul de culoare",
   "Settings.colorMode.light": "Lumină",

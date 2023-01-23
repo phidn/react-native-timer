@@ -1,9 +1,9 @@
 {
-  "app.name": "Mindful Check-in",
+  "common.appName": "Mindful Check-in",
   "common.cancel": "Annuller",
-  "notifee.returnToApp": "Tryk på for at vende tilbage til appen",
-  "notifee.invitingBell": "Invitation af klokken",
-  "notifee.inProgress": "I gang",
+  "notify.returnToApp": "Tryk på for at vende tilbage til appen",
+  "notify.invitingBell": "Invitation af klokken",
+  "notify.inProgress": "I gang",
   "Settings.appearance": "Udseende",
   "Settings.colorMode": "Farvetilstand",
   "Settings.colorMode.light": "Lys",

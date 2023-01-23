@@ -1,9 +1,9 @@
 {
-  "app.name": "Dėmesingas registravimasis",
+  "common.appName": "Dėmesingas registravimasis",
   "common.cancel": "Atšaukti",
-  "notifee.returnToApp": "Bakstelėkite , kad grįžtumėte į programą",
-  "notifee.invitingBell": "Kviečiant varpą",
-  "notifee.inProgress": "Vykdoma",
+  "notify.returnToApp": "Bakstelėkite , kad grįžtumėte į programą",
+  "notify.invitingBell": "Kviečiant varpą",
+  "notify.inProgress": "Vykdoma",
   "Settings.appearance": "Išvaizda",
   "Settings.colorMode": "Spalvų režimas",
   "Settings.colorMode.light": "Šviesa",

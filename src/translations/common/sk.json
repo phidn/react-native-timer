@@ -1,9 +1,9 @@
 {
-  "app.name": "Rozumné prihlásenie",
+  "common.appName": "Rozumné prihlásenie",
   "common.cancel": "Zrušiť",
-  "notifee.returnToApp": "Ťuknutím na položku sa vrátite do aplikácie",
-  "notifee.invitingBell": "Pozvanie na zvonenie",
-  "notifee.inProgress": "Prebieha",
+  "notify.returnToApp": "Ťuknutím na položku sa vrátite do aplikácie",
+  "notify.invitingBell": "Pozvanie na zvonenie",
+  "notify.inProgress": "Prebieha",
   "Settings.appearance": "Vzhľad",
   "Settings.colorMode": "Farebný režim",
   "Settings.colorMode.light": "Svetlo",

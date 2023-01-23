@@ -1,9 +1,9 @@
 {
-  "app.name": "Уважна реєстрація",
+  "common.appName": "Уважна реєстрація",
   "common.cancel": "Скасувати",
-  "notifee.returnToApp": "Натисніть, щоб повернутися до програми",
-  "notifee.invitingBell": "Запрошуємо на дзвін",
-  "notifee.inProgress": "У процесі виконання",
+  "notify.returnToApp": "Натисніть, щоб повернутися до програми",
+  "notify.invitingBell": "Запрошуємо на дзвін",
+  "notify.inProgress": "У процесі виконання",
   "Settings.appearance": "Зовнішній вигляд",
   "Settings.colorMode": "Колірний режим",
   "Settings.colorMode.light": "Світло",
