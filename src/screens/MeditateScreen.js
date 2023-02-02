@@ -10,7 +10,6 @@ import useSound from '@/hooks/useSound'
 import { useStore } from '@/store/useStore'
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
-import { logger } from '@/utilities/logger'
 import BackgroundService from 'react-native-background-actions'
 
 let preparationTime = 10

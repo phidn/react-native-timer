@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
+import produce from 'immer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storageKeys } from '@/config/config'
 import { logger } from '@/utilities/logger'
@@ -51,12 +52,14 @@ const sessionSlice = (set) => ({
   sessions: {},
   setSessions: (sessions) => set({ sessions }),
   setSessionLogs: (date, duration, started, ended) =>
-    set((state) => {
-      if (!state.sessions[date]?.logs) {
-        state.sessions[date] = { logs: [] }
-      }
-      state.sessions[date].logs.push([duration, started, ended].join('|'))
-    }),
+    set(
+      produce((state) => {
+        if (!state.sessions[date]?.logs) {
+          state.sessions[date] = { logs: [] }
+        }
+        state.sessions[date].logs.push([duration, started, ended].join('|'))
+      })
+    ),
   clearSession: () => set({ sessions: {} }),
 })
 

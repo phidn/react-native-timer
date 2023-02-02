@@ -133,6 +133,12 @@ const AdminScreen = () => {
     await BackgroundService.stop()
   }
 
+
+  const setTest = useStore(state => state.setTest)
+  const devTest = () => {
+    setTest('2023-02-02', {1: 5})
+  }
+
   return (
     <PageContainer style={{ padding: 40 }}>
       <Card style={styles.card}>
@@ -149,6 +155,11 @@ const AdminScreen = () => {
         <Button onPress={clearAsyncStorage}>Clear AsyncStorage</Button>
         <Button onPress={logAsyncStorage}>Log AsyncStorage</Button>
         <Button onPress={() => logger(store)}>Log app zustand store</Button>
+      </Card>
+
+      <Card style={styles.card}>
+        <Button onPress={() => logger(store.test)}>Log test</Button>
+        <Button onPress={devTest}>Dev test</Button>
       </Card>
 
       <Card style={styles.card}>
