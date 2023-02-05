@@ -2,57 +2,65 @@ import { logger } from './logger'
 
 export const getAsset = (assetKey) => {
   switch (assetKey) {
-    case 'bell_1_short':
-      return require('@/assets/sounds/bell_1_short.mp3')
-    case 'bell_1_long':
-      return require('@/assets/sounds/bell_1_long.mp3')
+    case 'Bell_1_short':
+      return require('@/assets/soundsv2/Bell_1_short.mp3')
+    case 'Bell_1_long':
+      return require('@/assets/soundsv2/Bell_1_long.mp3')
 
-    case 'bell_2_short':
-      return require('@/assets/sounds/bell_2_short.mp3')
-    case 'bell_2_long':
-      return require('@/assets/sounds/bell_2_long.mp3')
+    case 'Bell_2_short':
+      return require('@/assets/soundsv2/Bell_2_short.mp3')
+    case 'Bell_2_long':
+      return require('@/assets/soundsv2/Bell_2_long.mp3')
 
-    case 'bell_3_short':
-      return require('@/assets/sounds/bell_3_short.mp3')
-    case 'bell_3_long':
-      return require('@/assets/sounds/bell_3_long.mp3')
+    case 'Bell_A_short':
+    case 'Bell_A_long':
+      return require('@/assets/soundsv2/Bell_A.mp3')
 
-    case 'bell_4_short':
-      return require('@/assets/sounds/bell_4_short.mp3')
-    case 'bell_4_long':
-      return require('@/assets/sounds/bell_4_long.mp3')
+    case 'Bell_Meditation_Cleaned_short':
+      return require('@/assets/soundsv2/Bell_Meditation_Cleaned_short.mp3')
+    case 'Bell_Meditation_Cleaned_long':
+      return require('@/assets/soundsv2/Bell_Meditation_Cleaned_long.mp3')
 
-    case 'bell_5_short':
-      return require('@/assets/sounds/bell_5_short.mp3')
-    case 'bell_5_long':
-      return require('@/assets/sounds/bell_5_long.mp3')
+    case 'Bell_Meditation_short':
+      return require('@/assets/soundsv2/Bell_Meditation_short.mp3')
+    case 'Bell_Meditation_long':
+      return require('@/assets/soundsv2/Bell_Meditation_long.mp3')
 
-    case 'bell_6_short':
-    case 'bell_6_long':
-      return require('@/assets/sounds/bell_6.mp3')
+    case 'Meditation_Bowls_short':
+    case 'Meditation_Bowls_long':
+      return require('@/assets/soundsv2/Meditation_Bowls.mp3')
 
-    case 'bell_7_short':
-      return require('@/assets/sounds/bell_7_short.mp3')
-    case 'bell_7_long':
-      return require('@/assets/sounds/bell_7_long.mp3')
+    case 'Singing_bowl_hit_1_short':
+      return require('@/assets/soundsv2/Singing_bowl_hit_1_short.mp3')
+    case 'Singing_bowl_hit_1_long':
+      return require('@/assets/soundsv2/Singing_bowl_hit_1_long.mp3')
 
-    case 'bell_8_short':
-      return require('@/assets/sounds/bell_8_short.mp3')
-    case 'bell_8_long':
-      return require('@/assets/sounds/bell_8_long.mp3')
+    case 'Singing_bowl_hit_2_short':
+      return require('@/assets/soundsv2/Singing_bowl_hit_2_short.mp3')
+    case 'Singing_bowl_hit_2_long':
+      return require('@/assets/soundsv2/Singing_bowl_hit_2_long.mp3')
 
-    case 'bell_9_short':
-      return require('@/assets/sounds/bell_9_short.mp3')
-    case 'bell_9_long':
-      return require('@/assets/sounds/bell_9_long.mp3')
+    case 'Singing_bowl_hit_3_short':
+      return require('@/assets/soundsv2/Singing_bowl_hit_3_short.mp3')
+    case 'Singing_bowl_hit_3_long':
+      return require('@/assets/soundsv2/Singing_bowl_hit_3_long.mp3')
 
-    case 'bell_10_short':
-    case 'bell_10_long':
-    case 'bell_default_short':
-    case 'bell_default_long':
-      return require('@/assets/sounds/bell_10.mp3')
+    case 'Singing_Bowl_Male_Frequency_short':
+      return require('@/assets/soundsv2/Singing_Bowl_Male_Frequency_short.mp3')
+    case 'Singing_Bowl_Male_Frequency_long':
+      return require('@/assets/soundsv2/Singing_Bowl_Male_Frequency_long.mp3')
+
+    case 'Singing_Bowl_short':
+      return require('@/assets/soundsv2/Singing_Bowl_short.mp3')
+    case 'Singing_Bowl_long':
+      return require('@/assets/soundsv2/Singing_Bowl_long.mp3')
+
+    case 'Singing_Bowl_Tibetan_short':
+    case 'Singing_Bowl_Tibetan_long':
+      return require('@/assets/soundsv2/Singing_Bowl_Tibetan.mp3')
   }
 
   logger('getAsset error', assetKey)
+  return require('@/assets/soundsv2/Bell_1_short.mp3')
   return null
 }

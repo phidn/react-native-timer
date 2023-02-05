@@ -33,7 +33,7 @@ const prepareSlice = (set) => ({
   prepare: {
     duration: 60 * 30, // 30 minutes
     interval: 60 * 5, // 5 minutes
-    bellId: 'bell_default',
+    bellId: 'Bell_1',
     bellVolume: 0.5,
   },
   setPrepare: (payload) => {

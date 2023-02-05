@@ -182,8 +182,7 @@ const PrepareScreen = ({ navigation }) => {
         right={() => (
           <RowContainer>
             <Text variant="titleMedium" style={[{ color: colors.primary }]}>
-              {bellId !== 'bell_default' && `${t('Prepare.bell')} ${bellId.split('_').pop()}`}
-              {bellId === 'bell_default' && t('Prepare.defaultBell')}
+              {bellId.replace(/_/g, ' ')}
             </Text>
             <Feather
               color={colors.primary}

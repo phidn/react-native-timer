@@ -4,6 +4,7 @@ import { Text, Button, Modal, Portal, RadioButton, useTheme } from 'react-native
 import { useTranslation } from 'react-i18next'
 import useSound from '@/hooks/useSound'
 import { useStore } from '@/store/useStore'
+import { soundKeys } from '@/config/config'
 
 const ChooseSoundModal = (props) => {
   const { isShow, toggleShow, soundVolume, initValue } = props
@@ -12,7 +13,7 @@ const ChooseSoundModal = (props) => {
 
   const { playShortBell, release } = useSound()
   const [soundValue, setSoundValue] = useState(initValue)
-  
+
   const setPrepare = useStore((state) => state.setPrepare)
   const setBellId = (bellId) => setPrepare({ bellId })
 
@@ -33,7 +34,7 @@ const ChooseSoundModal = (props) => {
     release()
   }
 
-  return isShow? (
+  return isShow ? (
     <Portal>
       <Modal
         visible={isShow}
@@ -48,24 +49,11 @@ const ChooseSoundModal = (props) => {
         <Text variant="headlineSmall">{t('Prepare.choose-a-bell')}</Text>
         <ScrollView style={[styles.modalScrollView, { borderColor: colors.outlineVariant }]}>
           <RadioButton.Group onValueChange={onSoundChange} value={soundValue}>
-            <RadioButton.Item
-              key="bell_default"
-              label={t('Prepare.defaultBell')}
-              value="bell_default"
-            />
-            {[1, 2, 3].map((x) => (
+            {soundKeys.map((soundKey) => (
               <RadioButton.Item
-                key={`bell_${x}`}
-                label={`${t('Prepare.bell')} ${x}`}
-                value={`bell_${x}`}
-              />
-            ))}
-            {[4, 5, 6, 7, 8, 9].map((x) => (
-              <RadioButton.Item
-                key={`bell_${x}`}
-                label={`${t('Prepare.bell')} ${x}`}
-                value={`bell_${x}`}
-                disabled={true}
+                key={soundKey}
+                label={soundKey.replace(/_/g, ' ')}
+                value={soundKey}
               />
             ))}
           </RadioButton.Group>
@@ -75,7 +63,7 @@ const ChooseSoundModal = (props) => {
         </View>
       </Modal>
     </Portal>
-  ): null
+  ) : null
 }
 
 export default ChooseSoundModal

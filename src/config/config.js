@@ -30,3 +30,18 @@ export const screens = {
   MeditateScreen: 'MeditateScreen',
   GoPremiumScreen: 'GoPremiumScreen',
 }
+
+export const soundKeys = [
+  'Bell_1',
+  'Bell_2',
+  'Bell_A',
+  'Bell_Meditation_Cleaned',
+  'Bell_Meditation',
+  'Meditation_Bowls',
+  'Singing_bowl_hit_1',
+  'Singing_bowl_hit_2',
+  'Singing_bowl_hit_3',
+  'Singing_Bowl_Male_Frequency',
+  'Singing_Bowl',
+  'Singing_Bowl_Tibetan',
+]
