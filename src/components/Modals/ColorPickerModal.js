@@ -13,17 +13,11 @@ const ColorPickerModal = ({ isShowSoundDialog, setIsShowSoundDialog, navigation 
   const [bg, setBg] = useState('#000000')
   const setThemeColor = useStore((state) => state.setThemeColor)
   const setCustomColor = useStore((state) => state.setCustomColor)
-  const isPremium = useStore((state) => state.isPremium)
 
   const changeThemeColor = () => {
     setIsShowSoundDialog(false)
-    if (isPremium) {
-      setThemeColor(bg)
-      setCustomColor(bg)
-    }
-    if (!isPremium) {
-      navigation.navigate(screens.GoPremiumScreen)
-    }
+    setThemeColor(bg)
+    setCustomColor(bg)
   }
 
   return (
@@ -81,6 +75,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: -10,
-    marginTop: 20
+    marginTop: 20,
   },
 })

@@ -28,7 +28,6 @@ export const revenueCatApiKey = 'goog_lfrHjtpKlamGDZLjBzJFYdKLQUy'
 export const screens = {
   LanguageSettingScreen: 'LanguageSettingScreen',
   MeditateScreen: 'MeditateScreen',
-  GoPremiumScreen: 'GoPremiumScreen',
 }
 
 export const soundKeys = [

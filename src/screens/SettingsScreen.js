@@ -6,7 +6,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
-import Octicons from 'react-native-vector-icons/Octicons'
 import RowContainer from '@/components/Containers/RowContainer'
 import ListColor from '@/components/Color/ListColor'
 import { useStore } from '@/store/useStore'
@@ -26,7 +25,6 @@ const SettingsScreen = ({ navigation }) => {
   const isDarkMode = useStore((state) => state.isDarkMode)
   const toggleMode = useStore((state) => state.toggleMode)
   const language = availableLanguages.find((x) => x.code === i18n.resolvedLanguage)
-  const isPremium = useStore((state) => state.isPremium)
 
   const [isShowSoundDialog, setIsShowSoundDialog] = useState(false)
 
@@ -72,7 +70,7 @@ const SettingsScreen = ({ navigation }) => {
       <Card style={[styles.card, { paddingBottom: 20 }]}>
         <List.Item
           title={t('Settings.language')}
-          description={language?.label ? language.label : ''}
+          description={language?.name ? language.name : ''}
           left={(props) => <Entypo {...props} name="language" size={24} />}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => navigation.navigate(screens.LanguageSettingScreen)}
@@ -102,16 +100,8 @@ const SettingsScreen = ({ navigation }) => {
         </RowContainer>
       </Card>
 
-      {/* TODO: when app stored && in-app products are working */}
       <SettingCardTitle title={t('Settings.support')} />
       <Card style={styles.card}>
-        <List.Item
-          title={t('Settings.support.goPremium')}
-          description={isPremium ? t('Settings.support.goPremium.purchased') : ''}
-          left={(props) => <Octicons {...props} name="ruby" size={24} />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate(screens.GoPremiumScreen)}
-        />
         <List.Item
           title={t('Settings.moreSetting.feedback')}
           left={(props) => (

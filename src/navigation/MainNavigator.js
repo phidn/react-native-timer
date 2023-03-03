@@ -7,9 +7,7 @@ const Stack = createNativeStackNavigator()
 import { screens } from '@/config/config'
 import LanguageSettingScreen from '@/screens/LanguageSettingScreen'
 import MeditateScreen from '@/screens/MeditateScreen'
-import GoPremiumScreen from '@/screens/GoPremiumScreen'
 import BottomTabNavigator from './BottomTabNavigator'
-
 
 const MainNavigator = () => {
   const { t } = useTranslation()
@@ -19,19 +17,13 @@ const MainNavigator = () => {
       name: screens.LanguageSettingScreen,
       component: LanguageSettingScreen,
       headerTitle: t('Settings.language'),
-      headerShown: true
+      headerShown: true,
     },
     {
       name: screens.MeditateScreen,
       component: MeditateScreen,
       headerTitle: t('Navigation.Screen.timer'),
-      headerShown: false
-    },
-    {
-      name: screens.GoPremiumScreen,
-      component: GoPremiumScreen,
-      headerTitle: t('Navigation.Screen.goPremium'),
-      headerShown: true
+      headerShown: false,
     },
   ]
 

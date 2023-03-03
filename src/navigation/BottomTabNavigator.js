@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 
@@ -7,7 +7,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import SettingsScreen from '@/screens/SettingsScreen'
 import PrepareScreen from '@/screens/PrepareScreen'
-import AdminScreen from '@/screens/AdminScreen'
 import StatsTopTabs from './StatsTopTabs'
 
 import { useStore } from '@/store/useStore'
@@ -22,14 +21,6 @@ const BottomTabNavigator = ({ navigation }) => {
   const { tertiary } = useTheme().colors
 
   const bottomTabRoutes = [
-    {
-      name: 'AdminTab',
-      title: t('Navigation.BottomTab.AdminTab'),
-      component: AdminScreen,
-      IconComponent: Ionicons,
-      icon: 'person',
-      show: __DEV__,
-    },
     {
       name: 'PrepareTab',
       title: t('Navigation.BottomTab.PrepareTab'),

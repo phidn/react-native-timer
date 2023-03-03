@@ -1,123 +1,22 @@
-# Mindfulness Meditation Tracker
+# The Mindfulness Timer
+[<img alt="Get it on Google Play" height="60" src="https://play.google.com/intl/es-419/badges/static/images/badges/en_badge_web_generic.png" />](https://play.google.com/store/apps/details?id=com.phidang.mindfulcheckin)
 
-## Release
-- yarn release
-- https://console.firebase.google.com/u/0/project/test-apk-7ffe1/testlab/run/robo
+**The Mindfulness Timer** app is designed to support your mindfulness meditation practice and help you build a more mindful lifestyle. With accurate timing and mindfulness reminder bells, the app helps you stay focused and present.
 
-## Release hacks
-- npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle
+## Preview
+![app preview](.github/appPreview.png)
+ 
 
-- apk release
-  + cd android && gradlew clean && gradlew assembleRelease
-  + adb install app/build/outputs/apk/release/app-release.apk
+## Setup
+1. Clone the project to your local machine.
+2. Run yarn or npm install to install the dependencies.
 
-- apk debug: 
-  + cd android && gradlew clean && gradlew assembleDebug
-  + adb install android/app/build/outputs/apk/debug/app-debug.apk
+## Contributing
 
-- aab: cd android && gradlew clean && gradlew bundleRelease
+If you want to contribute to this project, please follow these steps:
 
-
-### Fix hermes
-```
-<!-- app/build.gradle -->
-
-project.ext.react = [
-    enableHermes: true,  // clean and rebuild if changing
-]
-
-project.ext.react = [
-    enableHermes: false,
-    deleteDebugFilesForVariant: { false }
-]
-```
-
-### Version
-- https://www.npmjs.com/package/react-native-version
-- npm install -g react-native-version
-- react-native-version --never-amend
-### Icon
-- https://www.appicon.co/
-
-## Bugs
-1. Fix "Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8"
-```
-org.gradle.java.home=C:\\Program Files\\Java\\jdk-11.0.17
-```
-
-## Patch react-native-paper
-`node_modules/react-native-paper/src/components/BottomNavigation/BottomNavigation.tsx#L1181`
-
-```css
-v3IconContainer: {
-  height: 32,
-  width: 32,
-  marginBottom: 0,
-  marginTop: 0,
-  justifyContent: 'center',
-},
-
-v3NoLabelContainer: {
-  height: 50,
-  justifyContent: 'center',
-  alignItems: 'center',
-},
-```
-
-### Saved code
-```
-if (__DEV__) {
-  params.duration = 45
-  params.interval = 10
-  preparationTime = 5
-  numberOfInviteBell = 2
-
-  let countInterval = 0
-  let total = params.interval
-  for (;;) {
-    if (total < params.duration) {
-      ++countInterval
-      total += params.interval
-    } else {
-      break
-    }
-  }
-  params.countInterval = countInterval
-}
-```
-
-## Icons
-- https://materialdesignicons.com/
-- https://oblador.github.io/react-native-vector-icons/
-
-## Privacy Policy Generator
-- https://app-privacy-policy-generator.nisrulz.com/
-
-## References
-- https://github.com/pmndrs/zustand
-- https://github.com/girish54321/react-native-starter
-- https://github.dev/victorkvarghese/react-native-query-boilerplate
-- https://github.dev/phidnhh/meditation-track
-
-- https://github.com/remigallego/react-native-sound
-- https://github.com/remigallego/react-native-use-sound
-
-- https://youmightnotneed.com/lodash
-- https://buildicon.netlify.app/?color=2196f3&emoji=dog
-
-- https://github.com/remigallego/react-native-use-sound
-
-- https://cdn.jsdelivr.net/npm/dayjs@1/locale.json
-- In app purchase: https://www.youtube.com/watch?v=bKhTCX3l24o
-- ADS: https://docs.page/invertase/react-native-google-mobile-ads/displaying-ads#banner-ads-component
-
-- API Access: https://www.youtube.com/watch?v=Ls2wkAwXftk
-- http://developer.android.com/tools/help/emulator.html#controlling
-
-## Repo
-- https://github.com/AudiusProject/audius-client
-- https://github.com/zensayyy/ZenMusic
-- https://github.com/Vetrivel-VP/react-native-musicplayer
-- https://github.com/dr0id007/forest-native
-- https://www.npmjs.com/package/react-native-bundle-visualizer
-- https://github.com/juanamd/react-native-background-timer-android
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Push your changes to your fork.
+5. Submit a pull request.
